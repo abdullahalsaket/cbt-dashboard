@@ -41,9 +41,6 @@
             min-height: 100vh;
         }
 
-        /* ============================================
-           HEADER
-           ============================================ */
         .navbar {
             background: linear-gradient(135deg, #0f2b40 0%, #1a4a6e 100%);
             color: white;
@@ -193,7 +190,6 @@
             background: rgba(255,255,255,0.25);
         }
 
-        /* Attend / Not Attend special styling */
         .filter-btn.attend-btn {
             border-color: var(--attend-color);
             color: var(--attend-color);
@@ -236,18 +232,12 @@
             background: rgba(239, 68, 68, 0.05);
         }
 
-        /* ============================================
-           CONTAINER
-           ============================================ */
         .container {
             max-width: 1440px;
             margin: 10px auto;
             padding: 0 10px;
         }
 
-        /* ============================================
-           PROJECT BRIEF
-           ============================================ */
         .brief-section {
             background: linear-gradient(135deg, #0f2b40 0%, #17b890 100%);
             color: white;
@@ -275,9 +265,6 @@
             font-weight: 700;
         }
 
-        /* ============================================
-           KPI GRID
-           ============================================ */
         .kpi-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
@@ -323,9 +310,6 @@
             color: var(--primary-light);
         }
 
-        /* ============================================
-           SEARCH + CHARTS - 2 per row
-           ============================================ */
         .search-charts-grid {
             display: grid;
             grid-template-columns: 1fr 2fr;
@@ -333,9 +317,6 @@
             margin-bottom: 14px;
         }
 
-        /* ============================================
-           EMPLOYEE SEARCH - Enhanced
-           ============================================ */
         .search-wrapper {
             background: var(--card-bg);
             padding: 14px;
@@ -402,9 +383,6 @@
             margin-top: 6px;
         }
 
-        /* ============================================
-           RESULT CARD - Enhanced with stats
-           ============================================ */
         .result-card {
             margin-top: 10px;
             background: #f8fafc;
@@ -508,9 +486,6 @@
             font-weight: 600;
         }
 
-        /* ============================================
-           CHARTS - 2 per row with larger size
-           ============================================ */
         .charts-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -553,9 +528,6 @@
             height: 240px;
         }
 
-        /* ============================================
-           UPDATE NOTIFICATION
-           ============================================ */
         .update-notification {
             background: var(--success);
             color: white;
@@ -578,9 +550,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ============================================
-           RESPONSIVE
-           ============================================ */
         @media (max-width: 1200px) {
             .charts-grid-2 {
                 grid-template-columns: 1fr 1fr;
@@ -735,9 +704,6 @@
 </head>
 <body>
 
-    <!-- ============================================
-    HEADER
-    ============================================ -->
     <div class="navbar">
         <div class="logo-left">
             <img src="CPC.png" alt="CPC Logo">
@@ -758,14 +724,8 @@
         </div>
     </div>
 
-    <!-- ============================================
-    MAIN CONTAINER
-    ============================================ -->
     <div class="container">
 
-        <!-- ============================================
-        PROJECT BRIEF
-        ============================================ -->
         <div class="brief-section">
             <h2><i class="fa-solid fa-bullseye"></i> Program Overview</h2>
             <p>
@@ -781,7 +741,6 @@
         FILTER BAR
         ============================================ -->
         <div class="filter-bar" id="filterBar">
-            <!-- Row 1: Training Programs -->
             <div class="filter-row">
                 <span class="filter-label"><i class="fa-solid fa-book"></i> Programs:</span>
                 <div class="filter-group" id="programFilters">
@@ -795,7 +754,6 @@
                 </div>
             </div>
 
-            <!-- Row 2: Location + Level + Phase + Attendance -->
             <div class="filter-row">
                 <span class="filter-label"><i class="fa-solid fa-location-dot"></i> Location:</span>
                 <div class="filter-group" id="locationFilters">
@@ -918,7 +876,6 @@
         SEARCH + CHARTS
         ============================================ -->
         <div class="search-charts-grid">
-            <!-- SEARCH - Enhanced -->
             <div class="search-wrapper">
                 <h3><i class="fa-solid fa-magnifying-glass"></i> Employee Query</h3>
                 <p>Enter Employee ID for full training profile.</p>
@@ -942,7 +899,6 @@
                         <div class="info-group"><h4>Status</h4><p id="resStatus">-</p></div>
                     </div>
                     
-                    <!-- Enhanced Stats -->
                     <div class="employee-stats" id="employeeStats">
                         <span class="stat-badge attend" id="statAttended">✅ Attended: 0</span>
                         <span class="stat-badge not-attend" id="statNotAttended">❌ Not Attended: 0</span>
@@ -955,7 +911,6 @@
                 </div>
             </div>
 
-            <!-- CHARTS: 2 Charts -->
             <div class="charts-grid">
                 <div class="chart-box">
                     <h4><i class="fa-solid fa-chart-bar" style="color:var(--primary-light);"></i> Employees by Sector</h4>
@@ -969,7 +924,7 @@
         </div>
 
         <!-- ============================================
-        CHARTS - 2 per row (4 charts total)
+        CHARTS - 2 per row
         ============================================ -->
         <div class="charts-grid-2">
             <div class="chart-box">
@@ -991,7 +946,7 @@
         </div>
 
         <!-- ============================================
-        ADDITIONAL CHARTS - 2 per row
+        ADDITIONAL CHARTS
         ============================================ -->
         <div class="charts-grid-2" style="margin-top:14px;">
             <div class="chart-box">
@@ -1042,7 +997,12 @@
         };
 
         // ============================================
-        // UTILITY: CSV to JSON with deduplication
+        // LOCATION MAPPING - قراءة من عمود Training Location
+        // ============================================
+        const LOCATION_VALUES = ['Steigenberger', 'TOR', 'Nob', 'Alsaff'];
+
+        // ============================================
+        // UTILITY: CSV to JSON
         // ============================================
         function csvToJSON(csv) {
             const lines = csv.split("\n");
@@ -1118,6 +1078,7 @@
         // UPDATE FILTER BADGE COUNTS
         // ============================================
         function updateFilterBadges(data) {
+            // --- Program Counts - قراءة من كل عمود على حدة ---
             const progAll = data.length;
             
             const prog7Sens = data.filter(r => {
@@ -1158,6 +1119,7 @@
             document.getElementById('progDriveCount').textContent = progDrive;
             document.getElementById('progKickCount').textContent = progKick;
 
+            // --- Location Counts - قراءة من عمود Training Location ---
             const locAll = data.length;
             const locSteigenberger = data.filter(r => String(r['Training Location'] || '').includes('Steigenberger')).length;
             const locTOR = data.filter(r => String(r['Training Location'] || '').includes('TOR')).length;
@@ -1170,6 +1132,7 @@
             document.getElementById('locNobCount').textContent = locNob;
             document.getElementById('locAlsaffCount').textContent = locAlsaff;
 
+            // --- Level Counts ---
             const lvlAll = data.length;
             const lvlL4 = data.filter(r => String(r['C-LVL'] || '').includes('L4')).length;
             const lvlL3 = data.filter(r => String(r['C-LVL'] || '').includes('L3')).length;
@@ -1182,6 +1145,7 @@
             document.getElementById('lvlL2Count').textContent = lvlL2;
             document.getElementById('lvlL1Count').textContent = lvlL1;
 
+            // --- Phase Counts ---
             const phaseAll = data.length;
             const phase1 = data.filter(r => String(r['CPT Training Phase'] || '').includes('Phase1')).length;
             const phase2 = data.filter(r => String(r['CPT Training Phase'] || '').includes('Phase2')).length;
@@ -1196,6 +1160,7 @@
             document.getElementById('phase4Count').textContent = phase4;
             document.getElementById('phaseOnlineCount').textContent = phaseOnline;
 
+            // --- Attendance Counts ---
             const attAll = data.length;
             const attAttend = data.filter(r => {
                 const sevenSens = String(r['7 Sens'] || '').toLowerCase();
@@ -1615,7 +1580,7 @@
                 plugins: [ChartDataLabels]
             });
 
-            // Chart 6: Location Distribution
+            // Chart 6: Location Distribution - قراءة من Training Location
             const ctx6 = document.getElementById('chartLocation').getContext('2d');
             chartInstances.location = new Chart(ctx6, {
                 type: 'bar',
@@ -1721,7 +1686,7 @@
         }
 
         // ============================================
-        // EMPLOYEE SEARCH - Enhanced
+        // EMPLOYEE SEARCH
         // ============================================
         function searchEmployee() {
             const inputId = document.getElementById('empIdInput').value.trim();
@@ -1740,7 +1705,6 @@
                 return;
             }
 
-            // Basic info
             document.getElementById('resName').textContent = emp['Name'] || 'Not recorded';
             document.getElementById('resTitle').textContent = emp['Title'] || 'Not recorded';
             document.getElementById('resSector').textContent = (emp['Sector'] || '-') + ' / ' + (emp['Department'] || '-');
@@ -1755,7 +1719,6 @@
             document.getElementById('resStatus').textContent = emp['Status'] || 'Not specified';
 
             // --- Enhanced Stats ---
-            // Count attended programs
             const programFields = ['7 Sens', 'Analytical Thinking', 'Mind Field', 'Leadership', 'Drive Performance', 'Kick Start'];
             let attendedCount = 0;
             let notAttendedCount = 0;
@@ -1774,13 +1737,11 @@
             document.getElementById('statGroup').textContent = `📋 Group: ${emp['CPT Training Group'] || 'N/A'}`;
             document.getElementById('statLocation').textContent = `📍 Location: ${emp['Training Location'] || 'N/A'}`;
             
-            // Accommodation
             const accommodation = String(emp['Accommodation'] || '').toLowerCase();
             const accomText = accommodation === 'yes' ? '✅ Yes' : 
                              accommodation === 'no' ? '❌ No' : 'N/A';
             document.getElementById('statAccommodation').textContent = `🏠 Accommodation: ${accomText}`;
 
-            // Training Programs
             const progContainer = document.getElementById('resPrograms');
             progContainer.innerHTML = '';
             const programs = [
