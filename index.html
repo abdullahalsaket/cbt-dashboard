@@ -457,7 +457,7 @@
         }
 
         /* ============================================
-           CHARTS - LARGER SIZE
+           CHARTS
            ============================================ */
         .charts-grid {
             display: grid;
@@ -987,6 +987,18 @@
         let fetchInterval = null;
 
         // ============================================
+        // PROGRAM FIELD MAPPING - دقيق حسب أعمدة الشيت
+        // ============================================
+        const PROGRAM_FIELDS = {
+            '7 Sens': '7 Sens',
+            'Analytical Thinking': 'Analytical Thinking',
+            'Mind Field': 'Mind Field',
+            'Leadership': 'Leadership',
+            'Drive Performance': 'Drive Performance',
+            'Kick Start': 'Kick Start'
+        };
+
+        // ============================================
         // UTILITY: CSV to JSON with deduplication
         // ============================================
         function csvToJSON(csv) {
@@ -1000,7 +1012,11 @@
                 if (!lines[i].trim()) continue;
                 const row = lines[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(item => item.trim().replace(/^"|"$/g, ''));
                 const obj = {};
-                headers.forEach((h, idx) => { obj[h] = row[idx] || ''; });
+                headers.forEach((h, idx) => { 
+                    // Use the actual column name from headers
+                    const key = h.trim();
+                    obj[key] = row[idx] || '';
+                });
                 
                 // Deduplicate by ID
                 const id = String(obj['ID'] || '').trim();
@@ -1008,7 +1024,6 @@
                     seenIds.add(id);
                     result.push(obj);
                 } else if (!id) {
-                    // Keep records without ID but add a unique key
                     obj['_tempId'] = 'temp_' + i;
                     result.push(obj);
                 }
@@ -1059,31 +1074,38 @@
         }
 
         // ============================================
-        // UPDATE FILTER BADGE COUNTS
+        // UPDATE FILTER BADGE COUNTS - قراءة دقيقة من كل عمود
         // ============================================
         function updateFilterBadges(data) {
-            // Program counts
+            // Program counts - قراءة من كل عمود على حدة
             const progAll = data.length;
+            
+            // لكل برنامج، نقرأ من العمود الخاص به
             const prog7Sens = data.filter(r => {
                 const val = String(r['7 Sens'] || '').toLowerCase();
                 return val === 'attend' || val === 'attended' || val.includes('attend');
             }).length;
+            
             const progAnalytical = data.filter(r => {
                 const val = String(r['Analytical Thinking'] || '').toLowerCase();
                 return val === 'attend' || val === 'attended' || val.includes('attend');
             }).length;
+            
             const progMindField = data.filter(r => {
                 const val = String(r['Mind Field'] || '').toLowerCase();
                 return val === 'attend' || val === 'attended' || val.includes('attend');
             }).length;
+            
             const progLeadership = data.filter(r => {
                 const val = String(r['Leadership'] || '').toLowerCase();
                 return val === 'attend' || val === 'attended' || val.includes('attend');
             }).length;
+            
             const progDrive = data.filter(r => {
                 const val = String(r['Drive Performance'] || '').toLowerCase();
                 return val === 'attend' || val === 'attended' || val.includes('attend');
             }).length;
+            
             const progKick = data.filter(r => {
                 const val = String(r['Kick Start'] || '').toLowerCase();
                 return val === 'attend' || val === 'attended' || val.includes('attend');
@@ -1125,11 +1147,11 @@
 
             // Phase counts
             const phaseAll = data.length;
-            const phase1 = data.filter(r => String(r['CPT TrainingPhase'] || '').includes('Phase1')).length;
-            const phase2 = data.filter(r => String(r['CPT TrainingPhase'] || '').includes('Phase2')).length;
-            const phase3 = data.filter(r => String(r['CPT TrainingPhase'] || '').includes('Phase3')).length;
-            const phase4 = data.filter(r => String(r['CPT TrainingPhase'] || '').includes('Phase4')).length;
-            const phaseOnline = data.filter(r => String(r['CPT TrainingPhase'] || '').includes('Online-Phase4')).length;
+            const phase1 = data.filter(r => String(r['CPT Training Phase'] || '').includes('Phase1')).length;
+            const phase2 = data.filter(r => String(r['CPT Training Phase'] || '').includes('Phase2')).length;
+            const phase3 = data.filter(r => String(r['CPT Training Phase'] || '').includes('Phase3')).length;
+            const phase4 = data.filter(r => String(r['CPT Training Phase'] || '').includes('Phase4')).length;
+            const phaseOnline = data.filter(r => String(r['CPT Training Phase'] || '').includes('Online-Phase4')).length;
 
             document.getElementById('phaseAllCount').textContent = phaseAll;
             document.getElementById('phase1Count').textContent = phase1;
@@ -1161,22 +1183,15 @@
             console.log('🔄 Applying filters:', activeFilters);
             filteredData = [...allData];
 
-            // Program filter
+            // Program filter - using the correct field for each program
             if (activeFilters.program !== 'all') {
-                const progMap = {
-                    '7 Sens': '7 Sens',
-                    'Analytical Thinking': 'Analytical Thinking',
-                    'Mind Field': 'Mind Field',
-                    'Leadership': 'Leadership',
-                    'Drive Performance': 'Drive Performance',
-                    'Kick Start': 'Kick Start'
-                };
-                const field = progMap[activeFilters.program];
+                const field = PROGRAM_FIELDS[activeFilters.program];
                 if (field) {
                     filteredData = filteredData.filter(r => {
                         const val = String(r[field] || '').toLowerCase();
                         return val === 'attend' || val === 'attended' || val.includes('attend');
                     });
+                    console.log(`📊 Filtered by program "${activeFilters.program}" (field: ${field}): ${filteredData.length} records`);
                 }
             }
 
@@ -1197,23 +1212,21 @@
             // Phase filter
             if (activeFilters.phase !== 'all') {
                 filteredData = filteredData.filter(r => 
-                    String(r['CPT TrainingPhase'] || '').includes(activeFilters.phase)
+                    String(r['CPT Training Phase'] || '').includes(activeFilters.phase)
                 );
             }
 
-            // Attendance filter - CRITICAL FIX
+            // Attendance filter
             if (activeFilters.attendance === 'attend') {
                 filteredData = filteredData.filter(r => {
                     const sevenSens = String(r['7 Sens'] || '').toLowerCase();
-                    const isAttend = sevenSens === 'attend' || sevenSens === 'attended' || sevenSens.includes('attend');
-                    return isAttend;
+                    return sevenSens === 'attend' || sevenSens === 'attended' || sevenSens.includes('attend');
                 });
                 console.log('✅ Filtering to ATTEND only:', filteredData.length, 'records');
             } else if (activeFilters.attendance === 'not-attend') {
                 filteredData = filteredData.filter(r => {
                     const sevenSens = String(r['7 Sens'] || '').toLowerCase();
-                    const isNotAttend = sevenSens === 'not attend' || sevenSens.includes('not attend');
-                    return isNotAttend;
+                    return sevenSens === 'not attend' || sevenSens.includes('not attend');
                 });
                 console.log('❌ Filtering to NOT ATTEND only:', filteredData.length, 'records');
             }
@@ -1395,7 +1408,7 @@
             const qualityLabels = Object.keys(qualityData);
             const qualityValues = Object.values(qualityData);
 
-            // Program Enrollment
+            // Program Enrollment - قراءة دقيقة من كل عمود
             const progEnroll = {};
             const progFields = ['7 Sens', 'Analytical Thinking', 'Mind Field', 'Leadership', 'Drive Performance', 'Kick Start'];
             progFields.forEach(p => {
