@@ -8,738 +8,197 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
-    
+
     <style>
-        :root {
-            --bg-color: #f0f2f5;
-            --primary: #0f2b40;
-            --primary-light: #1e3d59;
-            --accent: #ff6e40;
-            --accent-hover: #e05326;
-            --card-bg: #ffffff;
-            --text-dark: #1a2332;
-            --text-muted: #6b7a8f;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --info: #3b82f6;
-            --purple: #8b5cf6;
-            --border-radius: 14px;
-            --shadow: 0 4px 20px rgba(0,0,0,0.06);
-            --shadow-hover: 0 8px 30px rgba(0,0,0,0.12);
-            --transition: all 0.25s ease;
-            --attend-color: #10b981;
-            --not-attend-color: #ef4444;
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-
+        /* ===== RESET & BASE ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Cairo', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-dark);
+            background: #f0f2f5;
+            color: #1a2332;
             min-height: 100vh;
         }
 
+        /* ===== HEADER ===== */
         .navbar {
             background: linear-gradient(135deg, #0f2b40 0%, #1a4a6e 100%);
             color: white;
-            padding: 10px 16px;
+            padding: 10px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
             flex-wrap: wrap;
-            gap: 6px;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
+        .navbar .logo-left img, .navbar .logo-right img { height: 40px; width: auto; background: rgba(255,255,255,0.9); padding: 2px 6px; border-radius: 8px; }
+        .navbar .title-center { flex: 1; text-align: center; }
+        .navbar .title-center h1 { font-size: 1.3rem; font-weight: 800; background: linear-gradient(135deg, #fff 0%, #ff6e40 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .navbar .title-center .subtitle { font-size: 0.6rem; opacity: 0.7; letter-spacing: 1px; text-transform: uppercase; -webkit-text-fill-color: rgba(255,255,255,0.6); }
+        .navbar .status-badge { font-size: 0.6rem; background: rgba(255,255,255,0.1); padding: 4px 12px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 6px; }
+        .update-notification { background: #10b981; padding: 4px 14px; border-radius: 30px; font-size: 0.6rem; display: none; animation: slideDown 0.4s ease; }
+        .update-notification.show { display: inline-flex; align-items: center; gap: 6px; }
 
-        .navbar .logo-left img,
-        .navbar .logo-right img {
-            height: 38px;
-            width: auto;
-            object-fit: contain;
-            background: rgba(255,255,255,0.92);
-            padding: 2px 6px;
-            border-radius: 8px;
-        }
-
-        .navbar .title-center {
-            flex: 1;
-            text-align: center;
-            padding: 0 6px;
-        }
-
-        .navbar .title-center h1 {
-            margin: 0;
-            font-size: 1.2rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #ffffff 0%, #ff6e40 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .navbar .title-center .subtitle {
-            font-size: 0.55rem;
-            opacity: 0.7;
-            letter-spacing: 1px;
-            -webkit-text-fill-color: rgba(255,255,255,0.6);
-            text-transform: uppercase;
-        }
-
-        .navbar .status-badge {
-            font-size: 0.55rem;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            background: rgba(255,255,255,0.1);
-            padding: 3px 10px;
-            border-radius: 30px;
-            border: 1px solid rgba(255,255,255,0.08);
-            -webkit-text-fill-color: #fff;
-        }
-
-        .status-badge .fa-spinner {
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* ============================================
-           FILTER BAR
-           ============================================ */
+        /* ===== FILTER BAR ===== */
         .filter-bar {
-            background: var(--card-bg);
-            padding: 10px 14px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            margin-bottom: 14px;
+            background: white;
+            padding: 10px 16px;
+            border-radius: 12px;
+            margin: 12px auto;
+            max-width: 1400px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
             border: 1px solid #e8ecf0;
         }
-
-        .filter-bar .filter-row {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 4px 10px;
-            margin-bottom: 4px;
-        }
-
-        .filter-bar .filter-row:last-child {
-            margin-bottom: 0;
-        }
-
-        .filter-bar .filter-label {
-            font-size: 0.55rem;
-            font-weight: 700;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            min-width: 45px;
-        }
-
-        .filter-bar .filter-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 3px;
-        }
-
+        .filter-bar .filter-row { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; margin-bottom: 4px; }
+        .filter-bar .filter-row:last-child { margin-bottom: 0; }
+        .filter-bar .filter-label { font-size: 0.6rem; font-weight: 700; color: #6b7a8f; text-transform: uppercase; min-width: 45px; }
+        .filter-bar .filter-group { display: flex; flex-wrap: wrap; gap: 3px; }
         .filter-btn {
-            padding: 2px 10px;
-            border-radius: 30px;
-            border: 2px solid #e2e8f0;
-            background: transparent;
-            font-family: 'Cairo', sans-serif;
-            font-size: 0.6rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: var(--transition);
+            padding: 3px 12px; border-radius: 30px; border: 2px solid #e2e8f0; background: transparent;
+            font-family: 'Cairo', sans-serif; font-size: 0.6rem; font-weight: 600; color: #6b7a8f; cursor: pointer; transition: all 0.2s;
         }
-
-        .filter-btn:hover {
-            border-color: var(--primary-light);
-            color: var(--primary-light);
-            background: rgba(30, 61, 89, 0.04);
-        }
-
-        .filter-btn.active {
-            border-color: var(--accent);
-            background: var(--accent);
-            color: white;
-            box-shadow: 0 4px 12px rgba(255, 110, 64, 0.3);
-        }
-
-        .filter-btn.active:hover {
-            background: var(--accent-hover);
-            border-color: var(--accent-hover);
-        }
-
-        .filter-btn .badge-count {
-            display: inline-block;
-            background: rgba(255,255,255,0.2);
-            border-radius: 20px;
-            padding: 0 5px;
-            font-size: 0.5rem;
-            margin-left: 2px;
-        }
-
-        .filter-btn.active .badge-count {
-            background: rgba(255,255,255,0.25);
-        }
-
-        .filter-btn.attend-btn {
-            border-color: var(--attend-color);
-            color: var(--attend-color);
-        }
-
-        .filter-btn.attend-btn.active {
-            background: var(--attend-color);
-            border-color: var(--attend-color);
-            color: white;
-        }
-
-        .filter-btn.not-attend-btn {
-            border-color: var(--not-attend-color);
-            color: var(--not-attend-color);
-        }
-
-        .filter-btn.not-attend-btn.active {
-            background: var(--not-attend-color);
-            border-color: var(--not-attend-color);
-            color: white;
-        }
-
+        .filter-btn:hover { border-color: #1e3d59; color: #1e3d59; background: rgba(30,61,89,0.04); }
+        .filter-btn.active { border-color: #ff6e40; background: #ff6e40; color: white; box-shadow: 0 4px 12px rgba(255,110,64,0.3); }
+        .filter-btn .badge-count { background: rgba(255,255,255,0.2); border-radius: 20px; padding: 0 6px; font-size: 0.5rem; margin-left: 3px; }
+        .filter-btn.active .badge-count { background: rgba(255,255,255,0.25); }
+        .filter-btn.attend-btn { border-color: #10b981; color: #10b981; }
+        .filter-btn.attend-btn.active { background: #10b981; border-color: #10b981; color: white; }
+        .filter-btn.not-attend-btn { border-color: #ef4444; color: #ef4444; }
+        .filter-btn.not-attend-btn.active { background: #ef4444; border-color: #ef4444; color: white; }
         .clear-filters-btn {
-            padding: 2px 12px;
-            border-radius: 30px;
-            border: 2px solid #e2e8f0;
-            background: transparent;
-            font-family: 'Cairo', sans-serif;
-            font-size: 0.6rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: var(--transition);
-            margin-left: auto;
+            padding: 3px 14px; border-radius: 30px; border: 2px solid #e2e8f0; background: transparent;
+            font-family: 'Cairo', sans-serif; font-size: 0.6rem; font-weight: 600; color: #6b7a8f; cursor: pointer; transition: all 0.2s; margin-left: auto;
         }
+        .clear-filters-btn:hover { border-color: #ef4444; color: #ef4444; background: rgba(239,68,68,0.05); }
 
-        .clear-filters-btn:hover {
-            border-color: var(--danger);
-            color: var(--danger);
-            background: rgba(239, 68, 68, 0.05);
-        }
+        /* ===== CONTAINER ===== */
+        .container { max-width: 1440px; margin: 0 auto; padding: 0 12px; }
 
-        .container {
-            max-width: 1440px;
-            margin: 10px auto;
-            padding: 0 10px;
-        }
-
-        .brief-section {
-            background: linear-gradient(135deg, #0f2b40 0%, #17b890 100%);
-            color: white;
-            padding: 12px 18px;
-            border-radius: var(--border-radius);
-            margin-bottom: 14px;
-            box-shadow: var(--shadow);
-        }
-
-        .brief-section h2 {
-            margin-top: 0;
-            font-size: 0.95rem;
-            font-weight: 700;
-        }
-
-        .brief-section p {
-            margin-bottom: 0;
-            opacity: 0.92;
-            line-height: 1.6;
-            font-size: 0.8rem;
-        }
-
-        .brief-section .highlight {
-            color: #ff6e40;
-            font-weight: 700;
-        }
-
+        /* ===== KPI GRID ===== */
         .kpi-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-            gap: 8px;
-            margin-bottom: 14px;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin: 12px 0;
         }
-
         .kpi-card {
-            background: var(--card-bg);
-            padding: 8px 10px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 3px solid var(--primary-light);
-            transition: var(--transition);
+            background: white; padding: 10px 14px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            display: flex; align-items: center; justify-content: space-between; border-bottom: 3px solid #1e3d59; transition: all 0.2s;
+            cursor: pointer;
         }
+        .kpi-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+        .kpi-card i { font-size: 1.2rem; color: #ff6e40; opacity: 0.8; }
+        .kpi-info h4 { font-size: 0.55rem; color: #6b7a8f; text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 2px; }
+        .kpi-info .num { font-size: 1.1rem; font-weight: 800; color: #1e3d59; }
 
-        .kpi-card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .kpi-card i {
-            font-size: 1rem;
-            color: var(--accent);
-            opacity: 0.8;
-        }
-
-        .kpi-info h4 {
-            margin: 0 0 1px 0;
-            font-size: 0.5rem;
-            color: var(--text-muted);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-
-        .kpi-info .num {
-            font-size: 1rem;
-            font-weight: 800;
-            color: var(--primary-light);
-        }
-
+        /* ===== SEARCH + CHARTS ===== */
         .search-charts-grid {
             display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 14px;
-            margin-bottom: 14px;
+            grid-template-columns: 280px 1fr;
+            gap: 16px;
+            margin: 12px 0;
         }
-
         .search-wrapper {
-            background: var(--card-bg);
-            padding: 14px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            border: 1px solid #e8ecf0;
+            background: white; padding: 16px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid #e8ecf0;
         }
-
-        .search-wrapper h3 {
-            margin-top: 0;
-            font-size: 0.8rem;
-            color: var(--primary-light);
-            font-weight: 700;
-        }
-
-        .search-wrapper p {
-            margin: 0 0 6px 0;
-            color: var(--text-muted);
-            font-size: 0.65rem;
-        }
-
-        .search-box {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
-
-        .search-box input {
-            flex: 1;
-            padding: 5px 10px;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            font-family: 'Cairo', sans-serif;
-            font-size: 0.75rem;
-            outline: none;
-            transition: var(--transition);
-            min-width: 80px;
-        }
-
-        .search-box input:focus {
-            border-color: var(--primary-light);
-        }
-
-        .search-box button {
-            padding: 5px 12px;
-            background: var(--accent);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-family: 'Cairo', sans-serif;
-            font-weight: 700;
-            cursor: pointer;
-            transition: var(--transition);
-            font-size: 0.75rem;
-        }
-
-        .search-box button:hover {
-            background: var(--accent-hover);
-        }
-
-        .loading-status {
-            color: var(--text-muted);
-            font-size: 0.65rem;
-            margin-top: 6px;
-        }
+        .search-wrapper h3 { font-size: 0.85rem; color: #1e3d59; font-weight: 700; margin-bottom: 4px; }
+        .search-wrapper p { font-size: 0.65rem; color: #6b7a8f; margin-bottom: 8px; }
+        .search-box { display: flex; gap: 6px; flex-wrap: wrap; }
+        .search-box input { flex: 1; padding: 6px 12px; border: 2px solid #e2e8f0; border-radius: 10px; font-family: 'Cairo', sans-serif; font-size: 0.75rem; outline: none; min-width: 80px; }
+        .search-box input:focus { border-color: #1e3d59; }
+        .search-box button { padding: 6px 14px; background: #ff6e40; color: white; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; font-size: 0.75rem; }
+        .search-box button:hover { background: #e05326; }
+        .loading-status { font-size: 0.65rem; color: #6b7a8f; margin-top: 6px; }
 
         .result-card {
-            margin-top: 10px;
-            background: #f8fafc;
-            border-radius: 12px;
-            padding: 12px;
-            display: none;
-            border-right: 4px solid var(--success);
-            animation: fadeIn 0.3s ease;
+            margin-top: 10px; background: #f8fafc; border-radius: 12px; padding: 12px; display: none; border-right: 4px solid #10b981;
         }
+        .employee-profile { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 10px; }
+        .info-group h4 { font-size: 0.5rem; color: #6b7a8f; text-transform: uppercase; }
+        .info-group p { font-weight: 700; font-size: 0.75rem; }
+        .employee-stats { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; padding: 6px 10px; background: rgba(30,61,89,0.05); border-radius: 8px; }
+        .stat-badge { font-size: 0.6rem; font-weight: 700; padding: 2px 10px; border-radius: 20px; }
+        .stat-badge.attend { background: rgba(16,185,129,0.15); color: #10b981; }
+        .stat-badge.not-attend { background: rgba(239,68,68,0.15); color: #ef4444; }
+        .stat-badge.group { background: rgba(59,130,246,0.15); color: #3b82f6; }
+        .stat-badge.location { background: rgba(255,110,64,0.15); color: #ff6e40; }
+        .stat-badge.accommodation { background: rgba(139,92,246,0.15); color: #8b5cf6; }
+        .training-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+        .tag { background: #e2e8f0; color: #1e3d59; padding: 2px 8px; border-radius: 20px; font-size: 0.55rem; font-weight: 600; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .employee-profile {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4px 10px;
-        }
-
-        .info-group h4 {
-            margin: 0 0 1px 0;
-            color: var(--text-muted);
-            font-size: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-
-        .info-group p {
-            margin: 0;
-            font-weight: 700;
-            font-size: 0.75rem;
-        }
-
-        .employee-stats {
-            margin-top: 8px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            padding: 8px 10px;
-            background: rgba(30, 61, 89, 0.05);
-            border-radius: 8px;
-        }
-
-        .stat-badge {
-            font-size: 0.6rem;
-            font-weight: 700;
-            padding: 2px 10px;
-            border-radius: 20px;
-        }
-
-        .stat-badge.attend {
-            background: rgba(16, 185, 129, 0.15);
-            color: var(--success);
-        }
-
-        .stat-badge.not-attend {
-            background: rgba(239, 68, 68, 0.15);
-            color: var(--danger);
-        }
-
-        .stat-badge.group {
-            background: rgba(59, 130, 246, 0.15);
-            color: var(--info);
-        }
-
-        .stat-badge.location {
-            background: rgba(255, 110, 64, 0.15);
-            color: var(--accent);
-        }
-
-        .stat-badge.accommodation {
-            background: rgba(139, 92, 246, 0.15);
-            color: var(--purple);
-        }
-
-        .stat-badge.yes {
-            background: rgba(16, 185, 129, 0.15);
-            color: var(--success);
-        }
-
-        .stat-badge.no {
-            background: rgba(239, 68, 68, 0.15);
-            color: var(--danger);
-        }
-
-        .training-tags {
-            margin-top: 6px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px;
-        }
-
-        .tag {
-            background: #e2e8f0;
-            color: var(--primary-light);
-            padding: 2px 8px;
-            border-radius: 20px;
-            font-size: 0.55rem;
-            font-weight: 600;
-        }
-
-        .charts-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-            margin-bottom: 14px;
-        }
-
-        .charts-grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-            margin-bottom: 14px;
-        }
-
+        /* ===== CHARTS - 2 per row ===== */
+        .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 12px 0; }
+        .charts-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 12px 0; }
         .chart-box {
-            background: var(--card-bg);
-            padding: 16px 18px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            border: 1px solid #e8ecf0;
+            background: white; padding: 16px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid #e8ecf0;
+            cursor: pointer;
+            transition: all 0.2s;
         }
-
-        .chart-box h4 {
-            margin-top: 0;
-            margin-bottom: 10px;
-            font-size: 0.85rem;
-            color: var(--primary-light);
-            font-weight: 700;
+        .chart-box:hover {
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            border-color: #1e3d59;
         }
+        .chart-box h4 { font-size: 0.8rem; color: #1e3d59; font-weight: 700; margin-bottom: 8px; }
+        .chart-box canvas { width: 100% !important; height: 220px !important; max-height: 220px; }
+        .chart-box .chart-container { position: relative; width: 100%; height: 220px; }
 
-        .chart-box canvas {
-            width: 100% !important;
-            height: 240px !important;
-            max-height: 240px;
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 992px) {
+            .search-charts-grid { grid-template-columns: 1fr; }
+            .charts-grid { grid-template-columns: 1fr 1fr; }
+            .charts-grid-2 { grid-template-columns: 1fr 1fr; }
         }
-
-        .chart-box .chart-container {
-            position: relative;
-            width: 100%;
-            height: 240px;
+        @media (max-width: 768px) {
+            .navbar { flex-direction: column; text-align: center; }
+            .filter-bar .filter-row { flex-direction: column; align-items: stretch; }
+            .clear-filters-btn { margin-left: 0; }
+            .charts-grid { grid-template-columns: 1fr; }
+            .charts-grid-2 { grid-template-columns: 1fr; }
+            .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+            .employee-profile { grid-template-columns: 1fr; }
+            .chart-box canvas { height: 180px !important; max-height: 180px; }
+            .chart-box .chart-container { height: 180px; }
         }
-
-        .update-notification {
-            background: var(--success);
-            color: white;
-            padding: 6px 14px;
-            border-radius: 30px;
-            font-size: 0.6rem;
-            font-weight: 600;
-            display: none;
-            align-items: center;
-            gap: 6px;
-            animation: slideDown 0.4s ease;
-        }
-
-        .update-notification.show {
-            display: inline-flex;
+        @media (max-width: 480px) {
+            .kpi-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
+            .kpi-card { padding: 6px 8px; }
+            .kpi-info .num { font-size: 0.85rem; }
+            .filter-btn { font-size: 0.5rem; padding: 2px 8px; }
+            .chart-box canvas { height: 150px !important; max-height: 150px; }
+            .chart-box .chart-container { height: 150px; }
         }
 
         @keyframes slideDown {
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        @media (max-width: 1200px) {
-            .charts-grid-2 {
-                grid-template-columns: 1fr 1fr;
-            }
-            .chart-box canvas {
-                height: 200px !important;
-                max-height: 200px;
-            }
-            .chart-box .chart-container {
-                height: 200px;
-            }
-        }
-
-        @media (max-width: 992px) {
-            .search-charts-grid {
-                grid-template-columns: 1fr;
-            }
-            .charts-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .charts-grid-2 {
-                grid-template-columns: 1fr 1fr;
-            }
-            .chart-box canvas {
-                height: 200px !important;
-                max-height: 200px;
-            }
-            .chart-box .chart-container {
-                height: 200px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-                text-align: center;
-                padding: 6px 10px;
-            }
-            .navbar .title-center h1 {
-                font-size: 0.95rem;
-            }
-            .navbar .logo-left img,
-            .navbar .logo-right img {
-                height: 28px;
-            }
-            .filter-bar .filter-row {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 3px;
-            }
-            .filter-bar .filter-label {
-                min-width: auto;
-            }
-            .clear-filters-btn {
-                margin-left: 0;
-                width: 100%;
-                text-align: center;
-            }
-            .charts-grid {
-                grid-template-columns: 1fr;
-            }
-            .charts-grid-2 {
-                grid-template-columns: 1fr;
-            }
-            .kpi-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .employee-profile {
-                grid-template-columns: 1fr;
-            }
-            .employee-stats {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .brief-section {
-                padding: 10px 12px;
-            }
-            .brief-section h2 {
-                font-size: 0.8rem;
-            }
-            .brief-section p {
-                font-size: 0.7rem;
-            }
-            .chart-box {
-                padding: 12px 14px;
-            }
-            .chart-box h4 {
-                font-size: 0.7rem;
-            }
-            .chart-box canvas {
-                height: 180px !important;
-                max-height: 180px;
-            }
-            .chart-box .chart-container {
-                height: 180px;
-            }
-            .search-wrapper {
-                padding: 10px;
-            }
-            .kpi-card {
-                padding: 6px 8px;
-            }
-            .kpi-info .num {
-                font-size: 0.85rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .kpi-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 4px;
-            }
-            .kpi-card {
-                padding: 4px 6px;
-            }
-            .kpi-info h4 {
-                font-size: 0.4rem;
-            }
-            .kpi-info .num {
-                font-size: 0.75rem;
-            }
-            .filter-btn {
-                font-size: 0.5rem;
-                padding: 2px 6px;
-            }
-            .search-box input {
-                font-size: 0.65rem;
-                padding: 4px 6px;
-            }
-            .search-box button {
-                font-size: 0.65rem;
-                padding: 4px 10px;
-            }
-            .container {
-                padding: 0 4px;
-            }
-            .navbar .title-center h1 {
-                font-size: 0.8rem;
-            }
-            .navbar .title-center .subtitle {
-                font-size: 0.45rem;
-            }
-            .chart-box canvas {
-                height: 150px !important;
-                max-height: 150px;
-            }
-            .chart-box .chart-container {
-                height: 150px;
-            }
-        }
     </style>
 </head>
 <body>
 
+    <!-- ===== HEADER ===== -->
     <div class="navbar">
-        <div class="logo-left">
-            <img src="CPC.png" alt="CPC Logo">
-        </div>
+        <div class="logo-left"><img src="CPC.png" alt="CPC Logo"></div>
         <div class="title-center">
             <h1>CBT</h1>
             <div class="subtitle">Competency Based Training Intelligence Hub 2026</div>
         </div>
-        <div class="logo-right">
-            <img src="new koki.png" alt="Koki Logo">
-        </div>
-        <div class="status-badge" id="statusBadge">
-            <i class="fa-solid fa-cloud"></i>
-            <span id="statusText">Live</span>
-            <span id="updateNotification" class="update-notification">
-                <i class="fa-solid fa-rotate"></i> Updated!
-            </span>
+        <div class="logo-right"><img src="new koki.png" alt="Koki Logo"></div>
+        <div class="status-badge">
+            <i class="fa-solid fa-cloud"></i> Live
+            <span id="updateNotification" class="update-notification"><i class="fa-solid fa-rotate"></i> Updated!</span>
         </div>
     </div>
 
     <div class="container">
 
-        <div class="brief-section">
-            <h2><i class="fa-solid fa-bullseye"></i> Program Overview</h2>
-            <p>
-                This dashboard provides <span class="highlight">real-time intelligence</span> for the 
-                <strong>Competency Based Training (CBT)</strong> initiative. Powered by live Google Sheets data,
-                it enables <span class="highlight">instant visibility</span> into workforce capabilities,
-                training progression, and competency gaps — empowering data-driven decisions for
-                <span class="highlight">sustainable talent development</span>.
-            </p>
+        <!-- ===== BRIEF ===== -->
+        <div class="brief-section" style="background:linear-gradient(135deg,#0f2b40 0%,#17b890 100%);color:#fff;padding:12px 18px;border-radius:12px;margin:12px 0;">
+            <h2 style="font-size:0.95rem;font-weight:700;"><i class="fa-solid fa-bullseye"></i> Program Overview</h2>
+            <p style="font-size:0.8rem;opacity:0.9;line-height:1.6;">Real-time intelligence for the <strong>Competency Based Training (CBT)</strong> initiative. Powered by live Google Sheets data, enabling instant visibility into workforce capabilities, training progression, and competency gaps.</p>
         </div>
 
-        <!-- ============================================
-        FILTER BAR
-        ============================================ -->
+        <!-- ===== FILTER BAR ===== -->
         <div class="filter-bar" id="filterBar">
             <div class="filter-row">
                 <span class="filter-label"><i class="fa-solid fa-book"></i> Programs:</span>
@@ -753,7 +212,6 @@
                     <button class="filter-btn" data-filter="program" data-value="Kick Start">Kick Start <span class="badge-count" id="progKickCount">0</span></button>
                 </div>
             </div>
-
             <div class="filter-row">
                 <span class="filter-label"><i class="fa-solid fa-location-dot"></i> Location:</span>
                 <div class="filter-group" id="locationFilters">
@@ -763,8 +221,7 @@
                     <button class="filter-btn" data-filter="location" data-value="Nob">Nob <span class="badge-count" id="locNobCount">0</span></button>
                     <button class="filter-btn" data-filter="location" data-value="Alsaff">Alsaff <span class="badge-count" id="locAlsaffCount">0</span></button>
                 </div>
-
-                <span class="filter-label" style="margin-left:4px;"><i class="fa-solid fa-layer-group"></i> Level:</span>
+                <span class="filter-label" style="margin-left:6px;"><i class="fa-solid fa-layer-group"></i> Level:</span>
                 <div class="filter-group" id="levelFilters">
                     <button class="filter-btn active" data-filter="level" data-value="all">All <span class="badge-count" id="lvlAllCount">0</span></button>
                     <button class="filter-btn" data-filter="level" data-value="L4">L4 <span class="badge-count" id="lvlL4Count">0</span></button>
@@ -772,8 +229,7 @@
                     <button class="filter-btn" data-filter="level" data-value="L2">L2 <span class="badge-count" id="lvlL2Count">0</span></button>
                     <button class="filter-btn" data-filter="level" data-value="L1">L1 <span class="badge-count" id="lvlL1Count">0</span></button>
                 </div>
-
-                <span class="filter-label" style="margin-left:4px;"><i class="fa-solid fa-clock"></i> Phase:</span>
+                <span class="filter-label" style="margin-left:6px;"><i class="fa-solid fa-clock"></i> Phase:</span>
                 <div class="filter-group" id="phaseFilters">
                     <button class="filter-btn active" data-filter="phase" data-value="all">All <span class="badge-count" id="phaseAllCount">0</span></button>
                     <button class="filter-btn" data-filter="phase" data-value="Phase1">P1 <span class="badge-count" id="phase1Count">0</span></button>
@@ -782,111 +238,40 @@
                     <button class="filter-btn" data-filter="phase" data-value="Phase4">P4 <span class="badge-count" id="phase4Count">0</span></button>
                     <button class="filter-btn" data-filter="phase" data-value="Online-Phase4">Online <span class="badge-count" id="phaseOnlineCount">0</span></button>
                 </div>
-
-                <span class="filter-label" style="margin-left:4px;"><i class="fa-solid fa-user-check"></i> Attend:</span>
+                <span class="filter-label" style="margin-left:6px;"><i class="fa-solid fa-user-check"></i> Attend:</span>
                 <div class="filter-group" id="attendanceFilters">
                     <button class="filter-btn active attend-btn" data-filter="attendance" data-value="all">All <span class="badge-count" id="attAllCount">0</span></button>
                     <button class="filter-btn attend-btn" data-filter="attendance" data-value="attend">✅ Attend <span class="badge-count" id="attAttendCount">0</span></button>
                     <button class="filter-btn not-attend-btn" data-filter="attendance" data-value="not-attend">❌ Not Attend <span class="badge-count" id="attNotAttendCount">0</span></button>
                 </div>
-
-                <button class="clear-filters-btn" onclick="clearAllFilters()" style="margin-left:auto;">
-                    <i class="fa-solid fa-undo"></i> Reset
-                </button>
+                <button class="clear-filters-btn" onclick="clearAllFilters()"><i class="fa-solid fa-undo"></i> Reset</button>
             </div>
         </div>
 
-        <!-- ============================================
-        KPI GRID
-        ============================================ -->
+        <!-- ===== KPI GRID ===== -->
         <div class="kpi-grid" id="kpiGrid">
-            <div class="kpi-card">
-                <div class="kpi-info">
-                    <h4>Total Workforce</h4>
-                    <div class="num" id="kpiTotal">...</div>
-                </div>
-                <i class="fa-solid fa-users"></i>
-            </div>
-            <div class="kpi-card">
-                <div class="kpi-info">
-                    <h4>Executives (L4+)</h4>
-                    <div class="num" id="kpiL4">...</div>
-                </div>
-                <i class="fa-solid fa-crown"></i>
-            </div>
-            <div class="kpi-card">
-                <div class="kpi-info">
-                    <h4>Active Sectors</h4>
-                    <div class="num" id="kpiSectors">...</div>
-                </div>
-                <i class="fa-solid fa-building"></i>
-            </div>
-            <div class="kpi-card">
-                <div class="kpi-info">
-                    <h4>Departments</h4>
-                    <div class="num" id="kpiDepartments">...</div>
-                </div>
-                <i class="fa-solid fa-sitemap"></i>
-            </div>
-            <div class="kpi-card">
-                <div class="kpi-info">
-                    <h4>Attendance Rate</h4>
-                    <div class="num" id="kpiAttendance">...</div>
-                </div>
-                <i class="fa-solid fa-user-check"></i>
-            </div>
-            <div class="kpi-card">
-                <div class="kpi-info">
-                    <h4>Completion Rate</h4>
-                    <div class="num" id="kpiCompletion">...</div>
-                </div>
-                <i class="fa-solid fa-graduation-cap"></i>
-            </div>
-            <div class="kpi-card">
-                <div class="kpi-info">
-                    <h4>Training Programs</h4>
-                    <div class="num" id="kpiPrograms">...</div>
-                </div>
-                <i class="fa-solid fa-book-open"></i>
-            </div>
-            <div class="kpi-card">
-                <div class="kpi-info">
-                    <h4>Training Locations</h4>
-                    <div class="num" id="kpiLocations">...</div>
-                </div>
-                <i class="fa-solid fa-location-dot"></i>
-            </div>
-            <div class="kpi-card">
-                <div class="kpi-info">
-                    <h4>Data Quality</h4>
-                    <div class="num" id="kpiQuality">...</div>
-                </div>
-                <i class="fa-solid fa-shield-halved"></i>
-            </div>
-            <div class="kpi-card">
-                <div class="kpi-info">
-                    <h4>Active Phases</h4>
-                    <div class="num" id="kpiPhases">...</div>
-                </div>
-                <i class="fa-solid fa-clock"></i>
-            </div>
+            <div class="kpi-card"><div class="kpi-info"><h4>Total Workforce</h4><div class="num" id="kpiTotal">...</div></div><i class="fa-solid fa-users"></i></div>
+            <div class="kpi-card"><div class="kpi-info"><h4>Executives (L4+)</h4><div class="num" id="kpiL4">...</div></div><i class="fa-solid fa-crown"></i></div>
+            <div class="kpi-card"><div class="kpi-info"><h4>Active Sectors</h4><div class="num" id="kpiSectors">...</div></div><i class="fa-solid fa-building"></i></div>
+            <div class="kpi-card"><div class="kpi-info"><h4>Departments</h4><div class="num" id="kpiDepartments">...</div></div><i class="fa-solid fa-sitemap"></i></div>
+            <div class="kpi-card"><div class="kpi-info"><h4>Attendance Rate</h4><div class="num" id="kpiAttendance">...</div></div><i class="fa-solid fa-user-check"></i></div>
+            <div class="kpi-card"><div class="kpi-info"><h4>Completion Rate</h4><div class="num" id="kpiCompletion">...</div></div><i class="fa-solid fa-graduation-cap"></i></div>
+            <div class="kpi-card"><div class="kpi-info"><h4>Training Programs</h4><div class="num" id="kpiPrograms">...</div></div><i class="fa-solid fa-book-open"></i></div>
+            <div class="kpi-card"><div class="kpi-info"><h4>Training Locations</h4><div class="num" id="kpiLocations">...</div></div><i class="fa-solid fa-location-dot"></i></div>
+            <div class="kpi-card"><div class="kpi-info"><h4>Data Quality</h4><div class="num" id="kpiQuality">...</div></div><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="kpi-card"><div class="kpi-info"><h4>Active Phases</h4><div class="num" id="kpiPhases">...</div></div><i class="fa-solid fa-clock"></i></div>
         </div>
 
-        <!-- ============================================
-        SEARCH + CHARTS
-        ============================================ -->
+        <!-- ===== SEARCH + CHARTS ===== -->
         <div class="search-charts-grid">
             <div class="search-wrapper">
                 <h3><i class="fa-solid fa-magnifying-glass"></i> Employee Query</h3>
-                <p>Enter Employee ID for full training profile.</p>
+                <p>Enter Employee ID for full profile</p>
                 <div class="search-box">
                     <input type="number" id="empIdInput" placeholder="e.g., 5908">
                     <button onclick="searchEmployee()"><i class="fa-solid fa-search"></i> Search</button>
                 </div>
-                <div id="loadingMsg" class="loading-status">
-                    <i class="fa-solid fa-spinner fa-spin"></i> Loading data...
-                </div>
-
+                <div id="loadingMsg" class="loading-status"><i class="fa-solid fa-spinner fa-spin"></i> Loading data...</div>
                 <div id="resultProfile" class="result-card">
                     <div class="employee-profile">
                         <div class="info-group"><h4>Name</h4><p id="resName">-</p></div>
@@ -898,95 +283,75 @@
                         <div class="info-group"><h4>Attendance</h4><p id="resAttendance">-</p></div>
                         <div class="info-group"><h4>Status</h4><p id="resStatus">-</p></div>
                     </div>
-                    
-                    <div class="employee-stats" id="employeeStats">
+                    <div class="employee-stats">
                         <span class="stat-badge attend" id="statAttended">✅ Attended: 0</span>
                         <span class="stat-badge not-attend" id="statNotAttended">❌ Not Attended: 0</span>
                         <span class="stat-badge group" id="statGroup">📋 Group: -</span>
                         <span class="stat-badge location" id="statLocation">📍 Location: -</span>
                         <span class="stat-badge accommodation" id="statAccommodation">🏠 Accommodation: -</span>
                     </div>
-                    
                     <div class="training-tags" id="resPrograms"></div>
                 </div>
             </div>
-
             <div class="charts-grid">
-                <div class="chart-box">
-                    <h4><i class="fa-solid fa-chart-bar" style="color:var(--primary-light);"></i> Employees by Sector</h4>
+                <div class="chart-box" id="chartBoxSector">
+                    <h4><i class="fa-solid fa-chart-bar" style="color:#1e3d59;"></i> Employees by Sector</h4>
                     <div class="chart-container"><canvas id="chartSector"></canvas></div>
                 </div>
-                <div class="chart-box">
-                    <h4><i class="fa-solid fa-layer-group" style="color:var(--accent);"></i> Competency Levels</h4>
+                <div class="chart-box" id="chartBoxLevel">
+                    <h4><i class="fa-solid fa-layer-group" style="color:#ff6e40;"></i> Competency Levels</h4>
                     <div class="chart-container"><canvas id="chartLevel"></canvas></div>
                 </div>
             </div>
         </div>
 
-        <!-- ============================================
-        CHARTS - 2 per row
-        ============================================ -->
+        <!-- ===== CHARTS - 2 per row ===== -->
         <div class="charts-grid-2">
-            <div class="chart-box">
-                <h4><i class="fa-solid fa-users-between-lines" style="color:var(--success);"></i> Department Size</h4>
+            <div class="chart-box" id="chartBoxDept">
+                <h4><i class="fa-solid fa-users-between-lines" style="color:#10b981;"></i> Department Size</h4>
                 <div class="chart-container"><canvas id="chartDepartment"></canvas></div>
             </div>
-            <div class="chart-box">
-                <h4><i class="fa-solid fa-chart-line" style="color:var(--warning);"></i> Attendance vs Completion</h4>
+            <div class="chart-box" id="chartBoxAttendance">
+                <h4><i class="fa-solid fa-chart-line" style="color:#f59e0b;"></i> Attendance vs Completion</h4>
                 <div class="chart-container"><canvas id="chartAttendance"></canvas></div>
             </div>
-            <div class="chart-box">
-                <h4><i class="fa-solid fa-clock" style="color:var(--info);"></i> Training Phase Distribution</h4>
+            <div class="chart-box" id="chartBoxPhase">
+                <h4><i class="fa-solid fa-clock" style="color:#3b82f6;"></i> Training Phase Distribution</h4>
                 <div class="chart-container"><canvas id="chartPhase"></canvas></div>
             </div>
-            <div class="chart-box">
-                <h4><i class="fa-solid fa-location-dot" style="color:var(--danger);"></i> Training Location Distribution</h4>
+            <div class="chart-box" id="chartBoxLocation">
+                <h4><i class="fa-solid fa-location-dot" style="color:#ef4444;"></i> Training Location Distribution</h4>
                 <div class="chart-container"><canvas id="chartLocation"></canvas></div>
             </div>
         </div>
 
-        <!-- ============================================
-        ADDITIONAL CHARTS
-        ============================================ -->
-        <div class="charts-grid-2" style="margin-top:14px;">
-            <div class="chart-box">
-                <h4><i class="fa-solid fa-gauge-high" style="color:var(--primary-light);"></i> Data Quality Overview</h4>
+        <!-- ===== ADDITIONAL CHARTS ===== -->
+        <div class="charts-grid-2" style="margin-top:12px;">
+            <div class="chart-box" id="chartBoxQuality">
+                <h4><i class="fa-solid fa-gauge-high" style="color:#1e3d59;"></i> Data Quality Overview</h4>
                 <div class="chart-container"><canvas id="chartQuality"></canvas></div>
             </div>
-            <div class="chart-box">
-                <h4><i class="fa-solid fa-book-open" style="color:var(--purple);"></i> Program Enrollment Distribution</h4>
+            <div class="chart-box" id="chartBoxPrograms">
+                <h4><i class="fa-solid fa-book-open" style="color:#8b5cf6;"></i> Program Enrollment Distribution</h4>
                 <div class="chart-container"><canvas id="chartPrograms"></canvas></div>
             </div>
         </div>
 
     </div>
 
-    <!-- ============================================
-    JAVASCRIPT
-    ============================================ -->
     <script>
-        // ============================================
+        // ============================================================
         // CONFIG
-        // ============================================
-        const SHEET_URL = 
-            "https://docs.google.com/spreadsheets/d/e/2PACX-1vRu0vhUS8c-hbFznxR_F9K9LNueNeabXiLwMjMzppgpIjJCSNCadsHDVVGxwiKYYHve9-Qtb37ALs8P/pub?gid=1032977671&single=true&output=csv";
+        // ============================================================
+        const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRu0vhUS8c-hbFznxR_F9K9LNueNeabXiLwMjMzppgpIjJCSNCadsHDVVGxwiKYYHve9-Qtb37ALs8P/pub?gid=1032977671&single=true&output=csv";
 
         let allData = [];
         let filteredData = [];
         let chartInstances = {};
-        let activeFilters = { 
-            program: 'all', 
-            location: 'all', 
-            level: 'all', 
-            phase: 'all',
-            attendance: 'all'
-        };
+        let activeFilters = { program: 'all', location: 'all', level: 'all', phase: 'all', attendance: 'all' };
         let lastFetchedData = '';
         let fetchInterval = null;
 
-        // ============================================
-        // PROGRAM FIELD MAPPING
-        // ============================================
         const PROGRAM_FIELDS = {
             '7 Sens': '7 Sens',
             'Analytical Thinking': 'Analytical Thinking',
@@ -996,193 +361,105 @@
             'Kick Start': 'Kick Start'
         };
 
-        // ============================================
-        // LOCATION MAPPING - قراءة من عمود Training Location
-        // ============================================
-        const LOCATION_VALUES = ['Steigenberger', 'TOR', 'Nob', 'Alsaff'];
-
-        // ============================================
-        // UTILITY: CSV to JSON
-        // ============================================
+        // ============================================================
+        // UTILITY
+        // ============================================================
         function csvToJSON(csv) {
             const lines = csv.split("\n");
             if (lines.length < 2) return [];
             const headers = lines[0].split(",").map(h => h.trim().replace(/^"|"$/g, ''));
             const seenIds = new Set();
             const result = [];
-            
             for (let i = 1; i < lines.length; i++) {
                 if (!lines[i].trim()) continue;
                 const row = lines[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(item => item.trim().replace(/^"|"$/g, ''));
                 const obj = {};
-                headers.forEach((h, idx) => { 
-                    const key = h.trim();
-                    obj[key] = row[idx] || '';
-                });
-                
+                headers.forEach((h, idx) => { obj[h] = row[idx] || ''; });
                 const id = String(obj['ID'] || '').trim();
-                if (id && !seenIds.has(id)) {
-                    seenIds.add(id);
-                    result.push(obj);
-                } else if (!id) {
-                    obj['_tempId'] = 'temp_' + i;
-                    result.push(obj);
-                }
+                if (id && !seenIds.has(id)) { seenIds.add(id); result.push(obj); }
+                else if (!id) { obj['_tempId'] = 'temp_' + i; result.push(obj); }
             }
             return result;
         }
 
-        // ============================================
-        // CHECK FOR UPDATES
-        // ============================================
         function checkForUpdates() {
-            fetch(SHEET_URL)
-                .then(res => {
-                    if (!res.ok) throw new Error('Network error');
-                    return res.text();
-                })
-                .then(csv => {
-                    const currentHash = csv.substring(0, 1000);
-                    if (currentHash !== lastFetchedData) {
-                        lastFetchedData = currentHash;
-                        console.log('📊 Data updated! Reloading...');
-                        showUpdateNotification();
-                        allData = csvToJSON(csv);
-                        applyFilters();
-                    }
-                })
-                .catch(err => console.warn('Update check failed:', err));
+            fetch(SHEET_URL).then(res => res.text()).then(csv => {
+                const hash = csv.substring(0, 1000);
+                if (hash !== lastFetchedData) {
+                    lastFetchedData = hash;
+                    document.getElementById('updateNotification').classList.add('show');
+                    setTimeout(() => document.getElementById('updateNotification').classList.remove('show'), 4000);
+                    allData = csvToJSON(csv);
+                    applyFilters();
+                }
+            }).catch(() => {});
         }
 
-        function showUpdateNotification() {
-            const notification = document.getElementById('updateNotification');
-            notification.classList.add('show');
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 4000);
-        }
-
-        // ============================================
-        // DESTROY CHARTS
-        // ============================================
         function destroyCharts() {
             Object.keys(chartInstances).forEach(key => {
-                if (chartInstances[key]) {
-                    chartInstances[key].destroy();
-                    delete chartInstances[key];
-                }
+                if (chartInstances[key]) { chartInstances[key].destroy(); delete chartInstances[key]; }
             });
         }
 
-        // ============================================
-        // UPDATE FILTER BADGE COUNTS
-        // ============================================
+        // ============================================================
+        // UPDATE BADGE COUNTS
+        // ============================================================
         function updateFilterBadges(data) {
-            // --- Program Counts - قراءة من كل عمود على حدة ---
             const progAll = data.length;
-            
-            const prog7Sens = data.filter(r => {
+            document.getElementById('progAllCount').textContent = progAll;
+            ['7 Sens', 'Analytical Thinking', 'Mind Field', 'Leadership', 'Drive Performance', 'Kick Start'].forEach(p => {
+                const count = data.filter(r => {
+                    const val = String(r[p] || '').toLowerCase();
+                    return val === 'attend' || val === 'attended' || val.includes('attend');
+                }).length;
+                const id = 'prog' + p.replace(/ /g, '') + 'Count';
+                const el = document.getElementById(id);
+                if (el) el.textContent = count;
+            });
+
+            document.getElementById('locAllCount').textContent = data.length;
+            ['Steigenberger', 'TOR', 'Nob', 'Alsaff'].forEach(loc => {
+                const count = data.filter(r => String(r['Training Location'] || '').includes(loc)).length;
+                const id = 'loc' + loc + 'Count';
+                const el = document.getElementById(id);
+                if (el) el.textContent = count;
+            });
+
+            document.getElementById('lvlAllCount').textContent = data.length;
+            ['L4', 'L3', 'L2', 'L1'].forEach(lvl => {
+                const count = data.filter(r => String(r['C-LVL'] || '').includes(lvl)).length;
+                const id = 'lvl' + lvl + 'Count';
+                const el = document.getElementById(id);
+                if (el) el.textContent = count;
+            });
+
+            document.getElementById('phaseAllCount').textContent = data.length;
+            ['Phase1', 'Phase2', 'Phase3', 'Phase4', 'Online-Phase4'].forEach(ph => {
+                const count = data.filter(r => String(r['CPT Training Phase'] || '').includes(ph)).length;
+                const id = 'phase' + ph.replace(/-/g, '') + 'Count';
+                const el = document.getElementById(id);
+                if (el) el.textContent = count;
+            });
+
+            const attAll = data.length;
+            const attAttend = data.filter(r => {
                 const val = String(r['7 Sens'] || '').toLowerCase();
                 return val === 'attend' || val === 'attended' || val.includes('attend');
             }).length;
-            
-            const progAnalytical = data.filter(r => {
-                const val = String(r['Analytical Thinking'] || '').toLowerCase();
-                return val === 'attend' || val === 'attended' || val.includes('attend');
-            }).length;
-            
-            const progMindField = data.filter(r => {
-                const val = String(r['Mind Field'] || '').toLowerCase();
-                return val === 'attend' || val === 'attended' || val.includes('attend');
-            }).length;
-            
-            const progLeadership = data.filter(r => {
-                const val = String(r['Leadership'] || '').toLowerCase();
-                return val === 'attend' || val === 'attended' || val.includes('attend');
-            }).length;
-            
-            const progDrive = data.filter(r => {
-                const val = String(r['Drive Performance'] || '').toLowerCase();
-                return val === 'attend' || val === 'attended' || val.includes('attend');
-            }).length;
-            
-            const progKick = data.filter(r => {
-                const val = String(r['Kick Start'] || '').toLowerCase();
-                return val === 'attend' || val === 'attended' || val.includes('attend');
-            }).length;
-
-            document.getElementById('progAllCount').textContent = progAll;
-            document.getElementById('prog7SensCount').textContent = prog7Sens;
-            document.getElementById('progAnalyticalCount').textContent = progAnalytical;
-            document.getElementById('progMindFieldCount').textContent = progMindField;
-            document.getElementById('progLeadershipCount').textContent = progLeadership;
-            document.getElementById('progDriveCount').textContent = progDrive;
-            document.getElementById('progKickCount').textContent = progKick;
-
-            // --- Location Counts - قراءة من عمود Training Location ---
-            const locAll = data.length;
-            const locSteigenberger = data.filter(r => String(r['Training Location'] || '').includes('Steigenberger')).length;
-            const locTOR = data.filter(r => String(r['Training Location'] || '').includes('TOR')).length;
-            const locNob = data.filter(r => String(r['Training Location'] || '').includes('Nob')).length;
-            const locAlsaff = data.filter(r => String(r['Training Location'] || '').includes('Alsaff')).length;
-
-            document.getElementById('locAllCount').textContent = locAll;
-            document.getElementById('locSteigenbergerCount').textContent = locSteigenberger;
-            document.getElementById('locTORCount').textContent = locTOR;
-            document.getElementById('locNobCount').textContent = locNob;
-            document.getElementById('locAlsaffCount').textContent = locAlsaff;
-
-            // --- Level Counts ---
-            const lvlAll = data.length;
-            const lvlL4 = data.filter(r => String(r['C-LVL'] || '').includes('L4')).length;
-            const lvlL3 = data.filter(r => String(r['C-LVL'] || '').includes('L3')).length;
-            const lvlL2 = data.filter(r => String(r['C-LVL'] || '').includes('L2')).length;
-            const lvlL1 = data.filter(r => String(r['C-LVL'] || '').includes('L1')).length;
-
-            document.getElementById('lvlAllCount').textContent = lvlAll;
-            document.getElementById('lvlL4Count').textContent = lvlL4;
-            document.getElementById('lvlL3Count').textContent = lvlL3;
-            document.getElementById('lvlL2Count').textContent = lvlL2;
-            document.getElementById('lvlL1Count').textContent = lvlL1;
-
-            // --- Phase Counts ---
-            const phaseAll = data.length;
-            const phase1 = data.filter(r => String(r['CPT Training Phase'] || '').includes('Phase1')).length;
-            const phase2 = data.filter(r => String(r['CPT Training Phase'] || '').includes('Phase2')).length;
-            const phase3 = data.filter(r => String(r['CPT Training Phase'] || '').includes('Phase3')).length;
-            const phase4 = data.filter(r => String(r['CPT Training Phase'] || '').includes('Phase4')).length;
-            const phaseOnline = data.filter(r => String(r['CPT Training Phase'] || '').includes('Online-Phase4')).length;
-
-            document.getElementById('phaseAllCount').textContent = phaseAll;
-            document.getElementById('phase1Count').textContent = phase1;
-            document.getElementById('phase2Count').textContent = phase2;
-            document.getElementById('phase3Count').textContent = phase3;
-            document.getElementById('phase4Count').textContent = phase4;
-            document.getElementById('phaseOnlineCount').textContent = phaseOnline;
-
-            // --- Attendance Counts ---
-            const attAll = data.length;
-            const attAttend = data.filter(r => {
-                const sevenSens = String(r['7 Sens'] || '').toLowerCase();
-                return sevenSens === 'attend' || sevenSens === 'attended' || sevenSens.includes('attend');
-            }).length;
             const attNotAttend = data.filter(r => {
-                const sevenSens = String(r['7 Sens'] || '').toLowerCase();
-                return sevenSens === 'not attend' || sevenSens.includes('not attend');
+                const val = String(r['7 Sens'] || '').toLowerCase();
+                return val === 'not attend' || val.includes('not attend');
             }).length;
-
             document.getElementById('attAllCount').textContent = attAll;
             document.getElementById('attAttendCount').textContent = attAttend;
             document.getElementById('attNotAttendCount').textContent = attNotAttend;
         }
 
-        // ============================================
-        // APPLY FILTERS
-        // ============================================
+        // ============================================================
+        // FILTERS
+        // ============================================================
         function applyFilters() {
-            console.log('🔄 Applying filters:', activeFilters);
             filteredData = [...allData];
-
             if (activeFilters.program !== 'all') {
                 const field = PROGRAM_FIELDS[activeFilters.program];
                 if (field) {
@@ -1192,110 +469,259 @@
                     });
                 }
             }
-
             if (activeFilters.location !== 'all') {
-                filteredData = filteredData.filter(r => 
-                    String(r['Training Location'] || '').includes(activeFilters.location)
-                );
+                filteredData = filteredData.filter(r => String(r['Training Location'] || '').includes(activeFilters.location));
             }
-
             if (activeFilters.level !== 'all') {
-                filteredData = filteredData.filter(r => 
-                    String(r['C-LVL'] || '').includes(activeFilters.level)
-                );
+                filteredData = filteredData.filter(r => String(r['C-LVL'] || '').includes(activeFilters.level));
             }
-
             if (activeFilters.phase !== 'all') {
-                filteredData = filteredData.filter(r => 
-                    String(r['CPT Training Phase'] || '').includes(activeFilters.phase)
-                );
+                filteredData = filteredData.filter(r => String(r['CPT Training Phase'] || '').includes(activeFilters.phase));
             }
-
             if (activeFilters.attendance === 'attend') {
                 filteredData = filteredData.filter(r => {
-                    const sevenSens = String(r['7 Sens'] || '').toLowerCase();
-                    return sevenSens === 'attend' || sevenSens === 'attended' || sevenSens.includes('attend');
+                    const val = String(r['7 Sens'] || '').toLowerCase();
+                    return val === 'attend' || val === 'attended' || val.includes('attend');
                 });
             } else if (activeFilters.attendance === 'not-attend') {
                 filteredData = filteredData.filter(r => {
-                    const sevenSens = String(r['7 Sens'] || '').toLowerCase();
-                    return sevenSens === 'not attend' || sevenSens.includes('not attend');
+                    const val = String(r['7 Sens'] || '').toLowerCase();
+                    return val === 'not attend' || val.includes('not attend');
                 });
             }
-
             renderDashboard(filteredData);
         }
 
-        // ============================================
-        // FILTER BUTTON HANDLERS
-        // ============================================
         function setupFilterButtons() {
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
-                    const filterType = this.dataset.filter;
+                    const type = this.dataset.filter;
                     const value = this.dataset.value;
-
                     const group = this.closest('.filter-group');
                     group.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
-
-                    activeFilters[filterType] = value;
-
+                    activeFilters[type] = value;
                     applyFilters();
                 });
             });
         }
 
         function clearAllFilters() {
-            activeFilters = { 
-                program: 'all', 
-                location: 'all', 
-                level: 'all', 
-                phase: 'all',
-                attendance: 'all'
-            };
+            activeFilters = { program: 'all', location: 'all', level: 'all', phase: 'all', attendance: 'all' };
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.classList.remove('active');
-                if (btn.dataset.value === 'all') {
-                    btn.classList.add('active');
-                }
+                if (btn.dataset.value === 'all') btn.classList.add('active');
             });
             applyFilters();
         }
 
-        // ============================================
-        // RENDER DASHBOARD
-        // ============================================
-        function renderDashboard(data) {
-            if (!data || data.length === 0) {
-                console.warn("No data available.");
-                return;
+        // ============================================================
+        // CHART CLICK HANDLERS - INTERACTIVE
+        // ============================================================
+        function setupChartInteractivity() {
+            // Sector Chart Click
+            const sectorChart = chartInstances.sector;
+            if (sectorChart) {
+                sectorChart.on('click', function(e) {
+                    if (e.dataIndex !== undefined) {
+                        const label = sectorChart.data.labels[e.dataIndex];
+                        // Toggle filter: if already selected, deselect; else select
+                        if (activeFilters.sector === label) {
+                            activeFilters.sector = 'all';
+                            document.querySelectorAll('#locationFilters .filter-btn').forEach(b => b.classList.remove('active'));
+                            document.querySelector('#locationFilters .filter-btn[data-value="all"]').classList.add('active');
+                        } else {
+                            activeFilters.sector = label;
+                            document.querySelectorAll('#locationFilters .filter-btn').forEach(b => b.classList.remove('active'));
+                            // Highlight the corresponding sector button if it exists
+                            const sectorBtn = document.querySelector(`#locationFilters .filter-btn[data-value="${label}"]`);
+                            if (sectorBtn) sectorBtn.classList.add('active');
+                        }
+                        applyFilters();
+                    }
+                });
+                sectorChart.on('mouseover', function(e) { if (e.dataIndex !== undefined) { document.body.style.cursor = 'pointer'; } });
+                sectorChart.on('mouseout', function() { document.body.style.cursor = 'default'; });
             }
 
+            // Level Chart Click (Doughnut)
+            const levelChart = chartInstances.level;
+            if (levelChart) {
+                levelChart.on('click', function(e) {
+                    if (e.dataIndex !== undefined) {
+                        const label = levelChart.data.labels[e.dataIndex];
+                        if (activeFilters.level === label) {
+                            activeFilters.level = 'all';
+                            document.querySelectorAll('#levelFilters .filter-btn').forEach(b => b.classList.remove('active'));
+                            document.querySelector('#levelFilters .filter-btn[data-value="all"]').classList.add('active');
+                        } else {
+                            activeFilters.level = label;
+                            document.querySelectorAll('#levelFilters .filter-btn').forEach(b => b.classList.remove('active'));
+                            const levelBtn = document.querySelector(`#levelFilters .filter-btn[data-value="${label}"]`);
+                            if (levelBtn) levelBtn.classList.add('active');
+                        }
+                        applyFilters();
+                    }
+                });
+            }
+
+            // Department Chart Click
+            const deptChart = chartInstances.department;
+            if (deptChart) {
+                deptChart.on('click', function(e) {
+                    if (e.dataIndex !== undefined) {
+                        const label = deptChart.data.labels[e.dataIndex];
+                        // Set department filter (using custom filter)
+                        activeFilters.department = activeFilters.department === label ? 'all' : label;
+                        // Since we don't have a department filter button, apply directly
+                        applyFiltersWithExtra('department', activeFilters.department);
+                    }
+                });
+            }
+
+            // Location Chart Click
+            const locationChart = chartInstances.location;
+            if (locationChart) {
+                locationChart.on('click', function(e) {
+                    if (e.dataIndex !== undefined) {
+                        const label = locationChart.data.labels[e.dataIndex];
+                        if (activeFilters.location === label) {
+                            activeFilters.location = 'all';
+                            document.querySelectorAll('#locationFilters .filter-btn').forEach(b => b.classList.remove('active'));
+                            document.querySelector('#locationFilters .filter-btn[data-value="all"]').classList.add('active');
+                        } else {
+                            activeFilters.location = label;
+                            document.querySelectorAll('#locationFilters .filter-btn').forEach(b => b.classList.remove('active'));
+                            const locBtn = document.querySelector(`#locationFilters .filter-btn[data-value="${label}"]`);
+                            if (locBtn) locBtn.classList.add('active');
+                        }
+                        applyFilters();
+                    }
+                });
+            }
+
+            // Phase Chart Click
+            const phaseChart = chartInstances.phase;
+            if (phaseChart) {
+                phaseChart.on('click', function(e) {
+                    if (e.dataIndex !== undefined) {
+                        const label = phaseChart.data.labels[e.dataIndex];
+                        if (activeFilters.phase === label) {
+                            activeFilters.phase = 'all';
+                            document.querySelectorAll('#phaseFilters .filter-btn').forEach(b => b.classList.remove('active'));
+                            document.querySelector('#phaseFilters .filter-btn[data-value="all"]').classList.add('active');
+                        } else {
+                            activeFilters.phase = label;
+                            document.querySelectorAll('#phaseFilters .filter-btn').forEach(b => b.classList.remove('active'));
+                            const phaseBtn = document.querySelector(`#phaseFilters .filter-btn[data-value="${label}"]`);
+                            if (phaseBtn) phaseBtn.classList.add('active');
+                        }
+                        applyFilters();
+                    }
+                });
+            }
+
+            // Program Chart Click
+            const programChart = chartInstances.programs;
+            if (programChart) {
+                programChart.on('click', function(e) {
+                    if (e.dataIndex !== undefined) {
+                        const label = programChart.data.labels[e.dataIndex];
+                        if (activeFilters.program === label) {
+                            activeFilters.program = 'all';
+                            document.querySelectorAll('#programFilters .filter-btn').forEach(b => b.classList.remove('active'));
+                            document.querySelector('#programFilters .filter-btn[data-value="all"]').classList.add('active');
+                        } else {
+                            activeFilters.program = label;
+                            document.querySelectorAll('#programFilters .filter-btn').forEach(b => b.classList.remove('active'));
+                            const progBtn = document.querySelector(`#programFilters .filter-btn[data-value="${label}"]`);
+                            if (progBtn) progBtn.classList.add('active');
+                        }
+                        applyFilters();
+                    }
+                });
+            }
+        }
+
+        // Extra filter for department click
+        function applyFiltersWithExtra(type, value) {
+            // Store extra filters in a separate object
+            if (!window.extraFilters) window.extraFilters = {};
+            window.extraFilters[type] = value;
+            // Re-apply filters with extra
+            applyFiltersWithExtras();
+        }
+
+        function applyFiltersWithExtras() {
+            filteredData = [...allData];
+            // Apply standard filters
+            if (activeFilters.program !== 'all') {
+                const field = PROGRAM_FIELDS[activeFilters.program];
+                if (field) {
+                    filteredData = filteredData.filter(r => {
+                        const val = String(r[field] || '').toLowerCase();
+                        return val === 'attend' || val === 'attended' || val.includes('attend');
+                    });
+                }
+            }
+            if (activeFilters.location !== 'all') {
+                filteredData = filteredData.filter(r => String(r['Training Location'] || '').includes(activeFilters.location));
+            }
+            if (activeFilters.level !== 'all') {
+                filteredData = filteredData.filter(r => String(r['C-LVL'] || '').includes(activeFilters.level));
+            }
+            if (activeFilters.phase !== 'all') {
+                filteredData = filteredData.filter(r => String(r['CPT Training Phase'] || '').includes(activeFilters.phase));
+            }
+            if (activeFilters.attendance === 'attend') {
+                filteredData = filteredData.filter(r => {
+                    const val = String(r['7 Sens'] || '').toLowerCase();
+                    return val === 'attend' || val === 'attended' || val.includes('attend');
+                });
+            } else if (activeFilters.attendance === 'not-attend') {
+                filteredData = filteredData.filter(r => {
+                    const val = String(r['7 Sens'] || '').toLowerCase();
+                    return val === 'not attend' || val.includes('not attend');
+                });
+            }
+            // Apply extra filters
+            if (window.extraFilters && window.extraFilters.department) {
+                filteredData = filteredData.filter(r => String(r['Department'] || '').includes(window.extraFilters.department));
+            }
+            renderDashboard(filteredData);
+        }
+
+        // Override applyFilters to use extras
+        const originalApply = applyFilters;
+        applyFilters = function() {
+            applyFiltersWithExtras();
+        };
+
+        // ============================================================
+        // RENDER DASHBOARD
+        // ============================================================
+        function renderDashboard(data) {
+            if (!data || data.length === 0) { console.warn("No data."); return; }
             const total = data.length;
 
             const l4Count = data.filter(r => String(r['C-LVL'] || '').includes('L4')).length;
             const sectors = new Set(data.map(r => r['Sector']).filter(Boolean));
             const departments = new Set(data.map(r => r['Department']).filter(Boolean));
-            
             const attended = data.filter(r => {
-                const sevenSens = String(r['7 Sens'] || '').toLowerCase();
-                return sevenSens === 'attend' || sevenSens === 'attended' || sevenSens.includes('attend');
+                const val = String(r['7 Sens'] || '').toLowerCase();
+                return val === 'attend' || val === 'attended' || val.includes('attend');
             }).length;
             const attendanceRate = total > 0 ? Math.round((attended / total) * 100) : 0;
-            
             const completed = data.filter(r => {
-                const sevenSens = String(r['7 Sens'] || '').toLowerCase();
-                const analytical = String(r['Analytical Thinking'] || '').toLowerCase();
-                return (sevenSens === 'attend' || sevenSens === 'attended' || sevenSens.includes('attend')) ||
-                       (analytical === 'attend' || analytical === 'attended' || analytical.includes('attend'));
+                const v1 = String(r['7 Sens'] || '').toLowerCase();
+                const v2 = String(r['Analytical Thinking'] || '').toLowerCase();
+                return (v1 === 'attend' || v1 === 'attended' || v1.includes('attend')) ||
+                       (v2 === 'attend' || v2 === 'attended' || v2.includes('attend'));
             }).length;
             const completionRate = total > 0 ? Math.round((completed / total) * 100) : 0;
-
             const programs = new Set(data.map(r => r['CPT Training Group']).filter(Boolean));
             const locations = new Set(data.map(r => r['Training Location']).filter(Boolean));
             const phases = new Set(data.map(r => r['CPT Training Phase']).filter(Boolean));
-
             const hasId = data.filter(r => r['ID'] && r['ID'].trim()).length;
             const hasName = data.filter(r => r['Name'] && r['Name'].trim()).length;
             const hasDept = data.filter(r => r['Department'] && r['Department'].trim()).length;
@@ -1316,40 +742,30 @@
 
             // --- CHART DATA ---
             const sectorCounts = {};
-            data.forEach(r => {
-                const s = r['Sector'] || 'Unknown';
-                sectorCounts[s] = (sectorCounts[s] || 0) + 1;
-            });
+            data.forEach(r => { const s = r['Sector'] || 'Unknown'; sectorCounts[s] = (sectorCounts[s] || 0) + 1; });
             const sectorLabels = Object.keys(sectorCounts);
             const sectorValues = Object.values(sectorCounts);
 
             const levelCounts = {};
-            data.forEach(r => {
-                const lvl = r['C-LVL'] || 'Unknown';
-                levelCounts[lvl] = (levelCounts[lvl] || 0) + 1;
-            });
+            data.forEach(r => { const l = r['C-LVL'] || 'Unknown'; levelCounts[l] = (levelCounts[l] || 0) + 1; });
             const levelLabels = Object.keys(levelCounts);
             const levelValues = Object.values(levelCounts);
 
             const deptCounts = {};
-            data.forEach(r => {
-                const d = r['Department'] || 'Unknown';
-                deptCounts[d] = (deptCounts[d] || 0) + 1;
-            });
-            const sortedDepts = Object.entries(deptCounts).sort((a, b) => b[1] - a[1]).slice(0, 8);
+            data.forEach(r => { const d = r['Department'] || 'Unknown'; deptCounts[d] = (deptCounts[d] || 0) + 1; });
+            const sortedDepts = Object.entries(deptCounts).sort((a,b) => b[1]-a[1]).slice(0,8);
             const deptLabels = sortedDepts.map(d => d[0]);
             const deptValues = sortedDepts.map(d => d[1]);
 
-            const sectorAtt = {};
-            const sectorComp = {};
+            const sectorAtt = {}, sectorComp = {};
             data.forEach(r => {
                 const s = r['Sector'] || 'Unknown';
                 if (!sectorAtt[s]) { sectorAtt[s] = 0; sectorComp[s] = 0; }
-                const sevenSens = String(r['7 Sens'] || '').toLowerCase();
-                const analytical = String(r['Analytical Thinking'] || '').toLowerCase();
-                if (sevenSens === 'attend' || sevenSens === 'attended' || sevenSens.includes('attend')) sectorAtt[s]++;
-                if ((sevenSens === 'attend' || sevenSens === 'attended' || sevenSens.includes('attend')) ||
-                    (analytical === 'attend' || analytical === 'attended' || analytical.includes('attend'))) sectorComp[s]++;
+                const v1 = String(r['7 Sens'] || '').toLowerCase();
+                const v2 = String(r['Analytical Thinking'] || '').toLowerCase();
+                if (v1 === 'attend' || v1 === 'attended' || v1.includes('attend')) sectorAtt[s]++;
+                if ((v1 === 'attend' || v1 === 'attended' || v1.includes('attend')) ||
+                    (v2 === 'attend' || v2 === 'attended' || v2.includes('attend'))) sectorComp[s]++;
             });
             const attSectors = Object.keys(sectorAtt);
             const attValues = attSectors.map(s => {
@@ -1362,25 +778,17 @@
             });
 
             const phaseCounts = {};
-            data.forEach(r => {
-                const p = r['CPT Training Phase'] || 'Unknown';
-                phaseCounts[p] = (phaseCounts[p] || 0) + 1;
-            });
+            data.forEach(r => { const p = r['CPT Training Phase'] || 'Unknown'; phaseCounts[p] = (phaseCounts[p] || 0) + 1; });
             const phaseLabels = Object.keys(phaseCounts);
             const phaseValues = Object.values(phaseCounts);
 
             const locCounts = {};
-            data.forEach(r => {
-                const loc = r['Training Location'] || 'Unknown';
-                locCounts[loc] = (locCounts[loc] || 0) + 1;
-            });
+            data.forEach(r => { const l = r['Training Location'] || 'Unknown'; locCounts[l] = (locCounts[l] || 0) + 1; });
             const locLabels = Object.keys(locCounts);
             const locValues = Object.values(locCounts);
 
             const qualityData = {
-                'Valid IDs': hasId,
-                'Valid Names': hasName,
-                'Valid Departments': hasDept,
+                'Valid IDs': hasId, 'Valid Names': hasName, 'Valid Departments': hasDept,
                 'Has Grade': data.filter(r => r['Grade'] && r['Grade'].trim()).length,
                 'Has Status': data.filter(r => r['Status'] && r['Status'].trim()).length
             };
@@ -1388,8 +796,7 @@
             const qualityValues = Object.values(qualityData);
 
             const progEnroll = {};
-            const progFields = ['7 Sens', 'Analytical Thinking', 'Mind Field', 'Leadership', 'Drive Performance', 'Kick Start'];
-            progFields.forEach(p => {
+            ['7 Sens', 'Analytical Thinking', 'Mind Field', 'Leadership', 'Drive Performance', 'Kick Start'].forEach(p => {
                 progEnroll[p] = data.filter(r => {
                     const val = String(r[p] || '').toLowerCase();
                     return val === 'attend' || val === 'attended' || val.includes('attend');
@@ -1398,312 +805,145 @@
             const progEnrollLabels = Object.keys(progEnroll);
             const progEnrollValues = Object.values(progEnroll);
 
-            // --- DESTROY OLD CHARTS ---
             destroyCharts();
 
-            // --- CREATE CHARTS ---
+            // Create Charts
             Chart.defaults.font.family = 'Cairo, sans-serif';
             Chart.defaults.font.size = 12;
 
-            // Chart 1: Sector
+            // 1. Sector
             const ctx1 = document.getElementById('chartSector').getContext('2d');
             chartInstances.sector = new Chart(ctx1, {
                 type: 'bar',
-                data: {
-                    labels: sectorLabels,
-                    datasets: [{ 
-                        label: 'Employees', 
-                        data: sectorValues, 
-                        backgroundColor: '#1e3d59', 
-                        borderRadius: 6,
-                        barPercentage: 0.6
-                    }]
-                },
-                options: { 
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { 
-                        legend: { display: false },
-                        datalabels: {
-                            color: '#1a2332',
-                            anchor: 'end',
-                            align: 'top',
-                            font: { weight: 'bold', size: 12 }
-                        }
-                    },
-                    scales: {
-                        y: { ticks: { font: { size: 11 } } },
-                        x: { ticks: { font: { size: 11 } } }
-                    }
+                data: { labels: sectorLabels, datasets: [{ label: 'Employees', data: sectorValues, backgroundColor: '#1e3d59', borderRadius: 6, barPercentage: 0.6 }] },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { display: false }, datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 12 } } },
+                    scales: { y: { ticks: { font: { size: 11 } } }, x: { ticks: { font: { size: 11 } } } }
                 },
                 plugins: [ChartDataLabels]
             });
 
-            // Chart 2: Level
+            // 2. Level
             const ctx2 = document.getElementById('chartLevel').getContext('2d');
             chartInstances.level = new Chart(ctx2, {
                 type: 'doughnut',
-                data: {
-                    labels: levelLabels,
-                    datasets: [{ 
-                        data: levelValues, 
-                        backgroundColor: ['#1e3d59', '#17b890', '#ff6e40', '#f6c23e', '#8b5cf6', '#e74a3b'] 
-                    }]
-                },
-                options: { 
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { 
+                data: { labels: levelLabels, datasets: [{ data: levelValues, backgroundColor: ['#1e3d59','#17b890','#ff6e40','#f6c23e','#8b5cf6','#e74a3b'] }] },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: {
                         legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } },
-                        datalabels: {
-                            color: '#1a2332',
-                            font: { weight: 'bold', size: 12 },
-                            formatter: (value, ctx) => {
-                                const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
-                                return total > 0 ? Math.round((value / total) * 100) + '%' : '';
-                            }
-                        }
-                    } 
-                },
-                plugins: [ChartDataLabels]
-            });
-
-            // Chart 3: Department
-            const ctx3 = document.getElementById('chartDepartment').getContext('2d');
-            chartInstances.department = new Chart(ctx3, {
-                type: 'bar',
-                data: {
-                    labels: deptLabels,
-                    datasets: [{ 
-                        label: 'Employees', 
-                        data: deptValues, 
-                        backgroundColor: '#17b890', 
-                        borderRadius: 6,
-                        barPercentage: 0.6
-                    }]
-                },
-                options: { 
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { 
-                        legend: { display: false },
-                        datalabels: {
-                            color: '#1a2332',
-                            anchor: 'end',
-                            align: 'top',
-                            font: { weight: 'bold', size: 11 }
-                        }
-                    },
-                    indexAxis: 'y',
-                    scales: {
-                        y: { ticks: { font: { size: 10 } } },
-                        x: { ticks: { font: { size: 10 } } }
+                        datalabels: { color: '#1a2332', font: { weight: 'bold', size: 12 }, formatter: (v, ctx) => { const total = ctx.dataset.data.reduce((a,b) => a+b, 0); return total > 0 ? Math.round((v/total)*100) + '%' : ''; } }
                     }
                 },
                 plugins: [ChartDataLabels]
             });
 
-            // Chart 4: Attendance vs Completion
+            // 3. Department
+            const ctx3 = document.getElementById('chartDepartment').getContext('2d');
+            chartInstances.department = new Chart(ctx3, {
+                type: 'bar',
+                data: { labels: deptLabels, datasets: [{ label: 'Employees', data: deptValues, backgroundColor: '#17b890', borderRadius: 6, barPercentage: 0.6 }] },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { display: false }, datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 11 } } },
+                    indexAxis: 'y',
+                    scales: { y: { ticks: { font: { size: 10 } } }, x: { ticks: { font: { size: 10 } } } }
+                },
+                plugins: [ChartDataLabels]
+            });
+
+            // 4. Attendance vs Completion
             const ctx4 = document.getElementById('chartAttendance').getContext('2d');
             chartInstances.attendance = new Chart(ctx4, {
                 type: 'bar',
                 data: {
                     labels: attSectors,
                     datasets: [
-                        { 
-                            label: 'Attendance %', 
-                            data: attValues, 
-                            backgroundColor: '#3b82f6', 
-                            borderRadius: 4, 
-                            barPercentage: 0.4 
-                        },
-                        { 
-                            label: 'Completion %', 
-                            data: compValues, 
-                            backgroundColor: '#10b981', 
-                            borderRadius: 4, 
-                            barPercentage: 0.4 
-                        }
+                        { label: 'Attendance %', data: attValues, backgroundColor: '#3b82f6', borderRadius: 4, barPercentage: 0.4 },
+                        { label: 'Completion %', data: compValues, backgroundColor: '#10b981', borderRadius: 4, barPercentage: 0.4 }
                     ]
                 },
                 options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { 
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: {
                         legend: { position: 'top', labels: { boxWidth: 12, font: { size: 11 } } },
-                        datalabels: {
-                            color: '#1a2332',
-                            anchor: 'end',
-                            align: 'top',
-                            font: { weight: 'bold', size: 10 },
-                            formatter: (value) => value + '%'
-                        }
+                        datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 10 }, formatter: v => v + '%' }
                     },
-                    scales: { 
-                        y: { 
-                            beginAtZero: true, 
-                            max: 100, 
-                            ticks: { callback: v => v + '%', font: { size: 10 } } 
-                        },
-                        x: { ticks: { font: { size: 10 } } }
-                    }
+                    scales: { y: { beginAtZero: true, max: 100, ticks: { callback: v => v + '%', font: { size: 10 } } }, x: { ticks: { font: { size: 10 } } } }
                 },
                 plugins: [ChartDataLabels]
             });
 
-            // Chart 5: Phase Distribution
+            // 5. Phase
             const ctx5 = document.getElementById('chartPhase').getContext('2d');
             chartInstances.phase = new Chart(ctx5, {
                 type: 'pie',
-                data: {
-                    labels: phaseLabels,
-                    datasets: [{ 
-                        data: phaseValues, 
-                        backgroundColor: ['#1e3d59', '#17b890', '#ff6e40', '#f6c23e', '#8b5cf6'] 
-                    }]
-                },
-                options: { 
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { 
+                data: { labels: phaseLabels, datasets: [{ data: phaseValues, backgroundColor: ['#1e3d59','#17b890','#ff6e40','#f6c23e','#8b5cf6'] }] },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: {
                         legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } },
-                        datalabels: {
-                            color: '#1a2332',
-                            font: { weight: 'bold', size: 12 },
-                            formatter: (value, ctx) => {
-                                const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
-                                return total > 0 ? Math.round((value / total) * 100) + '%' : '';
-                            }
-                        }
-                    } 
+                        datalabels: { color: '#1a2332', font: { weight: 'bold', size: 12 }, formatter: (v, ctx) => { const total = ctx.dataset.data.reduce((a,b) => a+b, 0); return total > 0 ? Math.round((v/total)*100) + '%' : ''; } }
+                    }
                 },
                 plugins: [ChartDataLabels]
             });
 
-            // Chart 6: Location Distribution - قراءة من Training Location
+            // 6. Location
             const ctx6 = document.getElementById('chartLocation').getContext('2d');
             chartInstances.location = new Chart(ctx6, {
                 type: 'bar',
-                data: {
-                    labels: locLabels,
-                    datasets: [{ 
-                        label: 'Employees', 
-                        data: locValues, 
-                        backgroundColor: '#ff6e40', 
-                        borderRadius: 6,
-                        barPercentage: 0.6
-                    }]
-                },
-                options: { 
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { 
-                        legend: { display: false },
-                        datalabels: {
-                            color: '#1a2332',
-                            anchor: 'end',
-                            align: 'top',
-                            font: { weight: 'bold', size: 11 }
-                        }
-                    },
-                    scales: {
-                        y: { ticks: { font: { size: 10 } } },
-                        x: { ticks: { font: { size: 10 } } }
-                    }
+                data: { labels: locLabels, datasets: [{ label: 'Employees', data: locValues, backgroundColor: '#ff6e40', borderRadius: 6, barPercentage: 0.6 }] },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { display: false }, datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 11 } } },
+                    scales: { y: { ticks: { font: { size: 10 } } }, x: { ticks: { font: { size: 10 } } } }
                 },
                 plugins: [ChartDataLabels]
             });
 
-            // Chart 7: Quality
+            // 7. Quality
             const ctx7 = document.getElementById('chartQuality').getContext('2d');
             chartInstances.quality = new Chart(ctx7, {
                 type: 'bar',
-                data: {
-                    labels: qualityLabels,
-                    datasets: [{ 
-                        label: 'Records', 
-                        data: qualityValues, 
-                        backgroundColor: '#3b82f6', 
-                        borderRadius: 6,
-                        barPercentage: 0.6
-                    }]
-                },
-                options: { 
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { 
-                        legend: { display: false },
-                        datalabels: {
-                            color: '#1a2332',
-                            anchor: 'end',
-                            align: 'top',
-                            font: { weight: 'bold', size: 11 }
-                        }
-                    },
-                    scales: {
-                        y: { ticks: { font: { size: 10 } } },
-                        x: { ticks: { font: { size: 10 } } }
-                    }
+                data: { labels: qualityLabels, datasets: [{ label: 'Records', data: qualityValues, backgroundColor: '#3b82f6', borderRadius: 6, barPercentage: 0.6 }] },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { display: false }, datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 11 } } },
+                    scales: { y: { ticks: { font: { size: 10 } } }, x: { ticks: { font: { size: 10 } } } }
                 },
                 plugins: [ChartDataLabels]
             });
 
-            // Chart 8: Program Enrollment
+            // 8. Programs
             const ctx8 = document.getElementById('chartPrograms').getContext('2d');
             chartInstances.programs = new Chart(ctx8, {
                 type: 'bar',
-                data: {
-                    labels: progEnrollLabels,
-                    datasets: [{ 
-                        label: 'Enrolled', 
-                        data: progEnrollValues, 
-                        backgroundColor: ['#1e3d59', '#17b890', '#ff6e40', '#f6c23e', '#8b5cf6', '#e74a3b'],
-                        borderRadius: 6,
-                        barPercentage: 0.6
-                    }]
-                },
-                options: { 
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { 
-                        legend: { display: false },
-                        datalabels: {
-                            color: '#1a2332',
-                            anchor: 'end',
-                            align: 'top',
-                            font: { weight: 'bold', size: 11 }
-                        }
-                    },
-                    scales: {
-                        y: { ticks: { font: { size: 10 } } },
-                        x: { ticks: { font: { size: 10 } } }
-                    }
+                data: { labels: progEnrollLabels, datasets: [{ label: 'Enrolled', data: progEnrollValues, backgroundColor: ['#1e3d59','#17b890','#ff6e40','#f6c23e','#8b5cf6','#e74a3b'], borderRadius: 6, barPercentage: 0.6 }] },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { display: false }, datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 11 } } },
+                    scales: { y: { ticks: { font: { size: 10 } } }, x: { ticks: { font: { size: 10 } } } }
                 },
                 plugins: [ChartDataLabels]
             });
 
-            console.log('📊 All charts rendered with', data.length, 'records');
+            // Setup chart interactivity after all charts are created
+            setupChartInteractivity();
+
+            console.log('📊 Dashboard rendered with', data.length, 'records');
         }
 
-        // ============================================
+        // ============================================================
         // EMPLOYEE SEARCH
-        // ============================================
+        // ============================================================
         function searchEmployee() {
-            const inputId = document.getElementById('empIdInput').value.trim();
-            const profileCard = document.getElementById('resultProfile');
-
-            if (!inputId) {
-                alert('Please enter an Employee ID.');
-                return;
-            }
-
-            const emp = allData.find(r => String(r['ID']).trim() === inputId);
-
-            if (!emp) {
-                alert('Employee ID not found.');
-                profileCard.style.display = 'none';
-                return;
-            }
+            const id = document.getElementById('empIdInput').value.trim();
+            const card = document.getElementById('resultProfile');
+            if (!id) { alert('Enter Employee ID'); return; }
+            const emp = allData.find(r => String(r['ID']).trim() === id);
+            if (!emp) { alert('Not found.'); card.style.display = 'none'; return; }
 
             document.getElementById('resName').textContent = emp['Name'] || 'Not recorded';
             document.getElementById('resTitle').textContent = emp['Title'] || 'Not recorded';
@@ -1711,42 +951,28 @@
             document.getElementById('resLevel').textContent = emp['C-LVL'] || 'Not specified';
             document.getElementById('resLocation').textContent = emp['Training Location'] || 'Not specified';
             document.getElementById('resPhase').textContent = emp['CPT Training Phase'] || 'Not specified';
-            
-            const sevenSens = String(emp['7 Sens'] || '').toLowerCase();
-            document.getElementById('resAttendance').textContent = 
-                (sevenSens === 'attend' || sevenSens === 'attended' || sevenSens.includes('attend')) ? '✅ Attended' : '❌ Not Attended';
-            
+            const v = String(emp['7 Sens'] || '').toLowerCase();
+            document.getElementById('resAttendance').textContent = (v === 'attend' || v === 'attended' || v.includes('attend')) ? '✅ Attended' : '❌ Not Attended';
             document.getElementById('resStatus').textContent = emp['Status'] || 'Not specified';
 
-            // --- Enhanced Stats ---
-            const programFields = ['7 Sens', 'Analytical Thinking', 'Mind Field', 'Leadership', 'Drive Performance', 'Kick Start'];
-            let attendedCount = 0;
-            let notAttendedCount = 0;
-            
-            programFields.forEach(p => {
+            const fields = ['7 Sens', 'Analytical Thinking', 'Mind Field', 'Leadership', 'Drive Performance', 'Kick Start'];
+            let attendedCount = 0, notAttendedCount = 0;
+            fields.forEach(p => {
                 const val = String(emp[p] || '').toLowerCase();
-                if (val === 'attend' || val === 'attended' || val.includes('attend')) {
-                    attendedCount++;
-                } else if (val === 'not attend' || val.includes('not attend')) {
-                    notAttendedCount++;
-                }
+                if (val === 'attend' || val === 'attended' || val.includes('attend')) attendedCount++;
+                else if (val === 'not attend' || val.includes('not attend')) notAttendedCount++;
             });
-
             document.getElementById('statAttended').textContent = `✅ Attended: ${attendedCount}`;
             document.getElementById('statNotAttended').textContent = `❌ Not Attended: ${notAttendedCount}`;
             document.getElementById('statGroup').textContent = `📋 Group: ${emp['CPT Training Group'] || 'N/A'}`;
             document.getElementById('statLocation').textContent = `📍 Location: ${emp['Training Location'] || 'N/A'}`;
-            
-            const accommodation = String(emp['Accommodation'] || '').toLowerCase();
-            const accomText = accommodation === 'yes' ? '✅ Yes' : 
-                             accommodation === 'no' ? '❌ No' : 'N/A';
-            document.getElementById('statAccommodation').textContent = `🏠 Accommodation: ${accomText}`;
+            const accom = String(emp['Accommodation'] || '').toLowerCase();
+            document.getElementById('statAccommodation').textContent = `🏠 Accommodation: ${accom === 'yes' ? '✅ Yes' : accom === 'no' ? '❌ No' : 'N/A'}`;
 
             const progContainer = document.getElementById('resPrograms');
             progContainer.innerHTML = '';
             const programs = [
-                emp['CPT Training Group'],
-                emp['CPT Training Phase'],
+                emp['CPT Training Group'], emp['CPT Training Phase'],
                 emp['7 Sens'] ? '7 Sens: ' + emp['7 Sens'] : '',
                 emp['Analytical Thinking'] ? 'Analytical Thinking: ' + emp['Analytical Thinking'] : '',
                 emp['Mind Field'] ? 'Mind Field: ' + emp['Mind Field'] : '',
@@ -1754,7 +980,6 @@
                 emp['Drive Performance'] ? 'Drive Performance: ' + emp['Drive Performance'] : '',
                 emp['Kick Start'] ? 'Kick Start: ' + emp['Kick Start'] : ''
             ].filter(Boolean);
-            
             if (programs.length > 0) {
                 programs.forEach(p => {
                     const tag = document.createElement('span');
@@ -1763,40 +988,31 @@
                     progContainer.appendChild(tag);
                 });
             } else {
-                progContainer.innerHTML = '<span style="color:var(--text-muted);font-style:italic;">No training records found.</span>';
+                progContainer.innerHTML = '<span style="color:#6b7a8f;font-style:italic;">No training records found.</span>';
             }
-
-            profileCard.style.display = 'block';
+            card.style.display = 'block';
         }
 
-        // ============================================
+        // ============================================================
         // INIT
-        // ============================================
+        // ============================================================
         window.addEventListener('DOMContentLoaded', () => {
-            const loadingMsg = document.getElementById('loadingMsg');
-            loadingMsg.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Connecting to Google Sheets...';
+            const msg = document.getElementById('loadingMsg');
+            msg.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Connecting to Google Sheets...';
 
             fetch(SHEET_URL)
-                .then(res => {
-                    if (!res.ok) throw new Error('Network error');
-                    return res.text();
-                })
+                .then(res => res.text())
                 .then(csv => {
                     lastFetchedData = csv.substring(0, 1000);
                     allData = csvToJSON(csv);
-                    loadingMsg.innerHTML = '<span style="color:var(--success);font-weight:600;"><i class="fa-solid fa-check-circle"></i> Synced: ' + allData.length + ' unique records loaded.</span>';
+                    msg.innerHTML = '<span style="color:#10b981;font-weight:600;"><i class="fa-solid fa-check-circle"></i> Synced: ' + allData.length + ' records.</span>';
                     setupFilterButtons();
                     applyFilters();
-                    
-                    if (fetchInterval) clearInterval(fetchInterval);
-                    fetchInterval = setInterval(checkForUpdates, 30000);
+                    setInterval(checkForUpdates, 30000);
                 })
-                .catch(err => {
-                    console.error('Fetch error:', err);
-                    loadingMsg.innerHTML = '<span style="color:var(--danger);font-weight:600;"><i class="fa-solid fa-triangle-exclamation"></i> Failed to load data. Retrying...</span>';
-                    setTimeout(() => {
-                        window.location.reload();
-                    }, 5000);
+                .catch(() => {
+                    msg.innerHTML = '<span style="color:#ef4444;font-weight:600;"><i class="fa-solid fa-triangle-exclamation"></i> Failed to load. Retrying...</span>';
+                    setTimeout(() => location.reload(), 5000);
                 });
         });
 
@@ -1804,5 +1020,6 @@
             if (e.key === 'Enter') searchEmployee();
         });
     </script>
+
 </body>
 </html>
