@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <!-- ============================================================
+    META TAGS & SEO
+    ============================================================ -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Primary Meta Tags -->
+    <title>CTIH | Competency Training Intelligence Hub</title>
+    <meta name="title" content="CTIH - Competency Training Intelligence Hub">
+    <meta name="description" content="Enterprise-grade training analytics dashboard with real-time Google Sheets integration, advanced BI capabilities, and executive-level insights.">
+    <meta name="keywords" content="training analytics, HR dashboard, competency management, workforce intelligence, Google Sheets BI">
+    <meta name="author" content="CTIH Enterprise Team">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="CTIH - Competency Training Intelligence Hub">
+    <meta property="og:description" content="Real-time training analytics dashboard for enterprise workforce development.">
+    <meta property="og:image" content="https://ctih.enterprise/og-image.jpg">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#6C63FF">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ============================================================
+    FAVICON
+    ============================================================ -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+
+    <!-- ============================================================
+    CDN DEPENDENCIES
+    ============================================================ -->
+    
+    <!-- Bootstrap 5.3.2 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <!-- Font Awesome 6.5.1 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    
+    <!-- Apache ECharts 5.5.0 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+    
+    <!-- Google API Client Library -->
+    <script src="https://apis.google.com/js/api.js"></script>
+    
+    <!-- SheetJS (XLSX) -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    
+    <!-- jsPDF + html2canvas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <!-- ============================================================
+    CUSTOM STYLES
+    ============================================================ -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- ============================================================
+    INLINE CRITICAL CSS
+    ============================================================ -->
+    <style>
+        /* Critical: Immediate visual rendering */
+        :root {
+            --ctih-primary: #6C63FF;
+            --ctih-primary-dark: #5A52D5;
+            --ctih-primary-light: #8B83FF;
+            --ctih-secondary: #00C853;
+            --ctih-warning: #FFB300;
+            --ctih-danger: #FF1744;
+            --ctih-dark: #0A0A1A;
+            --ctih-dark-card: #141428;
+            --ctih-surface: #1A1A3E;
+            --ctih-text-primary: #FFFFFF;
+            --ctih-text-secondary: #A0A0C0;
+            --ctih-glass-bg: rgba(255, 255, 255, 0.05);
+            --ctih-glass-border: rgba(255, 255, 255, 0.08);
+            --ctih-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --ctih-radius: 20px;
+            --ctih-radius-sm: 12px;
+            --ctih-transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --ctih-font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--ctih-font);
+            background: var(--ctih-dark);
+            color: var(--ctih-text-primary);
+            overflow-x: hidden;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(ellipse at 10% 20%, rgba(108, 99, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 90% 80%, rgba(0, 200, 83, 0.05) 0%, transparent 50%);
+        }
+        
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--ctih-dark-card);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--ctih-primary);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--ctih-primary-light);
+        }
+        
+        #app-loader {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            background: var(--ctih-dark);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+        
+        #app-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        
+        .loader-spinner {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 4px solid rgba(108, 99, 255, 0.1);
+            border-top: 4px solid var(--ctih-primary);
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .loader-text {
+            font-size: 14px;
+            color: var(--ctih-text-secondary);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+        
+        .loader-progress {
+            width: 200px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .loader-progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--ctih-primary), var(--ctih-secondary));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        /* ============================================================
+        HEADER LOGO & TITLE CENTERING
+        ============================================================ */
+        .app-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        .header-title-center {
+            flex: 1;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            line-height: 1.2;
+        }
+
+        .header-title-center h1 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--ctih-text-primary);
+            margin: 0;
+            letter-spacing: -0.3px;
+        }
+
+        .header-title-center .header-subtitle {
+            font-size: 12px;
+            color: var(--ctih-text-secondary);
+            font-weight: 400;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-shrink: 0;
+        }
+
+        .header-logo-left,
+        .header-logo-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-logo-left img,
+        .header-logo-right img {
+            object-fit: contain;
+        }
+
+        @media (max-width: 768px) {
+            .header-title-center h1 {
+                font-size: 14px;
+            }
+            .header-title-center .header-subtitle {
+                font-size: 10px;
+            }
+            .header-logo-left img,
+            .header-logo-right img {
+                height: 30px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================
+    APPLICATION LOADER
+    ============================================================ -->
+    <div id="app-loader" role="status" aria-label="Application is loading">
+        <div class="loader-spinner"></div>
+        <div class="loader-text">Initializing Intelligence Hub</div>
+        <div class="loader-progress">
+            <div class="loader-progress-bar" id="loader-progress-bar"></div>
+        </div>
+        <div style="font-size:12px; color:rgba(255,255,255,0.2); font-weight:300;">
+            v2.0.0 · Enterprise Edition
+        </div>
+    </div>
+
+    <!-- ============================================================
+    MAIN APPLICATION WRAPPER
+    ============================================================ -->
+    <div id="app-wrapper" style="display:none;">
+        
+        <!-- ============================================================
+        SIDEBAR NAVIGATION
+        ============================================================ -->
+        <aside class="app-sidebar" id="app-sidebar" role="navigation" aria-label="Main Navigation">
+            <div class="sidebar-brand">
+                <div class="brand-icon" style="background: transparent; box-shadow: none; width: auto; height: auto;">
+                    <img src="CPC.png" alt="CPC Logo" style="height: 42px; width: auto;">
+                </div>
+                <div class="brand-text">
+                    <span class="brand-name">CTIH</span>
+                    <span class="brand-sub">Intelligence Hub</span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul class="nav-list">
+                    <li class="nav-item active" data-section="executive">
+                        <i class="fas fa-chart-pie"></i>
+                        <span>Executive Dashboard</span>
+                        <span class="nav-badge">Live</span>
+                    </li>
+                    <li class="nav-item" data-section="employees">
+                        <i class="fas fa-users"></i>
+                        <span>Workforce</span>
+                        <span class="nav-badge" id="employee-count-badge">0</span>
+                    </li>
+                    <li class="nav-item" data-section="programs">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Training Programs</span>
+                    </li>
+                    <li class="nav-item" data-section="departments">
+                        <i class="fas fa-building"></i>
+                        <span>Departments</span>
+                    </li>
+                    <li class="nav-item" data-section="analytics">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Advanced Analytics</span>
+                    </li>
+                    <li class="nav-item" data-section="reports">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Reports & Export</span>
+                    </li>
+                    <li class="nav-item" data-section="quality">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Data Quality</span>
+                        <span class="nav-badge" id="quality-badge">--%</span>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark/Light Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="sidebar-status">
+                    <span class="status-dot online"></span>
+                    <span class="status-text">Connected</span>
+                </div>
+                <div class="sidebar-version">v2.0.0</div>
+            </div>
+        </aside>
+
+        <!-- ============================================================
+        MAIN CONTENT AREA
+        ============================================================ -->
+        <main class="app-main" id="app-main" role="main">
+            
+            <!-- ============================================================
+            TOP HEADER BAR
+            ============================================================ -->
+            <header class="app-header" id="app-header">
+                <div class="header-left">
+                    <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Navigation">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <!-- Logo Left (CPC.png) -->
+                    <div class="header-logo-left">
+                        <img src="CPC.png" alt="CPC Logo" style="height: 40px; width: auto;">
+                    </div>
+                </div>
+
+                <!-- Title Center -->
+                <div class="header-title-center">
+                    <h1 id="section-title">Executive Dashboard</h1>
+                    <span class="header-subtitle" id="section-subtitle">Real-time workforce intelligence overview</span>
+                </div>
+
+                <!-- Right Side -->
+                <div class="header-right" style="display: flex; align-items: center; gap: 16px;">
+                    <!-- Search -->
+                    <div class="header-search" id="global-search-container">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" id="global-search" placeholder="Search employees, programs, departments..." aria-label="Global Search" class="search-input">
+                        <kbd class="search-shortcut">⌘K</kbd>
+                    </div>
+                    <!-- Actions -->
+                    <div class="header-actions">
+                        <button class="header-btn" id="refresh-btn" aria-label="Refresh Data" title="Refresh Data">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                        <button class="header-btn" id="fullscreen-btn" aria-label="Toggle Fullscreen" title="Fullscreen">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                        <!-- Logo Right (new koki.png) -->
+                        <div class="header-logo-right">
+                            <img src="new koki.png" alt="Koki Logo" style="height: 34px; width: auto; border-radius: 50%;">
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- ============================================================
+            DASHBOARD SECTIONS
+            ============================================================ -->
+            <div class="app-content" id="app-content">
+                
+                <!-- ============================================================
+                SECTION 1: EXECUTIVE DASHBOARD
+                ============================================================ -->
+                <section id="section-executive" class="dashboard-section active" aria-label="Executive Dashboard">
+                    
+                    <!-- KPI Cards Row -->
+                    <div class="kpi-grid" id="kpi-grid">
+                        <div class="kpi-card glass-card">
+                            <div class="kpi-icon" style="background: rgba(108, 99, 255, 0.15); color: #6C63FF;">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="kpi-content">
+                                <span class="kpi-label">Total Workforce</span>
+                                <span class="kpi-value" id="kpi-total-employees">0</span>
+                                <span class="kpi-change positive">+12% YoY</span>
+                            </div>
+                        </div>
+                        <div class="kpi-card glass-card">
+                            <div class="kpi-icon" style="background: rgba(0, 200, 83, 0.15); color: #00C853;">
+                                <i class="fas fa-user-check"></i>
+                            </div>
+                            <div class="kpi-content">
+                                <span class="kpi-label">Attendance Rate</span>
+                                <span class="kpi-value" id="kpi-attendance">0%</span>
+                                <span class="kpi-change positive">+5.2%</span>
+                            </div>
+                        </div>
+                        <div class="kpi-card glass-card">
+                            <div class="kpi-icon" style="background: rgba(255, 179, 0, 0.15); color: #FFB300;">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="kpi-content">
+                                <span class="kpi-label">Completion Rate</span>
+                                <span class="kpi-value" id="kpi-completion">0%</span>
+                                <span class="kpi-change positive">+8.7%</span>
+                            </div>
+                        </div>
+                        <div class="kpi-card glass-card">
+                            <div class="kpi-icon" style="background: rgba(255, 23, 68, 0.15); color: #FF1744;">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="kpi-content">
+                                <span class="kpi-label">Data Quality Score</span>
+                                <span class="kpi-value" id="kpi-quality">0%</span>
+                                <span class="kpi-change warning">Needs Review</span>
+                            </div>
+                        </div>
+                        <div class="kpi-card glass-card">
+                            <div class="kpi-icon" style="background: rgba(108, 99, 255, 0.15); color: #6C63FF;">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="kpi-content">
+                                <span class="kpi-label">Active Programs</span>
+                                <span class="kpi-value" id="kpi-programs">0</span>
+                                <span class="kpi-change positive">4 Active</span>
+                            </div>
+                        </div>
+                        <div class="kpi-card glass-card">
+                            <div class="kpi-icon" style="background: rgba(0, 200, 83, 0.15); color: #00C853;">
+                                <i class="fas fa-flag-checkered"></i>
+                            </div>
+                            <div class="kpi-content">
+                                <span class="kpi-label">Pending Training</span>
+                                <span class="kpi-value" id="kpi-pending">0</span>
+                                <span class="kpi-change negative">-3%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts Row 1 -->
+                    <div class="charts-grid">
+                        <div class="chart-card glass-card">
+                            <div class="chart-header">
+                                <h3>Training Program Distribution</h3>
+                                <span class="chart-badge">By Department</span>
+                            </div>
+                            <div class="chart-container" id="chart-distribution" style="height: 320px;"></div>
+                        </div>
+                        <div class="chart-card glass-card">
+                            <div class="chart-header">
+                                <h3>Attendance Overview</h3>
+                                <span class="chart-badge">Program-wise</span>
+                            </div>
+                            <div class="chart-container" id="chart-attendance" style="height: 320px;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Charts Row 2 -->
+                    <div class="charts-grid">
+                        <div class="chart-card glass-card">
+                            <div class="chart-header">
+                                <h3>Department Performance</h3>
+                                <span class="chart-badge">Competency Index</span>
+                            </div>
+                            <div class="chart-container" id="chart-department" style="height: 280px;"></div>
+                        </div>
+                        <div class="chart-card glass-card">
+                            <div class="chart-header">
+                                <h3>Workforce Distribution</h3>
+                                <span class="chart-badge">By Grade</span>
+                            </div>
+                            <div class="chart-container" id="chart-grade" style="height: 280px;"></div>
+                        </div>
+                        <div class="chart-card glass-card">
+                            <div class="chart-header">
+                                <h3>Data Quality Gauge</h3>
+                                <span class="chart-badge">Overall Score</span>
+                            </div>
+                            <div class="chart-container" id="chart-gauge" style="height: 280px;"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================================
+                SECTION 2: WORKFORCE (EMPLOYEES)
+                ============================================================ -->
+                <section id="section-employees" class="dashboard-section" aria-label="Workforce Management">
+                    <div class="section-toolbar">
+                        <div class="toolbar-left">
+                            <div class="filter-group">
+                                <select class="filter-select" id="filter-department">
+                                    <option value="">All Departments</option>
+                                </select>
+                                <select class="filter-select" id="filter-grade">
+                                    <option value="">All Grades</option>
+                                </select>
+                                <select class="filter-select" id="filter-status">
+                                    <option value="">All Status</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="toolbar-right">
+                            <span class="record-count" id="employee-record-count">Showing 0 records</span>
+                            <button class="btn-export" id="export-employees-csv">
+                                <i class="fas fa-file-export"></i> Export
+                            </button>
+                        </div>
+                    </div>
+                    <div class="table-wrapper glass-card">
+                        <div class="table-scroll" id="employee-table-scroll">
+                            <table class="data-table" id="employee-table">
+                                <thead>
+                                    <tr>
+                                        <th data-sort="id">ID <i class="fas fa-sort"></i></th>
+                                        <th data-sort="name">Name <i class="fas fa-sort"></i></th>
+                                        <th data-sort="title">Title <i class="fas fa-sort"></i></th>
+                                        <th data-sort="department">Department <i class="fas fa-sort"></i></th>
+                                        <th data-sort="grade">Grade <i class="fas fa-sort"></i></th>
+                                        <th data-sort="status">Status <i class="fas fa-sort"></i></th>
+                                        <th data-sort="attendance">Attendance <i class="fas fa-sort"></i></th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="employee-table-body">
+                                    <tr>
+                                        <td colspan="8" class="text-center text-muted py-4">
+                                            <i class="fas fa-spinner fa-spin me-2"></i> Loading workforce data...
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table-footer">
+                            <div class="pagination-controls" id="pagination-controls">
+                                <button class="page-btn" data-page="prev" disabled>
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <span class="page-info" id="page-info">Page 1 of 1</span>
+                                <button class="page-btn" data-page="next" disabled>
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                            <div class="page-size-control">
+                                <label>Rows per page:</label>
+                                <select id="page-size-select">
+                                    <option value="10">10</option>
+                                    <option value="25" selected>25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================================
+                SECTION 3: TRAINING PROGRAMS
+                ============================================================ -->
+                <section id="section-programs" class="dashboard-section" aria-label="Training Programs">
+                    <div class="programs-grid">
+                        <div class="chart-card glass-card full-width">
+                            <div class="chart-header">
+                                <h3>Program Performance Overview</h3>
+                                <span class="chart-badge">Completion & Attendance</span>
+                            </div>
+                            <div class="chart-container" id="chart-programs" style="height: 380px;"></div>
+                        </div>
+                    </div>
+                    <div class="programs-grid">
+                        <div class="chart-card glass-card">
+                            <div class="chart-header">
+                                <h3>Program Ranking</h3>
+                                <span class="chart-badge">By Attendance</span>
+                            </div>
+                            <div class="chart-container" id="chart-program-ranking" style="height: 300px;"></div>
+                        </div>
+                        <div class="chart-card glass-card">
+                            <div class="chart-header">
+                                <h3>Program Heatmap</h3>
+                                <span class="chart-badge">Department x Program</span>
+                            </div>
+                            <div class="chart-container" id="chart-heatmap" style="height: 300px;"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================================
+                SECTION 4: DEPARTMENTS
+                ============================================================ -->
+                <section id="section-departments" class="dashboard-section" aria-label="Departments">
+                    <div class="charts-grid">
+                        <div class="chart-card glass-card full-width">
+                            <div class="chart-header">
+                                <h3>Department Competency Comparison</h3>
+                                <span class="chart-badge">Radar Analysis</span>
+                            </div>
+                            <div class="chart-container" id="chart-department-radar" style="height: 400px;"></div>
+                        </div>
+                    </div>
+                    <div class="charts-grid">
+                        <div class="chart-card glass-card">
+                            <div class="chart-header">
+                                <h3>Department Size</h3>
+                                <span class="chart-badge">Headcount</span>
+                            </div>
+                            <div class="chart-container" id="chart-dept-size" style="height: 280px;"></div>
+                        </div>
+                        <div class="chart-card glass-card">
+                            <div class="chart-header">
+                                <h3>Completion by Department</h3>
+                                <span class="chart-badge">Bar Chart</span>
+                            </div>
+                            <div class="chart-container" id="chart-dept-completion" style="height: 280px;"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================================
+                SECTION 5: ADVANCED ANALYTICS
+                ============================================================ -->
+                <section id="section-analytics" class="dashboard-section" aria-label="Advanced Analytics">
+                    <div class="charts-grid">
+                        <div class="chart-card glass-card full-width">
+                            <div class="chart-header">
+                                <h3>Training Trend Analysis</h3>
+                                <span class="chart-badge">Timeline View</span>
+                            </div>
+                            <div class="chart-container" id="chart-trend" style="height: 350px;"></div>
+                        </div>
+                    </div>
+                    <div class="charts-grid">
+                        <div class="chart-card glass-card">
+                            <div class="chart-header">
+                                <h3>Grade Distribution</h3>
+                                <span class="chart-badge">Treemap</span>
+                            </div>
+                            <div class="chart-container" id="chart-treemap" style="height: 300px;"></div>
+                        </div>
+                        <div class="chart-card glass-card">
+                            <div class="chart-header">
+                                <h3>Status Distribution</h3>
+                                <span class="chart-badge">Doughnut</span>
+                            </div>
+                            <div class="chart-container" id="chart-doughnut" style="height: 300px;"></div>
+                        </div>
+                        <div class="chart-card glass-card">
+                            <div class="chart-header">
+                                <h3>Training Radar</h3>
+                                <span class="chart-badge">Multi-Dimensional</span>
+                            </div>
+                            <div class="chart-container" id="chart-radar" style="height: 300px;"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================================
+                SECTION 6: REPORTS & EXPORT
+                ============================================================ -->
+                <section id="section-reports" class="dashboard-section" aria-label="Reports & Export">
+                    <div class="reports-grid">
+                        <div class="report-card glass-card">
+                            <div class="report-icon">
+                                <i class="fas fa-file-excel" style="color: #217346;"></i>
+                            </div>
+                            <h4>Export to Excel</h4>
+                            <p>Complete workforce data with all training records</p>
+                            <button class="btn-report" id="export-excel">
+                                <i class="fas fa-download"></i> Download XLSX
+                            </button>
+                        </div>
+                        <div class="report-card glass-card">
+                            <div class="report-icon">
+                                <i class="fas fa-file-pdf" style="color: #FF0000;"></i>
+                            </div>
+                            <h4>Export to PDF</h4>
+                            <p>Executive dashboard snapshot with all charts</p>
+                            <button class="btn-report" id="export-pdf">
+                                <i class="fas fa-download"></i> Download PDF
+                            </button>
+                        </div>
+                        <div class="report-card glass-card">
+                            <div class="report-icon">
+                                <i class="fas fa-print" style="color: #6C63FF;"></i>
+                            </div>
+                            <h4>Print Dashboard</h4>
+                            <p>Print-ready executive summary</p>
+                            <button class="btn-report" id="print-dashboard">
+                                <i class="fas fa-print"></i> Print
+                            </button>
+                        </div>
+                        <div class="report-card glass-card">
+                            <div class="report-icon">
+                                <i class="fas fa-file-csv" style="color: #FFB300;"></i>
+                            </div>
+                            <h4>Export CSV</h4>
+                            <p>Raw data for advanced analysis</p>
+                            <button class="btn-report" id="export-csv">
+                                <i class="fas fa-download"></i> Download CSV
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================================
+                SECTION 7: DATA QUALITY
+                ============================================================ -->
+                <section id="section-quality" class="dashboard-section" aria-label="Data Quality">
+                    <div class="quality-grid">
+                        <div class="quality-summary glass-card">
+                            <h3>Data Quality Report</h3>
+                            <div class="quality-score-large" id="quality-score-large">
+                                <span class="score-number">0%</span>
+                                <span class="score-label">Overall Data Quality</span>
+                            </div>
+                            <div class="quality-metrics" id="quality-metrics">
+                                <!-- Dynamic content -->
+                            </div>
+                        </div>
+                        <div class="quality-details glass-card">
+                            <h4>Validation Issues</h4>
+                            <div class="quality-issues-list" id="quality-issues-list">
+                                <div class="issue-item">
+                                    <i class="fas fa-check-circle text-success"></i>
+                                    <span>No issues detected</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="charts-grid">
+                        <div class="chart-card glass-card full-width">
+                            <div class="chart-header">
+                                <h3>Data Quality Breakdown</h3>
+                                <span class="chart-badge">By Category</span>
+                            </div>
+                            <div class="chart-container" id="chart-quality" style="height: 300px;"></div>
+                        </div>
+                    </div>
+                </section>
+
+            </div><!-- /app-content -->
+        </main>
+    </div><!-- /app-wrapper -->
+
+    <!-- ============================================================
+    EMPLOYEE PROFILE MODAL
+    ============================================================ -->
+    <div class="modal fade" id="employeeModal" tabindex="-1" aria-hidden="true" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content glass-card">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="employeeModalLabel">Employee Profile</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="employeeModalBody">
+                    <!-- Dynamic content -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    TOAST NOTIFICATION CONTAINER
+    ============================================================ -->
+    <div id="toast-container" aria-live="polite" aria-atomic="true" style="position: fixed; top: 80px; right: 20px; z-index: 9999;"></div>
+
+    <!-- ============================================================
+    JAVASCRIPT - MODULAR LOADING
+    ============================================================ -->
+    
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    
+    <!-- Application Modules - Loaded in dependency order -->
+    <script src="js/config.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/google-sync.js"></script>
+    <script src="js/validation.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/employees.js"></script>
+    <script src="js/filters.js"></script>
+    <script src="js/reports.js"></script>
+    <script src="js/app.js"></script>
+    
+    <!-- ============================================================
+    INITIALIZATION - APP BOOTSTRAP
+    ============================================================ -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loader = document.getElementById('app-loader');
+            const progressBar = document.getElementById('loader-progress-bar');
+            const appWrapper = document.getElementById('app-wrapper');
+            
+            let progress = 0;
+            
+            function updateProgress(value) {
+                progress = Math.min(value, 100);
+                progressBar.style.width = progress + '%';
+                if (progress >= 100) {
+                    setTimeout(function() {
+                        loader.classList.add('hidden');
+                        appWrapper.style.display = 'block';
+                        if (typeof window.CTIHApp !== 'undefined') {
+                            window.CTIHApp.init();
+                        }
+                    }, 500);
+                }
+            }
+            
+            const steps = [
+                { target: 20, delay: 200 },
+                { target: 40, delay: 400 },
+                { target: 55, delay: 600 },
+                { target: 70, delay: 800 },
+                { target: 85, delay: 1000 },
+                { target: 95, delay: 1200 },
+                { target: 100, delay: 1400 }
+            ];
+            
+            steps.forEach((step, index) => {
+                setTimeout(function() {
+                    updateProgress(step.target);
+                }, step.delay);
+            });
+            
+            document.addEventListener('keydown', function(e) {
+                if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                    e.preventDefault();
+                    document.getElementById('global-search').focus();
+                }
+                if (e.key === 'Escape') {
+                    document.getElementById('global-search').blur();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
