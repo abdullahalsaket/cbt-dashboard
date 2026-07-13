@@ -324,17 +324,17 @@
         }
 
         /* ============================================
-           SEARCH + CHARTS
+           SEARCH + CHARTS - 2 per row
            ============================================ */
         .search-charts-grid {
             display: grid;
-            grid-template-columns: 280px 1fr;
+            grid-template-columns: 1fr 2fr;
             gap: 14px;
             margin-bottom: 14px;
         }
 
         /* ============================================
-           EMPLOYEE SEARCH
+           EMPLOYEE SEARCH - Enhanced
            ============================================ */
         .search-wrapper {
             background: var(--card-bg);
@@ -403,7 +403,7 @@
         }
 
         /* ============================================
-           RESULT CARD
+           RESULT CARD - Enhanced with stats
            ============================================ */
         .result-card {
             margin-top: 10px;
@@ -440,6 +440,58 @@
             font-size: 0.75rem;
         }
 
+        .employee-stats {
+            margin-top: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 8px 10px;
+            background: rgba(30, 61, 89, 0.05);
+            border-radius: 8px;
+        }
+
+        .stat-badge {
+            font-size: 0.6rem;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 20px;
+        }
+
+        .stat-badge.attend {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--success);
+        }
+
+        .stat-badge.not-attend {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--danger);
+        }
+
+        .stat-badge.group {
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--info);
+        }
+
+        .stat-badge.location {
+            background: rgba(255, 110, 64, 0.15);
+            color: var(--accent);
+        }
+
+        .stat-badge.accommodation {
+            background: rgba(139, 92, 246, 0.15);
+            color: var(--purple);
+        }
+
+        .stat-badge.yes {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--success);
+        }
+
+        .stat-badge.no {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--danger);
+        }
+
         .training-tags {
             margin-top: 6px;
             display: flex;
@@ -457,7 +509,7 @@
         }
 
         /* ============================================
-           CHARTS
+           CHARTS - 2 per row with larger size
            ============================================ */
         .charts-grid {
             display: grid;
@@ -466,9 +518,9 @@
             margin-bottom: 14px;
         }
 
-        .charts-full-grid {
+        .charts-grid-2 {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-template-columns: 1fr 1fr;
             gap: 14px;
             margin-bottom: 14px;
         }
@@ -491,23 +543,14 @@
 
         .chart-box canvas {
             width: 100% !important;
-            height: 220px !important;
-            max-height: 220px;
-        }
-
-        .charts-full-grid .chart-box canvas {
-            height: 200px !important;
-            max-height: 200px;
+            height: 240px !important;
+            max-height: 240px;
         }
 
         .chart-box .chart-container {
             position: relative;
             width: 100%;
-            height: 220px;
-        }
-
-        .charts-full-grid .chart-box .chart-container {
-            height: 200px;
+            height: 240px;
         }
 
         /* ============================================
@@ -539,22 +582,15 @@
            RESPONSIVE
            ============================================ */
         @media (max-width: 1200px) {
-            .charts-full-grid {
+            .charts-grid-2 {
                 grid-template-columns: 1fr 1fr;
             }
             .chart-box canvas {
-                height: 180px !important;
-                max-height: 180px;
-            }
-            .charts-full-grid .chart-box canvas {
-                height: 160px !important;
-                max-height: 160px;
+                height: 200px !important;
+                max-height: 200px;
             }
             .chart-box .chart-container {
-                height: 180px;
-            }
-            .charts-full-grid .chart-box .chart-container {
-                height: 160px;
+                height: 200px;
             }
         }
 
@@ -563,6 +599,9 @@
                 grid-template-columns: 1fr;
             }
             .charts-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .charts-grid-2 {
                 grid-template-columns: 1fr 1fr;
             }
             .chart-box canvas {
@@ -603,14 +642,18 @@
             .charts-grid {
                 grid-template-columns: 1fr;
             }
-            .charts-full-grid {
-                grid-template-columns: 1fr 1fr;
+            .charts-grid-2 {
+                grid-template-columns: 1fr;
             }
             .kpi-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
             .employee-profile {
                 grid-template-columns: 1fr;
+            }
+            .employee-stats {
+                flex-direction: column;
+                align-items: stretch;
             }
             .brief-section {
                 padding: 10px 12px;
@@ -628,18 +671,11 @@
                 font-size: 0.7rem;
             }
             .chart-box canvas {
-                height: 160px !important;
-                max-height: 160px;
+                height: 180px !important;
+                max-height: 180px;
             }
             .chart-box .chart-container {
-                height: 160px;
-            }
-            .charts-full-grid .chart-box canvas {
-                height: 140px !important;
-                max-height: 140px;
-            }
-            .charts-full-grid .chart-box .chart-container {
-                height: 140px;
+                height: 180px;
             }
             .search-wrapper {
                 padding: 10px;
@@ -670,9 +706,6 @@
                 font-size: 0.5rem;
                 padding: 2px 6px;
             }
-            .charts-full-grid {
-                grid-template-columns: 1fr;
-            }
             .search-box input {
                 font-size: 0.65rem;
                 padding: 4px 6px;
@@ -691,11 +724,11 @@
                 font-size: 0.45rem;
             }
             .chart-box canvas {
-                height: 140px !important;
-                max-height: 140px;
+                height: 150px !important;
+                max-height: 150px;
             }
             .chart-box .chart-container {
-                height: 140px;
+                height: 150px;
             }
         }
     </style>
@@ -885,7 +918,7 @@
         SEARCH + CHARTS
         ============================================ -->
         <div class="search-charts-grid">
-            <!-- SEARCH -->
+            <!-- SEARCH - Enhanced -->
             <div class="search-wrapper">
                 <h3><i class="fa-solid fa-magnifying-glass"></i> Employee Query</h3>
                 <p>Enter Employee ID for full training profile.</p>
@@ -908,11 +941,21 @@
                         <div class="info-group"><h4>Attendance</h4><p id="resAttendance">-</p></div>
                         <div class="info-group"><h4>Status</h4><p id="resStatus">-</p></div>
                     </div>
+                    
+                    <!-- Enhanced Stats -->
+                    <div class="employee-stats" id="employeeStats">
+                        <span class="stat-badge attend" id="statAttended">✅ Attended: 0</span>
+                        <span class="stat-badge not-attend" id="statNotAttended">❌ Not Attended: 0</span>
+                        <span class="stat-badge group" id="statGroup">📋 Group: -</span>
+                        <span class="stat-badge location" id="statLocation">📍 Location: -</span>
+                        <span class="stat-badge accommodation" id="statAccommodation">🏠 Accommodation: -</span>
+                    </div>
+                    
                     <div class="training-tags" id="resPrograms"></div>
                 </div>
             </div>
 
-            <!-- CHARTS: 2 Small Charts -->
+            <!-- CHARTS: 2 Charts -->
             <div class="charts-grid">
                 <div class="chart-box">
                     <h4><i class="fa-solid fa-chart-bar" style="color:var(--primary-light);"></i> Employees by Sector</h4>
@@ -926,9 +969,9 @@
         </div>
 
         <!-- ============================================
-        FULL WIDTH CHARTS
+        CHARTS - 2 per row (4 charts total)
         ============================================ -->
-        <div class="charts-full-grid">
+        <div class="charts-grid-2">
             <div class="chart-box">
                 <h4><i class="fa-solid fa-users-between-lines" style="color:var(--success);"></i> Department Size</h4>
                 <div class="chart-container"><canvas id="chartDepartment"></canvas></div>
@@ -948,9 +991,9 @@
         </div>
 
         <!-- ============================================
-        ADDITIONAL CHARTS
+        ADDITIONAL CHARTS - 2 per row
         ============================================ -->
-        <div class="charts-grid" style="margin-top:14px;">
+        <div class="charts-grid-2" style="margin-top:14px;">
             <div class="chart-box">
                 <h4><i class="fa-solid fa-gauge-high" style="color:var(--primary-light);"></i> Data Quality Overview</h4>
                 <div class="chart-container"><canvas id="chartQuality"></canvas></div>
@@ -987,7 +1030,7 @@
         let fetchInterval = null;
 
         // ============================================
-        // PROGRAM FIELD MAPPING - دقيق حسب أعمدة الشيت
+        // PROGRAM FIELD MAPPING
         // ============================================
         const PROGRAM_FIELDS = {
             '7 Sens': '7 Sens',
@@ -1013,12 +1056,10 @@
                 const row = lines[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(item => item.trim().replace(/^"|"$/g, ''));
                 const obj = {};
                 headers.forEach((h, idx) => { 
-                    // Use the actual column name from headers
                     const key = h.trim();
                     obj[key] = row[idx] || '';
                 });
                 
-                // Deduplicate by ID
                 const id = String(obj['ID'] || '').trim();
                 if (id && !seenIds.has(id)) {
                     seenIds.add(id);
@@ -1074,13 +1115,11 @@
         }
 
         // ============================================
-        // UPDATE FILTER BADGE COUNTS - قراءة دقيقة من كل عمود
+        // UPDATE FILTER BADGE COUNTS
         // ============================================
         function updateFilterBadges(data) {
-            // Program counts - قراءة من كل عمود على حدة
             const progAll = data.length;
             
-            // لكل برنامج، نقرأ من العمود الخاص به
             const prog7Sens = data.filter(r => {
                 const val = String(r['7 Sens'] || '').toLowerCase();
                 return val === 'attend' || val === 'attended' || val.includes('attend');
@@ -1119,7 +1158,6 @@
             document.getElementById('progDriveCount').textContent = progDrive;
             document.getElementById('progKickCount').textContent = progKick;
 
-            // Location counts
             const locAll = data.length;
             const locSteigenberger = data.filter(r => String(r['Training Location'] || '').includes('Steigenberger')).length;
             const locTOR = data.filter(r => String(r['Training Location'] || '').includes('TOR')).length;
@@ -1132,7 +1170,6 @@
             document.getElementById('locNobCount').textContent = locNob;
             document.getElementById('locAlsaffCount').textContent = locAlsaff;
 
-            // Level counts
             const lvlAll = data.length;
             const lvlL4 = data.filter(r => String(r['C-LVL'] || '').includes('L4')).length;
             const lvlL3 = data.filter(r => String(r['C-LVL'] || '').includes('L3')).length;
@@ -1145,7 +1182,6 @@
             document.getElementById('lvlL2Count').textContent = lvlL2;
             document.getElementById('lvlL1Count').textContent = lvlL1;
 
-            // Phase counts
             const phaseAll = data.length;
             const phase1 = data.filter(r => String(r['CPT Training Phase'] || '').includes('Phase1')).length;
             const phase2 = data.filter(r => String(r['CPT Training Phase'] || '').includes('Phase2')).length;
@@ -1160,7 +1196,6 @@
             document.getElementById('phase4Count').textContent = phase4;
             document.getElementById('phaseOnlineCount').textContent = phaseOnline;
 
-            // Attendance counts
             const attAll = data.length;
             const attAttend = data.filter(r => {
                 const sevenSens = String(r['7 Sens'] || '').toLowerCase();
@@ -1183,7 +1218,6 @@
             console.log('🔄 Applying filters:', activeFilters);
             filteredData = [...allData];
 
-            // Program filter - using the correct field for each program
             if (activeFilters.program !== 'all') {
                 const field = PROGRAM_FIELDS[activeFilters.program];
                 if (field) {
@@ -1191,44 +1225,37 @@
                         const val = String(r[field] || '').toLowerCase();
                         return val === 'attend' || val === 'attended' || val.includes('attend');
                     });
-                    console.log(`📊 Filtered by program "${activeFilters.program}" (field: ${field}): ${filteredData.length} records`);
                 }
             }
 
-            // Location filter
             if (activeFilters.location !== 'all') {
                 filteredData = filteredData.filter(r => 
                     String(r['Training Location'] || '').includes(activeFilters.location)
                 );
             }
 
-            // Level filter
             if (activeFilters.level !== 'all') {
                 filteredData = filteredData.filter(r => 
                     String(r['C-LVL'] || '').includes(activeFilters.level)
                 );
             }
 
-            // Phase filter
             if (activeFilters.phase !== 'all') {
                 filteredData = filteredData.filter(r => 
                     String(r['CPT Training Phase'] || '').includes(activeFilters.phase)
                 );
             }
 
-            // Attendance filter
             if (activeFilters.attendance === 'attend') {
                 filteredData = filteredData.filter(r => {
                     const sevenSens = String(r['7 Sens'] || '').toLowerCase();
                     return sevenSens === 'attend' || sevenSens === 'attended' || sevenSens.includes('attend');
                 });
-                console.log('✅ Filtering to ATTEND only:', filteredData.length, 'records');
             } else if (activeFilters.attendance === 'not-attend') {
                 filteredData = filteredData.filter(r => {
                     const sevenSens = String(r['7 Sens'] || '').toLowerCase();
                     return sevenSens === 'not attend' || sevenSens.includes('not attend');
                 });
-                console.log('❌ Filtering to NOT ATTEND only:', filteredData.length, 'records');
             }
 
             renderDashboard(filteredData);
@@ -1243,12 +1270,10 @@
                     const filterType = this.dataset.filter;
                     const value = this.dataset.value;
 
-                    // Update active state for this filter group
                     const group = this.closest('.filter-group');
                     group.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
 
-                    // Update activeFilters
                     activeFilters[filterType] = value;
 
                     applyFilters();
@@ -1284,7 +1309,6 @@
 
             const total = data.length;
 
-            // --- KPI CALCULATIONS ---
             const l4Count = data.filter(r => String(r['C-LVL'] || '').includes('L4')).length;
             const sectors = new Set(data.map(r => r['Sector']).filter(Boolean));
             const departments = new Set(data.map(r => r['Department']).filter(Boolean));
@@ -1307,13 +1331,11 @@
             const locations = new Set(data.map(r => r['Training Location']).filter(Boolean));
             const phases = new Set(data.map(r => r['CPT Training Phase']).filter(Boolean));
 
-            // Data Quality
             const hasId = data.filter(r => r['ID'] && r['ID'].trim()).length;
             const hasName = data.filter(r => r['Name'] && r['Name'].trim()).length;
             const hasDept = data.filter(r => r['Department'] && r['Department'].trim()).length;
             const qualityScore = total > 0 ? Math.round(((hasId + hasName + hasDept) / (total * 3)) * 100) : 0;
 
-            // Update KPI Cards
             document.getElementById('kpiTotal').textContent = total.toLocaleString();
             document.getElementById('kpiL4').textContent = l4Count.toLocaleString();
             document.getElementById('kpiSectors').textContent = sectors.size.toLocaleString();
@@ -1325,11 +1347,9 @@
             document.getElementById('kpiQuality').textContent = qualityScore + '%';
             document.getElementById('kpiPhases').textContent = phases.size.toLocaleString();
 
-            // Update filter badges
             updateFilterBadges(data);
 
             // --- CHART DATA ---
-            // Sector Distribution
             const sectorCounts = {};
             data.forEach(r => {
                 const s = r['Sector'] || 'Unknown';
@@ -1338,7 +1358,6 @@
             const sectorLabels = Object.keys(sectorCounts);
             const sectorValues = Object.values(sectorCounts);
 
-            // Competency Level
             const levelCounts = {};
             data.forEach(r => {
                 const lvl = r['C-LVL'] || 'Unknown';
@@ -1347,7 +1366,6 @@
             const levelLabels = Object.keys(levelCounts);
             const levelValues = Object.values(levelCounts);
 
-            // Department
             const deptCounts = {};
             data.forEach(r => {
                 const d = r['Department'] || 'Unknown';
@@ -1357,7 +1375,6 @@
             const deptLabels = sortedDepts.map(d => d[0]);
             const deptValues = sortedDepts.map(d => d[1]);
 
-            // Attendance vs Completion by Sector
             const sectorAtt = {};
             const sectorComp = {};
             data.forEach(r => {
@@ -1379,7 +1396,6 @@
                 return totalSector > 0 ? Math.round((sectorComp[s] / totalSector) * 100) : 0;
             });
 
-            // Phase Distribution
             const phaseCounts = {};
             data.forEach(r => {
                 const p = r['CPT Training Phase'] || 'Unknown';
@@ -1388,7 +1404,6 @@
             const phaseLabels = Object.keys(phaseCounts);
             const phaseValues = Object.values(phaseCounts);
 
-            // Location Distribution
             const locCounts = {};
             data.forEach(r => {
                 const loc = r['Training Location'] || 'Unknown';
@@ -1397,7 +1412,6 @@
             const locLabels = Object.keys(locCounts);
             const locValues = Object.values(locCounts);
 
-            // Quality Metrics
             const qualityData = {
                 'Valid IDs': hasId,
                 'Valid Names': hasName,
@@ -1408,7 +1422,6 @@
             const qualityLabels = Object.keys(qualityData);
             const qualityValues = Object.values(qualityData);
 
-            // Program Enrollment - قراءة دقيقة من كل عمود
             const progEnroll = {};
             const progFields = ['7 Sens', 'Analytical Thinking', 'Mind Field', 'Leadership', 'Drive Performance', 'Kick Start'];
             progFields.forEach(p => {
@@ -1454,12 +1467,8 @@
                         }
                     },
                     scales: {
-                        y: {
-                            ticks: { font: { size: 11 } }
-                        },
-                        x: {
-                            ticks: { font: { size: 11 } }
-                        }
+                        y: { ticks: { font: { size: 11 } } },
+                        x: { ticks: { font: { size: 11 } } }
                     }
                 },
                 plugins: [ChartDataLabels]
@@ -1522,12 +1531,8 @@
                     },
                     indexAxis: 'y',
                     scales: {
-                        y: {
-                            ticks: { font: { size: 10 } }
-                        },
-                        x: {
-                            ticks: { font: { size: 10 } }
-                        }
+                        y: { ticks: { font: { size: 10 } } },
+                        x: { ticks: { font: { size: 10 } } }
                     }
                 },
                 plugins: [ChartDataLabels]
@@ -1575,9 +1580,7 @@
                             max: 100, 
                             ticks: { callback: v => v + '%', font: { size: 10 } } 
                         },
-                        x: {
-                            ticks: { font: { size: 10 } }
-                        }
+                        x: { ticks: { font: { size: 10 } } }
                     }
                 },
                 plugins: [ChartDataLabels]
@@ -1639,12 +1642,8 @@
                         }
                     },
                     scales: {
-                        y: {
-                            ticks: { font: { size: 10 } }
-                        },
-                        x: {
-                            ticks: { font: { size: 10 } }
-                        }
+                        y: { ticks: { font: { size: 10 } } },
+                        x: { ticks: { font: { size: 10 } } }
                     }
                 },
                 plugins: [ChartDataLabels]
@@ -1677,12 +1676,8 @@
                         }
                     },
                     scales: {
-                        y: {
-                            ticks: { font: { size: 10 } }
-                        },
-                        x: {
-                            ticks: { font: { size: 10 } }
-                        }
+                        y: { ticks: { font: { size: 10 } } },
+                        x: { ticks: { font: { size: 10 } } }
                     }
                 },
                 plugins: [ChartDataLabels]
@@ -1715,12 +1710,8 @@
                         }
                     },
                     scales: {
-                        y: {
-                            ticks: { font: { size: 10 } }
-                        },
-                        x: {
-                            ticks: { font: { size: 10 } }
-                        }
+                        y: { ticks: { font: { size: 10 } } },
+                        x: { ticks: { font: { size: 10 } } }
                     }
                 },
                 plugins: [ChartDataLabels]
@@ -1730,7 +1721,7 @@
         }
 
         // ============================================
-        // EMPLOYEE SEARCH
+        // EMPLOYEE SEARCH - Enhanced
         // ============================================
         function searchEmployee() {
             const inputId = document.getElementById('empIdInput').value.trim();
@@ -1749,6 +1740,7 @@
                 return;
             }
 
+            // Basic info
             document.getElementById('resName').textContent = emp['Name'] || 'Not recorded';
             document.getElementById('resTitle').textContent = emp['Title'] || 'Not recorded';
             document.getElementById('resSector').textContent = (emp['Sector'] || '-') + ' / ' + (emp['Department'] || '-');
@@ -1762,6 +1754,33 @@
             
             document.getElementById('resStatus').textContent = emp['Status'] || 'Not specified';
 
+            // --- Enhanced Stats ---
+            // Count attended programs
+            const programFields = ['7 Sens', 'Analytical Thinking', 'Mind Field', 'Leadership', 'Drive Performance', 'Kick Start'];
+            let attendedCount = 0;
+            let notAttendedCount = 0;
+            
+            programFields.forEach(p => {
+                const val = String(emp[p] || '').toLowerCase();
+                if (val === 'attend' || val === 'attended' || val.includes('attend')) {
+                    attendedCount++;
+                } else if (val === 'not attend' || val.includes('not attend')) {
+                    notAttendedCount++;
+                }
+            });
+
+            document.getElementById('statAttended').textContent = `✅ Attended: ${attendedCount}`;
+            document.getElementById('statNotAttended').textContent = `❌ Not Attended: ${notAttendedCount}`;
+            document.getElementById('statGroup').textContent = `📋 Group: ${emp['CPT Training Group'] || 'N/A'}`;
+            document.getElementById('statLocation').textContent = `📍 Location: ${emp['Training Location'] || 'N/A'}`;
+            
+            // Accommodation
+            const accommodation = String(emp['Accommodation'] || '').toLowerCase();
+            const accomText = accommodation === 'yes' ? '✅ Yes' : 
+                             accommodation === 'no' ? '❌ No' : 'N/A';
+            document.getElementById('statAccommodation').textContent = `🏠 Accommodation: ${accomText}`;
+
+            // Training Programs
             const progContainer = document.getElementById('resPrograms');
             progContainer.innerHTML = '';
             const programs = [
