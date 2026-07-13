@@ -328,7 +328,7 @@
            ============================================ */
         .search-charts-grid {
             display: grid;
-            grid-template-columns: 1fr 2fr;
+            grid-template-columns: 280px 1fr;
             gap: 14px;
             margin-bottom: 14px;
         }
@@ -457,24 +457,25 @@
         }
 
         /* ============================================
-           CHARTS
+           CHARTS - LARGER SIZE
            ============================================ */
         .charts-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            gap: 14px;
+            margin-bottom: 14px;
         }
 
         .charts-full-grid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr;
-            gap: 10px;
-            margin-top: 14px;
+            gap: 14px;
+            margin-bottom: 14px;
         }
 
         .chart-box {
             background: var(--card-bg);
-            padding: 10px 12px;
+            padding: 16px 18px;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow);
             border: 1px solid #e8ecf0;
@@ -482,19 +483,31 @@
 
         .chart-box h4 {
             margin-top: 0;
-            margin-bottom: 6px;
-            font-size: 0.65rem;
+            margin-bottom: 10px;
+            font-size: 0.85rem;
             color: var(--primary-light);
             font-weight: 700;
         }
 
         .chart-box canvas {
-            max-height: 140px;
-            max-width: 100%;
+            width: 100% !important;
+            height: 220px !important;
+            max-height: 220px;
         }
 
         .charts-full-grid .chart-box canvas {
-            max-height: 120px;
+            height: 200px !important;
+            max-height: 200px;
+        }
+
+        .chart-box .chart-container {
+            position: relative;
+            width: 100%;
+            height: 220px;
+        }
+
+        .charts-full-grid .chart-box .chart-container {
+            height: 200px;
         }
 
         /* ============================================
@@ -529,6 +542,20 @@
             .charts-full-grid {
                 grid-template-columns: 1fr 1fr;
             }
+            .chart-box canvas {
+                height: 180px !important;
+                max-height: 180px;
+            }
+            .charts-full-grid .chart-box canvas {
+                height: 160px !important;
+                max-height: 160px;
+            }
+            .chart-box .chart-container {
+                height: 180px;
+            }
+            .charts-full-grid .chart-box .chart-container {
+                height: 160px;
+            }
         }
 
         @media (max-width: 992px) {
@@ -537,6 +564,13 @@
             }
             .charts-grid {
                 grid-template-columns: 1fr 1fr;
+            }
+            .chart-box canvas {
+                height: 200px !important;
+                max-height: 200px;
+            }
+            .chart-box .chart-container {
+                height: 200px;
             }
         }
 
@@ -588,10 +622,24 @@
                 font-size: 0.7rem;
             }
             .chart-box {
-                padding: 8px 10px;
+                padding: 12px 14px;
             }
             .chart-box h4 {
-                font-size: 0.6rem;
+                font-size: 0.7rem;
+            }
+            .chart-box canvas {
+                height: 160px !important;
+                max-height: 160px;
+            }
+            .chart-box .chart-container {
+                height: 160px;
+            }
+            .charts-full-grid .chart-box canvas {
+                height: 140px !important;
+                max-height: 140px;
+            }
+            .charts-full-grid .chart-box .chart-container {
+                height: 140px;
             }
             .search-wrapper {
                 padding: 10px;
@@ -641,6 +689,13 @@
             }
             .navbar .title-center .subtitle {
                 font-size: 0.45rem;
+            }
+            .chart-box canvas {
+                height: 140px !important;
+                max-height: 140px;
+            }
+            .chart-box .chart-container {
+                height: 140px;
             }
         }
     </style>
@@ -861,11 +916,11 @@
             <div class="charts-grid">
                 <div class="chart-box">
                     <h4><i class="fa-solid fa-chart-bar" style="color:var(--primary-light);"></i> Employees by Sector</h4>
-                    <canvas id="chartSector"></canvas>
+                    <div class="chart-container"><canvas id="chartSector"></canvas></div>
                 </div>
                 <div class="chart-box">
                     <h4><i class="fa-solid fa-layer-group" style="color:var(--accent);"></i> Competency Levels</h4>
-                    <canvas id="chartLevel"></canvas>
+                    <div class="chart-container"><canvas id="chartLevel"></canvas></div>
                 </div>
             </div>
         </div>
@@ -876,19 +931,19 @@
         <div class="charts-full-grid">
             <div class="chart-box">
                 <h4><i class="fa-solid fa-users-between-lines" style="color:var(--success);"></i> Department Size</h4>
-                <canvas id="chartDepartment"></canvas>
+                <div class="chart-container"><canvas id="chartDepartment"></canvas></div>
             </div>
             <div class="chart-box">
                 <h4><i class="fa-solid fa-chart-line" style="color:var(--warning);"></i> Attendance vs Completion</h4>
-                <canvas id="chartAttendance"></canvas>
+                <div class="chart-container"><canvas id="chartAttendance"></canvas></div>
             </div>
             <div class="chart-box">
                 <h4><i class="fa-solid fa-clock" style="color:var(--info);"></i> Training Phase Distribution</h4>
-                <canvas id="chartPhase"></canvas>
+                <div class="chart-container"><canvas id="chartPhase"></canvas></div>
             </div>
             <div class="chart-box">
                 <h4><i class="fa-solid fa-location-dot" style="color:var(--danger);"></i> Training Location Distribution</h4>
-                <canvas id="chartLocation"></canvas>
+                <div class="chart-container"><canvas id="chartLocation"></canvas></div>
             </div>
         </div>
 
@@ -898,11 +953,11 @@
         <div class="charts-grid" style="margin-top:14px;">
             <div class="chart-box">
                 <h4><i class="fa-solid fa-gauge-high" style="color:var(--primary-light);"></i> Data Quality Overview</h4>
-                <canvas id="chartQuality"></canvas>
+                <div class="chart-container"><canvas id="chartQuality"></canvas></div>
             </div>
             <div class="chart-box">
                 <h4><i class="fa-solid fa-book-open" style="color:var(--purple);"></i> Program Enrollment Distribution</h4>
-                <canvas id="chartPrograms"></canvas>
+                <div class="chart-container"><canvas id="chartPrograms"></canvas></div>
             </div>
         </div>
 
@@ -971,7 +1026,6 @@
                     return res.text();
                 })
                 .then(csv => {
-                    // Check if data changed (compare hash of first 1000 chars)
                     const currentHash = csv.substring(0, 1000);
                     if (currentHash !== lastFetchedData) {
                         lastFetchedData = currentHash;
@@ -1010,12 +1064,30 @@
         function updateFilterBadges(data) {
             // Program counts
             const progAll = data.length;
-            const prog7Sens = data.filter(r => String(r['7 Sens'] || '').toLowerCase().includes('attend')).length;
-            const progAnalytical = data.filter(r => String(r['Analytical Thinking'] || '').toLowerCase().includes('attend')).length;
-            const progMindField = data.filter(r => String(r['Mind Field'] || '').toLowerCase().includes('attend')).length;
-            const progLeadership = data.filter(r => String(r['Leadership'] || '').toLowerCase().includes('attend')).length;
-            const progDrive = data.filter(r => String(r['Drive Performance'] || '').toLowerCase().includes('attend')).length;
-            const progKick = data.filter(r => String(r['Kick Start'] || '').toLowerCase().includes('attend')).length;
+            const prog7Sens = data.filter(r => {
+                const val = String(r['7 Sens'] || '').toLowerCase();
+                return val === 'attend' || val === 'attended' || val.includes('attend');
+            }).length;
+            const progAnalytical = data.filter(r => {
+                const val = String(r['Analytical Thinking'] || '').toLowerCase();
+                return val === 'attend' || val === 'attended' || val.includes('attend');
+            }).length;
+            const progMindField = data.filter(r => {
+                const val = String(r['Mind Field'] || '').toLowerCase();
+                return val === 'attend' || val === 'attended' || val.includes('attend');
+            }).length;
+            const progLeadership = data.filter(r => {
+                const val = String(r['Leadership'] || '').toLowerCase();
+                return val === 'attend' || val === 'attended' || val.includes('attend');
+            }).length;
+            const progDrive = data.filter(r => {
+                const val = String(r['Drive Performance'] || '').toLowerCase();
+                return val === 'attend' || val === 'attended' || val.includes('attend');
+            }).length;
+            const progKick = data.filter(r => {
+                const val = String(r['Kick Start'] || '').toLowerCase();
+                return val === 'attend' || val === 'attended' || val.includes('attend');
+            }).length;
 
             document.getElementById('progAllCount').textContent = progAll;
             document.getElementById('prog7SensCount').textContent = prog7Sens;
@@ -1086,6 +1158,7 @@
         // APPLY FILTERS
         // ============================================
         function applyFilters() {
+            console.log('🔄 Applying filters:', activeFilters);
             filteredData = [...allData];
 
             // Program filter
@@ -1100,9 +1173,10 @@
                 };
                 const field = progMap[activeFilters.program];
                 if (field) {
-                    filteredData = filteredData.filter(r => 
-                        String(r[field] || '').toLowerCase().includes('attend')
-                    );
+                    filteredData = filteredData.filter(r => {
+                        const val = String(r[field] || '').toLowerCase();
+                        return val === 'attend' || val === 'attended' || val.includes('attend');
+                    });
                 }
             }
 
@@ -1127,17 +1201,21 @@
                 );
             }
 
-            // Attendance filter
+            // Attendance filter - CRITICAL FIX
             if (activeFilters.attendance === 'attend') {
                 filteredData = filteredData.filter(r => {
                     const sevenSens = String(r['7 Sens'] || '').toLowerCase();
-                    return sevenSens === 'attend' || sevenSens === 'attended' || sevenSens.includes('attend');
+                    const isAttend = sevenSens === 'attend' || sevenSens === 'attended' || sevenSens.includes('attend');
+                    return isAttend;
                 });
+                console.log('✅ Filtering to ATTEND only:', filteredData.length, 'records');
             } else if (activeFilters.attendance === 'not-attend') {
                 filteredData = filteredData.filter(r => {
                     const sevenSens = String(r['7 Sens'] || '').toLowerCase();
-                    return sevenSens === 'not attend' || sevenSens.includes('not attend');
+                    const isNotAttend = sevenSens === 'not attend' || sevenSens.includes('not attend');
+                    return isNotAttend;
                 });
+                console.log('❌ Filtering to NOT ATTEND only:', filteredData.length, 'records');
             }
 
             renderDashboard(filteredData);
@@ -1321,7 +1399,10 @@
             const progEnroll = {};
             const progFields = ['7 Sens', 'Analytical Thinking', 'Mind Field', 'Leadership', 'Drive Performance', 'Kick Start'];
             progFields.forEach(p => {
-                progEnroll[p] = data.filter(r => String(r[p] || '').toLowerCase().includes('attend')).length;
+                progEnroll[p] = data.filter(r => {
+                    const val = String(r[p] || '').toLowerCase();
+                    return val === 'attend' || val === 'attended' || val.includes('attend');
+                }).length;
             });
             const progEnrollLabels = Object.keys(progEnroll);
             const progEnrollValues = Object.values(progEnroll);
@@ -1330,6 +1411,9 @@
             destroyCharts();
 
             // --- CREATE CHARTS ---
+            Chart.defaults.font.family = 'Cairo, sans-serif';
+            Chart.defaults.font.size = 12;
+
             // Chart 1: Sector
             const ctx1 = document.getElementById('chartSector').getContext('2d');
             chartInstances.sector = new Chart(ctx1, {
@@ -1340,21 +1424,30 @@
                         label: 'Employees', 
                         data: sectorValues, 
                         backgroundColor: '#1e3d59', 
-                        borderRadius: 4,
+                        borderRadius: 6,
                         barPercentage: 0.6
                     }]
                 },
                 options: { 
-                    responsive: true, 
+                    responsive: true,
+                    maintainAspectRatio: false,
                     plugins: { 
                         legend: { display: false },
                         datalabels: {
                             color: '#1a2332',
                             anchor: 'end',
                             align: 'top',
-                            font: { weight: 'bold', size: 9 }
+                            font: { weight: 'bold', size: 12 }
                         }
-                    } 
+                    },
+                    scales: {
+                        y: {
+                            ticks: { font: { size: 11 } }
+                        },
+                        x: {
+                            ticks: { font: { size: 11 } }
+                        }
+                    }
                 },
                 plugins: [ChartDataLabels]
             });
@@ -1371,12 +1464,13 @@
                     }]
                 },
                 options: { 
-                    responsive: true, 
+                    responsive: true,
+                    maintainAspectRatio: false,
                     plugins: { 
-                        legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 9 } } },
+                        legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } },
                         datalabels: {
                             color: '#1a2332',
-                            font: { weight: 'bold', size: 9 },
+                            font: { weight: 'bold', size: 12 },
                             formatter: (value, ctx) => {
                                 const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
                                 return total > 0 ? Math.round((value / total) * 100) + '%' : '';
@@ -1397,22 +1491,31 @@
                         label: 'Employees', 
                         data: deptValues, 
                         backgroundColor: '#17b890', 
-                        borderRadius: 4,
+                        borderRadius: 6,
                         barPercentage: 0.6
                     }]
                 },
                 options: { 
-                    responsive: true, 
+                    responsive: true,
+                    maintainAspectRatio: false,
                     plugins: { 
                         legend: { display: false },
                         datalabels: {
                             color: '#1a2332',
                             anchor: 'end',
                             align: 'top',
-                            font: { weight: 'bold', size: 8 }
+                            font: { weight: 'bold', size: 11 }
                         }
                     },
-                    indexAxis: 'y' 
+                    indexAxis: 'y',
+                    scales: {
+                        y: {
+                            ticks: { font: { size: 10 } }
+                        },
+                        x: {
+                            ticks: { font: { size: 10 } }
+                        }
+                    }
                 },
                 plugins: [ChartDataLabels]
             });
@@ -1442,17 +1545,27 @@
                 },
                 options: {
                     responsive: true,
+                    maintainAspectRatio: false,
                     plugins: { 
-                        legend: { position: 'top', labels: { boxWidth: 10, font: { size: 9 } } },
+                        legend: { position: 'top', labels: { boxWidth: 12, font: { size: 11 } } },
                         datalabels: {
                             color: '#1a2332',
                             anchor: 'end',
                             align: 'top',
-                            font: { weight: 'bold', size: 8 },
+                            font: { weight: 'bold', size: 10 },
                             formatter: (value) => value + '%'
                         }
                     },
-                    scales: { y: { beginAtZero: true, max: 100, ticks: { callback: v => v + '%' } } }
+                    scales: { 
+                        y: { 
+                            beginAtZero: true, 
+                            max: 100, 
+                            ticks: { callback: v => v + '%', font: { size: 10 } } 
+                        },
+                        x: {
+                            ticks: { font: { size: 10 } }
+                        }
+                    }
                 },
                 plugins: [ChartDataLabels]
             });
@@ -1469,12 +1582,13 @@
                     }]
                 },
                 options: { 
-                    responsive: true, 
+                    responsive: true,
+                    maintainAspectRatio: false,
                     plugins: { 
-                        legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 9 } } },
+                        legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } },
                         datalabels: {
                             color: '#1a2332',
-                            font: { weight: 'bold', size: 9 },
+                            font: { weight: 'bold', size: 12 },
                             formatter: (value, ctx) => {
                                 const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
                                 return total > 0 ? Math.round((value / total) * 100) + '%' : '';
@@ -1495,21 +1609,30 @@
                         label: 'Employees', 
                         data: locValues, 
                         backgroundColor: '#ff6e40', 
-                        borderRadius: 4,
+                        borderRadius: 6,
                         barPercentage: 0.6
                     }]
                 },
                 options: { 
-                    responsive: true, 
+                    responsive: true,
+                    maintainAspectRatio: false,
                     plugins: { 
                         legend: { display: false },
                         datalabels: {
                             color: '#1a2332',
                             anchor: 'end',
                             align: 'top',
-                            font: { weight: 'bold', size: 8 }
+                            font: { weight: 'bold', size: 11 }
                         }
-                    } 
+                    },
+                    scales: {
+                        y: {
+                            ticks: { font: { size: 10 } }
+                        },
+                        x: {
+                            ticks: { font: { size: 10 } }
+                        }
+                    }
                 },
                 plugins: [ChartDataLabels]
             });
@@ -1524,21 +1647,30 @@
                         label: 'Records', 
                         data: qualityValues, 
                         backgroundColor: '#3b82f6', 
-                        borderRadius: 4,
+                        borderRadius: 6,
                         barPercentage: 0.6
                     }]
                 },
                 options: { 
-                    responsive: true, 
+                    responsive: true,
+                    maintainAspectRatio: false,
                     plugins: { 
                         legend: { display: false },
                         datalabels: {
                             color: '#1a2332',
                             anchor: 'end',
                             align: 'top',
-                            font: { weight: 'bold', size: 8 }
+                            font: { weight: 'bold', size: 11 }
                         }
-                    } 
+                    },
+                    scales: {
+                        y: {
+                            ticks: { font: { size: 10 } }
+                        },
+                        x: {
+                            ticks: { font: { size: 10 } }
+                        }
+                    }
                 },
                 plugins: [ChartDataLabels]
             });
@@ -1553,24 +1685,35 @@
                         label: 'Enrolled', 
                         data: progEnrollValues, 
                         backgroundColor: ['#1e3d59', '#17b890', '#ff6e40', '#f6c23e', '#8b5cf6', '#e74a3b'],
-                        borderRadius: 4,
+                        borderRadius: 6,
                         barPercentage: 0.6
                     }]
                 },
                 options: { 
-                    responsive: true, 
+                    responsive: true,
+                    maintainAspectRatio: false,
                     plugins: { 
                         legend: { display: false },
                         datalabels: {
                             color: '#1a2332',
                             anchor: 'end',
                             align: 'top',
-                            font: { weight: 'bold', size: 8 }
+                            font: { weight: 'bold', size: 11 }
                         }
-                    } 
+                    },
+                    scales: {
+                        y: {
+                            ticks: { font: { size: 10 } }
+                        },
+                        x: {
+                            ticks: { font: { size: 10 } }
+                        }
+                    }
                 },
                 plugins: [ChartDataLabels]
             });
+
+            console.log('📊 All charts rendered with', data.length, 'records');
         }
 
         // ============================================
@@ -1652,21 +1795,18 @@
                     setupFilterButtons();
                     applyFilters();
                     
-                    // Start auto-update checks every 30 seconds
                     if (fetchInterval) clearInterval(fetchInterval);
                     fetchInterval = setInterval(checkForUpdates, 30000);
                 })
                 .catch(err => {
                     console.error('Fetch error:', err);
                     loadingMsg.innerHTML = '<span style="color:var(--danger);font-weight:600;"><i class="fa-solid fa-triangle-exclamation"></i> Failed to load data. Retrying...</span>';
-                    // Retry after 5 seconds
                     setTimeout(() => {
                         window.location.reload();
                     }, 5000);
                 });
         });
 
-        // Allow Enter key for search
         document.getElementById('empIdInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') searchEmployee();
         });
