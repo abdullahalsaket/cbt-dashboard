@@ -10,7 +10,6 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 
     <style>
-        /* ===== CSS (نفس الكود السابق - تم اختصاره للطول) ===== */
         :root {
             --cpc-blue-dark: #0f2b40;
             --cpc-blue: #1e3d59;
@@ -30,6 +29,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Cairo', sans-serif; background: var(--bg-light); color: var(--text-dark); min-height: 100vh; }
 
+        /* ===== HEADER ===== */
         .navbar {
             background: linear-gradient(135deg, var(--cpc-blue-dark) 0%, var(--cpc-blue) 100%);
             color: white;
@@ -50,28 +50,151 @@
         .refresh-btn:hover { background: rgba(255,255,255,0.25); }
         .refresh-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-        .filter-bar { background: var(--white); padding: 10px 16px; border-radius: 12px; margin: 12px auto; max-width: 1440px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid #e8ecf0; }
-        .filter-bar .filter-row { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; margin-bottom: 4px; }
-        .filter-bar .filter-row:last-child { margin-bottom: 0; }
-        .filter-bar .filter-label { font-size: 0.6rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; min-width: 45px; }
-        .filter-bar .filter-group { display: flex; flex-wrap: wrap; gap: 3px; }
-        
-        .filter-btn { padding: 3px 12px; border-radius: 30px; border: 2px solid #e2e8f0; background: transparent; font-family: 'Cairo', sans-serif; font-size: 0.6rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.2s; }
-        .filter-btn:hover { border-color: var(--cpc-blue); color: var(--cpc-blue); background: rgba(30,61,89,0.04); }
-        .filter-btn.active { border-color: var(--koki-orange); background: var(--koki-orange); color: white; box-shadow: 0 4px 12px rgba(255,110,64,0.3); }
-        .filter-btn .badge-count { background: rgba(255,255,255,0.2); border-radius: 20px; padding: 0 6px; font-size: 0.5rem; margin-left: 3px; }
-        .filter-btn.attend-btn { border-color: var(--success); color: var(--success); }
-        .filter-btn.attend-btn.active { background: var(--success); border-color: var(--success); color: white; }
-        .filter-btn.not-attend-btn { border-color: var(--danger); color: var(--danger); }
-        .filter-btn.not-attend-btn.active { background: var(--danger); border-color: var(--danger); color: white; }
-        
-        /* تمييز أزرار المجموعات التدريبية بلون مختلف */
-        .filter-btn.group-btn { border-color: var(--teal); color: var(--teal); }
-        .filter-btn.group-btn.active { background: var(--teal); border-color: var(--teal); color: white; box-shadow: 0 4px 12px rgba(20,184,166,0.3); }
-        
-        .clear-filters-btn { padding: 3px 14px; border-radius: 30px; border: 2px solid #e2e8f0; background: transparent; font-family: 'Cairo', sans-serif; font-size: 0.6rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.2s; margin-left: auto; }
-        .clear-filters-btn:hover { border-color: var(--danger); color: var(--danger); background: rgba(239,68,68,0.05); }
+        /* ============================================================
+           FILTER BAR - تنسيق جديد بمسافات بين الصفوف
+           ============================================================ */
+        .filter-bar {
+            background: var(--white);
+            padding: 14px 18px;
+            border-radius: 12px;
+            margin: 12px auto;
+            max-width: 1440px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border: 1px solid #e8ecf0;
+        }
 
+        .filter-bar .filter-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 6px 12px;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .filter-bar .filter-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .filter-bar .filter-row:first-child {
+            padding-top: 0;
+        }
+
+        .filter-bar .filter-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            min-width: 55px;
+            flex-shrink: 0;
+        }
+
+        .filter-bar .filter-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px 6px;
+            flex: 1;
+        }
+
+        .filter-btn {
+            padding: 4px 14px;
+            border-radius: 30px;
+            border: 2px solid #e2e8f0;
+            background: transparent;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--cpc-blue);
+            color: var(--cpc-blue);
+            background: rgba(30,61,89,0.04);
+        }
+
+        .filter-btn.active {
+            border-color: var(--koki-orange);
+            background: var(--koki-orange);
+            color: white;
+            box-shadow: 0 4px 12px rgba(255,110,64,0.3);
+        }
+
+        .filter-btn .badge-count {
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: 0 6px;
+            font-size: 0.5rem;
+            margin-left: 3px;
+        }
+
+        .filter-btn.active .badge-count {
+            background: rgba(255,255,255,0.25);
+        }
+
+        .filter-btn.attend-btn {
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .filter-btn.attend-btn.active {
+            background: var(--success);
+            border-color: var(--success);
+            color: white;
+        }
+
+        .filter-btn.not-attend-btn {
+            border-color: var(--danger);
+            color: var(--danger);
+        }
+
+        .filter-btn.not-attend-btn.active {
+            background: var(--danger);
+            border-color: var(--danger);
+            color: white;
+        }
+
+        .filter-btn.group-btn {
+            border-color: var(--teal);
+            color: var(--teal);
+        }
+
+        .filter-btn.group-btn.active {
+            background: var(--teal);
+            border-color: var(--teal);
+            color: white;
+            box-shadow: 0 4px 12px rgba(20,184,166,0.3);
+        }
+
+        .clear-filters-btn {
+            padding: 4px 16px;
+            border-radius: 30px;
+            border: 2px solid #e2e8f0;
+            background: transparent;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-left: auto;
+            flex-shrink: 0;
+        }
+
+        .clear-filters-btn:hover {
+            border-color: var(--danger);
+            color: var(--danger);
+            background: rgba(239,68,68,0.05);
+        }
+
+        /* ============================================================
+           باقي الـ CSS كما هو
+           ============================================================ */
         .container { max-width: 1440px; margin: 0 auto; padding: 0 12px; }
 
         .brief-section { background: linear-gradient(135deg, var(--cpc-blue-dark) 0%, #17b890 100%); color: white; padding: 12px 18px; border-radius: 12px; margin: 12px 0; }
@@ -143,7 +266,8 @@
         @media (max-width: 768px) {
             .navbar { flex-direction: column; text-align: center; }
             .filter-bar .filter-row { flex-direction: column; align-items: stretch; }
-            .clear-filters-btn { margin-left: 0; }
+            .filter-bar .filter-label { min-width: auto; }
+            .clear-filters-btn { margin-left: 0; width: 100%; text-align: center; }
             .charts-grid { grid-template-columns: 1fr; }
             .charts-grid-2 { grid-template-columns: 1fr; }
             .kpi-grid { grid-template-columns: repeat(2, 1fr); }
@@ -191,10 +315,10 @@
         </div>
 
         <!-- ============================================================
-        FILTER BAR - مع صف إضافي للمجموعات التدريبية
+        FILTER BAR - كل سطر لوحده مع مسافات
         ============================================================ -->
         <div class="filter-bar" id="filterBar">
-            <!-- الصف الأول: البرامج التدريبية (6 برامج) -->
+            <!-- الصف الأول: البرامج التدريبية -->
             <div class="filter-row">
                 <span class="filter-label"><i class="fa-solid fa-book"></i> Programs:</span>
                 <div class="filter-group" id="programFilters">
@@ -208,16 +332,16 @@
                 </div>
             </div>
 
-            <!-- الصف الثاني: المجموعات التدريبية (Groups) -->
+            <!-- الصف الثاني: المجموعات التدريبية -->
             <div class="filter-row">
                 <span class="filter-label"><i class="fa-solid fa-layer-group"></i> Groups:</span>
                 <div class="filter-group" id="groupFilters">
                     <button class="filter-btn group-btn active" data-filter="group" data-value="all">All <span class="badge-count" id="groupAllCount">0</span></button>
-                    <!-- الأزرار هتتضاف ديناميكياً من جافاسكريبت -->
+                    <!-- باقي الأزرار بتتضاف من جافاسكريبت -->
                 </div>
             </div>
 
-            <!-- الصف الثالث: باقي الفلاتر -->
+            <!-- الصف الثالث: Location + Level + Phase -->
             <div class="filter-row">
                 <span class="filter-label"><i class="fa-solid fa-location-dot"></i> Location:</span>
                 <div class="filter-group" id="locationFilters">
@@ -227,6 +351,7 @@
                     <button class="filter-btn" data-filter="location" data-value="Nob">Nob <span class="badge-count" id="locNobCount">0</span></button>
                     <button class="filter-btn" data-filter="location" data-value="Alsaff">Alsaff <span class="badge-count" id="locAlsaffCount">0</span></button>
                 </div>
+
                 <span class="filter-label" style="margin-left:6px;"><i class="fa-solid fa-layer-group"></i> Level:</span>
                 <div class="filter-group" id="levelFilters">
                     <button class="filter-btn active" data-filter="level" data-value="all">All <span class="badge-count" id="lvlAllCount">0</span></button>
@@ -235,6 +360,7 @@
                     <button class="filter-btn" data-filter="level" data-value="L2">L2 <span class="badge-count" id="lvlL2Count">0</span></button>
                     <button class="filter-btn" data-filter="level" data-value="L1">L1 <span class="badge-count" id="lvlL1Count">0</span></button>
                 </div>
+
                 <span class="filter-label" style="margin-left:6px;"><i class="fa-solid fa-clock"></i> Phase:</span>
                 <div class="filter-group" id="phaseFilters">
                     <button class="filter-btn active" data-filter="phase" data-value="all">All <span class="badge-count" id="phaseAllCount">0</span></button>
@@ -244,28 +370,32 @@
                     <button class="filter-btn" data-filter="phase" data-value="Phase4">P4 <span class="badge-count" id="phase4Count">0</span></button>
                     <button class="filter-btn" data-filter="phase" data-value="Online-Phase4">Online <span class="badge-count" id="phaseOnlineCount">0</span></button>
                 </div>
+
                 <span class="filter-label" style="margin-left:6px;"><i class="fa-solid fa-user-check"></i> Attend:</span>
                 <div class="filter-group" id="attendanceFilters">
                     <button class="filter-btn active attend-btn" data-filter="attendance" data-value="all">All <span class="badge-count" id="attAllCount">0</span></button>
                     <button class="filter-btn attend-btn" data-filter="attendance" data-value="attend">✅ Attend <span class="badge-count" id="attAttendCount">0</span></button>
                     <button class="filter-btn not-attend-btn" data-filter="attendance" data-value="not-attend">❌ Not Attend <span class="badge-count" id="attNotAttendCount">0</span></button>
                 </div>
+
                 <button class="clear-filters-btn" onclick="clearAllFilters()"><i class="fa-solid fa-undo"></i> Reset</button>
             </div>
         </div>
 
         <!-- ============================================================
-        KPI GRID
+        باقي الـ HTML كما هو
         ============================================================ -->
         <div class="kpi-grid" id="kpiGrid">
             <div class="kpi-card"><div class="kpi-info"><h4>Total Workforce</h4><div class="num" id="kpiTotal">...</div></div><i class="fa-solid fa-users"></i></div>
-            <div class="kpi-card"><div class="kpi-info"><h4>Sectors</h4><div class="num" id="kpiSectors">...</div></div><i class="fa-solid fa-building"></i></div>
+            <div class="kpi-card"><div class="kpi-info"><h4>Executives (L4+)</h4><div class="num" id="kpiL4">...</div></div><i class="fa-solid fa-crown"></i></div>
+            <div class="kpi-card"><div class="kpi-info"><h4>Active Sectors</h4><div class="num" id="kpiSectors">...</div></div><i class="fa-solid fa-building"></i></div>
             <div class="kpi-card"><div class="kpi-info"><h4>Departments</h4><div class="num" id="kpiDepartments">...</div></div><i class="fa-solid fa-sitemap"></i></div>
             <div class="kpi-card"><div class="kpi-info"><h4>Attendance Rate</h4><div class="num" id="kpiAttendance">...</div></div><i class="fa-solid fa-user-check"></i></div>
             <div class="kpi-card"><div class="kpi-info"><h4>Completion Rate</h4><div class="num" id="kpiCompletion">...</div></div><i class="fa-solid fa-graduation-cap"></i></div>
             <div class="kpi-card"><div class="kpi-info"><h4>Training Programs</h4><div class="num" id="kpiPrograms">...</div></div><i class="fa-solid fa-book-open"></i></div>
             <div class="kpi-card"><div class="kpi-info"><h4>Training Locations</h4><div class="num" id="kpiLocations">...</div></div><i class="fa-solid fa-location-dot"></i></div>
-            <div class="kpi-card"><div class="kpi-info"><h4>Project Phases</h4><div class="num" id="kpiPhases">...</div></div><i class="fa-solid fa-clock"></i></div>
+            <div class="kpi-card"><div class="kpi-info"><h4>Data Quality</h4><div class="num" id="kpiQuality">...</div></div><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="kpi-card"><div class="kpi-info"><h4>Active Phases</h4><div class="num" id="kpiPhases">...</div></div><i class="fa-solid fa-clock"></i></div>
         </div>
 
         <!-- ============================================================
@@ -313,9 +443,6 @@
             </div>
         </div>
 
-        <!-- ============================================================
-        CHARTS
-        ============================================================ -->
         <div class="charts-grid-2">
             <div class="chart-box" id="chartBoxDept">
                 <h4><i class="fa-solid fa-users-between-lines" style="color:var(--success);"></i> Department Size</h4>
@@ -346,9 +473,6 @@
             </div>
         </div>
 
-        <!-- ============================================================
-        INSIGHTS
-        ============================================================ -->
         <div class="insights-section" id="insightsSection">
             <div class="insight-card">
                 <div class="insight-icon"><i class="fa-solid fa-users"></i></div>
@@ -423,7 +547,6 @@
             Accommodation: 'Accommodation'
         };
 
-        // البرامج التدريبية الفعلية (6 برامج)
         const PROGRAM_FIELDS = {
             '7 Sens Program': COLUMNS.SevenSens,
             'Analytical Thinking Program': COLUMNS.Analytical,
@@ -478,7 +601,7 @@
         // UPDATE FILTER BADGES
         // ============================================================
         function updateFilterBadges(data) {
-            // --- Program Counts (من أعمدة البرامج) ---
+            // --- Program Counts ---
             const progAll = data.length;
             document.getElementById('progAllCount').textContent = progAll;
 
@@ -493,7 +616,7 @@
                 if (el) el.textContent = count;
             });
 
-            // --- Group Counts (من CPT Training Group) ---
+            // --- Group Counts ---
             const groupCounts = {};
             data.forEach(r => {
                 const group = r[COLUMNS.TrainingGroup] || '';
@@ -503,9 +626,7 @@
             });
             const sortedGroups = Object.entries(groupCounts).sort((a, b) => b[1] - a[1]);
             
-            // تحديث أزرار المجموعات
             const groupContainer = document.getElementById('groupFilters');
-            // نحتفظ بزر All
             const allBtn = groupContainer.querySelector('.filter-btn[data-value="all"]');
             groupContainer.innerHTML = '';
             groupContainer.appendChild(allBtn);
@@ -678,7 +799,6 @@
             if (!allData || allData.length === 0) return;
             filteredData = [...allData];
 
-            // فلتر البرامج (من أعمدة البرامج)
             if (activeFilters.program !== 'all') {
                 const field = PROGRAM_FIELDS[activeFilters.program];
                 if (field) {
@@ -689,7 +809,6 @@
                 }
             }
 
-            // فلتر المجموعات (من CPT Training Group)
             if (activeFilters.group !== 'all') {
                 filteredData = filteredData.filter(r => 
                     String(r[COLUMNS.TrainingGroup] || '').includes(activeFilters.group)
@@ -731,7 +850,6 @@
                     applyFilters();
                 });
             });
-            // أزرار المجموعات بتتضاف ديناميكياً في updateFilterBadges
         }
 
         function clearAllFilters() {
@@ -822,7 +940,7 @@
             }).length;
             const completionRate = total > 0 ? Math.round((completed / total) * 100) : 0;
 
-            // ✅ Training Programs: عدد البرامج الفعلية (6)
+            // Training Programs (6)
             let programCount = 0;
             Object.keys(PROGRAM_FIELDS).forEach(progName => {
                 const field = PROGRAM_FIELDS[progName];
@@ -833,7 +951,6 @@
                 if (hasAttendees) programCount++;
             });
 
-            // Training Locations
             const locationSet = new Set();
             data.forEach(r => {
                 const loc = r[COLUMNS.TrainingLocation] || '';
@@ -841,7 +958,6 @@
             });
             const locationCount = locationSet.size;
 
-            // Active Phases (4)
             const phaseSet = new Set();
             data.forEach(r => {
                 const phase = String(r[COLUMNS.TrainingPhase] || '');
@@ -850,7 +966,6 @@
             });
             const phaseCount = phaseSet.size;
 
-            // Data Quality
             const hasId = data.filter(r => r['ID'] && r['ID'].trim()).length;
             const hasName = data.filter(r => r['Name'] && r['Name'].trim()).length;
             const hasDept = data.filter(r => r[COLUMNS.Department] && r[COLUMNS.Department].trim()).length;
@@ -862,7 +977,7 @@
             document.getElementById('kpiDepartments').textContent = departments.size.toLocaleString();
             document.getElementById('kpiAttendance').textContent = attendanceRate + '%';
             document.getElementById('kpiCompletion').textContent = completionRate + '%';
-            document.getElementById('kpiPrograms').textContent = programCount; // ✅ 6
+            document.getElementById('kpiPrograms').textContent = programCount;
             document.getElementById('kpiLocations').textContent = locationCount;
             document.getElementById('kpiQuality').textContent = qualityScore + '%';
             document.getElementById('kpiPhases').textContent = phaseCount;
