@@ -28,7 +28,6 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Cairo', sans-serif; background: var(--bg-light); color: var(--text-dark); min-height: 100vh; }
 
-        /* ===== HEADER ===== */
         .navbar {
             background: linear-gradient(135deg, var(--cpc-blue-dark) 0%, var(--cpc-blue) 100%);
             color: white;
@@ -468,9 +467,6 @@
                 if (el) el.textContent = count;
             });
 
-            // ============================================================
-            // ✅ ✅ ✅ PHASE COUNTS - 4 مراحل بس
-            // ============================================================
             document.getElementById('phaseAllCount').textContent = data.length;
             const validPhases = ['Phase1', 'Phase2', 'Phase3', 'Phase4'];
             const phaseMap = {
@@ -488,7 +484,6 @@
                 const el = document.getElementById(id);
                 if (el) el.textContent = count;
             });
-            // Online-Phase4 تضاف لـ Phase4
             const onlineCount = data.filter(r => String(r[COLUMNS.TrainingPhase] || '').includes('Online-Phase4')).length;
             const phase4El = document.getElementById('phase4Count');
             if (phase4El) {
@@ -496,7 +491,6 @@
                 phase4El.textContent = currentPhase4 + onlineCount;
             }
 
-            // Attendance
             const attAll = data.length;
             const attAttend = data.filter(r => {
                 const val = String(r[COLUMNS.SevenSens] || '').toLowerCase();
@@ -733,9 +727,7 @@
             }).length;
             const completionRate = total > 0 ? Math.round((completed / total) * 100) : 0;
 
-            // ============================================================
-            // ✅ ✅ ✅ حساب البرامج التدريبية (6 برامج)
-            // ============================================================
+            // Training Programs (6)
             const programGroups = new Set();
             data.forEach(r => {
                 const group = r[COLUMNS.TrainingGroup] || '';
@@ -745,9 +737,7 @@
             });
             const programCount = programGroups.size;
 
-            // ============================================================
-            // ✅ ✅ ✅ حساب المواقع التدريبية (5 مواقع)
-            // ============================================================
+            // Training Locations (5)
             const locationSet = new Set();
             data.forEach(r => {
                 const loc = r[COLUMNS.TrainingLocation] || '';
@@ -757,9 +747,7 @@
             });
             const locationCount = locationSet.size;
 
-            // ============================================================
-            // ✅ ✅ ✅ حساب المراحل (4 مراحل)
-            // ============================================================
+            // Active Phases (4)
             const phaseSet = new Set();
             data.forEach(r => {
                 const phase = String(r[COLUMNS.TrainingPhase] || '');
@@ -776,17 +764,16 @@
             const hasDept = data.filter(r => r[COLUMNS.Department] && r[COLUMNS.Department].trim()).length;
             const qualityScore = total > 0 ? Math.round(((hasId + hasName + hasDept) / (total * 3)) * 100) : 0;
 
-            // --- تحديث DOM ---
             document.getElementById('kpiTotal').textContent = total.toLocaleString();
             document.getElementById('kpiL4').textContent = l4Count.toLocaleString();
             document.getElementById('kpiSectors').textContent = sectors.size.toLocaleString();
             document.getElementById('kpiDepartments').textContent = departments.size.toLocaleString();
             document.getElementById('kpiAttendance').textContent = attendanceRate + '%';
             document.getElementById('kpiCompletion').textContent = completionRate + '%';
-            document.getElementById('kpiPrograms').textContent = programCount; // ✅ 6
-            document.getElementById('kpiLocations').textContent = locationCount; // ✅ 5
+            document.getElementById('kpiPrograms').textContent = programCount;
+            document.getElementById('kpiLocations').textContent = locationCount;
             document.getElementById('kpiQuality').textContent = qualityScore + '%';
-            document.getElementById('kpiPhases').textContent = phaseCount; // ✅ 4
+            document.getElementById('kpiPhases').textContent = phaseCount;
 
             updateFilterBadges(data);
             updateInsights(data);
