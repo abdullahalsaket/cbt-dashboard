@@ -10,6 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 
     <style>
+        /* ===== CSS (نفس الكود السابق - تم اختصاره للطول) ===== */
         :root {
             --cpc-blue-dark: #0f2b40;
             --cpc-blue: #1e3d59;
@@ -24,6 +25,7 @@
             --danger: #ef4444;
             --info: #3b82f6;
             --purple: #8b5cf6;
+            --teal: #14b8a6;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Cairo', sans-serif; background: var(--bg-light); color: var(--text-dark); min-height: 100vh; }
@@ -53,6 +55,7 @@
         .filter-bar .filter-row:last-child { margin-bottom: 0; }
         .filter-bar .filter-label { font-size: 0.6rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; min-width: 45px; }
         .filter-bar .filter-group { display: flex; flex-wrap: wrap; gap: 3px; }
+        
         .filter-btn { padding: 3px 12px; border-radius: 30px; border: 2px solid #e2e8f0; background: transparent; font-family: 'Cairo', sans-serif; font-size: 0.6rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.2s; }
         .filter-btn:hover { border-color: var(--cpc-blue); color: var(--cpc-blue); background: rgba(30,61,89,0.04); }
         .filter-btn.active { border-color: var(--koki-orange); background: var(--koki-orange); color: white; box-shadow: 0 4px 12px rgba(255,110,64,0.3); }
@@ -61,6 +64,11 @@
         .filter-btn.attend-btn.active { background: var(--success); border-color: var(--success); color: white; }
         .filter-btn.not-attend-btn { border-color: var(--danger); color: var(--danger); }
         .filter-btn.not-attend-btn.active { background: var(--danger); border-color: var(--danger); color: white; }
+        
+        /* تمييز أزرار المجموعات التدريبية بلون مختلف */
+        .filter-btn.group-btn { border-color: var(--teal); color: var(--teal); }
+        .filter-btn.group-btn.active { background: var(--teal); border-color: var(--teal); color: white; box-shadow: 0 4px 12px rgba(20,184,166,0.3); }
+        
         .clear-filters-btn { padding: 3px 14px; border-radius: 30px; border: 2px solid #e2e8f0; background: transparent; font-family: 'Cairo', sans-serif; font-size: 0.6rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.2s; margin-left: auto; }
         .clear-filters-btn:hover { border-color: var(--danger); color: var(--danger); background: rgba(239,68,68,0.05); }
 
@@ -182,7 +190,11 @@
             </p>
         </div>
 
+        <!-- ============================================================
+        FILTER BAR - مع صف إضافي للمجموعات التدريبية
+        ============================================================ -->
         <div class="filter-bar" id="filterBar">
+            <!-- الصف الأول: البرامج التدريبية (6 برامج) -->
             <div class="filter-row">
                 <span class="filter-label"><i class="fa-solid fa-book"></i> Programs:</span>
                 <div class="filter-group" id="programFilters">
@@ -195,6 +207,17 @@
                     <button class="filter-btn" data-filter="program" data-value="Kick Start Program">Kick Start <span class="badge-count" id="progKickCount">0</span></button>
                 </div>
             </div>
+
+            <!-- الصف الثاني: المجموعات التدريبية (Groups) -->
+            <div class="filter-row">
+                <span class="filter-label"><i class="fa-solid fa-layer-group"></i> Groups:</span>
+                <div class="filter-group" id="groupFilters">
+                    <button class="filter-btn group-btn active" data-filter="group" data-value="all">All <span class="badge-count" id="groupAllCount">0</span></button>
+                    <!-- الأزرار هتتضاف ديناميكياً من جافاسكريبت -->
+                </div>
+            </div>
+
+            <!-- الصف الثالث: باقي الفلاتر -->
             <div class="filter-row">
                 <span class="filter-label"><i class="fa-solid fa-location-dot"></i> Location:</span>
                 <div class="filter-group" id="locationFilters">
@@ -231,6 +254,9 @@
             </div>
         </div>
 
+        <!-- ============================================================
+        KPI GRID
+        ============================================================ -->
         <div class="kpi-grid" id="kpiGrid">
             <div class="kpi-card"><div class="kpi-info"><h4>Total Workforce</h4><div class="num" id="kpiTotal">...</div></div><i class="fa-solid fa-users"></i></div>
             <div class="kpi-card"><div class="kpi-info"><h4>Executives (L4+)</h4><div class="num" id="kpiL4">...</div></div><i class="fa-solid fa-crown"></i></div>
@@ -244,6 +270,9 @@
             <div class="kpi-card"><div class="kpi-info"><h4>Active Phases</h4><div class="num" id="kpiPhases">...</div></div><i class="fa-solid fa-clock"></i></div>
         </div>
 
+        <!-- ============================================================
+        SEARCH + CHARTS
+        ============================================================ -->
         <div class="search-charts-grid">
             <div class="search-wrapper">
                 <h3><i class="fa-solid fa-magnifying-glass"></i> Employee Query</h3>
@@ -286,6 +315,9 @@
             </div>
         </div>
 
+        <!-- ============================================================
+        CHARTS
+        ============================================================ -->
         <div class="charts-grid-2">
             <div class="chart-box" id="chartBoxDept">
                 <h4><i class="fa-solid fa-users-between-lines" style="color:var(--success);"></i> Department Size</h4>
@@ -316,6 +348,9 @@
             </div>
         </div>
 
+        <!-- ============================================================
+        INSIGHTS
+        ============================================================ -->
         <div class="insights-section" id="insightsSection">
             <div class="insight-card">
                 <div class="insight-icon"><i class="fa-solid fa-users"></i></div>
@@ -390,6 +425,7 @@
             Accommodation: 'Accommodation'
         };
 
+        // البرامج التدريبية الفعلية (6 برامج)
         const PROGRAM_FIELDS = {
             '7 Sens Program': COLUMNS.SevenSens,
             'Analytical Thinking Program': COLUMNS.Analytical,
@@ -402,7 +438,14 @@
         let allData = [];
         let filteredData = [];
         let chartInstances = {};
-        let activeFilters = { program: 'all', location: 'all', level: 'all', phase: 'all', attendance: 'all' };
+        let activeFilters = { 
+            program: 'all', 
+            group: 'all',
+            location: 'all', 
+            level: 'all', 
+            phase: 'all', 
+            attendance: 'all' 
+        };
         let isLoading = false;
         let loadError = false;
 
@@ -437,6 +480,7 @@
         // UPDATE FILTER BADGES
         // ============================================================
         function updateFilterBadges(data) {
+            // --- Program Counts (من أعمدة البرامج) ---
             const progAll = data.length;
             document.getElementById('progAllCount').textContent = progAll;
 
@@ -451,6 +495,47 @@
                 if (el) el.textContent = count;
             });
 
+            // --- Group Counts (من CPT Training Group) ---
+            const groupCounts = {};
+            data.forEach(r => {
+                const group = r[COLUMNS.TrainingGroup] || '';
+                if (group.trim() !== '') {
+                    groupCounts[group] = (groupCounts[group] || 0) + 1;
+                }
+            });
+            const sortedGroups = Object.entries(groupCounts).sort((a, b) => b[1] - a[1]);
+            
+            // تحديث أزرار المجموعات
+            const groupContainer = document.getElementById('groupFilters');
+            // نحتفظ بزر All
+            const allBtn = groupContainer.querySelector('.filter-btn[data-value="all"]');
+            groupContainer.innerHTML = '';
+            groupContainer.appendChild(allBtn);
+            
+            sortedGroups.forEach(([group, count]) => {
+                const btn = document.createElement('button');
+                btn.className = 'filter-btn group-btn';
+                btn.dataset.filter = 'group';
+                btn.dataset.value = group;
+                btn.innerHTML = `${group} <span class="badge-count">${count}</span>`;
+                if (activeFilters.group === group) {
+                    btn.classList.add('active');
+                }
+                btn.addEventListener('click', function() {
+                    const type = this.dataset.filter;
+                    const value = this.dataset.value;
+                    const group = this.closest('.filter-group');
+                    group.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    activeFilters[type] = value;
+                    applyFilters();
+                });
+                groupContainer.appendChild(btn);
+            });
+            
+            document.getElementById('groupAllCount').textContent = data.length;
+
+            // --- Location Counts ---
             document.getElementById('locAllCount').textContent = data.length;
             ['Steigenberger', 'TOR', 'Nob', 'Alsaff'].forEach(loc => {
                 const count = data.filter(r => String(r[COLUMNS.TrainingLocation] || '').includes(loc)).length;
@@ -459,6 +544,7 @@
                 if (el) el.textContent = count;
             });
 
+            // --- Level Counts ---
             document.getElementById('lvlAllCount').textContent = data.length;
             ['L4', 'L3', 'L2', 'L1'].forEach(lvl => {
                 const count = data.filter(r => String(r['C-LVL'] || '').includes(lvl)).length;
@@ -467,6 +553,7 @@
                 if (el) el.textContent = count;
             });
 
+            // --- Phase Counts ---
             document.getElementById('phaseAllCount').textContent = data.length;
             const validPhases = ['Phase1', 'Phase2', 'Phase3', 'Phase4'];
             const phaseMap = {
@@ -491,6 +578,7 @@
                 phase4El.textContent = currentPhase4 + onlineCount;
             }
 
+            // --- Attendance Counts ---
             const attAll = data.length;
             const attAttend = data.filter(r => {
                 const val = String(r[COLUMNS.SevenSens] || '').toLowerCase();
@@ -592,6 +680,7 @@
             if (!allData || allData.length === 0) return;
             filteredData = [...allData];
 
+            // فلتر البرامج (من أعمدة البرامج)
             if (activeFilters.program !== 'all') {
                 const field = PROGRAM_FIELDS[activeFilters.program];
                 if (field) {
@@ -600,6 +689,13 @@
                         return val === 'attend' || val === 'attended' || val.includes('attend');
                     });
                 }
+            }
+
+            // فلتر المجموعات (من CPT Training Group)
+            if (activeFilters.group !== 'all') {
+                filteredData = filteredData.filter(r => 
+                    String(r[COLUMNS.TrainingGroup] || '').includes(activeFilters.group)
+                );
             }
 
             if (activeFilters.location !== 'all') {
@@ -626,7 +722,7 @@
         }
 
         function setupFilterButtons() {
-            document.querySelectorAll('.filter-btn').forEach(btn => {
+            document.querySelectorAll('.filter-btn:not(.group-btn)').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const type = this.dataset.filter;
                     const value = this.dataset.value;
@@ -637,10 +733,11 @@
                     applyFilters();
                 });
             });
+            // أزرار المجموعات بتتضاف ديناميكياً في updateFilterBadges
         }
 
         function clearAllFilters() {
-            activeFilters = { program: 'all', location: 'all', level: 'all', phase: 'all', attendance: 'all' };
+            activeFilters = { program: 'all', group: 'all', location: 'all', level: 'all', phase: 'all', attendance: 'all' };
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.classList.remove('active');
                 if (btn.dataset.value === 'all') btn.classList.add('active');
@@ -727,23 +824,22 @@
             }).length;
             const completionRate = total > 0 ? Math.round((completed / total) * 100) : 0;
 
-            // Training Programs (6)
-            const programGroups = new Set();
-            data.forEach(r => {
-                const group = r[COLUMNS.TrainingGroup] || '';
-                if (group.trim() !== '') {
-                    programGroups.add(group);
-                }
+            // ✅ Training Programs: عدد البرامج الفعلية (6)
+            let programCount = 0;
+            Object.keys(PROGRAM_FIELDS).forEach(progName => {
+                const field = PROGRAM_FIELDS[progName];
+                const hasAttendees = data.some(r => {
+                    const val = String(r[field] || '').toLowerCase();
+                    return val === 'attend' || val === 'attended' || val.includes('attend');
+                });
+                if (hasAttendees) programCount++;
             });
-            const programCount = programGroups.size;
 
-            // Training Locations (5)
+            // Training Locations
             const locationSet = new Set();
             data.forEach(r => {
                 const loc = r[COLUMNS.TrainingLocation] || '';
-                if (loc.trim() !== '') {
-                    locationSet.add(loc);
-                }
+                if (loc.trim() !== '') locationSet.add(loc);
             });
             const locationCount = locationSet.size;
 
@@ -752,9 +848,7 @@
             data.forEach(r => {
                 const phase = String(r[COLUMNS.TrainingPhase] || '');
                 const match = phase.match(/Phase[1-4]/);
-                if (match) {
-                    phaseSet.add(match[0]);
-                }
+                if (match) phaseSet.add(match[0]);
             });
             const phaseCount = phaseSet.size;
 
@@ -770,7 +864,7 @@
             document.getElementById('kpiDepartments').textContent = departments.size.toLocaleString();
             document.getElementById('kpiAttendance').textContent = attendanceRate + '%';
             document.getElementById('kpiCompletion').textContent = completionRate + '%';
-            document.getElementById('kpiPrograms').textContent = programCount;
+            document.getElementById('kpiPrograms').textContent = programCount; // ✅ 6
             document.getElementById('kpiLocations').textContent = locationCount;
             document.getElementById('kpiQuality').textContent = qualityScore + '%';
             document.getElementById('kpiPhases').textContent = phaseCount;
