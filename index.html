@@ -10,16 +10,9 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 
     <style>
-        /* ===== RESET & BASE ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Cairo', sans-serif;
-            background: #f0f2f5;
-            color: #1a2332;
-            min-height: 100vh;
-        }
+        body { font-family: 'Cairo', sans-serif; background: #f0f2f5; color: #1a2332; min-height: 100vh; }
 
-        /* ===== HEADER ===== */
         .navbar {
             background: linear-gradient(135deg, #0f2b40 0%, #1a4a6e 100%);
             color: white;
@@ -39,13 +32,12 @@
         .update-notification { background: #10b981; padding: 4px 14px; border-radius: 30px; font-size: 0.6rem; display: none; animation: slideDown 0.4s ease; }
         .update-notification.show { display: inline-flex; align-items: center; gap: 6px; }
 
-        /* ===== FILTER BAR ===== */
         .filter-bar {
             background: white;
             padding: 10px 16px;
             border-radius: 12px;
             margin: 12px auto;
-            max-width: 1400px;
+            max-width: 1440px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
             border: 1px solid #e8ecf0;
         }
@@ -71,10 +63,8 @@
         }
         .clear-filters-btn:hover { border-color: #ef4444; color: #ef4444; background: rgba(239,68,68,0.05); }
 
-        /* ===== CONTAINER ===== */
         .container { max-width: 1440px; margin: 0 auto; padding: 0 12px; }
 
-        /* ===== KPI GRID ===== */
         .kpi-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
@@ -91,7 +81,6 @@
         .kpi-info h4 { font-size: 0.55rem; color: #6b7a8f; text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 2px; }
         .kpi-info .num { font-size: 1.1rem; font-weight: 800; color: #1e3d59; }
 
-        /* ===== SEARCH + CHARTS ===== */
         .search-charts-grid {
             display: grid;
             grid-template-columns: 280px 1fr;
@@ -126,7 +115,6 @@
         .training-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
         .tag { background: #e2e8f0; color: #1e3d59; padding: 2px 8px; border-radius: 20px; font-size: 0.55rem; font-weight: 600; }
 
-        /* ===== CHARTS - 2 per row ===== */
         .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 12px 0; }
         .charts-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 12px 0; }
         .chart-box {
@@ -134,15 +122,11 @@
             cursor: pointer;
             transition: all 0.2s;
         }
-        .chart-box:hover {
-            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-            border-color: #1e3d59;
-        }
+        .chart-box:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); border-color: #1e3d59; }
         .chart-box h4 { font-size: 0.8rem; color: #1e3d59; font-weight: 700; margin-bottom: 8px; }
         .chart-box canvas { width: 100% !important; height: 220px !important; max-height: 220px; }
         .chart-box .chart-container { position: relative; width: 100%; height: 220px; }
 
-        /* ===== RESPONSIVE ===== */
         @media (max-width: 992px) {
             .search-charts-grid { grid-template-columns: 1fr; }
             .charts-grid { grid-template-columns: 1fr 1fr; }
@@ -176,7 +160,6 @@
 </head>
 <body>
 
-    <!-- ===== HEADER ===== -->
     <div class="navbar">
         <div class="logo-left"><img src="CPC.png" alt="CPC Logo"></div>
         <div class="title-center">
@@ -192,24 +175,22 @@
 
     <div class="container">
 
-        <!-- ===== BRIEF ===== -->
         <div class="brief-section" style="background:linear-gradient(135deg,#0f2b40 0%,#17b890 100%);color:#fff;padding:12px 18px;border-radius:12px;margin:12px 0;">
             <h2 style="font-size:0.95rem;font-weight:700;"><i class="fa-solid fa-bullseye"></i> Program Overview</h2>
             <p style="font-size:0.8rem;opacity:0.9;line-height:1.6;">Real-time intelligence for the <strong>Competency Based Training (CBT)</strong> initiative. Powered by live Google Sheets data, enabling instant visibility into workforce capabilities, training progression, and competency gaps.</p>
         </div>
 
-        <!-- ===== FILTER BAR ===== -->
         <div class="filter-bar" id="filterBar">
             <div class="filter-row">
                 <span class="filter-label"><i class="fa-solid fa-book"></i> Programs:</span>
                 <div class="filter-group" id="programFilters">
                     <button class="filter-btn active" data-filter="program" data-value="all">All <span class="badge-count" id="progAllCount">0</span></button>
-                    <button class="filter-btn" data-filter="program" data-value="7 Sens">7 Sens <span class="badge-count" id="prog7SensCount">0</span></button>
-                    <button class="filter-btn" data-filter="program" data-value="Analytical Thinking">Analytical <span class="badge-count" id="progAnalyticalCount">0</span></button>
-                    <button class="filter-btn" data-filter="program" data-value="Mind Field">Mind Field <span class="badge-count" id="progMindFieldCount">0</span></button>
-                    <button class="filter-btn" data-filter="program" data-value="Leadership">Leadership <span class="badge-count" id="progLeadershipCount">0</span></button>
-                    <button class="filter-btn" data-filter="program" data-value="Drive Performance">Drive <span class="badge-count" id="progDriveCount">0</span></button>
-                    <button class="filter-btn" data-filter="program" data-value="Kick Start">Kick Start <span class="badge-count" id="progKickCount">0</span></button>
+                    <button class="filter-btn" data-filter="program" data-value="7 Sens Program">7 Sens <span class="badge-count" id="prog7SensCount">0</span></button>
+                    <button class="filter-btn" data-filter="program" data-value="Analytical Thinking Program">Analytical <span class="badge-count" id="progAnalyticalCount">0</span></button>
+                    <button class="filter-btn" data-filter="program" data-value="Mind field Program">Mind Field <span class="badge-count" id="progMindFieldCount">0</span></button>
+                    <button class="filter-btn" data-filter="program" data-value="Leader Ship Program">Leadership <span class="badge-count" id="progLeadershipCount">0</span></button>
+                    <button class="filter-btn" data-filter="program" data-value="Drive Performance Program">Drive <span class="badge-count" id="progDriveCount">0</span></button>
+                    <button class="filter-btn" data-filter="program" data-value="Kick Start Program">Kick Start <span class="badge-count" id="progKickCount">0</span></button>
                 </div>
             </div>
             <div class="filter-row">
@@ -248,7 +229,6 @@
             </div>
         </div>
 
-        <!-- ===== KPI GRID ===== -->
         <div class="kpi-grid" id="kpiGrid">
             <div class="kpi-card"><div class="kpi-info"><h4>Total Workforce</h4><div class="num" id="kpiTotal">...</div></div><i class="fa-solid fa-users"></i></div>
             <div class="kpi-card"><div class="kpi-info"><h4>Executives (L4+)</h4><div class="num" id="kpiL4">...</div></div><i class="fa-solid fa-crown"></i></div>
@@ -262,7 +242,6 @@
             <div class="kpi-card"><div class="kpi-info"><h4>Active Phases</h4><div class="num" id="kpiPhases">...</div></div><i class="fa-solid fa-clock"></i></div>
         </div>
 
-        <!-- ===== SEARCH + CHARTS ===== -->
         <div class="search-charts-grid">
             <div class="search-wrapper">
                 <h3><i class="fa-solid fa-magnifying-glass"></i> Employee Query</h3>
@@ -305,7 +284,6 @@
             </div>
         </div>
 
-        <!-- ===== CHARTS - 2 per row ===== -->
         <div class="charts-grid-2">
             <div class="chart-box" id="chartBoxDept">
                 <h4><i class="fa-solid fa-users-between-lines" style="color:#10b981;"></i> Department Size</h4>
@@ -325,7 +303,6 @@
             </div>
         </div>
 
-        <!-- ===== ADDITIONAL CHARTS ===== -->
         <div class="charts-grid-2" style="margin-top:12px;">
             <div class="chart-box" id="chartBoxQuality">
                 <h4><i class="fa-solid fa-gauge-high" style="color:#1e3d59;"></i> Data Quality Overview</h4>
@@ -341,9 +318,41 @@
 
     <script>
         // ============================================================
-        // CONFIG
+        // CONFIG - أسماء الأعمدة الصحيحة من الشيت
         // ============================================================
         const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRu0vhUS8c-hbFznxR_F9K9LNueNeabXiLwMjMzppgpIjJCSNCadsHDVVGxwiKYYHve9-Qtb37ALs8P/pub?gid=1032977671&single=true&output=csv";
+
+        // أسماء الأعمدة في الشيت (من أول سطر في الشيت)
+        const COLUMNS = {
+            ID: 'ID',
+            Name: 'Name',
+            Title: 'Title',
+            CLevel: 'C-LVL',
+            Grade: 'Grade',
+            Status: 'Status',
+            Sector: 'Sector',
+            Department: 'Department',
+            TrainingLocation: 'Training Location',
+            TrainingGroup: 'CPT Training Group',
+            TrainingPhase: 'CPT TrainingPhase',
+            SevenSens: '7 Sens Program',
+            Analytical: 'Analytical Thinking Program',
+            MindField: 'Mind field Program',
+            Leadership: 'Leader Ship Program',
+            DrivePerformance: 'Drive Performance Program',
+            KickStart: 'Kick Start Program',
+            Accommodation: 'Accommodation'
+        };
+
+        // البرامج مع أسمائها الصحيحة
+        const PROGRAM_FIELDS = {
+            '7 Sens Program': COLUMNS.SevenSens,
+            'Analytical Thinking Program': COLUMNS.Analytical,
+            'Mind field Program': COLUMNS.MindField,
+            'Leader Ship Program': COLUMNS.Leadership,
+            'Drive Performance Program': COLUMNS.DrivePerformance,
+            'Kick Start Program': COLUMNS.KickStart
+        };
 
         let allData = [];
         let filteredData = [];
@@ -351,15 +360,6 @@
         let activeFilters = { program: 'all', location: 'all', level: 'all', phase: 'all', attendance: 'all' };
         let lastFetchedData = '';
         let fetchInterval = null;
-
-        const PROGRAM_FIELDS = {
-            '7 Sens': '7 Sens',
-            'Analytical Thinking': 'Analytical Thinking',
-            'Mind Field': 'Mind Field',
-            'Leadership': 'Leadership',
-            'Drive Performance': 'Drive Performance',
-            'Kick Start': 'Kick Start'
-        };
 
         // ============================================================
         // UTILITY
@@ -402,29 +402,34 @@
         }
 
         // ============================================================
-        // UPDATE BADGE COUNTS
+        // UPDATE BADGE COUNTS - باستخدام الأسماء الصحيحة
         // ============================================================
         function updateFilterBadges(data) {
+            // برامج
             const progAll = data.length;
             document.getElementById('progAllCount').textContent = progAll;
-            ['7 Sens', 'Analytical Thinking', 'Mind Field', 'Leadership', 'Drive Performance', 'Kick Start'].forEach(p => {
+
+            Object.keys(PROGRAM_FIELDS).forEach(progName => {
+                const field = PROGRAM_FIELDS[progName];
                 const count = data.filter(r => {
-                    const val = String(r[p] || '').toLowerCase();
+                    const val = String(r[field] || '').toLowerCase();
                     return val === 'attend' || val === 'attended' || val.includes('attend');
                 }).length;
-                const id = 'prog' + p.replace(/ /g, '') + 'Count';
+                const id = 'prog' + progName.replace(/ /g, '') + 'Count';
                 const el = document.getElementById(id);
                 if (el) el.textContent = count;
             });
 
+            // Locations
             document.getElementById('locAllCount').textContent = data.length;
             ['Steigenberger', 'TOR', 'Nob', 'Alsaff'].forEach(loc => {
-                const count = data.filter(r => String(r['Training Location'] || '').includes(loc)).length;
+                const count = data.filter(r => String(r[COLUMNS.TrainingLocation] || '').includes(loc)).length;
                 const id = 'loc' + loc + 'Count';
                 const el = document.getElementById(id);
                 if (el) el.textContent = count;
             });
 
+            // Levels
             document.getElementById('lvlAllCount').textContent = data.length;
             ['L4', 'L3', 'L2', 'L1'].forEach(lvl => {
                 const count = data.filter(r => String(r['C-LVL'] || '').includes(lvl)).length;
@@ -433,21 +438,23 @@
                 if (el) el.textContent = count;
             });
 
+            // Phases
             document.getElementById('phaseAllCount').textContent = data.length;
             ['Phase1', 'Phase2', 'Phase3', 'Phase4', 'Online-Phase4'].forEach(ph => {
-                const count = data.filter(r => String(r['CPT Training Phase'] || '').includes(ph)).length;
+                const count = data.filter(r => String(r[COLUMNS.TrainingPhase] || '').includes(ph)).length;
                 const id = 'phase' + ph.replace(/-/g, '') + 'Count';
                 const el = document.getElementById(id);
                 if (el) el.textContent = count;
             });
 
+            // Attendance
             const attAll = data.length;
             const attAttend = data.filter(r => {
-                const val = String(r['7 Sens'] || '').toLowerCase();
+                const val = String(r[COLUMNS.SevenSens] || '').toLowerCase();
                 return val === 'attend' || val === 'attended' || val.includes('attend');
             }).length;
             const attNotAttend = data.filter(r => {
-                const val = String(r['7 Sens'] || '').toLowerCase();
+                const val = String(r[COLUMNS.SevenSens] || '').toLowerCase();
                 return val === 'not attend' || val.includes('not attend');
             }).length;
             document.getElementById('attAllCount').textContent = attAll;
@@ -460,6 +467,8 @@
         // ============================================================
         function applyFilters() {
             filteredData = [...allData];
+
+            // Program filter باستخدام الأسماء الصحيحة
             if (activeFilters.program !== 'all') {
                 const field = PROGRAM_FIELDS[activeFilters.program];
                 if (field) {
@@ -469,23 +478,24 @@
                     });
                 }
             }
+
             if (activeFilters.location !== 'all') {
-                filteredData = filteredData.filter(r => String(r['Training Location'] || '').includes(activeFilters.location));
+                filteredData = filteredData.filter(r => String(r[COLUMNS.TrainingLocation] || '').includes(activeFilters.location));
             }
             if (activeFilters.level !== 'all') {
                 filteredData = filteredData.filter(r => String(r['C-LVL'] || '').includes(activeFilters.level));
             }
             if (activeFilters.phase !== 'all') {
-                filteredData = filteredData.filter(r => String(r['CPT Training Phase'] || '').includes(activeFilters.phase));
+                filteredData = filteredData.filter(r => String(r[COLUMNS.TrainingPhase] || '').includes(activeFilters.phase));
             }
             if (activeFilters.attendance === 'attend') {
                 filteredData = filteredData.filter(r => {
-                    const val = String(r['7 Sens'] || '').toLowerCase();
+                    const val = String(r[COLUMNS.SevenSens] || '').toLowerCase();
                     return val === 'attend' || val === 'attended' || val.includes('attend');
                 });
             } else if (activeFilters.attendance === 'not-attend') {
                 filteredData = filteredData.filter(r => {
-                    const val = String(r['7 Sens'] || '').toLowerCase();
+                    const val = String(r[COLUMNS.SevenSens] || '').toLowerCase();
                     return val === 'not attend' || val.includes('not attend');
                 });
             }
@@ -516,215 +526,38 @@
         }
 
         // ============================================================
-        // CHART CLICK HANDLERS - INTERACTIVE
-        // ============================================================
-        function setupChartInteractivity() {
-            // Sector Chart Click
-            const sectorChart = chartInstances.sector;
-            if (sectorChart) {
-                sectorChart.on('click', function(e) {
-                    if (e.dataIndex !== undefined) {
-                        const label = sectorChart.data.labels[e.dataIndex];
-                        // Toggle filter: if already selected, deselect; else select
-                        if (activeFilters.sector === label) {
-                            activeFilters.sector = 'all';
-                            document.querySelectorAll('#locationFilters .filter-btn').forEach(b => b.classList.remove('active'));
-                            document.querySelector('#locationFilters .filter-btn[data-value="all"]').classList.add('active');
-                        } else {
-                            activeFilters.sector = label;
-                            document.querySelectorAll('#locationFilters .filter-btn').forEach(b => b.classList.remove('active'));
-                            // Highlight the corresponding sector button if it exists
-                            const sectorBtn = document.querySelector(`#locationFilters .filter-btn[data-value="${label}"]`);
-                            if (sectorBtn) sectorBtn.classList.add('active');
-                        }
-                        applyFilters();
-                    }
-                });
-                sectorChart.on('mouseover', function(e) { if (e.dataIndex !== undefined) { document.body.style.cursor = 'pointer'; } });
-                sectorChart.on('mouseout', function() { document.body.style.cursor = 'default'; });
-            }
-
-            // Level Chart Click (Doughnut)
-            const levelChart = chartInstances.level;
-            if (levelChart) {
-                levelChart.on('click', function(e) {
-                    if (e.dataIndex !== undefined) {
-                        const label = levelChart.data.labels[e.dataIndex];
-                        if (activeFilters.level === label) {
-                            activeFilters.level = 'all';
-                            document.querySelectorAll('#levelFilters .filter-btn').forEach(b => b.classList.remove('active'));
-                            document.querySelector('#levelFilters .filter-btn[data-value="all"]').classList.add('active');
-                        } else {
-                            activeFilters.level = label;
-                            document.querySelectorAll('#levelFilters .filter-btn').forEach(b => b.classList.remove('active'));
-                            const levelBtn = document.querySelector(`#levelFilters .filter-btn[data-value="${label}"]`);
-                            if (levelBtn) levelBtn.classList.add('active');
-                        }
-                        applyFilters();
-                    }
-                });
-            }
-
-            // Department Chart Click
-            const deptChart = chartInstances.department;
-            if (deptChart) {
-                deptChart.on('click', function(e) {
-                    if (e.dataIndex !== undefined) {
-                        const label = deptChart.data.labels[e.dataIndex];
-                        // Set department filter (using custom filter)
-                        activeFilters.department = activeFilters.department === label ? 'all' : label;
-                        // Since we don't have a department filter button, apply directly
-                        applyFiltersWithExtra('department', activeFilters.department);
-                    }
-                });
-            }
-
-            // Location Chart Click
-            const locationChart = chartInstances.location;
-            if (locationChart) {
-                locationChart.on('click', function(e) {
-                    if (e.dataIndex !== undefined) {
-                        const label = locationChart.data.labels[e.dataIndex];
-                        if (activeFilters.location === label) {
-                            activeFilters.location = 'all';
-                            document.querySelectorAll('#locationFilters .filter-btn').forEach(b => b.classList.remove('active'));
-                            document.querySelector('#locationFilters .filter-btn[data-value="all"]').classList.add('active');
-                        } else {
-                            activeFilters.location = label;
-                            document.querySelectorAll('#locationFilters .filter-btn').forEach(b => b.classList.remove('active'));
-                            const locBtn = document.querySelector(`#locationFilters .filter-btn[data-value="${label}"]`);
-                            if (locBtn) locBtn.classList.add('active');
-                        }
-                        applyFilters();
-                    }
-                });
-            }
-
-            // Phase Chart Click
-            const phaseChart = chartInstances.phase;
-            if (phaseChart) {
-                phaseChart.on('click', function(e) {
-                    if (e.dataIndex !== undefined) {
-                        const label = phaseChart.data.labels[e.dataIndex];
-                        if (activeFilters.phase === label) {
-                            activeFilters.phase = 'all';
-                            document.querySelectorAll('#phaseFilters .filter-btn').forEach(b => b.classList.remove('active'));
-                            document.querySelector('#phaseFilters .filter-btn[data-value="all"]').classList.add('active');
-                        } else {
-                            activeFilters.phase = label;
-                            document.querySelectorAll('#phaseFilters .filter-btn').forEach(b => b.classList.remove('active'));
-                            const phaseBtn = document.querySelector(`#phaseFilters .filter-btn[data-value="${label}"]`);
-                            if (phaseBtn) phaseBtn.classList.add('active');
-                        }
-                        applyFilters();
-                    }
-                });
-            }
-
-            // Program Chart Click
-            const programChart = chartInstances.programs;
-            if (programChart) {
-                programChart.on('click', function(e) {
-                    if (e.dataIndex !== undefined) {
-                        const label = programChart.data.labels[e.dataIndex];
-                        if (activeFilters.program === label) {
-                            activeFilters.program = 'all';
-                            document.querySelectorAll('#programFilters .filter-btn').forEach(b => b.classList.remove('active'));
-                            document.querySelector('#programFilters .filter-btn[data-value="all"]').classList.add('active');
-                        } else {
-                            activeFilters.program = label;
-                            document.querySelectorAll('#programFilters .filter-btn').forEach(b => b.classList.remove('active'));
-                            const progBtn = document.querySelector(`#programFilters .filter-btn[data-value="${label}"]`);
-                            if (progBtn) progBtn.classList.add('active');
-                        }
-                        applyFilters();
-                    }
-                });
-            }
-        }
-
-        // Extra filter for department click
-        function applyFiltersWithExtra(type, value) {
-            // Store extra filters in a separate object
-            if (!window.extraFilters) window.extraFilters = {};
-            window.extraFilters[type] = value;
-            // Re-apply filters with extra
-            applyFiltersWithExtras();
-        }
-
-        function applyFiltersWithExtras() {
-            filteredData = [...allData];
-            // Apply standard filters
-            if (activeFilters.program !== 'all') {
-                const field = PROGRAM_FIELDS[activeFilters.program];
-                if (field) {
-                    filteredData = filteredData.filter(r => {
-                        const val = String(r[field] || '').toLowerCase();
-                        return val === 'attend' || val === 'attended' || val.includes('attend');
-                    });
-                }
-            }
-            if (activeFilters.location !== 'all') {
-                filteredData = filteredData.filter(r => String(r['Training Location'] || '').includes(activeFilters.location));
-            }
-            if (activeFilters.level !== 'all') {
-                filteredData = filteredData.filter(r => String(r['C-LVL'] || '').includes(activeFilters.level));
-            }
-            if (activeFilters.phase !== 'all') {
-                filteredData = filteredData.filter(r => String(r['CPT Training Phase'] || '').includes(activeFilters.phase));
-            }
-            if (activeFilters.attendance === 'attend') {
-                filteredData = filteredData.filter(r => {
-                    const val = String(r['7 Sens'] || '').toLowerCase();
-                    return val === 'attend' || val === 'attended' || val.includes('attend');
-                });
-            } else if (activeFilters.attendance === 'not-attend') {
-                filteredData = filteredData.filter(r => {
-                    const val = String(r['7 Sens'] || '').toLowerCase();
-                    return val === 'not attend' || val.includes('not attend');
-                });
-            }
-            // Apply extra filters
-            if (window.extraFilters && window.extraFilters.department) {
-                filteredData = filteredData.filter(r => String(r['Department'] || '').includes(window.extraFilters.department));
-            }
-            renderDashboard(filteredData);
-        }
-
-        // Override applyFilters to use extras
-        const originalApply = applyFilters;
-        applyFilters = function() {
-            applyFiltersWithExtras();
-        };
-
-        // ============================================================
         // RENDER DASHBOARD
         // ============================================================
         function renderDashboard(data) {
             if (!data || data.length === 0) { console.warn("No data."); return; }
             const total = data.length;
 
+            // KPIs
             const l4Count = data.filter(r => String(r['C-LVL'] || '').includes('L4')).length;
-            const sectors = new Set(data.map(r => r['Sector']).filter(Boolean));
-            const departments = new Set(data.map(r => r['Department']).filter(Boolean));
+            const sectors = new Set(data.map(r => r[COLUMNS.Sector]).filter(Boolean));
+            const departments = new Set(data.map(r => r[COLUMNS.Department]).filter(Boolean));
+
             const attended = data.filter(r => {
-                const val = String(r['7 Sens'] || '').toLowerCase();
+                const val = String(r[COLUMNS.SevenSens] || '').toLowerCase();
                 return val === 'attend' || val === 'attended' || val.includes('attend');
             }).length;
             const attendanceRate = total > 0 ? Math.round((attended / total) * 100) : 0;
+
             const completed = data.filter(r => {
-                const v1 = String(r['7 Sens'] || '').toLowerCase();
-                const v2 = String(r['Analytical Thinking'] || '').toLowerCase();
+                const v1 = String(r[COLUMNS.SevenSens] || '').toLowerCase();
+                const v2 = String(r[COLUMNS.Analytical] || '').toLowerCase();
                 return (v1 === 'attend' || v1 === 'attended' || v1.includes('attend')) ||
                        (v2 === 'attend' || v2 === 'attended' || v2.includes('attend'));
             }).length;
             const completionRate = total > 0 ? Math.round((completed / total) * 100) : 0;
-            const programs = new Set(data.map(r => r['CPT Training Group']).filter(Boolean));
-            const locations = new Set(data.map(r => r['Training Location']).filter(Boolean));
-            const phases = new Set(data.map(r => r['CPT Training Phase']).filter(Boolean));
+
+            const programs = new Set(data.map(r => r[COLUMNS.TrainingGroup]).filter(Boolean));
+            const locations = new Set(data.map(r => r[COLUMNS.TrainingLocation]).filter(Boolean));
+            const phases = new Set(data.map(r => r[COLUMNS.TrainingPhase]).filter(Boolean));
+
             const hasId = data.filter(r => r['ID'] && r['ID'].trim()).length;
             const hasName = data.filter(r => r['Name'] && r['Name'].trim()).length;
-            const hasDept = data.filter(r => r['Department'] && r['Department'].trim()).length;
+            const hasDept = data.filter(r => r[COLUMNS.Department] && r[COLUMNS.Department].trim()).length;
             const qualityScore = total > 0 ? Math.round(((hasId + hasName + hasDept) / (total * 3)) * 100) : 0;
 
             document.getElementById('kpiTotal').textContent = total.toLocaleString();
@@ -741,52 +574,59 @@
             updateFilterBadges(data);
 
             // --- CHART DATA ---
+            // Sector
             const sectorCounts = {};
-            data.forEach(r => { const s = r['Sector'] || 'Unknown'; sectorCounts[s] = (sectorCounts[s] || 0) + 1; });
+            data.forEach(r => { const s = r[COLUMNS.Sector] || 'Unknown'; sectorCounts[s] = (sectorCounts[s] || 0) + 1; });
             const sectorLabels = Object.keys(sectorCounts);
             const sectorValues = Object.values(sectorCounts);
 
+            // Levels
             const levelCounts = {};
             data.forEach(r => { const l = r['C-LVL'] || 'Unknown'; levelCounts[l] = (levelCounts[l] || 0) + 1; });
             const levelLabels = Object.keys(levelCounts);
             const levelValues = Object.values(levelCounts);
 
+            // Departments
             const deptCounts = {};
-            data.forEach(r => { const d = r['Department'] || 'Unknown'; deptCounts[d] = (deptCounts[d] || 0) + 1; });
+            data.forEach(r => { const d = r[COLUMNS.Department] || 'Unknown'; deptCounts[d] = (deptCounts[d] || 0) + 1; });
             const sortedDepts = Object.entries(deptCounts).sort((a,b) => b[1]-a[1]).slice(0,8);
             const deptLabels = sortedDepts.map(d => d[0]);
             const deptValues = sortedDepts.map(d => d[1]);
 
+            // Attendance vs Completion by Sector
             const sectorAtt = {}, sectorComp = {};
             data.forEach(r => {
-                const s = r['Sector'] || 'Unknown';
+                const s = r[COLUMNS.Sector] || 'Unknown';
                 if (!sectorAtt[s]) { sectorAtt[s] = 0; sectorComp[s] = 0; }
-                const v1 = String(r['7 Sens'] || '').toLowerCase();
-                const v2 = String(r['Analytical Thinking'] || '').toLowerCase();
+                const v1 = String(r[COLUMNS.SevenSens] || '').toLowerCase();
+                const v2 = String(r[COLUMNS.Analytical] || '').toLowerCase();
                 if (v1 === 'attend' || v1 === 'attended' || v1.includes('attend')) sectorAtt[s]++;
                 if ((v1 === 'attend' || v1 === 'attended' || v1.includes('attend')) ||
                     (v2 === 'attend' || v2 === 'attended' || v2.includes('attend'))) sectorComp[s]++;
             });
             const attSectors = Object.keys(sectorAtt);
             const attValues = attSectors.map(s => {
-                const totalSector = data.filter(r => r['Sector'] === s).length;
+                const totalSector = data.filter(r => r[COLUMNS.Sector] === s).length;
                 return totalSector > 0 ? Math.round((sectorAtt[s] / totalSector) * 100) : 0;
             });
             const compValues = attSectors.map(s => {
-                const totalSector = data.filter(r => r['Sector'] === s).length;
+                const totalSector = data.filter(r => r[COLUMNS.Sector] === s).length;
                 return totalSector > 0 ? Math.round((sectorComp[s] / totalSector) * 100) : 0;
             });
 
+            // Phases
             const phaseCounts = {};
-            data.forEach(r => { const p = r['CPT Training Phase'] || 'Unknown'; phaseCounts[p] = (phaseCounts[p] || 0) + 1; });
+            data.forEach(r => { const p = r[COLUMNS.TrainingPhase] || 'Unknown'; phaseCounts[p] = (phaseCounts[p] || 0) + 1; });
             const phaseLabels = Object.keys(phaseCounts);
             const phaseValues = Object.values(phaseCounts);
 
+            // Locations
             const locCounts = {};
-            data.forEach(r => { const l = r['Training Location'] || 'Unknown'; locCounts[l] = (locCounts[l] || 0) + 1; });
+            data.forEach(r => { const l = r[COLUMNS.TrainingLocation] || 'Unknown'; locCounts[l] = (locCounts[l] || 0) + 1; });
             const locLabels = Object.keys(locCounts);
             const locValues = Object.values(locCounts);
 
+            // Quality
             const qualityData = {
                 'Valid IDs': hasId, 'Valid Names': hasName, 'Valid Departments': hasDept,
                 'Has Grade': data.filter(r => r['Grade'] && r['Grade'].trim()).length,
@@ -795,10 +635,12 @@
             const qualityLabels = Object.keys(qualityData);
             const qualityValues = Object.values(qualityData);
 
+            // Program Enrollment - باستخدام الأسماء الصحيحة
             const progEnroll = {};
-            ['7 Sens', 'Analytical Thinking', 'Mind Field', 'Leadership', 'Drive Performance', 'Kick Start'].forEach(p => {
-                progEnroll[p] = data.filter(r => {
-                    const val = String(r[p] || '').toLowerCase();
+            Object.keys(PROGRAM_FIELDS).forEach(progName => {
+                const field = PROGRAM_FIELDS[progName];
+                progEnroll[progName] = data.filter(r => {
+                    const val = String(r[field] || '').toLowerCase();
                     return val === 'attend' || val === 'attended' || val.includes('attend');
                 }).length;
             });
@@ -807,7 +649,6 @@
 
             destroyCharts();
 
-            // Create Charts
             Chart.defaults.font.family = 'Cairo, sans-serif';
             Chart.defaults.font.size = 12;
 
@@ -920,7 +761,16 @@
             const ctx8 = document.getElementById('chartPrograms').getContext('2d');
             chartInstances.programs = new Chart(ctx8, {
                 type: 'bar',
-                data: { labels: progEnrollLabels, datasets: [{ label: 'Enrolled', data: progEnrollValues, backgroundColor: ['#1e3d59','#17b890','#ff6e40','#f6c23e','#8b5cf6','#e74a3b'], borderRadius: 6, barPercentage: 0.6 }] },
+                data: {
+                    labels: progEnrollLabels,
+                    datasets: [{
+                        label: 'Enrolled',
+                        data: progEnrollValues,
+                        backgroundColor: ['#1e3d59','#17b890','#ff6e40','#f6c23e','#8b5cf6','#e74a3b'],
+                        borderRadius: 6,
+                        barPercentage: 0.6
+                    }]
+                },
                 options: {
                     responsive: true, maintainAspectRatio: false,
                     plugins: { legend: { display: false }, datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 11 } } },
@@ -929,10 +779,69 @@
                 plugins: [ChartDataLabels]
             });
 
-            // Setup chart interactivity after all charts are created
+            // Chart Interactivity (Click on charts)
             setupChartInteractivity();
 
             console.log('📊 Dashboard rendered with', data.length, 'records');
+        }
+
+        // ============================================================
+        // CHART INTERACTIVITY
+        // ============================================================
+        function setupChartInteractivity() {
+            const charts = [
+                { chart: chartInstances.sector, filterType: 'location', id: 'chartBoxSector' },
+                { chart: chartInstances.level, filterType: 'level', id: 'chartBoxLevel' },
+                { chart: chartInstances.department, filterType: 'department', id: 'chartBoxDept' },
+                { chart: chartInstances.location, filterType: 'location', id: 'chartBoxLocation' },
+                { chart: chartInstances.phase, filterType: 'phase', id: 'chartBoxPhase' },
+                { chart: chartInstances.programs, filterType: 'program', id: 'chartBoxPrograms' }
+            ];
+
+            charts.forEach(({ chart, filterType, id }) => {
+                if (!chart) return;
+                chart.on('click', function(e) {
+                    if (e.dataIndex !== undefined) {
+                        const label = chart.data.labels[e.dataIndex];
+                        // Map label to filter value
+                        let filterValue = label;
+                        if (filterType === 'location') {
+                            // Check if label matches a location
+                            const locations = ['Steigenberger', 'TOR', 'Nob', 'Alsaff'];
+                            if (locations.includes(label)) {
+                                filterValue = label;
+                            } else {
+                                // Try to find if label contains a location
+                                for (let loc of locations) {
+                                    if (label.includes(loc)) { filterValue = loc; break; }
+                                }
+                            }
+                        }
+                        // Toggle filter
+                        if (activeFilters[filterType] === filterValue) {
+                            activeFilters[filterType] = 'all';
+                        } else {
+                            activeFilters[filterType] = filterValue;
+                        }
+                        // Update UI buttons
+                        const groupId = filterType + 'Filters';
+                        const group = document.getElementById(groupId);
+                        if (group) {
+                            group.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                            if (activeFilters[filterType] !== 'all') {
+                                const btn = group.querySelector(`.filter-btn[data-value="${filterValue}"]`);
+                                if (btn) btn.classList.add('active');
+                            } else {
+                                const btn = group.querySelector('.filter-btn[data-value="all"]');
+                                if (btn) btn.classList.add('active');
+                            }
+                        }
+                        applyFilters();
+                    }
+                });
+                chart.on('mouseover', function(e) { if (e.dataIndex !== undefined) { document.body.style.cursor = 'pointer'; } });
+                chart.on('mouseout', function() { document.body.style.cursor = 'default'; });
+            });
         }
 
         // ============================================================
@@ -947,38 +856,38 @@
 
             document.getElementById('resName').textContent = emp['Name'] || 'Not recorded';
             document.getElementById('resTitle').textContent = emp['Title'] || 'Not recorded';
-            document.getElementById('resSector').textContent = (emp['Sector'] || '-') + ' / ' + (emp['Department'] || '-');
+            document.getElementById('resSector').textContent = (emp[COLUMNS.Sector] || '-') + ' / ' + (emp[COLUMNS.Department] || '-');
             document.getElementById('resLevel').textContent = emp['C-LVL'] || 'Not specified';
-            document.getElementById('resLocation').textContent = emp['Training Location'] || 'Not specified';
-            document.getElementById('resPhase').textContent = emp['CPT Training Phase'] || 'Not specified';
-            const v = String(emp['7 Sens'] || '').toLowerCase();
+            document.getElementById('resLocation').textContent = emp[COLUMNS.TrainingLocation] || 'Not specified';
+            document.getElementById('resPhase').textContent = emp[COLUMNS.TrainingPhase] || 'Not specified';
+            const v = String(emp[COLUMNS.SevenSens] || '').toLowerCase();
             document.getElementById('resAttendance').textContent = (v === 'attend' || v === 'attended' || v.includes('attend')) ? '✅ Attended' : '❌ Not Attended';
             document.getElementById('resStatus').textContent = emp['Status'] || 'Not specified';
 
-            const fields = ['7 Sens', 'Analytical Thinking', 'Mind Field', 'Leadership', 'Drive Performance', 'Kick Start'];
+            const fields = Object.values(PROGRAM_FIELDS);
             let attendedCount = 0, notAttendedCount = 0;
-            fields.forEach(p => {
-                const val = String(emp[p] || '').toLowerCase();
+            fields.forEach(field => {
+                const val = String(emp[field] || '').toLowerCase();
                 if (val === 'attend' || val === 'attended' || val.includes('attend')) attendedCount++;
                 else if (val === 'not attend' || val.includes('not attend')) notAttendedCount++;
             });
             document.getElementById('statAttended').textContent = `✅ Attended: ${attendedCount}`;
             document.getElementById('statNotAttended').textContent = `❌ Not Attended: ${notAttendedCount}`;
-            document.getElementById('statGroup').textContent = `📋 Group: ${emp['CPT Training Group'] || 'N/A'}`;
-            document.getElementById('statLocation').textContent = `📍 Location: ${emp['Training Location'] || 'N/A'}`;
-            const accom = String(emp['Accommodation'] || '').toLowerCase();
+            document.getElementById('statGroup').textContent = `📋 Group: ${emp[COLUMNS.TrainingGroup] || 'N/A'}`;
+            document.getElementById('statLocation').textContent = `📍 Location: ${emp[COLUMNS.TrainingLocation] || 'N/A'}`;
+            const accom = String(emp[COLUMNS.Accommodation] || '').toLowerCase();
             document.getElementById('statAccommodation').textContent = `🏠 Accommodation: ${accom === 'yes' ? '✅ Yes' : accom === 'no' ? '❌ No' : 'N/A'}`;
 
             const progContainer = document.getElementById('resPrograms');
             progContainer.innerHTML = '';
             const programs = [
-                emp['CPT Training Group'], emp['CPT Training Phase'],
-                emp['7 Sens'] ? '7 Sens: ' + emp['7 Sens'] : '',
-                emp['Analytical Thinking'] ? 'Analytical Thinking: ' + emp['Analytical Thinking'] : '',
-                emp['Mind Field'] ? 'Mind Field: ' + emp['Mind Field'] : '',
-                emp['Leadership'] ? 'Leadership: ' + emp['Leadership'] : '',
-                emp['Drive Performance'] ? 'Drive Performance: ' + emp['Drive Performance'] : '',
-                emp['Kick Start'] ? 'Kick Start: ' + emp['Kick Start'] : ''
+                emp[COLUMNS.TrainingGroup], emp[COLUMNS.TrainingPhase],
+                emp[COLUMNS.SevenSens] ? '7 Sens: ' + emp[COLUMNS.SevenSens] : '',
+                emp[COLUMNS.Analytical] ? 'Analytical: ' + emp[COLUMNS.Analytical] : '',
+                emp[COLUMNS.MindField] ? 'Mind Field: ' + emp[COLUMNS.MindField] : '',
+                emp[COLUMNS.Leadership] ? 'Leadership: ' + emp[COLUMNS.Leadership] : '',
+                emp[COLUMNS.DrivePerformance] ? 'Drive: ' + emp[COLUMNS.DrivePerformance] : '',
+                emp[COLUMNS.KickStart] ? 'Kick Start: ' + emp[COLUMNS.KickStart] : ''
             ].filter(Boolean);
             if (programs.length > 0) {
                 programs.forEach(p => {
