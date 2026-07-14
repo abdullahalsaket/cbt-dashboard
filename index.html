@@ -29,7 +29,6 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Cairo', sans-serif; background: var(--bg-light); color: var(--text-dark); min-height: 100vh; }
 
-        /* ===== HEADER ===== */
         .navbar {
             background: linear-gradient(135deg, var(--cpc-blue-dark) 0%, var(--cpc-blue) 100%);
             color: white;
@@ -51,7 +50,7 @@
         .refresh-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
         /* ============================================================
-           FILTER BAR - تنسيق جديد بمسافات بين الصفوف
+           FILTER BAR
            ============================================================ */
         .filter-bar {
             background: var(--white);
@@ -96,8 +95,50 @@
             flex-wrap: wrap;
             gap: 4px 6px;
             flex: 1;
+            align-items: center;
         }
 
+        /* ============================================================
+           DROPDOWN SELECT - للجروبات والمراحل
+           ============================================================ */
+        .filter-select {
+            padding: 5px 30px 5px 12px;
+            border-radius: 30px;
+            border: 2px solid #e2e8f0;
+            background: var(--white);
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7a8f' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            min-width: 120px;
+            max-width: 250px;
+        }
+
+        .filter-select:hover {
+            border-color: var(--cpc-blue);
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--koki-orange);
+            box-shadow: 0 0 0 3px rgba(255,110,64,0.15);
+        }
+
+        .filter-select option {
+            padding: 4px 8px;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        /* ============================================================
+           BUTTONS - باقي الفلاتر
+           ============================================================ */
         .filter-btn {
             padding: 4px 14px;
             border-radius: 30px;
@@ -159,18 +200,6 @@
             color: white;
         }
 
-        .filter-btn.group-btn {
-            border-color: var(--teal);
-            color: var(--teal);
-        }
-
-        .filter-btn.group-btn.active {
-            background: var(--teal);
-            border-color: var(--teal);
-            color: white;
-            box-shadow: 0 4px 12px rgba(20,184,166,0.3);
-        }
-
         .clear-filters-btn {
             padding: 4px 16px;
             border-radius: 30px;
@@ -193,7 +222,7 @@
         }
 
         /* ============================================================
-           باقي الـ CSS كما هو
+           باقي الـ CSS
            ============================================================ */
         .container { max-width: 1440px; margin: 0 auto; padding: 0 12px; }
 
@@ -267,6 +296,7 @@
             .navbar { flex-direction: column; text-align: center; }
             .filter-bar .filter-row { flex-direction: column; align-items: stretch; }
             .filter-bar .filter-label { min-width: auto; }
+            .filter-select { max-width: 100%; }
             .clear-filters-btn { margin-left: 0; width: 100%; text-align: center; }
             .charts-grid { grid-template-columns: 1fr; }
             .charts-grid-2 { grid-template-columns: 1fr; }
@@ -279,6 +309,7 @@
             .kpi-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
             .kpi-card { padding: 6px 8px; }
             .filter-btn { font-size: 0.5rem; padding: 2px 8px; }
+            .filter-select { font-size: 0.5rem; padding: 4px 24px 4px 8px; min-width: 80px; }
             .chart-box canvas { height: 150px !important; max-height: 150px; }
         }
     </style>
@@ -315,7 +346,7 @@
         </div>
 
         <!-- ============================================================
-        FILTER BAR - كل سطر لوحده مع مسافات
+        FILTER BAR - مع Dropdown للجروبات والمراحل
         ============================================================ -->
         <div class="filter-bar" id="filterBar">
             <!-- الصف الأول: البرامج التدريبية -->
@@ -332,16 +363,7 @@
                 </div>
             </div>
 
-            <!-- الصف الثاني: المجموعات التدريبية -->
-            <div class="filter-row">
-                <span class="filter-label"><i class="fa-solid fa-layer-group"></i> Groups:</span>
-                <div class="filter-group" id="groupFilters">
-                    <button class="filter-btn group-btn active" data-filter="group" data-value="all">All <span class="badge-count" id="groupAllCount">0</span></button>
-                    <!-- باقي الأزرار بتتضاف من جافاسكريبت -->
-                </div>
-            </div>
-
-            <!-- الصف الثالث: Location + Level + Phase -->
+            <!-- الصف الثاني: Location + Level (أزرار) + Group (Dropdown) -->
             <div class="filter-row">
                 <span class="filter-label"><i class="fa-solid fa-location-dot"></i> Location:</span>
                 <div class="filter-group" id="locationFilters">
@@ -360,15 +382,27 @@
                     <button class="filter-btn" data-filter="level" data-value="L2">L2 <span class="badge-count" id="lvlL2Count">0</span></button>
                     <button class="filter-btn" data-filter="level" data-value="L1">L1 <span class="badge-count" id="lvlL1Count">0</span></button>
                 </div>
+            </div>
+
+            <!-- الصف الثالث: Group (Dropdown) + Phase (Dropdown) + Attend + Reset -->
+            <div class="filter-row">
+                <span class="filter-label"><i class="fa-solid fa-layer-group"></i> Group:</span>
+                <div class="filter-group">
+                    <select class="filter-select" id="groupSelect">
+                        <option value="all">All Groups</option>
+                    </select>
+                </div>
 
                 <span class="filter-label" style="margin-left:6px;"><i class="fa-solid fa-clock"></i> Phase:</span>
-                <div class="filter-group" id="phaseFilters">
-                    <button class="filter-btn active" data-filter="phase" data-value="all">All <span class="badge-count" id="phaseAllCount">0</span></button>
-                    <button class="filter-btn" data-filter="phase" data-value="Phase1">P1 <span class="badge-count" id="phase1Count">0</span></button>
-                    <button class="filter-btn" data-filter="phase" data-value="Phase2">P2 <span class="badge-count" id="phase2Count">0</span></button>
-                    <button class="filter-btn" data-filter="phase" data-value="Phase3">P3 <span class="badge-count" id="phase3Count">0</span></button>
-                    <button class="filter-btn" data-filter="phase" data-value="Phase4">P4 <span class="badge-count" id="phase4Count">0</span></button>
-                    <button class="filter-btn" data-filter="phase" data-value="Online-Phase4">Online <span class="badge-count" id="phaseOnlineCount">0</span></button>
+                <div class="filter-group">
+                    <select class="filter-select" id="phaseSelect">
+                        <option value="all">All Phases</option>
+                        <option value="Phase1">Phase 1</option>
+                        <option value="Phase2">Phase 2</option>
+                        <option value="Phase3">Phase 3</option>
+                        <option value="Phase4">Phase 4</option>
+                        <option value="Online-Phase4">Online Phase 4</option>
+                    </select>
                 </div>
 
                 <span class="filter-label" style="margin-left:6px;"><i class="fa-solid fa-user-check"></i> Attend:</span>
@@ -398,9 +432,6 @@
             <div class="kpi-card"><div class="kpi-info"><h4>Active Phases</h4><div class="num" id="kpiPhases">...</div></div><i class="fa-solid fa-clock"></i></div>
         </div>
 
-        <!-- ============================================================
-        SEARCH + CHARTS
-        ============================================================ -->
         <div class="search-charts-grid">
             <div class="search-wrapper">
                 <h3><i class="fa-solid fa-magnifying-glass"></i> Employee Query</h3>
@@ -616,7 +647,7 @@
                 if (el) el.textContent = count;
             });
 
-            // --- Group Counts ---
+            // --- Group Dropdown ---
             const groupCounts = {};
             data.forEach(r => {
                 const group = r[COLUMNS.TrainingGroup] || '';
@@ -626,33 +657,21 @@
             });
             const sortedGroups = Object.entries(groupCounts).sort((a, b) => b[1] - a[1]);
             
-            const groupContainer = document.getElementById('groupFilters');
-            const allBtn = groupContainer.querySelector('.filter-btn[data-value="all"]');
-            groupContainer.innerHTML = '';
-            groupContainer.appendChild(allBtn);
-            
+            const groupSelect = document.getElementById('groupSelect');
+            const currentValue = groupSelect.value;
+            groupSelect.innerHTML = '<option value="all">All Groups (' + data.length + ')</option>';
             sortedGroups.forEach(([group, count]) => {
-                const btn = document.createElement('button');
-                btn.className = 'filter-btn group-btn';
-                btn.dataset.filter = 'group';
-                btn.dataset.value = group;
-                btn.innerHTML = `${group} <span class="badge-count">${count}</span>`;
-                if (activeFilters.group === group) {
-                    btn.classList.add('active');
-                }
-                btn.addEventListener('click', function() {
-                    const type = this.dataset.filter;
-                    const value = this.dataset.value;
-                    const group = this.closest('.filter-group');
-                    group.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    activeFilters[type] = value;
-                    applyFilters();
-                });
-                groupContainer.appendChild(btn);
+                const opt = document.createElement('option');
+                opt.value = group;
+                opt.textContent = group + ' (' + count + ')';
+                groupSelect.appendChild(opt);
             });
-            
-            document.getElementById('groupAllCount').textContent = data.length;
+            if (currentValue && Array.from(groupSelect.options).some(o => o.value === currentValue)) {
+                groupSelect.value = currentValue;
+            } else {
+                groupSelect.value = 'all';
+            }
+            activeFilters.group = groupSelect.value;
 
             // --- Location Counts ---
             document.getElementById('locAllCount').textContent = data.length;
@@ -672,30 +691,38 @@
                 if (el) el.textContent = count;
             });
 
-            // --- Phase Counts ---
-            document.getElementById('phaseAllCount').textContent = data.length;
-            const validPhases = ['Phase1', 'Phase2', 'Phase3', 'Phase4'];
-            const phaseMap = {
-                'Phase1': 'phase1Count',
-                'Phase2': 'phase2Count',
-                'Phase3': 'phase3Count',
-                'Phase4': 'phase4Count'
-            };
-            validPhases.forEach(phase => {
-                const count = data.filter(r => {
-                    const phaseVal = String(r[COLUMNS.TrainingPhase] || '');
-                    return phaseVal === phase || phaseVal.includes(phase);
-                }).length;
-                const id = phaseMap[phase];
-                const el = document.getElementById(id);
-                if (el) el.textContent = count;
+            // --- Phase Dropdown ---
+            const phaseSelect = document.getElementById('phaseSelect');
+            const currentPhase = phaseSelect.value;
+            // نحتفظ بالخيارات الثابتة (All, Phase1-4, Online-Phase4)
+            // بس بنحدث الأرقام في الـ Labels
+            const phaseOptions = [
+                { value: 'all', label: 'All Phases' },
+                { value: 'Phase1', label: 'Phase 1' },
+                { value: 'Phase2', label: 'Phase 2' },
+                { value: 'Phase3', label: 'Phase 3' },
+                { value: 'Phase4', label: 'Phase 4' },
+                { value: 'Online-Phase4', label: 'Online Phase 4' }
+            ];
+            phaseSelect.innerHTML = '';
+            phaseOptions.forEach(po => {
+                const opt = document.createElement('option');
+                opt.value = po.value;
+                let count = 0;
+                if (po.value === 'all') {
+                    count = data.length;
+                } else {
+                    count = data.filter(r => String(r[COLUMNS.TrainingPhase] || '').includes(po.value)).length;
+                }
+                opt.textContent = po.label + ' (' + count + ')';
+                phaseSelect.appendChild(opt);
             });
-            const onlineCount = data.filter(r => String(r[COLUMNS.TrainingPhase] || '').includes('Online-Phase4')).length;
-            const phase4El = document.getElementById('phase4Count');
-            if (phase4El) {
-                const currentPhase4 = parseInt(phase4El.textContent) || 0;
-                phase4El.textContent = currentPhase4 + onlineCount;
+            if (currentPhase && Array.from(phaseSelect.options).some(o => o.value === currentPhase)) {
+                phaseSelect.value = currentPhase;
+            } else {
+                phaseSelect.value = 'all';
             }
+            activeFilters.phase = phaseSelect.value;
 
             // --- Attendance Counts ---
             const attAll = data.length;
@@ -799,6 +826,7 @@
             if (!allData || allData.length === 0) return;
             filteredData = [...allData];
 
+            // Program filter
             if (activeFilters.program !== 'all') {
                 const field = PROGRAM_FIELDS[activeFilters.program];
                 if (field) {
@@ -809,21 +837,29 @@
                 }
             }
 
+            // Group filter (من dropdown)
             if (activeFilters.group !== 'all') {
                 filteredData = filteredData.filter(r => 
                     String(r[COLUMNS.TrainingGroup] || '').includes(activeFilters.group)
                 );
             }
 
+            // Location filter
             if (activeFilters.location !== 'all') {
                 filteredData = filteredData.filter(r => String(r[COLUMNS.TrainingLocation] || '').includes(activeFilters.location));
             }
+
+            // Level filter
             if (activeFilters.level !== 'all') {
                 filteredData = filteredData.filter(r => String(r['C-LVL'] || '').includes(activeFilters.level));
             }
+
+            // Phase filter (من dropdown)
             if (activeFilters.phase !== 'all') {
                 filteredData = filteredData.filter(r => String(r[COLUMNS.TrainingPhase] || '').includes(activeFilters.phase));
             }
+
+            // Attendance filter
             if (activeFilters.attendance === 'attend') {
                 filteredData = filteredData.filter(r => {
                     const val = String(r[COLUMNS.SevenSens] || '').toLowerCase();
@@ -839,7 +875,8 @@
         }
 
         function setupFilterButtons() {
-            document.querySelectorAll('.filter-btn:not(.group-btn)').forEach(btn => {
+            // أزرار البرامج
+            document.querySelectorAll('#programFilters .filter-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const type = this.dataset.filter;
                     const value = this.dataset.value;
@@ -850,6 +887,57 @@
                     applyFilters();
                 });
             });
+
+            // أزرار Location
+            document.querySelectorAll('#locationFilters .filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const type = this.dataset.filter;
+                    const value = this.dataset.value;
+                    const group = this.closest('.filter-group');
+                    group.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    activeFilters[type] = value;
+                    applyFilters();
+                });
+            });
+
+            // أزرار Level
+            document.querySelectorAll('#levelFilters .filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const type = this.dataset.filter;
+                    const value = this.dataset.value;
+                    const group = this.closest('.filter-group');
+                    group.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    activeFilters[type] = value;
+                    applyFilters();
+                });
+            });
+
+            // أزرار Attendance
+            document.querySelectorAll('#attendanceFilters .filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const type = this.dataset.filter;
+                    const value = this.dataset.value;
+                    const group = this.closest('.filter-group');
+                    group.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    activeFilters[type] = value;
+                    applyFilters();
+                });
+            });
+
+            // Dropdown Group
+            document.getElementById('groupSelect').addEventListener('change', function() {
+                activeFilters.group = this.value;
+                applyFilters();
+            });
+
+            // Dropdown Phase
+            document.getElementById('phaseSelect').addEventListener('change', function() {
+                activeFilters.phase = this.value;
+                applyFilters();
+            });
         }
 
         function clearAllFilters() {
@@ -858,6 +946,8 @@
                 btn.classList.remove('active');
                 if (btn.dataset.value === 'all') btn.classList.add('active');
             });
+            document.getElementById('groupSelect').value = 'all';
+            document.getElementById('phaseSelect').value = 'all';
             applyFilters();
         }
 
