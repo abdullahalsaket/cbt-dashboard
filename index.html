@@ -49,9 +49,6 @@
         .refresh-btn:hover { background: rgba(255,255,255,0.25); }
         .refresh-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-        /* ============================================================
-           FILTER BAR
-           ============================================================ */
         .filter-bar {
             background: var(--white);
             padding: 14px 18px;
@@ -61,169 +58,30 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
             border: 1px solid #e8ecf0;
         }
+        .filter-bar .filter-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.04); }
+        .filter-bar .filter-row:last-child { border-bottom: none; padding-bottom: 0; }
+        .filter-bar .filter-row:first-child { padding-top: 0; }
+        .filter-bar .filter-label { font-size: 0.65rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; min-width: 55px; flex-shrink: 0; }
+        .filter-bar .filter-group { display: flex; flex-wrap: wrap; gap: 4px 6px; flex: 1; align-items: center; }
 
-        .filter-bar .filter-row {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 6px 12px;
-            padding: 6px 0;
-            border-bottom: 1px solid rgba(0,0,0,0.04);
-        }
+        .filter-select { padding: 5px 30px 5px 12px; border-radius: 30px; border: 2px solid #e2e8f0; background: var(--white); font-family: 'Cairo', sans-serif; font-size: 0.6rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.2s; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7a8f' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; min-width: 120px; max-width: 250px; }
+        .filter-select:hover { border-color: var(--cpc-blue); }
+        .filter-select:focus { outline: none; border-color: var(--koki-orange); box-shadow: 0 0 0 3px rgba(255,110,64,0.15); }
+        .filter-select option { padding: 4px 8px; font-family: 'Cairo', sans-serif; }
 
-        .filter-bar .filter-row:last-child {
-            border-bottom: none;
-            padding-bottom: 0;
-        }
+        .filter-btn { padding: 4px 14px; border-radius: 30px; border: 2px solid #e2e8f0; background: transparent; font-family: 'Cairo', sans-serif; font-size: 0.6rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+        .filter-btn:hover { border-color: var(--cpc-blue); color: var(--cpc-blue); background: rgba(30,61,89,0.04); }
+        .filter-btn.active { border-color: var(--koki-orange); background: var(--koki-orange); color: white; box-shadow: 0 4px 12px rgba(255,110,64,0.3); }
+        .filter-btn .badge-count { background: rgba(255,255,255,0.2); border-radius: 20px; padding: 0 6px; font-size: 0.5rem; margin-left: 3px; }
+        .filter-btn.active .badge-count { background: rgba(255,255,255,0.25); }
+        .filter-btn.attend-btn { border-color: var(--success); color: var(--success); }
+        .filter-btn.attend-btn.active { background: var(--success); border-color: var(--success); color: white; }
+        .filter-btn.not-attend-btn { border-color: var(--danger); color: var(--danger); }
+        .filter-btn.not-attend-btn.active { background: var(--danger); border-color: var(--danger); color: white; }
 
-        .filter-bar .filter-row:first-child {
-            padding-top: 0;
-        }
+        .clear-filters-btn { padding: 4px 16px; border-radius: 30px; border: 2px solid #e2e8f0; background: transparent; font-family: 'Cairo', sans-serif; font-size: 0.6rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.2s; margin-left: auto; flex-shrink: 0; }
+        .clear-filters-btn:hover { border-color: var(--danger); color: var(--danger); background: rgba(239,68,68,0.05); }
 
-        .filter-bar .filter-label {
-            font-size: 0.65rem;
-            font-weight: 700;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            min-width: 55px;
-            flex-shrink: 0;
-        }
-
-        .filter-bar .filter-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px 6px;
-            flex: 1;
-            align-items: center;
-        }
-
-        /* ============================================================
-           DROPDOWN SELECT - للجروبات والمراحل
-           ============================================================ */
-        .filter-select {
-            padding: 5px 30px 5px 12px;
-            border-radius: 30px;
-            border: 2px solid #e2e8f0;
-            background: var(--white);
-            font-family: 'Cairo', sans-serif;
-            font-size: 0.6rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: all 0.2s;
-            appearance: none;
-            -webkit-appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7a8f' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 10px center;
-            min-width: 120px;
-            max-width: 250px;
-        }
-
-        .filter-select:hover {
-            border-color: var(--cpc-blue);
-        }
-
-        .filter-select:focus {
-            outline: none;
-            border-color: var(--koki-orange);
-            box-shadow: 0 0 0 3px rgba(255,110,64,0.15);
-        }
-
-        .filter-select option {
-            padding: 4px 8px;
-            font-family: 'Cairo', sans-serif;
-        }
-
-        /* ============================================================
-           BUTTONS - باقي الفلاتر
-           ============================================================ */
-        .filter-btn {
-            padding: 4px 14px;
-            border-radius: 30px;
-            border: 2px solid #e2e8f0;
-            background: transparent;
-            font-family: 'Cairo', sans-serif;
-            font-size: 0.6rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: all 0.2s;
-            white-space: nowrap;
-        }
-
-        .filter-btn:hover {
-            border-color: var(--cpc-blue);
-            color: var(--cpc-blue);
-            background: rgba(30,61,89,0.04);
-        }
-
-        .filter-btn.active {
-            border-color: var(--koki-orange);
-            background: var(--koki-orange);
-            color: white;
-            box-shadow: 0 4px 12px rgba(255,110,64,0.3);
-        }
-
-        .filter-btn .badge-count {
-            background: rgba(255,255,255,0.2);
-            border-radius: 20px;
-            padding: 0 6px;
-            font-size: 0.5rem;
-            margin-left: 3px;
-        }
-
-        .filter-btn.active .badge-count {
-            background: rgba(255,255,255,0.25);
-        }
-
-        .filter-btn.attend-btn {
-            border-color: var(--success);
-            color: var(--success);
-        }
-
-        .filter-btn.attend-btn.active {
-            background: var(--success);
-            border-color: var(--success);
-            color: white;
-        }
-
-        .filter-btn.not-attend-btn {
-            border-color: var(--danger);
-            color: var(--danger);
-        }
-
-        .filter-btn.not-attend-btn.active {
-            background: var(--danger);
-            border-color: var(--danger);
-            color: white;
-        }
-
-        .clear-filters-btn {
-            padding: 4px 16px;
-            border-radius: 30px;
-            border: 2px solid #e2e8f0;
-            background: transparent;
-            font-family: 'Cairo', sans-serif;
-            font-size: 0.6rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: all 0.2s;
-            margin-left: auto;
-            flex-shrink: 0;
-        }
-
-        .clear-filters-btn:hover {
-            border-color: var(--danger);
-            color: var(--danger);
-            background: rgba(239,68,68,0.05);
-        }
-
-        /* ============================================================
-           باقي الـ CSS
-           ============================================================ */
         .container { max-width: 1440px; margin: 0 auto; padding: 0 12px; }
 
         .brief-section { background: linear-gradient(135deg, var(--cpc-blue-dark) 0%, #17b890 100%); color: white; padding: 12px 18px; border-radius: 12px; margin: 12px 0; }
@@ -231,7 +89,10 @@
         .brief-section p { font-size: 0.8rem; opacity: 0.92; line-height: 1.6; }
         .brief-section .highlight { color: var(--koki-orange); font-weight: 700; }
 
-        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin: 12px 0; }
+        /* ============================================================
+           KPI GRID - 8 بطاقات (تم إزالة L4 و Completion Rate)
+           ============================================================ */
+        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin: 12px 0; }
         .kpi-card { background: var(--white); padding: 10px 14px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); display: flex; align-items: center; justify-content: space-between; border-bottom: 3px solid var(--cpc-blue); transition: all 0.2s; cursor: pointer; }
         .kpi-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
         .kpi-card i { font-size: 1.2rem; color: var(--koki-orange); opacity: 0.8; }
@@ -251,6 +112,9 @@
         .loading-status.error { color: var(--danger); }
         .loading-status.success { color: var(--success); }
 
+        /* ============================================================
+           RESULT CARD - مع زر طباعة
+           ============================================================ */
         .result-card { margin-top: 10px; background: #f8fafc; border-radius: 12px; padding: 12px; display: none; border-right: 4px solid var(--success); }
         .employee-profile { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 10px; }
         .info-group h4 { font-size: 0.5rem; color: var(--text-muted); text-transform: uppercase; }
@@ -265,14 +129,49 @@
         .training-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
         .tag { background: #e2e8f0; color: var(--cpc-blue); padding: 2px 8px; border-radius: 20px; font-size: 0.55rem; font-weight: 600; }
 
-        .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 12px 0; }
-        .charts-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 12px 0; }
-        .chart-box { background: var(--white); padding: 16px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid #e8ecf0; cursor: pointer; transition: all 0.2s; }
-        .chart-box:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); border-color: var(--cpc-blue); }
-        .chart-box h4 { font-size: 0.8rem; color: var(--cpc-blue); font-weight: 700; margin-bottom: 8px; }
-        .chart-box canvas { width: 100% !important; height: 220px !important; max-height: 220px; }
-        .chart-box .chart-container { position: relative; width: 100%; height: 220px; }
+        /* زر الطباعة */
+        .print-btn { background: var(--cpc-blue); color: white; border: none; padding: 6px 16px; border-radius: 8px; font-family: 'Cairo', sans-serif; font-size: 0.7rem; font-weight: 600; cursor: pointer; transition: all 0.2s; margin-top: 8px; display: inline-flex; align-items: center; gap: 6px; }
+        .print-btn:hover { background: var(--cpc-blue-dark); }
 
+        /* ============================================================
+           CHARTS
+           ============================================================ */
+        .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 14px 0; }
+        .charts-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 14px 0; }
+        .chart-box { background: var(--white); padding: 20px 22px; border-radius: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid #e8ecf0; cursor: pointer; transition: all 0.2s; }
+        .chart-box:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); border-color: var(--cpc-blue); }
+        .chart-box h4 { font-size: 0.95rem; color: var(--cpc-blue); font-weight: 700; margin-bottom: 12px; }
+        .chart-box canvas { width: 100% !important; height: 280px !important; max-height: 280px; }
+        .chart-box .chart-container { position: relative; width: 100%; height: 280px; }
+        .charts-grid-2 .chart-box canvas { height: 260px !important; max-height: 260px; }
+        .charts-grid-2 .chart-box .chart-container { height: 260px; }
+
+        /* ============================================================
+           EMPLOYEE TABLE - جدول تفصيلي تحت الرسوم
+           ============================================================ */
+        .employee-detail-table {
+            background: var(--white);
+            border-radius: 14px;
+            padding: 16px 18px;
+            margin-top: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border: 1px solid #e8ecf0;
+            overflow-x: auto;
+            display: none;
+        }
+        .employee-detail-table.show { display: block; }
+        .employee-detail-table h4 { font-size: 0.9rem; color: var(--cpc-blue); font-weight: 700; margin-bottom: 10px; }
+        .employee-detail-table table { width: 100%; border-collapse: collapse; font-size: 0.75rem; }
+        .employee-detail-table th { background: var(--cpc-blue); color: white; padding: 8px 12px; text-align: left; font-weight: 600; }
+        .employee-detail-table td { padding: 6px 12px; border-bottom: 1px solid #e8ecf0; }
+        .employee-detail-table tr:hover td { background: #f8fafc; }
+        .employee-detail-table .badge-attend { background: rgba(16,185,129,0.15); color: var(--success); padding: 2px 10px; border-radius: 20px; font-size: 0.6rem; font-weight: 600; }
+        .employee-detail-table .badge-not-attend { background: rgba(239,68,68,0.15); color: var(--danger); padding: 2px 10px; border-radius: 20px; font-size: 0.6rem; font-weight: 600; }
+        .employee-detail-table .badge-unknown { background: rgba(107,122,143,0.15); color: var(--text-muted); padding: 2px 10px; border-radius: 20px; font-size: 0.6rem; font-weight: 600; }
+
+        /* ============================================================
+           INSIGHTS
+           ============================================================ */
         .insights-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 16px 0 30px 0; }
         .insight-card { background: var(--white); padding: 16px 18px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border-left: 4px solid var(--koki-orange); transition: all 0.2s; }
         .insight-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); transform: translateX(4px); }
@@ -291,6 +190,10 @@
             .charts-grid { grid-template-columns: 1fr 1fr; }
             .charts-grid-2 { grid-template-columns: 1fr 1fr; }
             .insights-section { grid-template-columns: 1fr 1fr; }
+            .chart-box canvas { height: 220px !important; max-height: 220px; }
+            .chart-box .chart-container { height: 220px; }
+            .charts-grid-2 .chart-box canvas { height: 200px !important; max-height: 200px; }
+            .charts-grid-2 .chart-box .chart-container { height: 200px; }
         }
         @media (max-width: 768px) {
             .navbar { flex-direction: column; text-align: center; }
@@ -302,15 +205,20 @@
             .charts-grid-2 { grid-template-columns: 1fr; }
             .kpi-grid { grid-template-columns: repeat(2, 1fr); }
             .employee-profile { grid-template-columns: 1fr; }
-            .chart-box canvas { height: 180px !important; max-height: 180px; }
+            .chart-box canvas { height: 200px !important; max-height: 200px; }
+            .chart-box .chart-container { height: 200px; }
             .insights-section { grid-template-columns: 1fr; }
+            .employee-detail-table table { font-size: 0.65rem; }
+            .employee-detail-table th, .employee-detail-table td { padding: 4px 8px; }
         }
         @media (max-width: 480px) {
             .kpi-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
             .kpi-card { padding: 6px 8px; }
             .filter-btn { font-size: 0.5rem; padding: 2px 8px; }
             .filter-select { font-size: 0.5rem; padding: 4px 24px 4px 8px; min-width: 80px; }
-            .chart-box canvas { height: 150px !important; max-height: 150px; }
+            .chart-box canvas { height: 170px !important; max-height: 170px; }
+            .chart-box .chart-container { height: 170px; }
+            .chart-box { padding: 12px 14px; }
         }
     </style>
 </head>
@@ -346,10 +254,9 @@
         </div>
 
         <!-- ============================================================
-        FILTER BAR - مع Dropdown للجروبات والمراحل
+        FILTER BAR
         ============================================================ -->
         <div class="filter-bar" id="filterBar">
-            <!-- الصف الأول: البرامج التدريبية -->
             <div class="filter-row">
                 <span class="filter-label"><i class="fa-solid fa-book"></i> Programs:</span>
                 <div class="filter-group" id="programFilters">
@@ -363,7 +270,6 @@
                 </div>
             </div>
 
-            <!-- الصف الثاني: Location + Level (أزرار) + Group (Dropdown) -->
             <div class="filter-row">
                 <span class="filter-label"><i class="fa-solid fa-location-dot"></i> Location:</span>
                 <div class="filter-group" id="locationFilters">
@@ -382,9 +288,17 @@
                     <button class="filter-btn" data-filter="level" data-value="L2">L2 <span class="badge-count" id="lvlL2Count">0</span></button>
                     <button class="filter-btn" data-filter="level" data-value="L1">L1 <span class="badge-count" id="lvlL1Count">0</span></button>
                 </div>
+
+                <span class="filter-label" style="margin-left:6px;"><i class="fa-solid fa-industry"></i> Sector:</span>
+                <div class="filter-group">
+                    <select class="filter-select" id="sectorSelect">
+                        <option value="all">All Sectors</option>
+                        <option value="الأعلاف">الأعلاف</option>
+                        <option value="المجازر">المجازر</option>
+                    </select>
+                </div>
             </div>
 
-            <!-- الصف الثالث: Group (Dropdown) + Phase (Dropdown) + Attend + Reset -->
             <div class="filter-row">
                 <span class="filter-label"><i class="fa-solid fa-layer-group"></i> Group:</span>
                 <div class="filter-group">
@@ -417,21 +331,22 @@
         </div>
 
         <!-- ============================================================
-        باقي الـ HTML كما هو
+        KPI GRID - 8 بطاقات (تم إزالة L4 و Completion Rate)
         ============================================================ -->
         <div class="kpi-grid" id="kpiGrid">
             <div class="kpi-card"><div class="kpi-info"><h4>Total Workforce</h4><div class="num" id="kpiTotal">...</div></div><i class="fa-solid fa-users"></i></div>
-            <div class="kpi-card"><div class="kpi-info"><h4>Executives (L4+)</h4><div class="num" id="kpiL4">...</div></div><i class="fa-solid fa-crown"></i></div>
             <div class="kpi-card"><div class="kpi-info"><h4>Active Sectors</h4><div class="num" id="kpiSectors">...</div></div><i class="fa-solid fa-building"></i></div>
             <div class="kpi-card"><div class="kpi-info"><h4>Departments</h4><div class="num" id="kpiDepartments">...</div></div><i class="fa-solid fa-sitemap"></i></div>
             <div class="kpi-card"><div class="kpi-info"><h4>Attendance Rate</h4><div class="num" id="kpiAttendance">...</div></div><i class="fa-solid fa-user-check"></i></div>
-            <div class="kpi-card"><div class="kpi-info"><h4>Completion Rate</h4><div class="num" id="kpiCompletion">...</div></div><i class="fa-solid fa-graduation-cap"></i></div>
-            <div class="kpi-card"><div class="kpi-info"><h4>Training Programs</h4><div class="num" id="kpiPrograms">...</div></div><i class="fa-solid fa-book-open"></i></div>
+            <div class="kpi-card"><div class="kpi-info"><h4>Completed Training Programs</h4><div class="num" id="kpiPrograms">...</div></div><i class="fa-solid fa-book-open"></i></div>
             <div class="kpi-card"><div class="kpi-info"><h4>Training Locations</h4><div class="num" id="kpiLocations">...</div></div><i class="fa-solid fa-location-dot"></i></div>
             <div class="kpi-card"><div class="kpi-info"><h4>Data Quality</h4><div class="num" id="kpiQuality">...</div></div><i class="fa-solid fa-shield-halved"></i></div>
             <div class="kpi-card"><div class="kpi-info"><h4>Active Phases</h4><div class="num" id="kpiPhases">...</div></div><i class="fa-solid fa-clock"></i></div>
         </div>
 
+        <!-- ============================================================
+        SEARCH + CHARTS
+        ============================================================ -->
         <div class="search-charts-grid">
             <div class="search-wrapper">
                 <h3><i class="fa-solid fa-magnifying-glass"></i> Employee Query</h3>
@@ -460,6 +375,8 @@
                         <span class="stat-badge accommodation" id="statAccommodation">🏠 Accommodation: -</span>
                     </div>
                     <div class="training-tags" id="resPrograms"></div>
+                    <!-- زر الطباعة -->
+                    <button class="print-btn" onclick="printEmployeeProfile()"><i class="fa-solid fa-print"></i> Print Profile</button>
                 </div>
             </div>
             <div class="charts-grid">
@@ -474,9 +391,12 @@
             </div>
         </div>
 
+        <!-- ============================================================
+        CHARTS
+        ============================================================ -->
         <div class="charts-grid-2">
             <div class="chart-box" id="chartBoxDept">
-                <h4><i class="fa-solid fa-users-between-lines" style="color:var(--success);"></i> Department Size</h4>
+                <h4><i class="fa-solid fa-users-between-lines" style="color:var(--success);"></i> Department Size (All Departments)</h4>
                 <div class="chart-container"><canvas id="chartDepartment"></canvas></div>
             </div>
             <div class="chart-box" id="chartBoxAttendance">
@@ -493,7 +413,7 @@
             </div>
         </div>
 
-        <div class="charts-grid-2" style="margin-top:12px;">
+        <div class="charts-grid-2" style="margin-top:14px;">
             <div class="chart-box" id="chartBoxQuality">
                 <h4><i class="fa-solid fa-gauge-high" style="color:var(--cpc-blue);"></i> Data Quality Overview</h4>
                 <div class="chart-container"><canvas id="chartQuality"></canvas></div>
@@ -504,6 +424,33 @@
             </div>
         </div>
 
+        <!-- ============================================================
+        EMPLOYEE DETAIL TABLE - يظهر عند اختيار جروب أو مرحلة
+        ============================================================ -->
+        <div class="employee-detail-table" id="employeeDetailTable">
+            <h4><i class="fa-solid fa-users"></i> Employees Details</h4>
+            <div style="overflow-x:auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Department</th>
+                            <th>Title</th>
+                            <th>Attendance</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="detailTableBody">
+                        <!-- يتم تعبئته من جافاسكريبت -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        INSIGHTS
+        ============================================================ -->
         <div class="insights-section" id="insightsSection">
             <div class="insight-card">
                 <div class="insight-icon"><i class="fa-solid fa-users"></i></div>
@@ -596,10 +543,12 @@
             location: 'all', 
             level: 'all', 
             phase: 'all', 
-            attendance: 'all' 
+            attendance: 'all',
+            sector: 'all'
         };
         let isLoading = false;
         let loadError = false;
+        let lastSearchedEmployee = null;
 
         // ============================================================
         // UTILITY
@@ -632,10 +581,9 @@
         // UPDATE FILTER BADGES
         // ============================================================
         function updateFilterBadges(data) {
-            // --- Program Counts ---
+            // Program Counts
             const progAll = data.length;
             document.getElementById('progAllCount').textContent = progAll;
-
             Object.keys(PROGRAM_FIELDS).forEach(progName => {
                 const field = PROGRAM_FIELDS[progName];
                 const count = data.filter(r => {
@@ -647,7 +595,7 @@
                 if (el) el.textContent = count;
             });
 
-            // --- Group Dropdown ---
+            // Group Dropdown
             const groupCounts = {};
             data.forEach(r => {
                 const group = r[COLUMNS.TrainingGroup] || '';
@@ -656,7 +604,6 @@
                 }
             });
             const sortedGroups = Object.entries(groupCounts).sort((a, b) => b[1] - a[1]);
-            
             const groupSelect = document.getElementById('groupSelect');
             const currentValue = groupSelect.value;
             groupSelect.innerHTML = '<option value="all">All Groups (' + data.length + ')</option>';
@@ -673,7 +620,7 @@
             }
             activeFilters.group = groupSelect.value;
 
-            // --- Location Counts ---
+            // Location Counts
             document.getElementById('locAllCount').textContent = data.length;
             ['Steigenberger', 'TOR', 'Nob', 'Alsaff'].forEach(loc => {
                 const count = data.filter(r => String(r[COLUMNS.TrainingLocation] || '').includes(loc)).length;
@@ -682,7 +629,7 @@
                 if (el) el.textContent = count;
             });
 
-            // --- Level Counts ---
+            // Level Counts
             document.getElementById('lvlAllCount').textContent = data.length;
             ['L4', 'L3', 'L2', 'L1'].forEach(lvl => {
                 const count = data.filter(r => String(r['C-LVL'] || '').includes(lvl)).length;
@@ -691,11 +638,34 @@
                 if (el) el.textContent = count;
             });
 
-            // --- Phase Dropdown ---
+            // Sector Dropdown
+            const sectorSelect = document.getElementById('sectorSelect');
+            const currentSector = sectorSelect.value;
+            sectorSelect.innerHTML = '<option value="all">All Sectors (' + data.length + ')</option>';
+            const sectorCounts = {};
+            data.forEach(r => {
+                const s = r[COLUMNS.Sector] || '';
+                if (s.trim() !== '') {
+                    sectorCounts[s] = (sectorCounts[s] || 0) + 1;
+                }
+            });
+            Object.entries(sectorCounts).sort((a, b) => b[1] - a[1]).forEach(([sector, count]) => {
+                const opt = document.createElement('option');
+                opt.value = sector;
+                opt.textContent = sector + ' (' + count + ')';
+                sectorSelect.appendChild(opt);
+            });
+            if (currentSector && Array.from(sectorSelect.options).some(o => o.value === currentSector)) {
+                sectorSelect.value = currentSector;
+            } else {
+                sectorSelect.value = 'all';
+            }
+            activeFilters.sector = sectorSelect.value;
+
+            // Phase Dropdown
             const phaseSelect = document.getElementById('phaseSelect');
             const currentPhase = phaseSelect.value;
-            // نحتفظ بالخيارات الثابتة (All, Phase1-4, Online-Phase4)
-            // بس بنحدث الأرقام في الـ Labels
+            phaseSelect.innerHTML = '';
             const phaseOptions = [
                 { value: 'all', label: 'All Phases' },
                 { value: 'Phase1', label: 'Phase 1' },
@@ -704,7 +674,6 @@
                 { value: 'Phase4', label: 'Phase 4' },
                 { value: 'Online-Phase4', label: 'Online Phase 4' }
             ];
-            phaseSelect.innerHTML = '';
             phaseOptions.forEach(po => {
                 const opt = document.createElement('option');
                 opt.value = po.value;
@@ -724,7 +693,7 @@
             }
             activeFilters.phase = phaseSelect.value;
 
-            // --- Attendance Counts ---
+            // Attendance Counts
             const attAll = data.length;
             const attAttend = data.filter(r => {
                 const val = String(r[COLUMNS.SevenSens] || '').toLowerCase();
@@ -837,7 +806,7 @@
                 }
             }
 
-            // Group filter (من dropdown)
+            // Group filter
             if (activeFilters.group !== 'all') {
                 filteredData = filteredData.filter(r => 
                     String(r[COLUMNS.TrainingGroup] || '').includes(activeFilters.group)
@@ -854,7 +823,12 @@
                 filteredData = filteredData.filter(r => String(r['C-LVL'] || '').includes(activeFilters.level));
             }
 
-            // Phase filter (من dropdown)
+            // Sector filter
+            if (activeFilters.sector !== 'all') {
+                filteredData = filteredData.filter(r => String(r[COLUMNS.Sector] || '').includes(activeFilters.sector));
+            }
+
+            // Phase filter
             if (activeFilters.phase !== 'all') {
                 filteredData = filteredData.filter(r => String(r[COLUMNS.TrainingPhase] || '').includes(activeFilters.phase));
             }
@@ -872,10 +846,11 @@
                 });
             }
             renderDashboard(filteredData);
+            updateEmployeeDetailTable(filteredData);
         }
 
         function setupFilterButtons() {
-            // أزرار البرامج
+            // Program buttons
             document.querySelectorAll('#programFilters .filter-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const type = this.dataset.filter;
@@ -888,7 +863,7 @@
                 });
             });
 
-            // أزرار Location
+            // Location buttons
             document.querySelectorAll('#locationFilters .filter-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const type = this.dataset.filter;
@@ -901,7 +876,7 @@
                 });
             });
 
-            // أزرار Level
+            // Level buttons
             document.querySelectorAll('#levelFilters .filter-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const type = this.dataset.filter;
@@ -914,7 +889,7 @@
                 });
             });
 
-            // أزرار Attendance
+            // Attendance buttons
             document.querySelectorAll('#attendanceFilters .filter-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const type = this.dataset.filter;
@@ -927,28 +902,78 @@
                 });
             });
 
-            // Dropdown Group
+            // Dropdowns
             document.getElementById('groupSelect').addEventListener('change', function() {
                 activeFilters.group = this.value;
                 applyFilters();
             });
-
-            // Dropdown Phase
             document.getElementById('phaseSelect').addEventListener('change', function() {
                 activeFilters.phase = this.value;
+                applyFilters();
+            });
+            document.getElementById('sectorSelect').addEventListener('change', function() {
+                activeFilters.sector = this.value;
                 applyFilters();
             });
         }
 
         function clearAllFilters() {
-            activeFilters = { program: 'all', group: 'all', location: 'all', level: 'all', phase: 'all', attendance: 'all' };
+            activeFilters = { program: 'all', group: 'all', location: 'all', level: 'all', phase: 'all', attendance: 'all', sector: 'all' };
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.classList.remove('active');
                 if (btn.dataset.value === 'all') btn.classList.add('active');
             });
             document.getElementById('groupSelect').value = 'all';
             document.getElementById('phaseSelect').value = 'all';
+            document.getElementById('sectorSelect').value = 'all';
             applyFilters();
+        }
+
+        // ============================================================
+        // EMPLOYEE DETAIL TABLE
+        // ============================================================
+        function updateEmployeeDetailTable(data) {
+            const tableContainer = document.getElementById('employeeDetailTable');
+            const tbody = document.getElementById('detailTableBody');
+            
+            // Show table only if group or phase filter is active (not 'all')
+            const showTable = activeFilters.group !== 'all' || activeFilters.phase !== 'all';
+            
+            if (!showTable || !data || data.length === 0) {
+                tableContainer.classList.remove('show');
+                return;
+            }
+
+            tableContainer.classList.add('show');
+            
+            // Limit to first 50 records for performance
+            const displayData = data.slice(0, 50);
+            
+            tbody.innerHTML = displayData.map(emp => {
+                const sevenSens = String(emp[COLUMNS.SevenSens] || '').toLowerCase();
+                let attendanceBadge = '<span class="badge-unknown">Unknown</span>';
+                if (sevenSens === 'attend' || sevenSens === 'attended' || sevenSens.includes('attend')) {
+                    attendanceBadge = '<span class="badge-attend">✅ Attended</span>';
+                } else if (sevenSens === 'not attend' || sevenSens.includes('not attend')) {
+                    attendanceBadge = '<span class="badge-not-attend">❌ Not Attended</span>';
+                }
+                
+                const statusMap = {
+                    'active': 'Active',
+                    'sick': 'Sick Leave',
+                    'legal': 'Legal',
+                    'inactive': 'Inactive'
+                };
+                
+                return `<tr>
+                    <td>${emp[COLUMNS.ID] || 'N/A'}</td>
+                    <td>${emp[COLUMNS.Name] || 'Unknown'}</td>
+                    <td>${emp[COLUMNS.Department] || 'N/A'}</td>
+                    <td>${emp[COLUMNS.Title] || 'N/A'}</td>
+                    <td>${attendanceBadge}</td>
+                    <td>${statusMap[emp[COLUMNS.Status]] || emp[COLUMNS.Status] || 'N/A'}</td>
+                </tr>`;
+            }).join('');
         }
 
         // ============================================================
@@ -1012,7 +1037,6 @@
             const total = data.length;
 
             // --- KPIs ---
-            const l4Count = data.filter(r => String(r['C-LVL'] || '').includes('L4')).length;
             const sectors = new Set(data.map(r => r[COLUMNS.Sector]).filter(Boolean));
             const departments = new Set(data.map(r => r[COLUMNS.Department]).filter(Boolean));
 
@@ -1022,15 +1046,7 @@
             }).length;
             const attendanceRate = total > 0 ? Math.round((attended / total) * 100) : 0;
 
-            const completed = data.filter(r => {
-                const v1 = String(r[COLUMNS.SevenSens] || '').toLowerCase();
-                const v2 = String(r[COLUMNS.Analytical] || '').toLowerCase();
-                return (v1 === 'attend' || v1 === 'attended' || v1.includes('attend')) ||
-                       (v2 === 'attend' || v2 === 'attended' || v2.includes('attend'));
-            }).length;
-            const completionRate = total > 0 ? Math.round((completed / total) * 100) : 0;
-
-            // Training Programs (6)
+            // Completed Training Programs (عدد البرامج المكتملة)
             let programCount = 0;
             Object.keys(PROGRAM_FIELDS).forEach(progName => {
                 const field = PROGRAM_FIELDS[progName];
@@ -1062,11 +1078,9 @@
             const qualityScore = total > 0 ? Math.round(((hasId + hasName + hasDept) / (total * 3)) * 100) : 0;
 
             document.getElementById('kpiTotal').textContent = total.toLocaleString();
-            document.getElementById('kpiL4').textContent = l4Count.toLocaleString();
             document.getElementById('kpiSectors').textContent = sectors.size.toLocaleString();
             document.getElementById('kpiDepartments').textContent = departments.size.toLocaleString();
             document.getElementById('kpiAttendance').textContent = attendanceRate + '%';
-            document.getElementById('kpiCompletion').textContent = completionRate + '%';
             document.getElementById('kpiPrograms').textContent = programCount;
             document.getElementById('kpiLocations').textContent = locationCount;
             document.getElementById('kpiQuality').textContent = qualityScore + '%';
@@ -1090,7 +1104,7 @@
 
             const deptCounts = {};
             data.forEach(r => { const d = r[COLUMNS.Department] || 'Unknown'; deptCounts[d] = (deptCounts[d] || 0) + 1; });
-            const sortedDepts = Object.entries(deptCounts).sort((a,b) => b[1]-a[1]).slice(0,8);
+            const sortedDepts = Object.entries(deptCounts).sort((a, b) => b[1] - a[1]);
             const deptLabels = sortedDepts.map(d => d[0]);
             const deptValues = sortedDepts.map(d => d[1]);
 
@@ -1146,7 +1160,7 @@
             destroyCharts();
 
             Chart.defaults.font.family = 'Cairo, sans-serif';
-            Chart.defaults.font.size = 12;
+            Chart.defaults.font.size = 13;
 
             // 1. Sector
             const ctx1 = document.getElementById('chartSector').getContext('2d');
@@ -1155,8 +1169,11 @@
                 data: { labels: sectorLabels, datasets: [{ label: 'Employees', data: sectorValues, backgroundColor: '#1e3d59', borderRadius: 6, barPercentage: 0.6 }] },
                 options: {
                     responsive: true, maintainAspectRatio: false,
-                    plugins: { legend: { display: false }, datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 12 } } },
-                    scales: { y: { ticks: { font: { size: 11 } } }, x: { ticks: { font: { size: 11 } } } }
+                    plugins: { 
+                        legend: { display: false, labels: { font: { size: 13 } } },
+                        datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 13 } }
+                    },
+                    scales: { y: { ticks: { font: { size: 12 } } }, x: { ticks: { font: { size: 12 } } } }
                 },
                 plugins: [ChartDataLabels]
             });
@@ -1169,21 +1186,24 @@
                 options: {
                     responsive: true, maintainAspectRatio: false,
                     plugins: {
-                        legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } },
-                        datalabels: { color: '#1a2332', font: { weight: 'bold', size: 12 }, formatter: (v, ctx) => { const total = ctx.dataset.data.reduce((a,b) => a+b, 0); return total > 0 ? Math.round((v/total)*100) + '%' : ''; } }
+                        legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 12 } } },
+                        datalabels: { color: '#1a2332', font: { weight: 'bold', size: 13 }, formatter: (v, ctx) => { const total = ctx.dataset.data.reduce((a,b) => a+b, 0); return total > 0 ? Math.round((v/total)*100) + '%' : ''; } }
                     }
                 },
                 plugins: [ChartDataLabels]
             });
 
-            // 3. Department
+            // 3. Department - كل الإدارات
             const ctx3 = document.getElementById('chartDepartment').getContext('2d');
             chartInstances.department = new Chart(ctx3, {
                 type: 'bar',
                 data: { labels: deptLabels, datasets: [{ label: 'Employees', data: deptValues, backgroundColor: '#17b890', borderRadius: 6, barPercentage: 0.6 }] },
                 options: {
                     responsive: true, maintainAspectRatio: false,
-                    plugins: { legend: { display: false }, datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 11 } } },
+                    plugins: { 
+                        legend: { display: false, labels: { font: { size: 13 } } },
+                        datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 11 } }
+                    },
                     indexAxis: 'y',
                     scales: { y: { ticks: { font: { size: 10 } } }, x: { ticks: { font: { size: 10 } } } }
                 },
@@ -1204,10 +1224,10 @@
                 options: {
                     responsive: true, maintainAspectRatio: false,
                     plugins: {
-                        legend: { position: 'top', labels: { boxWidth: 12, font: { size: 11 } } },
-                        datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 10 }, formatter: v => v + '%' }
+                        legend: { position: 'top', labels: { boxWidth: 12, font: { size: 12 } } },
+                        datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 11 }, formatter: v => v + '%' }
                     },
-                    scales: { y: { beginAtZero: true, max: 100, ticks: { callback: v => v + '%', font: { size: 10 } } }, x: { ticks: { font: { size: 10 } } } }
+                    scales: { y: { beginAtZero: true, max: 100, ticks: { callback: v => v + '%', font: { size: 11 } } }, x: { ticks: { font: { size: 11 } } } }
                 },
                 plugins: [ChartDataLabels]
             });
@@ -1220,8 +1240,8 @@
                 options: {
                     responsive: true, maintainAspectRatio: false,
                     plugins: {
-                        legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } },
-                        datalabels: { color: '#1a2332', font: { weight: 'bold', size: 12 }, formatter: (v, ctx) => { const total = ctx.dataset.data.reduce((a,b) => a+b, 0); return total > 0 ? Math.round((v/total)*100) + '%' : ''; } }
+                        legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 12 } } },
+                        datalabels: { color: '#1a2332', font: { weight: 'bold', size: 13 }, formatter: (v, ctx) => { const total = ctx.dataset.data.reduce((a,b) => a+b, 0); return total > 0 ? Math.round((v/total)*100) + '%' : ''; } }
                     }
                 },
                 plugins: [ChartDataLabels]
@@ -1234,8 +1254,11 @@
                 data: { labels: locLabels, datasets: [{ label: 'Employees', data: locValues, backgroundColor: '#ff6e40', borderRadius: 6, barPercentage: 0.6 }] },
                 options: {
                     responsive: true, maintainAspectRatio: false,
-                    plugins: { legend: { display: false }, datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 11 } } },
-                    scales: { y: { ticks: { font: { size: 10 } } }, x: { ticks: { font: { size: 10 } } } }
+                    plugins: { 
+                        legend: { display: false, labels: { font: { size: 13 } } },
+                        datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 12 } }
+                    },
+                    scales: { y: { ticks: { font: { size: 11 } } }, x: { ticks: { font: { size: 11 } } } }
                 },
                 plugins: [ChartDataLabels]
             });
@@ -1247,8 +1270,11 @@
                 data: { labels: qualityLabels, datasets: [{ label: 'Records', data: qualityValues, backgroundColor: '#3b82f6', borderRadius: 6, barPercentage: 0.6 }] },
                 options: {
                     responsive: true, maintainAspectRatio: false,
-                    plugins: { legend: { display: false }, datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 11 } } },
-                    scales: { y: { ticks: { font: { size: 10 } } }, x: { ticks: { font: { size: 10 } } } }
+                    plugins: { 
+                        legend: { display: false, labels: { font: { size: 13 } } },
+                        datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 12 } }
+                    },
+                    scales: { y: { ticks: { font: { size: 11 } } }, x: { ticks: { font: { size: 11 } } } }
                 },
                 plugins: [ChartDataLabels]
             });
@@ -1269,8 +1295,11 @@
                 },
                 options: {
                     responsive: true, maintainAspectRatio: false,
-                    plugins: { legend: { display: false }, datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 11 } } },
-                    scales: { y: { ticks: { font: { size: 10 } } }, x: { ticks: { font: { size: 10 } } } }
+                    plugins: { 
+                        legend: { display: false, labels: { font: { size: 13 } } },
+                        datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 12 } }
+                    },
+                    scales: { y: { ticks: { font: { size: 11 } } }, x: { ticks: { font: { size: 11 } } } }
                 },
                 plugins: [ChartDataLabels]
             });
@@ -1288,50 +1317,6 @@
         }
 
         // ============================================================
-        // LOAD DATA
-        // ============================================================
-        function loadData() {
-            if (isLoading) return;
-            isLoading = true;
-            loadError = false;
-
-            const msg = document.getElementById('loadingMsg');
-            msg.className = 'loading-status';
-            msg.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Loading data...';
-
-            document.getElementById('statusText').textContent = 'Loading...';
-            document.getElementById('statusIcon').className = 'fa-solid fa-spinner';
-            document.getElementById('refreshBtn').disabled = true;
-
-            fetch(SHEET_URL)
-                .then(res => {
-                    if (!res.ok) throw new Error('Network error: ' + res.status);
-                    return res.text();
-                })
-                .then(csv => {
-                    allData = csvToJSON(csv);
-                    isLoading = false;
-                    document.getElementById('statusText').textContent = 'Live';
-                    document.getElementById('statusIcon').className = 'fa-solid fa-cloud';
-                    document.getElementById('refreshBtn').disabled = false;
-                    msg.className = 'loading-status success';
-                    msg.innerHTML = '<i class="fa-solid fa-check-circle"></i> Loaded: ' + allData.length + ' records';
-                    setupFilterButtons();
-                    applyFilters();
-                })
-                .catch(err => {
-                    console.error('Load error:', err);
-                    isLoading = false;
-                    loadError = true;
-                    document.getElementById('statusText').textContent = 'Error';
-                    document.getElementById('statusIcon').className = 'fa-solid fa-triangle-exclamation';
-                    document.getElementById('refreshBtn').disabled = false;
-                    msg.className = 'loading-status error';
-                    msg.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Failed to load data. Click Refresh to retry.';
-                });
-        }
-
-        // ============================================================
         // EMPLOYEE SEARCH
         // ============================================================
         function searchEmployee() {
@@ -1343,8 +1328,10 @@
             const emp = allData.find(r => String(r['ID']).trim() === id);
             if (!emp) { alert('Employee ID not found.'); card.style.display = 'none'; return; }
 
-            document.getElementById('resName').textContent = emp['Name'] || 'Not recorded';
-            document.getElementById('resTitle').textContent = emp['Title'] || 'Not recorded';
+            lastSearchedEmployee = emp;
+
+            document.getElementById('resName').textContent = emp[COLUMNS.Name] || 'Not recorded';
+            document.getElementById('resTitle').textContent = emp[COLUMNS.Title] || 'Not recorded';
             document.getElementById('resSector').textContent = (emp[COLUMNS.Sector] || '-') + ' / ' + (emp[COLUMNS.Department] || '-');
             document.getElementById('resLevel').textContent = emp['C-LVL'] || 'Not specified';
             document.getElementById('resLocation').textContent = emp[COLUMNS.TrainingLocation] || 'Not specified';
@@ -1389,6 +1376,170 @@
                 progContainer.innerHTML = '<span style="color:#6b7a8f;font-style:italic;">No training records found.</span>';
             }
             card.style.display = 'block';
+        }
+
+        // ============================================================
+        // PRINT EMPLOYEE PROFILE
+        // ============================================================
+        function printEmployeeProfile() {
+            if (!lastSearchedEmployee) {
+                alert('Please search for an employee first.');
+                return;
+            }
+            
+            const emp = lastSearchedEmployee;
+            const printWindow = window.open('', '_blank', 'width=800,height=600');
+            if (!printWindow) {
+                alert('Please allow popups for printing.');
+                return;
+            }
+
+            const statusMap = {
+                'active': 'Active',
+                'sick': 'Sick Leave',
+                'legal': 'Legal',
+                'inactive': 'Inactive'
+            };
+
+            const sevenSens = String(emp[COLUMNS.SevenSens] || '').toLowerCase();
+            const attendanceText = (sevenSens === 'attend' || sevenSens === 'attended' || sevenSens.includes('attend')) ? '✅ Attended' : '❌ Not Attended';
+
+            const fields = Object.values(PROGRAM_FIELDS);
+            let attendedCount = 0, notAttendedCount = 0;
+            fields.forEach(field => {
+                const val = String(emp[field] || '').toLowerCase();
+                if (val === 'attend' || val === 'attended' || val.includes('attend')) attendedCount++;
+                else if (val === 'not attend' || val.includes('not attend')) notAttendedCount++;
+            });
+
+            const programs = [
+                emp[COLUMNS.TrainingGroup] || 'N/A',
+                emp[COLUMNS.TrainingPhase] || 'N/A',
+                emp[COLUMNS.SevenSens] ? '7 Sens: ' + emp[COLUMNS.SevenSens] : '',
+                emp[COLUMNS.Analytical] ? 'Analytical: ' + emp[COLUMNS.Analytical] : '',
+                emp[COLUMNS.MindField] ? 'Mind Field: ' + emp[COLUMNS.MindField] : '',
+                emp[COLUMNS.Leadership] ? 'Leadership: ' + emp[COLUMNS.Leadership] : '',
+                emp[COLUMNS.DrivePerformance] ? 'Drive: ' + emp[COLUMNS.DrivePerformance] : '',
+                emp[COLUMNS.KickStart] ? 'Kick Start: ' + emp[COLUMNS.KickStart] : ''
+            ].filter(Boolean);
+
+            const html = `
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>Employee Profile - ${emp[COLUMNS.Name] || 'Employee'}</title>
+                <style>
+                    body { font-family: 'Cairo', Arial, sans-serif; padding: 40px; max-width: 800px; margin: 0 auto; color: #1a2332; direction: ltr; }
+                    .header { border-bottom: 3px solid #1e3d59; padding-bottom: 15px; margin-bottom: 20px; display: flex; align-items: center; gap: 15px; }
+                    .header h1 { margin: 0; font-size: 22px; color: #1e3d59; }
+                    .header .sub { color: #6b7a8f; font-size: 14px; }
+                    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+                    .field { background: #f5f7fa; padding: 10px 14px; border-radius: 8px; }
+                    .field .label { font-size: 11px; color: #6b7a8f; text-transform: uppercase; letter-spacing: 0.5px; }
+                    .field .value { font-size: 15px; font-weight: 600; color: #1a2332; margin-top: 2px; }
+                    .stats { display: flex; flex-wrap: wrap; gap: 10px; margin: 15px 0; padding: 15px; background: #f0f4f8; border-radius: 8px; }
+                    .stats span { font-size: 13px; font-weight: 600; }
+                    .stats .attend { color: #10b981; }
+                    .stats .not-attend { color: #ef4444; }
+                    .stats .info { color: #3b82f6; }
+                    .stats .orange { color: #ff6e40; }
+                    .stats .purple { color: #8b5cf6; }
+                    .programs { border-top: 1px solid #e2e8f0; padding-top: 15px; margin-top: 10px; }
+                    .programs h3 { font-size: 14px; color: #1e3d59; margin-bottom: 10px; }
+                    .programs .tag { display: inline-block; background: #e2e8f0; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; color: #1e3d59; margin: 3px; }
+                    .footer { margin-top: 30px; border-top: 1px solid #e2e8f0; padding-top: 15px; font-size: 11px; color: #6b7a8f; text-align: center; }
+                    @media print { body { padding: 20px; } .field { background: #f5f7fa; } }
+                </style>
+            </head>
+            <body>
+                <div class="header">
+                    <div style="width:60px;height:60px;border-radius:50%;background:#1e3d59;color:white;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;flex-shrink:0;">
+                        ${(emp[COLUMNS.Name] || '?').charAt(0).toUpperCase()}
+                    </div>
+                    <div>
+                        <h1>${emp[COLUMNS.Name] || 'Unknown'}</h1>
+                        <div class="sub">${emp[COLUMNS.Title] || 'No Title'} · ID: ${emp[COLUMNS.ID] || 'N/A'}</div>
+                    </div>
+                </div>
+
+                <div class="grid">
+                    <div class="field"><div class="label">Department</div><div class="value">${emp[COLUMNS.Department] || 'N/A'}</div></div>
+                    <div class="field"><div class="label">Sector</div><div class="value">${emp[COLUMNS.Sector] || 'N/A'}</div></div>
+                    <div class="field"><div class="label">Competency Level</div><div class="value">${emp['C-LVL'] || 'N/A'}</div></div>
+                    <div class="field"><div class="label">Status</div><div class="value">${statusMap[emp[COLUMNS.Status]] || emp[COLUMNS.Status] || 'N/A'}</div></div>
+                    <div class="field"><div class="label">Training Location</div><div class="value">${emp[COLUMNS.TrainingLocation] || 'N/A'}</div></div>
+                    <div class="field"><div class="label">Training Phase</div><div class="value">${emp[COLUMNS.TrainingPhase] || 'N/A'}</div></div>
+                    <div class="field"><div class="label">Attendance</div><div class="value">${attendanceText}</div></div>
+                    <div class="field"><div class="label">Accommodation</div><div class="value">${accom === 'yes' ? '✅ Yes' : accom === 'no' ? '❌ No' : 'N/A'}</div></div>
+                </div>
+
+                <div class="stats">
+                    <span class="attend">✅ Attended: ${attendedCount}</span>
+                    <span class="not-attend">❌ Not Attended: ${notAttendedCount}</span>
+                    <span class="info">📋 Group: ${emp[COLUMNS.TrainingGroup] || 'N/A'}</span>
+                    <span class="orange">📍 Location: ${emp[COLUMNS.TrainingLocation] || 'N/A'}</span>
+                    <span class="purple">🏠 Accommodation: ${accom === 'yes' ? '✅ Yes' : accom === 'no' ? '❌ No' : 'N/A'}</span>
+                </div>
+
+                <div class="programs">
+                    <h3>📚 Training Programs</h3>
+                    ${programs.length > 0 ? programs.map(p => `<span class="tag">${p}</span>`).join('') : '<span style="color:#6b7a8f;font-style:italic;">No training records found.</span>'}
+                </div>
+
+                <div class="footer">
+                    Generated by CBT Intelligence Hub · ${new Date().toLocaleString()}
+                </div>
+            </body>
+            </html>
+            `;
+
+            printWindow.document.write(html);
+            printWindow.document.close();
+            setTimeout(() => { printWindow.print(); }, 500);
+        }
+
+        // ============================================================
+        // LOAD DATA
+        // ============================================================
+        function loadData() {
+            if (isLoading) return;
+            isLoading = true;
+            loadError = false;
+
+            const msg = document.getElementById('loadingMsg');
+            msg.className = 'loading-status';
+            msg.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Loading data...';
+
+            document.getElementById('statusText').textContent = 'Loading...';
+            document.getElementById('statusIcon').className = 'fa-solid fa-spinner';
+            document.getElementById('refreshBtn').disabled = true;
+
+            fetch(SHEET_URL)
+                .then(res => {
+                    if (!res.ok) throw new Error('Network error: ' + res.status);
+                    return res.text();
+                })
+                .then(csv => {
+                    allData = csvToJSON(csv);
+                    isLoading = false;
+                    document.getElementById('statusText').textContent = 'Live';
+                    document.getElementById('statusIcon').className = 'fa-solid fa-cloud';
+                    document.getElementById('refreshBtn').disabled = false;
+                    msg.className = 'loading-status success';
+                    msg.innerHTML = '<i class="fa-solid fa-check-circle"></i> Loaded: ' + allData.length + ' records';
+                    setupFilterButtons();
+                    applyFilters();
+                })
+                .catch(err => {
+                    console.error('Load error:', err);
+                    isLoading = false;
+                    loadError = true;
+                    document.getElementById('statusText').textContent = 'Error';
+                    document.getElementById('statusIcon').className = 'fa-solid fa-triangle-exclamation';
+                    document.getElementById('refreshBtn').disabled = false;
+                    msg.className = 'loading-status error';
+                    msg.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Failed to load data. Click Refresh to retry.';
+                });
         }
 
         // ============================================================
