@@ -51,81 +51,24 @@
             gap: 8px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
-        .navbar .logo-left img, .navbar .logo-right img {
-            height: 40px;
-            width: auto;
-            background: rgba(255,255,255,0.95);
-            padding: 2px 6px;
-            border-radius: 8px;
-        }
+        .navbar .logo-left img, .navbar .logo-right img { height: 40px; width: auto; background: rgba(255,255,255,0.95); padding: 2px 6px; border-radius: 8px; }
         .navbar .title-center { flex: 1; text-align: center; }
-        .navbar .title-center h1 {
-            font-size: 1.3rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #ffffff 0%, var(--koki-orange) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .navbar .title-center .subtitle {
-            font-size: 0.6rem;
-            opacity: 0.7;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            -webkit-text-fill-color: rgba(255,255,255,0.6);
-        }
-        .navbar .status-badge {
-            font-size: 0.6rem;
-            background: rgba(255,255,255,0.1);
-            padding: 4px 12px;
-            border-radius: 30px;
-            border: 1px solid rgba(255,255,255,0.1);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .navbar .status-badge .fa-spinner {
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
+        .navbar .title-center h1 { font-size: 1.3rem; font-weight: 800; background: linear-gradient(135deg, #ffffff 0%, var(--koki-orange) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .navbar .title-center .subtitle { font-size: 0.6rem; opacity: 0.7; letter-spacing: 1px; text-transform: uppercase; -webkit-text-fill-color: rgba(255,255,255,0.6); }
+        .navbar .status-badge { font-size: 0.6rem; background: rgba(255,255,255,0.1); padding: 4px 12px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 6px; }
+        .navbar .status-badge .fa-spinner { animation: spin 1s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
-        .refresh-btn {
-            background: rgba(255,255,255,0.15);
-            border: 1px solid rgba(255,255,255,0.2);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 30px;
-            font-size: 0.6rem;
-            cursor: pointer;
-            transition: var(--transition);
-            font-family: 'Cairo', sans-serif;
-        }
-        .refresh-btn:hover {
-            background: rgba(255,255,255,0.25);
-        }
-        .refresh-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
+        .refresh-btn { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 4px 12px; border-radius: 30px; font-size: 0.6rem; cursor: pointer; transition: var(--transition); font-family: 'Cairo', sans-serif; }
+        .refresh-btn:hover { background: rgba(255,255,255,0.25); }
+        .refresh-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-        .filter-bar {
-            background: var(--white);
-            padding: 10px 16px;
-            border-radius: var(--border-radius);
-            margin: 12px auto;
-            max-width: 1440px;
-            box-shadow: var(--shadow);
-            border: 1px solid #e8ecf0;
-        }
+        .filter-bar { background: var(--white); padding: 10px 16px; border-radius: var(--border-radius); margin: 12px auto; max-width: 1440px; box-shadow: var(--shadow); border: 1px solid #e8ecf0; }
         .filter-bar .filter-row { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; margin-bottom: 4px; }
         .filter-bar .filter-row:last-child { margin-bottom: 0; }
         .filter-bar .filter-label { font-size: 0.6rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; min-width: 45px; }
         .filter-bar .filter-group { display: flex; flex-wrap: wrap; gap: 3px; }
-        .filter-btn {
-            padding: 3px 12px; border-radius: 30px; border: 2px solid #e2e8f0; background: transparent;
-            font-family: 'Cairo', sans-serif; font-size: 0.6rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: var(--transition);
-        }
+        .filter-btn { padding: 3px 12px; border-radius: 30px; border: 2px solid #e2e8f0; background: transparent; font-family: 'Cairo', sans-serif; font-size: 0.6rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: var(--transition); }
         .filter-btn:hover { border-color: var(--cpc-blue); color: var(--cpc-blue); background: rgba(30,61,89,0.04); }
         .filter-btn.active { border-color: var(--koki-orange); background: var(--koki-orange); color: white; box-shadow: 0 4px 12px rgba(255,110,64,0.3); }
         .filter-btn .badge-count { background: rgba(255,255,255,0.2); border-radius: 20px; padding: 0 6px; font-size: 0.5rem; margin-left: 3px; }
@@ -134,82 +77,37 @@
         .filter-btn.attend-btn.active { background: var(--success); border-color: var(--success); color: white; }
         .filter-btn.not-attend-btn { border-color: var(--danger); color: var(--danger); }
         .filter-btn.not-attend-btn.active { background: var(--danger); border-color: var(--danger); color: white; }
-        .clear-filters-btn {
-            padding: 3px 14px; border-radius: 30px; border: 2px solid #e2e8f0; background: transparent;
-            font-family: 'Cairo', sans-serif; font-size: 0.6rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: var(--transition); margin-left: auto;
-        }
+        .clear-filters-btn { padding: 3px 14px; border-radius: 30px; border: 2px solid #e2e8f0; background: transparent; font-family: 'Cairo', sans-serif; font-size: 0.6rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: var(--transition); margin-left: auto; }
         .clear-filters-btn:hover { border-color: var(--danger); color: var(--danger); background: rgba(239,68,68,0.05); }
 
         .container { max-width: 1440px; margin: 0 auto; padding: 0 12px; }
 
-        .brief-section {
-            background: linear-gradient(135deg, var(--cpc-blue-dark) 0%, #17b890 100%);
-            color: white;
-            padding: 12px 18px;
-            border-radius: var(--border-radius);
-            margin: 12px 0;
-        }
+        .brief-section { background: linear-gradient(135deg, var(--cpc-blue-dark) 0%, #17b890 100%); color: white; padding: 12px 18px; border-radius: var(--border-radius); margin: 12px 0; }
         .brief-section h2 { font-size: 0.95rem; font-weight: 700; }
         .brief-section p { font-size: 0.8rem; opacity: 0.92; line-height: 1.6; }
         .brief-section .highlight { color: var(--koki-orange); font-weight: 700; }
 
-        .kpi-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 10px;
-            margin: 12px 0;
-        }
-        .kpi-card {
-            background: var(--white);
-            padding: 10px 14px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 3px solid var(--cpc-blue);
-            transition: var(--transition);
-            cursor: pointer;
-        }
+        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin: 12px 0; }
+        .kpi-card { background: var(--white); padding: 10px 14px; border-radius: var(--border-radius); box-shadow: var(--shadow); display: flex; align-items: center; justify-content: space-between; border-bottom: 3px solid var(--cpc-blue); transition: var(--transition); cursor: pointer; }
         .kpi-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
         .kpi-card i { font-size: 1.2rem; color: var(--koki-orange); opacity: 0.8; }
         .kpi-info h4 { font-size: 0.55rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 2px; }
         .kpi-info .num { font-size: 1.1rem; font-weight: 800; color: var(--cpc-blue); }
 
-        .search-charts-grid {
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 16px;
-            margin: 12px 0;
-        }
-        .search-wrapper {
-            background: var(--white);
-            padding: 16px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            border: 1px solid #e8ecf0;
-        }
+        .search-charts-grid { display: grid; grid-template-columns: 280px 1fr; gap: 16px; margin: 12px 0; }
+        .search-wrapper { background: var(--white); padding: 16px; border-radius: var(--border-radius); box-shadow: var(--shadow); border: 1px solid #e8ecf0; }
         .search-wrapper h3 { font-size: 0.85rem; color: var(--cpc-blue); font-weight: 700; margin-bottom: 4px; }
         .search-wrapper p { font-size: 0.65rem; color: var(--text-muted); margin-bottom: 8px; }
         .search-box { display: flex; gap: 6px; flex-wrap: wrap; }
-        .search-box input {
-            flex: 1; padding: 6px 12px; border: 2px solid #e2e8f0; border-radius: 10px;
-            font-family: 'Cairo', sans-serif; font-size: 0.75rem; outline: none; min-width: 80px;
-        }
+        .search-box input { flex: 1; padding: 6px 12px; border: 2px solid #e2e8f0; border-radius: 10px; font-family: 'Cairo', sans-serif; font-size: 0.75rem; outline: none; min-width: 80px; }
         .search-box input:focus { border-color: var(--cpc-blue); }
-        .search-box button {
-            padding: 6px 14px; background: var(--koki-orange); color: white; border: none;
-            border-radius: 10px; font-weight: 700; cursor: pointer; font-size: 0.75rem;
-        }
+        .search-box button { padding: 6px 14px; background: var(--koki-orange); color: white; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; font-size: 0.75rem; }
         .search-box button:hover { background: var(--koki-orange-hover); }
         .loading-status { font-size: 0.65rem; color: var(--text-muted); margin-top: 6px; }
         .loading-status.error { color: var(--danger); }
         .loading-status.success { color: var(--success); }
 
-        .result-card {
-            margin-top: 10px; background: #f8fafc; border-radius: var(--border-radius);
-            padding: 12px; display: none; border-right: 4px solid var(--success);
-        }
+        .result-card { margin-top: 10px; background: #f8fafc; border-radius: var(--border-radius); padding: 12px; display: none; border-right: 4px solid var(--success); }
         .employee-profile { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 10px; }
         .info-group h4 { font-size: 0.5rem; color: var(--text-muted); text-transform: uppercase; }
         .info-group p { font-weight: 700; font-size: 0.75rem; }
@@ -225,42 +123,20 @@
 
         .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 12px 0; }
         .charts-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 12px 0; }
-        .chart-box {
-            background: var(--white);
-            padding: 16px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            border: 1px solid #e8ecf0;
-            cursor: pointer;
-            transition: var(--transition);
-        }
+        .chart-box { background: var(--white); padding: 16px; border-radius: var(--border-radius); box-shadow: var(--shadow); border: 1px solid #e8ecf0; cursor: pointer; transition: var(--transition); }
         .chart-box:hover { box-shadow: var(--shadow-hover); border-color: var(--cpc-blue); }
         .chart-box h4 { font-size: 0.8rem; color: var(--cpc-blue); font-weight: 700; margin-bottom: 8px; }
         .chart-box canvas { width: 100% !important; height: 220px !important; max-height: 220px; }
         .chart-box .chart-container { position: relative; width: 100%; height: 220px; }
 
-        .insights-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 16px;
-            margin: 16px 0 30px 0;
-        }
-        .insight-card {
-            background: var(--white);
-            padding: 16px 18px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            border-left: 4px solid var(--koki-orange);
-            transition: var(--transition);
-        }
+        .insights-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 16px 0 30px 0; }
+        .insight-card { background: var(--white); padding: 16px 18px; border-radius: var(--border-radius); box-shadow: var(--shadow); border-left: 4px solid var(--koki-orange); transition: var(--transition); }
         .insight-card:hover { box-shadow: var(--shadow-hover); transform: translateX(4px); }
         .insight-card .insight-icon { font-size: 1.2rem; color: var(--koki-orange); margin-right: 8px; }
         .insight-card h4 { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
         .insight-card .insight-value { font-size: 1.4rem; font-weight: 800; color: var(--cpc-blue); }
         .insight-card .insight-desc { font-size: 0.75rem; color: var(--text-muted); margin-top: 4px; }
-        .insight-card .insight-tag {
-            display: inline-block; font-size: 0.55rem; font-weight: 700; padding: 2px 10px; border-radius: 20px; margin-top: 6px;
-        }
+        .insight-card .insight-tag { display: inline-block; font-size: 0.55rem; font-weight: 700; padding: 2px 10px; border-radius: 20px; margin-top: 6px; }
         .insight-tag.good { background: rgba(16,185,129,0.15); color: var(--success); }
         .insight-tag.warning { background: rgba(245,158,11,0.15); color: var(--warning); }
         .insight-tag.danger { background: rgba(239,68,68,0.15); color: var(--danger); }
@@ -508,10 +384,13 @@
 
     <script>
         // ============================================================
-        // CONFIG
+        // CONFIG - أسماء الأعمدة الصحيحة من الشيت
         // ============================================================
         const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRu0vhUS8c-hbFznxR_F9K9LNueNeabXiLwMjMzppgpIjJCSNCadsHDVVGxwiKYYHve9-Qtb37ALs8P/pub?gid=1032977671&single=true&output=csv";
 
+        // ============================================================
+        // أسماء الأعمدة بالضبط زي ما هي في الشيت
+        // ============================================================
         const COLUMNS = {
             ID: 'ID',
             Name: 'Name',
@@ -533,6 +412,9 @@
             Accommodation: 'Accommodation'
         };
 
+        // ============================================================
+        // ربط أسماء البرامج بالأعمدة الصحيحة
+        // ============================================================
         const PROGRAM_FIELDS = {
             '7 Sens Program': COLUMNS.SevenSens,
             'Analytical Thinking Program': COLUMNS.Analytical,
@@ -550,7 +432,7 @@
         let loadError = false;
 
         // ============================================================
-        // UTILITY
+        // UTILITY: تحويل CSV إلى JSON
         // ============================================================
         function csvToJSON(csv) {
             const lines = csv.split("\n");
@@ -577,7 +459,7 @@
         }
 
         // ============================================================
-        // UPDATE BADGE COUNTS
+        // تحديث أعداد الأزرار
         // ============================================================
         function updateFilterBadges(data) {
             const progAll = data.length;
@@ -633,7 +515,7 @@
         }
 
         // ============================================================
-        // UPDATE INSIGHTS
+        // تحديث Insights
         // ============================================================
         function updateInsights(data) {
             if (!data || data.length === 0) return;
@@ -664,7 +546,6 @@
                 const best = sortedProgs[0];
                 document.getElementById('insightBestProgram').textContent = best[0].replace(' Program', '');
                 document.getElementById('insightBestProgramDesc').textContent = best[1] + '% completion';
-
                 const worst = sortedProgs[sortedProgs.length - 1];
                 document.getElementById('insightWorstProgram').textContent = worst[0].replace(' Program', '');
                 document.getElementById('insightWorstProgramDesc').textContent = worst[1] + '% completion';
@@ -700,7 +581,6 @@
 
             document.getElementById('insightQualityStatus').textContent = qualityScore + '%';
             document.getElementById('insightQualityStatusDesc').textContent = total + ' records analyzed';
-
             const tag = document.getElementById('insightQualityTag');
             if (qualityScore >= 85) {
                 tag.textContent = '✅ Excellent';
@@ -715,7 +595,7 @@
         }
 
         // ============================================================
-        // FILTERS
+        // الفلاتر
         // ============================================================
         function applyFilters() {
             if (!allData || allData.length === 0) return;
@@ -778,7 +658,7 @@
         }
 
         // ============================================================
-        // CHART INTERACTIVITY
+        // تفاعل الرسوم البيانية
         // ============================================================
         function setupChartInteractivity() {
             const charts = [
@@ -796,20 +676,17 @@
                     if (e.dataIndex !== undefined) {
                         const label = chart.data.labels[e.dataIndex];
                         let filterValue = label;
-
                         if (filterType === 'location') {
                             const locations = ['Steigenberger', 'TOR', 'Nob', 'Alsaff'];
                             for (let loc of locations) {
                                 if (label.includes(loc)) { filterValue = loc; break; }
                             }
                         }
-
                         if (activeFilters[filterType] === filterValue) {
                             activeFilters[filterType] = 'all';
                         } else {
                             activeFilters[filterType] = filterValue;
                         }
-
                         const groupId = filterType + 'Filters';
                         const group = document.getElementById(groupId);
                         if (group) {
@@ -831,7 +708,7 @@
         }
 
         // ============================================================
-        // RENDER DASHBOARD
+        // عرض الـ Dashboard
         // ============================================================
         function renderDashboard(data) {
             if (!data || data.length === 0) {
@@ -840,6 +717,7 @@
             }
             const total = data.length;
 
+            // --- حساب الـ KPIs ---
             const l4Count = data.filter(r => String(r['C-LVL'] || '').includes('L4')).length;
             const sectors = new Set(data.map(r => r[COLUMNS.Sector]).filter(Boolean));
             const departments = new Set(data.map(r => r[COLUMNS.Department]).filter(Boolean));
@@ -867,6 +745,7 @@
             const hasDept = data.filter(r => r[COLUMNS.Department] && r[COLUMNS.Department].trim()).length;
             const qualityScore = total > 0 ? Math.round(((hasId + hasName + hasDept) / (total * 3)) * 100) : 0;
 
+            // --- تحديث الـ DOM ---
             document.getElementById('kpiTotal').textContent = total.toLocaleString();
             document.getElementById('kpiL4').textContent = l4Count.toLocaleString();
             document.getElementById('kpiSectors').textContent = sectors.size.toLocaleString();
@@ -881,7 +760,7 @@
             updateFilterBadges(data);
             updateInsights(data);
 
-            // --- CHART DATA ---
+            // --- تحضير بيانات الرسوم البيانية ---
             const sectorCounts = {};
             data.forEach(r => { const s = r[COLUMNS.Sector] || 'Unknown'; sectorCounts[s] = (sectorCounts[s] || 0) + 1; });
             const sectorLabels = Object.keys(sectorCounts);
@@ -952,6 +831,7 @@
             Chart.defaults.font.family = 'Cairo, sans-serif';
             Chart.defaults.font.size = 12;
 
+            // --- رسم الرسوم البيانية ---
             // 1. Sector
             const ctx1 = document.getElementById('chartSector').getContext('2d');
             chartInstances.sector = new Chart(ctx1, {
@@ -1081,7 +961,7 @@
 
             setupChartInteractivity();
 
-            // Update status
+            // تحديث حالة الاتصال
             document.getElementById('statusText').textContent = 'Live';
             document.getElementById('statusIcon').className = 'fa-solid fa-cloud';
             const msg = document.getElementById('loadingMsg');
@@ -1093,7 +973,7 @@
         }
 
         // ============================================================
-        // LOAD DATA
+        // تحميل البيانات
         // ============================================================
         function loadData() {
             if (isLoading) return;
@@ -1137,13 +1017,14 @@
         }
 
         // ============================================================
-        // EMPLOYEE SEARCH
+        // البحث عن موظف
         // ============================================================
         function searchEmployee() {
             const id = document.getElementById('empIdInput').value.trim();
             const card = document.getElementById('resultProfile');
             if (!id) { alert('Enter Employee ID'); return; }
             if (!allData || allData.length === 0) { alert('Data not loaded yet. Please wait.'); return; }
+            
             const emp = allData.find(r => String(r['ID']).trim() === id);
             if (!emp) { alert('Employee ID not found.'); card.style.display = 'none'; return; }
 
@@ -1196,18 +1077,11 @@
         }
 
         // ============================================================
-        // INIT
+        // بدء التشغيل
         // ============================================================
         document.addEventListener('DOMContentLoaded', function() {
-            // Load data on page load
             loadData();
-
-            // Refresh button
-            document.getElementById('refreshBtn').addEventListener('click', function() {
-                loadData();
-            });
-
-            // Enter key for search
+            document.getElementById('refreshBtn').addEventListener('click', function() { loadData(); });
             document.getElementById('empIdInput').addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') searchEmployee();
             });
