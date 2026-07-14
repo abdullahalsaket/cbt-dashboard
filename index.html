@@ -10,11 +10,43 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Cairo', sans-serif; background: #f0f2f5; color: #1a2332; min-height: 100vh; }
+        /* ============================================================
+           الألوان المتوافقة مع اللوجوز (CPC أزرق + Koki برتقالي)
+           ============================================================ */
+        :root {
+            --cpc-blue-dark: #0f2b40;
+            --cpc-blue: #1e3d59;
+            --cpc-blue-light: #2a5a7a;
+            --koki-orange: #ff6e40;
+            --koki-orange-hover: #e05326;
+            --white: #ffffff;
+            --bg-light: #f0f2f5;
+            --text-dark: #1a2332;
+            --text-muted: #6b7a8f;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --info: #3b82f6;
+            --purple: #8b5cf6;
+            --border-radius: 12px;
+            --shadow: 0 2px 8px rgba(0,0,0,0.04);
+            --shadow-hover: 0 8px 24px rgba(0,0,0,0.08);
+            --transition: all 0.2s ease;
+        }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            min-height: 100vh;
+        }
+
+        /* ============================================================
+           HEADER - ألوان متوافقة
+           ============================================================ */
         .navbar {
-            background: linear-gradient(135deg, #0f2b40 0%, #1a4a6e 100%);
+            background: linear-gradient(135deg, var(--cpc-blue-dark) 0%, var(--cpc-blue) 100%);
             color: white;
             padding: 10px 20px;
             display: flex;
@@ -24,47 +56,104 @@
             gap: 8px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
-        .navbar .logo-left img, .navbar .logo-right img { height: 40px; width: auto; background: rgba(255,255,255,0.9); padding: 2px 6px; border-radius: 8px; }
+        .navbar .logo-left img, .navbar .logo-right img {
+            height: 40px;
+            width: auto;
+            background: rgba(255,255,255,0.95);
+            padding: 2px 6px;
+            border-radius: 8px;
+        }
         .navbar .title-center { flex: 1; text-align: center; }
-        .navbar .title-center h1 { font-size: 1.3rem; font-weight: 800; background: linear-gradient(135deg, #fff 0%, #ff6e40 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .navbar .title-center .subtitle { font-size: 0.6rem; opacity: 0.7; letter-spacing: 1px; text-transform: uppercase; -webkit-text-fill-color: rgba(255,255,255,0.6); }
-        .navbar .status-badge { font-size: 0.6rem; background: rgba(255,255,255,0.1); padding: 4px 12px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 6px; }
-        .update-notification { background: #10b981; padding: 4px 14px; border-radius: 30px; font-size: 0.6rem; display: none; animation: slideDown 0.4s ease; }
+        .navbar .title-center h1 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff 0%, var(--koki-orange) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .navbar .title-center .subtitle {
+            font-size: 0.6rem;
+            opacity: 0.7;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            -webkit-text-fill-color: rgba(255,255,255,0.6);
+        }
+        .navbar .status-badge {
+            font-size: 0.6rem;
+            background: rgba(255,255,255,0.1);
+            padding: 4px 12px;
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .update-notification {
+            background: var(--success);
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-size: 0.6rem;
+            display: none;
+            animation: slideDown 0.4s ease;
+        }
         .update-notification.show { display: inline-flex; align-items: center; gap: 6px; }
 
+        /* ============================================================
+           FILTER BAR
+           ============================================================ */
         .filter-bar {
-            background: white;
+            background: var(--white);
             padding: 10px 16px;
-            border-radius: 12px;
+            border-radius: var(--border-radius);
             margin: 12px auto;
             max-width: 1440px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            box-shadow: var(--shadow);
             border: 1px solid #e8ecf0;
         }
         .filter-bar .filter-row { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; margin-bottom: 4px; }
         .filter-bar .filter-row:last-child { margin-bottom: 0; }
-        .filter-bar .filter-label { font-size: 0.6rem; font-weight: 700; color: #6b7a8f; text-transform: uppercase; min-width: 45px; }
+        .filter-bar .filter-label { font-size: 0.6rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; min-width: 45px; }
         .filter-bar .filter-group { display: flex; flex-wrap: wrap; gap: 3px; }
         .filter-btn {
             padding: 3px 12px; border-radius: 30px; border: 2px solid #e2e8f0; background: transparent;
-            font-family: 'Cairo', sans-serif; font-size: 0.6rem; font-weight: 600; color: #6b7a8f; cursor: pointer; transition: all 0.2s;
+            font-family: 'Cairo', sans-serif; font-size: 0.6rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: var(--transition);
         }
-        .filter-btn:hover { border-color: #1e3d59; color: #1e3d59; background: rgba(30,61,89,0.04); }
-        .filter-btn.active { border-color: #ff6e40; background: #ff6e40; color: white; box-shadow: 0 4px 12px rgba(255,110,64,0.3); }
+        .filter-btn:hover { border-color: var(--cpc-blue); color: var(--cpc-blue); background: rgba(30,61,89,0.04); }
+        .filter-btn.active { border-color: var(--koki-orange); background: var(--koki-orange); color: white; box-shadow: 0 4px 12px rgba(255,110,64,0.3); }
         .filter-btn .badge-count { background: rgba(255,255,255,0.2); border-radius: 20px; padding: 0 6px; font-size: 0.5rem; margin-left: 3px; }
         .filter-btn.active .badge-count { background: rgba(255,255,255,0.25); }
-        .filter-btn.attend-btn { border-color: #10b981; color: #10b981; }
-        .filter-btn.attend-btn.active { background: #10b981; border-color: #10b981; color: white; }
-        .filter-btn.not-attend-btn { border-color: #ef4444; color: #ef4444; }
-        .filter-btn.not-attend-btn.active { background: #ef4444; border-color: #ef4444; color: white; }
+        .filter-btn.attend-btn { border-color: var(--success); color: var(--success); }
+        .filter-btn.attend-btn.active { background: var(--success); border-color: var(--success); color: white; }
+        .filter-btn.not-attend-btn { border-color: var(--danger); color: var(--danger); }
+        .filter-btn.not-attend-btn.active { background: var(--danger); border-color: var(--danger); color: white; }
         .clear-filters-btn {
             padding: 3px 14px; border-radius: 30px; border: 2px solid #e2e8f0; background: transparent;
-            font-family: 'Cairo', sans-serif; font-size: 0.6rem; font-weight: 600; color: #6b7a8f; cursor: pointer; transition: all 0.2s; margin-left: auto;
+            font-family: 'Cairo', sans-serif; font-size: 0.6rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: var(--transition); margin-left: auto;
         }
-        .clear-filters-btn:hover { border-color: #ef4444; color: #ef4444; background: rgba(239,68,68,0.05); }
+        .clear-filters-btn:hover { border-color: var(--danger); color: var(--danger); background: rgba(239,68,68,0.05); }
 
+        /* ============================================================
+           CONTAINER
+           ============================================================ */
         .container { max-width: 1440px; margin: 0 auto; padding: 0 12px; }
 
+        /* ============================================================
+           BRIEF SECTION - ألوان متوافقة
+           ============================================================ */
+        .brief-section {
+            background: linear-gradient(135deg, var(--cpc-blue-dark) 0%, #17b890 100%);
+            color: white;
+            padding: 12px 18px;
+            border-radius: var(--border-radius);
+            margin: 12px 0;
+        }
+        .brief-section h2 { font-size: 0.95rem; font-weight: 700; }
+        .brief-section p { font-size: 0.8rem; opacity: 0.92; line-height: 1.6; }
+        .brief-section .highlight { color: var(--koki-orange); font-weight: 700; }
+
+        /* ============================================================
+           KPI GRID
+           ============================================================ */
         .kpi-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
@@ -72,15 +161,25 @@
             margin: 12px 0;
         }
         .kpi-card {
-            background: white; padding: 10px 14px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-            display: flex; align-items: center; justify-content: space-between; border-bottom: 3px solid #1e3d59; transition: all 0.2s;
+            background: var(--white);
+            padding: 10px 14px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 3px solid var(--cpc-blue);
+            transition: var(--transition);
             cursor: pointer;
         }
-        .kpi-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
-        .kpi-card i { font-size: 1.2rem; color: #ff6e40; opacity: 0.8; }
-        .kpi-info h4 { font-size: 0.55rem; color: #6b7a8f; text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 2px; }
-        .kpi-info .num { font-size: 1.1rem; font-weight: 800; color: #1e3d59; }
+        .kpi-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+        .kpi-card i { font-size: 1.2rem; color: var(--koki-orange); opacity: 0.8; }
+        .kpi-info h4 { font-size: 0.55rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 2px; }
+        .kpi-info .num { font-size: 1.1rem; font-weight: 800; color: var(--cpc-blue); }
 
+        /* ============================================================
+           SEARCH + CHARTS
+           ============================================================ */
         .search-charts-grid {
             display: grid;
             grid-template-columns: 280px 1fr;
@@ -88,49 +187,124 @@
             margin: 12px 0;
         }
         .search-wrapper {
-            background: white; padding: 16px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid #e8ecf0;
+            background: var(--white);
+            padding: 16px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            border: 1px solid #e8ecf0;
         }
-        .search-wrapper h3 { font-size: 0.85rem; color: #1e3d59; font-weight: 700; margin-bottom: 4px; }
-        .search-wrapper p { font-size: 0.65rem; color: #6b7a8f; margin-bottom: 8px; }
+        .search-wrapper h3 { font-size: 0.85rem; color: var(--cpc-blue); font-weight: 700; margin-bottom: 4px; }
+        .search-wrapper p { font-size: 0.65rem; color: var(--text-muted); margin-bottom: 8px; }
         .search-box { display: flex; gap: 6px; flex-wrap: wrap; }
-        .search-box input { flex: 1; padding: 6px 12px; border: 2px solid #e2e8f0; border-radius: 10px; font-family: 'Cairo', sans-serif; font-size: 0.75rem; outline: none; min-width: 80px; }
-        .search-box input:focus { border-color: #1e3d59; }
-        .search-box button { padding: 6px 14px; background: #ff6e40; color: white; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; font-size: 0.75rem; }
-        .search-box button:hover { background: #e05326; }
-        .loading-status { font-size: 0.65rem; color: #6b7a8f; margin-top: 6px; }
+        .search-box input {
+            flex: 1; padding: 6px 12px; border: 2px solid #e2e8f0; border-radius: 10px;
+            font-family: 'Cairo', sans-serif; font-size: 0.75rem; outline: none; min-width: 80px;
+        }
+        .search-box input:focus { border-color: var(--cpc-blue); }
+        .search-box button {
+            padding: 6px 14px; background: var(--koki-orange); color: white; border: none;
+            border-radius: 10px; font-weight: 700; cursor: pointer; font-size: 0.75rem;
+        }
+        .search-box button:hover { background: var(--koki-orange-hover); }
+        .loading-status { font-size: 0.65rem; color: var(--text-muted); margin-top: 6px; }
 
         .result-card {
-            margin-top: 10px; background: #f8fafc; border-radius: 12px; padding: 12px; display: none; border-right: 4px solid #10b981;
+            margin-top: 10px; background: #f8fafc; border-radius: var(--border-radius);
+            padding: 12px; display: none; border-right: 4px solid var(--success);
         }
         .employee-profile { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 10px; }
-        .info-group h4 { font-size: 0.5rem; color: #6b7a8f; text-transform: uppercase; }
+        .info-group h4 { font-size: 0.5rem; color: var(--text-muted); text-transform: uppercase; }
         .info-group p { font-weight: 700; font-size: 0.75rem; }
         .employee-stats { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; padding: 6px 10px; background: rgba(30,61,89,0.05); border-radius: 8px; }
         .stat-badge { font-size: 0.6rem; font-weight: 700; padding: 2px 10px; border-radius: 20px; }
-        .stat-badge.attend { background: rgba(16,185,129,0.15); color: #10b981; }
-        .stat-badge.not-attend { background: rgba(239,68,68,0.15); color: #ef4444; }
-        .stat-badge.group { background: rgba(59,130,246,0.15); color: #3b82f6; }
-        .stat-badge.location { background: rgba(255,110,64,0.15); color: #ff6e40; }
-        .stat-badge.accommodation { background: rgba(139,92,246,0.15); color: #8b5cf6; }
+        .stat-badge.attend { background: rgba(16,185,129,0.15); color: var(--success); }
+        .stat-badge.not-attend { background: rgba(239,68,68,0.15); color: var(--danger); }
+        .stat-badge.group { background: rgba(59,130,246,0.15); color: var(--info); }
+        .stat-badge.location { background: rgba(255,110,64,0.15); color: var(--koki-orange); }
+        .stat-badge.accommodation { background: rgba(139,92,246,0.15); color: var(--purple); }
         .training-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
-        .tag { background: #e2e8f0; color: #1e3d59; padding: 2px 8px; border-radius: 20px; font-size: 0.55rem; font-weight: 600; }
+        .tag { background: #e2e8f0; color: var(--cpc-blue); padding: 2px 8px; border-radius: 20px; font-size: 0.55rem; font-weight: 600; }
 
+        /* ============================================================
+           CHARTS
+           ============================================================ */
         .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 12px 0; }
         .charts-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 12px 0; }
         .chart-box {
-            background: white; padding: 16px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid #e8ecf0;
+            background: var(--white);
+            padding: 16px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            border: 1px solid #e8ecf0;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: var(--transition);
         }
-        .chart-box:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); border-color: #1e3d59; }
-        .chart-box h4 { font-size: 0.8rem; color: #1e3d59; font-weight: 700; margin-bottom: 8px; }
+        .chart-box:hover { box-shadow: var(--shadow-hover); border-color: var(--cpc-blue); }
+        .chart-box h4 { font-size: 0.8rem; color: var(--cpc-blue); font-weight: 700; margin-bottom: 8px; }
         .chart-box canvas { width: 100% !important; height: 220px !important; max-height: 220px; }
         .chart-box .chart-container { position: relative; width: 100%; height: 220px; }
 
+        /* ============================================================
+           INSIGHTS SECTION
+           ============================================================ */
+        .insights-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 16px;
+            margin: 16px 0 30px 0;
+        }
+        .insight-card {
+            background: var(--white);
+            padding: 16px 18px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--koki-orange);
+            transition: var(--transition);
+        }
+        .insight-card:hover { box-shadow: var(--shadow-hover); transform: translateX(4px); }
+        .insight-card .insight-icon {
+            font-size: 1.2rem;
+            color: var(--koki-orange);
+            margin-right: 8px;
+        }
+        .insight-card h4 {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+        .insight-card .insight-value {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--cpc-blue);
+        }
+        .insight-card .insight-desc {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+        .insight-card .insight-tag {
+            display: inline-block;
+            font-size: 0.55rem;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 20px;
+            margin-top: 6px;
+        }
+        .insight-tag.good { background: rgba(16,185,129,0.15); color: var(--success); }
+        .insight-tag.warning { background: rgba(245,158,11,0.15); color: var(--warning); }
+        .insight-tag.danger { background: rgba(239,68,68,0.15); color: var(--danger); }
+        .insight-tag.info { background: rgba(59,130,246,0.15); color: var(--info); }
+
+        /* ============================================================
+           RESPONSIVE
+           ============================================================ */
         @media (max-width: 992px) {
             .search-charts-grid { grid-template-columns: 1fr; }
             .charts-grid { grid-template-columns: 1fr 1fr; }
             .charts-grid-2 { grid-template-columns: 1fr 1fr; }
+            .insights-section { grid-template-columns: 1fr 1fr; }
         }
         @media (max-width: 768px) {
             .navbar { flex-direction: column; text-align: center; }
@@ -142,6 +316,7 @@
             .employee-profile { grid-template-columns: 1fr; }
             .chart-box canvas { height: 180px !important; max-height: 180px; }
             .chart-box .chart-container { height: 180px; }
+            .insights-section { grid-template-columns: 1fr; }
         }
         @media (max-width: 480px) {
             .kpi-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
@@ -160,6 +335,9 @@
 </head>
 <body>
 
+    <!-- ============================================================
+    HEADER
+    ============================================================ -->
     <div class="navbar">
         <div class="logo-left"><img src="CPC.png" alt="CPC Logo"></div>
         <div class="title-center">
@@ -173,13 +351,28 @@
         </div>
     </div>
 
+    <!-- ============================================================
+    MAIN CONTAINER
+    ============================================================ -->
     <div class="container">
 
-        <div class="brief-section" style="background:linear-gradient(135deg,#0f2b40 0%,#17b890 100%);color:#fff;padding:12px 18px;border-radius:12px;margin:12px 0;">
-            <h2 style="font-size:0.95rem;font-weight:700;"><i class="fa-solid fa-bullseye"></i> Program Overview</h2>
-            <p style="font-size:0.8rem;opacity:0.9;line-height:1.6;">Real-time intelligence for the <strong>Competency Based Training (CBT)</strong> initiative. Powered by live Google Sheets data, enabling instant visibility into workforce capabilities, training progression, and competency gaps.</p>
+        <!-- ============================================================
+        BRIEF
+        ============================================================ -->
+        <div class="brief-section">
+            <h2><i class="fa-solid fa-bullseye"></i> Program Overview</h2>
+            <p>
+                This dashboard provides <span class="highlight">real-time intelligence</span> for the
+                <strong>Competency Based Training (CBT)</strong> initiative. Powered by live Google Sheets data,
+                it enables <span class="highlight">instant visibility</span> into workforce capabilities,
+                training progression, and competency gaps — empowering data-driven decisions for
+                <span class="highlight">sustainable talent development</span>.
+            </p>
         </div>
 
+        <!-- ============================================================
+        FILTERS
+        ============================================================ -->
         <div class="filter-bar" id="filterBar">
             <div class="filter-row">
                 <span class="filter-label"><i class="fa-solid fa-book"></i> Programs:</span>
@@ -229,6 +422,9 @@
             </div>
         </div>
 
+        <!-- ============================================================
+        KPI GRID
+        ============================================================ -->
         <div class="kpi-grid" id="kpiGrid">
             <div class="kpi-card"><div class="kpi-info"><h4>Total Workforce</h4><div class="num" id="kpiTotal">...</div></div><i class="fa-solid fa-users"></i></div>
             <div class="kpi-card"><div class="kpi-info"><h4>Executives (L4+)</h4><div class="num" id="kpiL4">...</div></div><i class="fa-solid fa-crown"></i></div>
@@ -242,6 +438,9 @@
             <div class="kpi-card"><div class="kpi-info"><h4>Active Phases</h4><div class="num" id="kpiPhases">...</div></div><i class="fa-solid fa-clock"></i></div>
         </div>
 
+        <!-- ============================================================
+        SEARCH + CHARTS
+        ============================================================ -->
         <div class="search-charts-grid">
             <div class="search-wrapper">
                 <h3><i class="fa-solid fa-magnifying-glass"></i> Employee Query</h3>
@@ -274,55 +473,111 @@
             </div>
             <div class="charts-grid">
                 <div class="chart-box" id="chartBoxSector">
-                    <h4><i class="fa-solid fa-chart-bar" style="color:#1e3d59;"></i> Employees by Sector</h4>
+                    <h4><i class="fa-solid fa-chart-bar" style="color:var(--cpc-blue);"></i> Employees by Sector</h4>
                     <div class="chart-container"><canvas id="chartSector"></canvas></div>
                 </div>
                 <div class="chart-box" id="chartBoxLevel">
-                    <h4><i class="fa-solid fa-layer-group" style="color:#ff6e40;"></i> Competency Levels</h4>
+                    <h4><i class="fa-solid fa-layer-group" style="color:var(--koki-orange);"></i> Competency Levels</h4>
                     <div class="chart-container"><canvas id="chartLevel"></canvas></div>
                 </div>
             </div>
         </div>
 
+        <!-- ============================================================
+        CHARTS - 2 per row
+        ============================================================ -->
         <div class="charts-grid-2">
             <div class="chart-box" id="chartBoxDept">
-                <h4><i class="fa-solid fa-users-between-lines" style="color:#10b981;"></i> Department Size</h4>
+                <h4><i class="fa-solid fa-users-between-lines" style="color:var(--success);"></i> Department Size</h4>
                 <div class="chart-container"><canvas id="chartDepartment"></canvas></div>
             </div>
             <div class="chart-box" id="chartBoxAttendance">
-                <h4><i class="fa-solid fa-chart-line" style="color:#f59e0b;"></i> Attendance vs Completion</h4>
+                <h4><i class="fa-solid fa-chart-line" style="color:var(--warning);"></i> Attendance vs Completion</h4>
                 <div class="chart-container"><canvas id="chartAttendance"></canvas></div>
             </div>
             <div class="chart-box" id="chartBoxPhase">
-                <h4><i class="fa-solid fa-clock" style="color:#3b82f6;"></i> Training Phase Distribution</h4>
+                <h4><i class="fa-solid fa-clock" style="color:var(--info);"></i> Training Phase Distribution</h4>
                 <div class="chart-container"><canvas id="chartPhase"></canvas></div>
             </div>
             <div class="chart-box" id="chartBoxLocation">
-                <h4><i class="fa-solid fa-location-dot" style="color:#ef4444;"></i> Training Location Distribution</h4>
+                <h4><i class="fa-solid fa-location-dot" style="color:var(--danger);"></i> Training Location Distribution</h4>
                 <div class="chart-container"><canvas id="chartLocation"></canvas></div>
             </div>
         </div>
 
+        <!-- ============================================================
+        ADDITIONAL CHARTS
+        ============================================================ -->
         <div class="charts-grid-2" style="margin-top:12px;">
             <div class="chart-box" id="chartBoxQuality">
-                <h4><i class="fa-solid fa-gauge-high" style="color:#1e3d59;"></i> Data Quality Overview</h4>
+                <h4><i class="fa-solid fa-gauge-high" style="color:var(--cpc-blue);"></i> Data Quality Overview</h4>
                 <div class="chart-container"><canvas id="chartQuality"></canvas></div>
             </div>
             <div class="chart-box" id="chartBoxPrograms">
-                <h4><i class="fa-solid fa-book-open" style="color:#8b5cf6;"></i> Program Enrollment Distribution</h4>
+                <h4><i class="fa-solid fa-book-open" style="color:var(--purple);"></i> Program Enrollment Distribution</h4>
                 <div class="chart-container"><canvas id="chartPrograms"></canvas></div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+        INSIGHTS SECTION - جديد
+        ============================================================ -->
+        <div class="insights-section" id="insightsSection">
+            <div class="insight-card">
+                <div class="insight-icon"><i class="fa-solid fa-users"></i></div>
+                <h4>Largest Department</h4>
+                <div class="insight-value" id="insightLargestDept">-</div>
+                <div class="insight-desc" id="insightLargestDeptDesc">Employees</div>
+                <span class="insight-tag info">🏆 Top Performer</span>
+            </div>
+            <div class="insight-card">
+                <div class="insight-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                <h4>Highest Completion Program</h4>
+                <div class="insight-value" id="insightBestProgram">-</div>
+                <div class="insight-desc" id="insightBestProgramDesc">Completion Rate</div>
+                <span class="insight-tag good">✅ Excellent</span>
+            </div>
+            <div class="insight-card">
+                <div class="insight-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                <h4>Lowest Completion Program</h4>
+                <div class="insight-value" id="insightWorstProgram">-</div>
+                <div class="insight-desc" id="insightWorstProgramDesc">Completion Rate</div>
+                <span class="insight-tag danger">⚠️ Needs Attention</span>
+            </div>
+            <div class="insight-card">
+                <div class="insight-icon"><i class="fa-solid fa-location-dot"></i></div>
+                <h4>Most Popular Location</h4>
+                <div class="insight-value" id="insightTopLocation">-</div>
+                <div class="insight-desc" id="insightTopLocationDesc">Employees</div>
+                <span class="insight-tag info">📍 Top Location</span>
+            </div>
+            <div class="insight-card">
+                <div class="insight-icon"><i class="fa-solid fa-layer-group"></i></div>
+                <h4>Largest Competency Level</h4>
+                <div class="insight-value" id="insightTopLevel">-</div>
+                <div class="insight-desc" id="insightTopLevelDesc">Employees</div>
+                <span class="insight-tag info">📊 Key Segment</span>
+            </div>
+            <div class="insight-card">
+                <div class="insight-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <h4>Data Quality Status</h4>
+                <div class="insight-value" id="insightQualityStatus">-</div>
+                <div class="insight-desc" id="insightQualityStatusDesc">Overall Quality</div>
+                <span class="insight-tag good" id="insightQualityTag">✅ Good</span>
             </div>
         </div>
 
     </div>
 
+    <!-- ============================================================
+    JAVASCRIPT
+    ============================================================ -->
     <script>
         // ============================================================
         // CONFIG - أسماء الأعمدة الصحيحة من الشيت
         // ============================================================
         const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRu0vhUS8c-hbFznxR_F9K9LNueNeabXiLwMjMzppgpIjJCSNCadsHDVVGxwiKYYHve9-Qtb37ALs8P/pub?gid=1032977671&single=true&output=csv";
 
-        // أسماء الأعمدة في الشيت (من أول سطر في الشيت)
         const COLUMNS = {
             ID: 'ID',
             Name: 'Name',
@@ -344,7 +599,6 @@
             Accommodation: 'Accommodation'
         };
 
-        // البرامج مع أسمائها الصحيحة
         const PROGRAM_FIELDS = {
             '7 Sens Program': COLUMNS.SevenSens,
             'Analytical Thinking Program': COLUMNS.Analytical,
@@ -402,10 +656,9 @@
         }
 
         // ============================================================
-        // UPDATE BADGE COUNTS - باستخدام الأسماء الصحيحة
+        // UPDATE FILTER BADGE COUNTS
         // ============================================================
         function updateFilterBadges(data) {
-            // برامج
             const progAll = data.length;
             document.getElementById('progAllCount').textContent = progAll;
 
@@ -420,7 +673,6 @@
                 if (el) el.textContent = count;
             });
 
-            // Locations
             document.getElementById('locAllCount').textContent = data.length;
             ['Steigenberger', 'TOR', 'Nob', 'Alsaff'].forEach(loc => {
                 const count = data.filter(r => String(r[COLUMNS.TrainingLocation] || '').includes(loc)).length;
@@ -429,7 +681,6 @@
                 if (el) el.textContent = count;
             });
 
-            // Levels
             document.getElementById('lvlAllCount').textContent = data.length;
             ['L4', 'L3', 'L2', 'L1'].forEach(lvl => {
                 const count = data.filter(r => String(r['C-LVL'] || '').includes(lvl)).length;
@@ -438,7 +689,6 @@
                 if (el) el.textContent = count;
             });
 
-            // Phases
             document.getElementById('phaseAllCount').textContent = data.length;
             ['Phase1', 'Phase2', 'Phase3', 'Phase4', 'Online-Phase4'].forEach(ph => {
                 const count = data.filter(r => String(r[COLUMNS.TrainingPhase] || '').includes(ph)).length;
@@ -447,7 +697,6 @@
                 if (el) el.textContent = count;
             });
 
-            // Attendance
             const attAll = data.length;
             const attAttend = data.filter(r => {
                 const val = String(r[COLUMNS.SevenSens] || '').toLowerCase();
@@ -463,12 +712,98 @@
         }
 
         // ============================================================
+        // UPDATE INSIGHTS
+        // ============================================================
+        function updateInsights(data) {
+            if (!data || data.length === 0) return;
+
+            // 1. Largest Department
+            const deptCounts = {};
+            data.forEach(r => {
+                const d = r[COLUMNS.Department] || 'Unknown';
+                deptCounts[d] = (deptCounts[d] || 0) + 1;
+            });
+            const sortedDepts = Object.entries(deptCounts).sort((a, b) => b[1] - a[1]);
+            if (sortedDepts.length > 0) {
+                document.getElementById('insightLargestDept').textContent = sortedDepts[0][0];
+                document.getElementById('insightLargestDeptDesc').textContent = sortedDepts[0][1] + ' employees';
+            }
+
+            // 2. Best & Worst Program
+            const progRates = {};
+            Object.keys(PROGRAM_FIELDS).forEach(progName => {
+                const field = PROGRAM_FIELDS[progName];
+                const total = data.filter(r => r[field] && r[field].trim() !== '').length;
+                const attended = data.filter(r => {
+                    const val = String(r[field] || '').toLowerCase();
+                    return val === 'attend' || val === 'attended' || val.includes('attend');
+                }).length;
+                progRates[progName] = total > 0 ? Math.round((attended / total) * 100) : 0;
+            });
+            const sortedProgs = Object.entries(progRates).sort((a, b) => b[1] - a[1]);
+            if (sortedProgs.length > 0) {
+                const best = sortedProgs[0];
+                document.getElementById('insightBestProgram').textContent = best[0].replace(' Program', '');
+                document.getElementById('insightBestProgramDesc').textContent = best[1] + '% completion';
+
+                const worst = sortedProgs[sortedProgs.length - 1];
+                document.getElementById('insightWorstProgram').textContent = worst[0].replace(' Program', '');
+                document.getElementById('insightWorstProgramDesc').textContent = worst[1] + '% completion';
+            }
+
+            // 3. Top Location
+            const locCounts = {};
+            data.forEach(r => {
+                const l = r[COLUMNS.TrainingLocation] || 'Unknown';
+                locCounts[l] = (locCounts[l] || 0) + 1;
+            });
+            const sortedLocs = Object.entries(locCounts).sort((a, b) => b[1] - a[1]);
+            if (sortedLocs.length > 0) {
+                document.getElementById('insightTopLocation').textContent = sortedLocs[0][0];
+                document.getElementById('insightTopLocationDesc').textContent = sortedLocs[0][1] + ' employees';
+            }
+
+            // 4. Largest Competency Level
+            const levelCounts = {};
+            data.forEach(r => {
+                const l = r['C-LVL'] || 'Unknown';
+                levelCounts[l] = (levelCounts[l] || 0) + 1;
+            });
+            const sortedLevels = Object.entries(levelCounts).sort((a, b) => b[1] - a[1]);
+            if (sortedLevels.length > 0) {
+                document.getElementById('insightTopLevel').textContent = sortedLevels[0][0];
+                document.getElementById('insightTopLevelDesc').textContent = sortedLevels[0][1] + ' employees';
+            }
+
+            // 5. Data Quality Status
+            const total = data.length;
+            const hasId = data.filter(r => r['ID'] && r['ID'].trim()).length;
+            const hasName = data.filter(r => r['Name'] && r['Name'].trim()).length;
+            const hasDept = data.filter(r => r[COLUMNS.Department] && r[COLUMNS.Department].trim()).length;
+            const qualityScore = total > 0 ? Math.round(((hasId + hasName + hasDept) / (total * 3)) * 100) : 0;
+
+            document.getElementById('insightQualityStatus').textContent = qualityScore + '%';
+            document.getElementById('insightQualityStatusDesc').textContent = total + ' records analyzed';
+
+            const tag = document.getElementById('insightQualityTag');
+            if (qualityScore >= 85) {
+                tag.textContent = '✅ Excellent';
+                tag.className = 'insight-tag good';
+            } else if (qualityScore >= 70) {
+                tag.textContent = '⚠️ Good';
+                tag.className = 'insight-tag warning';
+            } else {
+                tag.textContent = '❌ Needs Improvement';
+                tag.className = 'insight-tag danger';
+            }
+        }
+
+        // ============================================================
         // FILTERS
         // ============================================================
         function applyFilters() {
             filteredData = [...allData];
 
-            // Program filter باستخدام الأسماء الصحيحة
             if (activeFilters.program !== 'all') {
                 const field = PROGRAM_FIELDS[activeFilters.program];
                 if (field) {
@@ -526,6 +861,59 @@
         }
 
         // ============================================================
+        // CHART INTERACTIVITY
+        // ============================================================
+        function setupChartInteractivity() {
+            const charts = [
+                { chart: chartInstances.sector, filterType: 'location', id: 'chartBoxSector' },
+                { chart: chartInstances.level, filterType: 'level', id: 'chartBoxLevel' },
+                { chart: chartInstances.department, filterType: 'department', id: 'chartBoxDept' },
+                { chart: chartInstances.location, filterType: 'location', id: 'chartBoxLocation' },
+                { chart: chartInstances.phase, filterType: 'phase', id: 'chartBoxPhase' },
+                { chart: chartInstances.programs, filterType: 'program', id: 'chartBoxPrograms' }
+            ];
+
+            charts.forEach(({ chart, filterType, id }) => {
+                if (!chart) return;
+                chart.on('click', function(e) {
+                    if (e.dataIndex !== undefined) {
+                        const label = chart.data.labels[e.dataIndex];
+                        let filterValue = label;
+
+                        if (filterType === 'location') {
+                            const locations = ['Steigenberger', 'TOR', 'Nob', 'Alsaff'];
+                            for (let loc of locations) {
+                                if (label.includes(loc)) { filterValue = loc; break; }
+                            }
+                        }
+
+                        if (activeFilters[filterType] === filterValue) {
+                            activeFilters[filterType] = 'all';
+                        } else {
+                            activeFilters[filterType] = filterValue;
+                        }
+
+                        const groupId = filterType + 'Filters';
+                        const group = document.getElementById(groupId);
+                        if (group) {
+                            group.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                            if (activeFilters[filterType] !== 'all') {
+                                const btn = group.querySelector(`.filter-btn[data-value="${filterValue}"]`);
+                                if (btn) btn.classList.add('active');
+                            } else {
+                                const btn = group.querySelector('.filter-btn[data-value="all"]');
+                                if (btn) btn.classList.add('active');
+                            }
+                        }
+                        applyFilters();
+                    }
+                });
+                chart.on('mouseover', function(e) { if (e.dataIndex !== undefined) { document.body.style.cursor = 'pointer'; } });
+                chart.on('mouseout', function() { document.body.style.cursor = 'default'; });
+            });
+        }
+
+        // ============================================================
         // RENDER DASHBOARD
         // ============================================================
         function renderDashboard(data) {
@@ -572,28 +960,25 @@
             document.getElementById('kpiPhases').textContent = phases.size.toLocaleString();
 
             updateFilterBadges(data);
+            updateInsights(data);
 
             // --- CHART DATA ---
-            // Sector
             const sectorCounts = {};
             data.forEach(r => { const s = r[COLUMNS.Sector] || 'Unknown'; sectorCounts[s] = (sectorCounts[s] || 0) + 1; });
             const sectorLabels = Object.keys(sectorCounts);
             const sectorValues = Object.values(sectorCounts);
 
-            // Levels
             const levelCounts = {};
             data.forEach(r => { const l = r['C-LVL'] || 'Unknown'; levelCounts[l] = (levelCounts[l] || 0) + 1; });
             const levelLabels = Object.keys(levelCounts);
             const levelValues = Object.values(levelCounts);
 
-            // Departments
             const deptCounts = {};
             data.forEach(r => { const d = r[COLUMNS.Department] || 'Unknown'; deptCounts[d] = (deptCounts[d] || 0) + 1; });
             const sortedDepts = Object.entries(deptCounts).sort((a,b) => b[1]-a[1]).slice(0,8);
             const deptLabels = sortedDepts.map(d => d[0]);
             const deptValues = sortedDepts.map(d => d[1]);
 
-            // Attendance vs Completion by Sector
             const sectorAtt = {}, sectorComp = {};
             data.forEach(r => {
                 const s = r[COLUMNS.Sector] || 'Unknown';
@@ -614,19 +999,16 @@
                 return totalSector > 0 ? Math.round((sectorComp[s] / totalSector) * 100) : 0;
             });
 
-            // Phases
             const phaseCounts = {};
             data.forEach(r => { const p = r[COLUMNS.TrainingPhase] || 'Unknown'; phaseCounts[p] = (phaseCounts[p] || 0) + 1; });
             const phaseLabels = Object.keys(phaseCounts);
             const phaseValues = Object.values(phaseCounts);
 
-            // Locations
             const locCounts = {};
             data.forEach(r => { const l = r[COLUMNS.TrainingLocation] || 'Unknown'; locCounts[l] = (locCounts[l] || 0) + 1; });
             const locLabels = Object.keys(locCounts);
             const locValues = Object.values(locCounts);
 
-            // Quality
             const qualityData = {
                 'Valid IDs': hasId, 'Valid Names': hasName, 'Valid Departments': hasDept,
                 'Has Grade': data.filter(r => r['Grade'] && r['Grade'].trim()).length,
@@ -635,7 +1017,6 @@
             const qualityLabels = Object.keys(qualityData);
             const qualityValues = Object.values(qualityData);
 
-            // Program Enrollment - باستخدام الأسماء الصحيحة
             const progEnroll = {};
             Object.keys(PROGRAM_FIELDS).forEach(progName => {
                 const field = PROGRAM_FIELDS[progName];
@@ -779,69 +1160,9 @@
                 plugins: [ChartDataLabels]
             });
 
-            // Chart Interactivity (Click on charts)
             setupChartInteractivity();
 
             console.log('📊 Dashboard rendered with', data.length, 'records');
-        }
-
-        // ============================================================
-        // CHART INTERACTIVITY
-        // ============================================================
-        function setupChartInteractivity() {
-            const charts = [
-                { chart: chartInstances.sector, filterType: 'location', id: 'chartBoxSector' },
-                { chart: chartInstances.level, filterType: 'level', id: 'chartBoxLevel' },
-                { chart: chartInstances.department, filterType: 'department', id: 'chartBoxDept' },
-                { chart: chartInstances.location, filterType: 'location', id: 'chartBoxLocation' },
-                { chart: chartInstances.phase, filterType: 'phase', id: 'chartBoxPhase' },
-                { chart: chartInstances.programs, filterType: 'program', id: 'chartBoxPrograms' }
-            ];
-
-            charts.forEach(({ chart, filterType, id }) => {
-                if (!chart) return;
-                chart.on('click', function(e) {
-                    if (e.dataIndex !== undefined) {
-                        const label = chart.data.labels[e.dataIndex];
-                        // Map label to filter value
-                        let filterValue = label;
-                        if (filterType === 'location') {
-                            // Check if label matches a location
-                            const locations = ['Steigenberger', 'TOR', 'Nob', 'Alsaff'];
-                            if (locations.includes(label)) {
-                                filterValue = label;
-                            } else {
-                                // Try to find if label contains a location
-                                for (let loc of locations) {
-                                    if (label.includes(loc)) { filterValue = loc; break; }
-                                }
-                            }
-                        }
-                        // Toggle filter
-                        if (activeFilters[filterType] === filterValue) {
-                            activeFilters[filterType] = 'all';
-                        } else {
-                            activeFilters[filterType] = filterValue;
-                        }
-                        // Update UI buttons
-                        const groupId = filterType + 'Filters';
-                        const group = document.getElementById(groupId);
-                        if (group) {
-                            group.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                            if (activeFilters[filterType] !== 'all') {
-                                const btn = group.querySelector(`.filter-btn[data-value="${filterValue}"]`);
-                                if (btn) btn.classList.add('active');
-                            } else {
-                                const btn = group.querySelector('.filter-btn[data-value="all"]');
-                                if (btn) btn.classList.add('active');
-                            }
-                        }
-                        applyFilters();
-                    }
-                });
-                chart.on('mouseover', function(e) { if (e.dataIndex !== undefined) { document.body.style.cursor = 'pointer'; } });
-                chart.on('mouseout', function() { document.body.style.cursor = 'default'; });
-            });
         }
 
         // ============================================================
@@ -871,12 +1192,12 @@
                 if (val === 'attend' || val === 'attended' || val.includes('attend')) attendedCount++;
                 else if (val === 'not attend' || val.includes('not attend')) notAttendedCount++;
             });
-            document.getElementById('statAttended').textContent = `✅ Attended: ${attendedCount}`;
-            document.getElementById('statNotAttended').textContent = `❌ Not Attended: ${notAttendedCount}`;
-            document.getElementById('statGroup').textContent = `📋 Group: ${emp[COLUMNS.TrainingGroup] || 'N/A'}`;
-            document.getElementById('statLocation').textContent = `📍 Location: ${emp[COLUMNS.TrainingLocation] || 'N/A'}`;
+            document.getElementById('statAttended').textContent = '✅ Attended: ' + attendedCount;
+            document.getElementById('statNotAttended').textContent = '❌ Not Attended: ' + notAttendedCount;
+            document.getElementById('statGroup').textContent = '📋 Group: ' + (emp[COLUMNS.TrainingGroup] || 'N/A');
+            document.getElementById('statLocation').textContent = '📍 Location: ' + (emp[COLUMNS.TrainingLocation] || 'N/A');
             const accom = String(emp[COLUMNS.Accommodation] || '').toLowerCase();
-            document.getElementById('statAccommodation').textContent = `🏠 Accommodation: ${accom === 'yes' ? '✅ Yes' : accom === 'no' ? '❌ No' : 'N/A'}`;
+            document.getElementById('statAccommodation').textContent = '🏠 Accommodation: ' + (accom === 'yes' ? '✅ Yes' : accom === 'no' ? '❌ No' : 'N/A');
 
             const progContainer = document.getElementById('resPrograms');
             progContainer.innerHTML = '';
@@ -893,7 +1214,7 @@
                 programs.forEach(p => {
                     const tag = document.createElement('span');
                     tag.className = 'tag';
-                    tag.innerHTML = `<i class="fa-solid fa-graduation-cap"></i> ${p}`;
+                    tag.innerHTML = '<i class="fa-solid fa-graduation-cap"></i> ' + p;
                     progContainer.appendChild(tag);
                 });
             } else {
