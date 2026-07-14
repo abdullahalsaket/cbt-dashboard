@@ -10,9 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 
     <style>
-        /* ============================================================
-           الألوان المتوافقة مع اللوجوز (CPC أزرق + Koki برتقالي)
-           ============================================================ */
+        /* ===== CSS ===== */
         :root {
             --cpc-blue-dark: #0f2b40;
             --cpc-blue: #1e3d59;
@@ -42,9 +40,6 @@
             min-height: 100vh;
         }
 
-        /* ============================================================
-           HEADER - ألوان متوافقة
-           ============================================================ */
         .navbar {
             background: linear-gradient(135deg, var(--cpc-blue-dark) 0%, var(--cpc-blue) 100%);
             color: white;
@@ -88,19 +83,32 @@
             align-items: center;
             gap: 6px;
         }
-        .update-notification {
-            background: var(--success);
-            padding: 4px 14px;
+        .navbar .status-badge .fa-spinner {
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .refresh-btn {
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 4px 12px;
             border-radius: 30px;
             font-size: 0.6rem;
-            display: none;
-            animation: slideDown 0.4s ease;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Cairo', sans-serif;
         }
-        .update-notification.show { display: inline-flex; align-items: center; gap: 6px; }
+        .refresh-btn:hover {
+            background: rgba(255,255,255,0.25);
+        }
+        .refresh-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
 
-        /* ============================================================
-           FILTER BAR
-           ============================================================ */
         .filter-bar {
             background: var(--white);
             padding: 10px 16px;
@@ -132,14 +140,8 @@
         }
         .clear-filters-btn:hover { border-color: var(--danger); color: var(--danger); background: rgba(239,68,68,0.05); }
 
-        /* ============================================================
-           CONTAINER
-           ============================================================ */
         .container { max-width: 1440px; margin: 0 auto; padding: 0 12px; }
 
-        /* ============================================================
-           BRIEF SECTION - ألوان متوافقة
-           ============================================================ */
         .brief-section {
             background: linear-gradient(135deg, var(--cpc-blue-dark) 0%, #17b890 100%);
             color: white;
@@ -151,9 +153,6 @@
         .brief-section p { font-size: 0.8rem; opacity: 0.92; line-height: 1.6; }
         .brief-section .highlight { color: var(--koki-orange); font-weight: 700; }
 
-        /* ============================================================
-           KPI GRID
-           ============================================================ */
         .kpi-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
@@ -177,9 +176,6 @@
         .kpi-info h4 { font-size: 0.55rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 2px; }
         .kpi-info .num { font-size: 1.1rem; font-weight: 800; color: var(--cpc-blue); }
 
-        /* ============================================================
-           SEARCH + CHARTS
-           ============================================================ */
         .search-charts-grid {
             display: grid;
             grid-template-columns: 280px 1fr;
@@ -207,6 +203,8 @@
         }
         .search-box button:hover { background: var(--koki-orange-hover); }
         .loading-status { font-size: 0.65rem; color: var(--text-muted); margin-top: 6px; }
+        .loading-status.error { color: var(--danger); }
+        .loading-status.success { color: var(--success); }
 
         .result-card {
             margin-top: 10px; background: #f8fafc; border-radius: var(--border-radius);
@@ -225,9 +223,6 @@
         .training-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
         .tag { background: #e2e8f0; color: var(--cpc-blue); padding: 2px 8px; border-radius: 20px; font-size: 0.55rem; font-weight: 600; }
 
-        /* ============================================================
-           CHARTS
-           ============================================================ */
         .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 12px 0; }
         .charts-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 12px 0; }
         .chart-box {
@@ -244,12 +239,9 @@
         .chart-box canvas { width: 100% !important; height: 220px !important; max-height: 220px; }
         .chart-box .chart-container { position: relative; width: 100%; height: 220px; }
 
-        /* ============================================================
-           INSIGHTS SECTION
-           ============================================================ */
         .insights-section {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 16px;
             margin: 16px 0 30px 0;
         }
@@ -262,44 +254,18 @@
             transition: var(--transition);
         }
         .insight-card:hover { box-shadow: var(--shadow-hover); transform: translateX(4px); }
-        .insight-card .insight-icon {
-            font-size: 1.2rem;
-            color: var(--koki-orange);
-            margin-right: 8px;
-        }
-        .insight-card h4 {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 4px;
-        }
-        .insight-card .insight-value {
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: var(--cpc-blue);
-        }
-        .insight-card .insight-desc {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-top: 4px;
-        }
+        .insight-card .insight-icon { font-size: 1.2rem; color: var(--koki-orange); margin-right: 8px; }
+        .insight-card h4 { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .insight-card .insight-value { font-size: 1.4rem; font-weight: 800; color: var(--cpc-blue); }
+        .insight-card .insight-desc { font-size: 0.75rem; color: var(--text-muted); margin-top: 4px; }
         .insight-card .insight-tag {
-            display: inline-block;
-            font-size: 0.55rem;
-            font-weight: 700;
-            padding: 2px 10px;
-            border-radius: 20px;
-            margin-top: 6px;
+            display: inline-block; font-size: 0.55rem; font-weight: 700; padding: 2px 10px; border-radius: 20px; margin-top: 6px;
         }
         .insight-tag.good { background: rgba(16,185,129,0.15); color: var(--success); }
         .insight-tag.warning { background: rgba(245,158,11,0.15); color: var(--warning); }
         .insight-tag.danger { background: rgba(239,68,68,0.15); color: var(--danger); }
         .insight-tag.info { background: rgba(59,130,246,0.15); color: var(--info); }
 
-        /* ============================================================
-           RESPONSIVE
-           ============================================================ */
         @media (max-width: 992px) {
             .search-charts-grid { grid-template-columns: 1fr; }
             .charts-grid { grid-template-columns: 1fr 1fr; }
@@ -326,18 +292,10 @@
             .chart-box canvas { height: 150px !important; max-height: 150px; }
             .chart-box .chart-container { height: 150px; }
         }
-
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
     </style>
 </head>
 <body>
 
-    <!-- ============================================================
-    HEADER
-    ============================================================ -->
     <div class="navbar">
         <div class="logo-left"><img src="CPC.png" alt="CPC Logo"></div>
         <div class="title-center">
@@ -346,19 +304,16 @@
         </div>
         <div class="logo-right"><img src="new koki.png" alt="Koki Logo"></div>
         <div class="status-badge">
-            <i class="fa-solid fa-cloud"></i> Live
-            <span id="updateNotification" class="update-notification"><i class="fa-solid fa-rotate"></i> Updated!</span>
+            <i class="fa-solid fa-cloud" id="statusIcon"></i>
+            <span id="statusText">Live</span>
+            <button class="refresh-btn" id="refreshBtn" title="Refresh Data">
+                <i class="fa-solid fa-rotate"></i> Refresh
+            </button>
         </div>
     </div>
 
-    <!-- ============================================================
-    MAIN CONTAINER
-    ============================================================ -->
     <div class="container">
 
-        <!-- ============================================================
-        BRIEF
-        ============================================================ -->
         <div class="brief-section">
             <h2><i class="fa-solid fa-bullseye"></i> Program Overview</h2>
             <p>
@@ -370,9 +325,6 @@
             </p>
         </div>
 
-        <!-- ============================================================
-        FILTERS
-        ============================================================ -->
         <div class="filter-bar" id="filterBar">
             <div class="filter-row">
                 <span class="filter-label"><i class="fa-solid fa-book"></i> Programs:</span>
@@ -422,9 +374,6 @@
             </div>
         </div>
 
-        <!-- ============================================================
-        KPI GRID
-        ============================================================ -->
         <div class="kpi-grid" id="kpiGrid">
             <div class="kpi-card"><div class="kpi-info"><h4>Total Workforce</h4><div class="num" id="kpiTotal">...</div></div><i class="fa-solid fa-users"></i></div>
             <div class="kpi-card"><div class="kpi-info"><h4>Executives (L4+)</h4><div class="num" id="kpiL4">...</div></div><i class="fa-solid fa-crown"></i></div>
@@ -438,9 +387,6 @@
             <div class="kpi-card"><div class="kpi-info"><h4>Active Phases</h4><div class="num" id="kpiPhases">...</div></div><i class="fa-solid fa-clock"></i></div>
         </div>
 
-        <!-- ============================================================
-        SEARCH + CHARTS
-        ============================================================ -->
         <div class="search-charts-grid">
             <div class="search-wrapper">
                 <h3><i class="fa-solid fa-magnifying-glass"></i> Employee Query</h3>
@@ -483,9 +429,6 @@
             </div>
         </div>
 
-        <!-- ============================================================
-        CHARTS - 2 per row
-        ============================================================ -->
         <div class="charts-grid-2">
             <div class="chart-box" id="chartBoxDept">
                 <h4><i class="fa-solid fa-users-between-lines" style="color:var(--success);"></i> Department Size</h4>
@@ -505,9 +448,6 @@
             </div>
         </div>
 
-        <!-- ============================================================
-        ADDITIONAL CHARTS
-        ============================================================ -->
         <div class="charts-grid-2" style="margin-top:12px;">
             <div class="chart-box" id="chartBoxQuality">
                 <h4><i class="fa-solid fa-gauge-high" style="color:var(--cpc-blue);"></i> Data Quality Overview</h4>
@@ -519,9 +459,6 @@
             </div>
         </div>
 
-        <!-- ============================================================
-        INSIGHTS SECTION - جديد
-        ============================================================ -->
         <div class="insights-section" id="insightsSection">
             <div class="insight-card">
                 <div class="insight-icon"><i class="fa-solid fa-users"></i></div>
@@ -569,12 +506,9 @@
 
     </div>
 
-    <!-- ============================================================
-    JAVASCRIPT
-    ============================================================ -->
     <script>
         // ============================================================
-        // CONFIG - أسماء الأعمدة الصحيحة من الشيت
+        // CONFIG
         // ============================================================
         const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRu0vhUS8c-hbFznxR_F9K9LNueNeabXiLwMjMzppgpIjJCSNCadsHDVVGxwiKYYHve9-Qtb37ALs8P/pub?gid=1032977671&single=true&output=csv";
 
@@ -612,8 +546,8 @@
         let filteredData = [];
         let chartInstances = {};
         let activeFilters = { program: 'all', location: 'all', level: 'all', phase: 'all', attendance: 'all' };
-        let lastFetchedData = '';
-        let fetchInterval = null;
+        let isLoading = false;
+        let loadError = false;
 
         // ============================================================
         // UTILITY
@@ -636,19 +570,6 @@
             return result;
         }
 
-        function checkForUpdates() {
-            fetch(SHEET_URL).then(res => res.text()).then(csv => {
-                const hash = csv.substring(0, 1000);
-                if (hash !== lastFetchedData) {
-                    lastFetchedData = hash;
-                    document.getElementById('updateNotification').classList.add('show');
-                    setTimeout(() => document.getElementById('updateNotification').classList.remove('show'), 4000);
-                    allData = csvToJSON(csv);
-                    applyFilters();
-                }
-            }).catch(() => {});
-        }
-
         function destroyCharts() {
             Object.keys(chartInstances).forEach(key => {
                 if (chartInstances[key]) { chartInstances[key].destroy(); delete chartInstances[key]; }
@@ -656,7 +577,7 @@
         }
 
         // ============================================================
-        // UPDATE FILTER BADGE COUNTS
+        // UPDATE BADGE COUNTS
         // ============================================================
         function updateFilterBadges(data) {
             const progAll = data.length;
@@ -717,7 +638,6 @@
         function updateInsights(data) {
             if (!data || data.length === 0) return;
 
-            // 1. Largest Department
             const deptCounts = {};
             data.forEach(r => {
                 const d = r[COLUMNS.Department] || 'Unknown';
@@ -729,7 +649,6 @@
                 document.getElementById('insightLargestDeptDesc').textContent = sortedDepts[0][1] + ' employees';
             }
 
-            // 2. Best & Worst Program
             const progRates = {};
             Object.keys(PROGRAM_FIELDS).forEach(progName => {
                 const field = PROGRAM_FIELDS[progName];
@@ -751,7 +670,6 @@
                 document.getElementById('insightWorstProgramDesc').textContent = worst[1] + '% completion';
             }
 
-            // 3. Top Location
             const locCounts = {};
             data.forEach(r => {
                 const l = r[COLUMNS.TrainingLocation] || 'Unknown';
@@ -763,7 +681,6 @@
                 document.getElementById('insightTopLocationDesc').textContent = sortedLocs[0][1] + ' employees';
             }
 
-            // 4. Largest Competency Level
             const levelCounts = {};
             data.forEach(r => {
                 const l = r['C-LVL'] || 'Unknown';
@@ -775,7 +692,6 @@
                 document.getElementById('insightTopLevelDesc').textContent = sortedLevels[0][1] + ' employees';
             }
 
-            // 5. Data Quality Status
             const total = data.length;
             const hasId = data.filter(r => r['ID'] && r['ID'].trim()).length;
             const hasName = data.filter(r => r['Name'] && r['Name'].trim()).length;
@@ -802,6 +718,7 @@
         // FILTERS
         // ============================================================
         function applyFilters() {
+            if (!allData || allData.length === 0) return;
             filteredData = [...allData];
 
             if (activeFilters.program !== 'all') {
@@ -917,10 +834,12 @@
         // RENDER DASHBOARD
         // ============================================================
         function renderDashboard(data) {
-            if (!data || data.length === 0) { console.warn("No data."); return; }
+            if (!data || data.length === 0) {
+                console.warn("No data.");
+                return;
+            }
             const total = data.length;
 
-            // KPIs
             const l4Count = data.filter(r => String(r['C-LVL'] || '').includes('L4')).length;
             const sectors = new Set(data.map(r => r[COLUMNS.Sector]).filter(Boolean));
             const departments = new Set(data.map(r => r[COLUMNS.Department]).filter(Boolean));
@@ -1162,7 +1081,59 @@
 
             setupChartInteractivity();
 
+            // Update status
+            document.getElementById('statusText').textContent = 'Live';
+            document.getElementById('statusIcon').className = 'fa-solid fa-cloud';
+            const msg = document.getElementById('loadingMsg');
+            msg.className = 'loading-status success';
+            msg.innerHTML = '<i class="fa-solid fa-check-circle"></i> Data loaded: ' + data.length + ' records';
+            document.getElementById('refreshBtn').disabled = false;
+
             console.log('📊 Dashboard rendered with', data.length, 'records');
+        }
+
+        // ============================================================
+        // LOAD DATA
+        // ============================================================
+        function loadData() {
+            if (isLoading) return;
+            isLoading = true;
+            loadError = false;
+
+            const msg = document.getElementById('loadingMsg');
+            msg.className = 'loading-status';
+            msg.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Loading data...';
+
+            document.getElementById('statusText').textContent = 'Loading...';
+            document.getElementById('statusIcon').className = 'fa-solid fa-spinner';
+            document.getElementById('refreshBtn').disabled = true;
+
+            fetch(SHEET_URL)
+                .then(res => {
+                    if (!res.ok) throw new Error('Network error: ' + res.status);
+                    return res.text();
+                })
+                .then(csv => {
+                    allData = csvToJSON(csv);
+                    isLoading = false;
+                    document.getElementById('statusText').textContent = 'Live';
+                    document.getElementById('statusIcon').className = 'fa-solid fa-cloud';
+                    document.getElementById('refreshBtn').disabled = false;
+                    msg.className = 'loading-status success';
+                    msg.innerHTML = '<i class="fa-solid fa-check-circle"></i> Loaded: ' + allData.length + ' records';
+                    setupFilterButtons();
+                    applyFilters();
+                })
+                .catch(err => {
+                    console.error('Load error:', err);
+                    isLoading = false;
+                    loadError = true;
+                    document.getElementById('statusText').textContent = 'Error';
+                    document.getElementById('statusIcon').className = 'fa-solid fa-triangle-exclamation';
+                    document.getElementById('refreshBtn').disabled = false;
+                    msg.className = 'loading-status error';
+                    msg.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Failed to load data. Click Refresh to retry.';
+                });
         }
 
         // ============================================================
@@ -1172,8 +1143,9 @@
             const id = document.getElementById('empIdInput').value.trim();
             const card = document.getElementById('resultProfile');
             if (!id) { alert('Enter Employee ID'); return; }
+            if (!allData || allData.length === 0) { alert('Data not loaded yet. Please wait.'); return; }
             const emp = allData.find(r => String(r['ID']).trim() === id);
-            if (!emp) { alert('Not found.'); card.style.display = 'none'; return; }
+            if (!emp) { alert('Employee ID not found.'); card.style.display = 'none'; return; }
 
             document.getElementById('resName').textContent = emp['Name'] || 'Not recorded';
             document.getElementById('resTitle').textContent = emp['Title'] || 'Not recorded';
@@ -1226,28 +1198,19 @@
         // ============================================================
         // INIT
         // ============================================================
-        window.addEventListener('DOMContentLoaded', () => {
-            const msg = document.getElementById('loadingMsg');
-            msg.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Connecting to Google Sheets...';
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load data on page load
+            loadData();
 
-            fetch(SHEET_URL)
-                .then(res => res.text())
-                .then(csv => {
-                    lastFetchedData = csv.substring(0, 1000);
-                    allData = csvToJSON(csv);
-                    msg.innerHTML = '<span style="color:#10b981;font-weight:600;"><i class="fa-solid fa-check-circle"></i> Synced: ' + allData.length + ' records.</span>';
-                    setupFilterButtons();
-                    applyFilters();
-                    setInterval(checkForUpdates, 30000);
-                })
-                .catch(() => {
-                    msg.innerHTML = '<span style="color:#ef4444;font-weight:600;"><i class="fa-solid fa-triangle-exclamation"></i> Failed to load. Retrying...</span>';
-                    setTimeout(() => location.reload(), 5000);
-                });
-        });
+            // Refresh button
+            document.getElementById('refreshBtn').addEventListener('click', function() {
+                loadData();
+            });
 
-        document.getElementById('empIdInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') searchEmployee();
+            // Enter key for search
+            document.getElementById('empIdInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') searchEmployee();
+            });
         });
     </script>
 
