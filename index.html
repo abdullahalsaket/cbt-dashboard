@@ -50,7 +50,7 @@
         .refresh-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
         /* ============================================================
-           TOP BAR - سلايسر النشاط + أزرار الطباعة
+           TOP BAR
            ============================================================ */
         .top-bar {
             background: var(--white);
@@ -101,11 +101,7 @@
         .top-bar .slicer-section .slicer-btn .badge { background: rgba(255,255,255,0.2); border-radius: 20px; padding: 0 8px; font-size: 0.5rem; margin-left: 4px; }
         .top-bar .slicer-section .slicer-btn.active .badge { background: rgba(255,255,255,0.25); }
 
-        .top-bar .action-buttons {
-            display: flex;
-            gap: 6px;
-            flex-shrink: 0;
-        }
+        .top-bar .action-buttons { display: flex; gap: 6px; flex-shrink: 0; }
         .top-bar .action-btn {
             padding: 4px 16px;
             border-radius: 30px;
@@ -121,27 +117,11 @@
             align-items: center;
             gap: 6px;
         }
-        .top-bar .action-btn:hover {
-            background: var(--cpc-blue-dark);
-            border-color: var(--cpc-blue-dark);
-            transform: translateY(-1px);
-        }
-        .top-bar .action-btn.print-btn {
-            background: var(--cpc-blue);
-            border-color: var(--cpc-blue);
-        }
-        .top-bar .action-btn.print-btn:hover {
-            background: var(--cpc-blue-dark);
-            border-color: var(--cpc-blue-dark);
-        }
-        .top-bar .action-btn.pdf-btn {
-            background: var(--danger);
-            border-color: var(--danger);
-        }
-        .top-bar .action-btn.pdf-btn:hover {
-            background: #dc2626;
-            border-color: #dc2626;
-        }
+        .top-bar .action-btn:hover { background: var(--cpc-blue-dark); border-color: var(--cpc-blue-dark); transform: translateY(-1px); }
+        .top-bar .action-btn.print-btn { background: var(--cpc-blue); border-color: var(--cpc-blue); }
+        .top-bar .action-btn.print-btn:hover { background: var(--cpc-blue-dark); border-color: var(--cpc-blue-dark); }
+        .top-bar .action-btn.pdf-btn { background: var(--danger); border-color: var(--danger); }
+        .top-bar .action-btn.pdf-btn:hover { background: #dc2626; border-color: #dc2626; }
 
         .alerts-container {
             background: var(--white);
@@ -254,6 +234,9 @@
         .charts-grid-2 .chart-box canvas { height: 260px !important; max-height: 260px; }
         .charts-grid-2 .chart-box .chart-container { height: 260px; }
 
+        /* ============================================================
+           EMPLOYEE DETAIL TABLE - تنسيق محسن
+           ============================================================ */
         .employee-detail-table {
             background: var(--white);
             border-radius: 14px;
@@ -273,6 +256,149 @@
         .employee-detail-table .badge-not-attend { background: rgba(239,68,68,0.15); color: var(--danger); padding: 2px 10px; border-radius: 20px; font-size: 0.6rem; font-weight: 600; }
         .employee-detail-table .badge-unknown { background: rgba(107,122,143,0.15); color: var(--text-muted); padding: 2px 10px; border-radius: 20px; font-size: 0.6rem; font-weight: 600; }
 
+        /* ============================================================
+           FILTERS - توزيع 3 يمين و 3 يسار
+           ============================================================ */
+        .filter-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 30px;
+            width: 100%;
+        }
+        .filter-grid .filter-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            padding: 4px 0;
+        }
+        .filter-grid .filter-item .filter-label {
+            font-size: 0.6rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            min-width: 55px;
+            flex-shrink: 0;
+            text-align: left;
+        }
+        .filter-grid .filter-item .filter-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3px 6px;
+            align-items: center;
+        }
+        .filter-grid .filter-item .filter-btn {
+            font-size: 0.55rem;
+            padding: 2px 10px;
+            white-space: nowrap;
+        }
+        .filter-grid .filter-item .filter-select {
+            font-size: 0.55rem;
+            padding: 3px 24px 3px 10px;
+            min-width: 100px;
+            max-width: 180px;
+        }
+        /* محاذاة العناصر في اليمين */
+        .filter-grid .filter-item-right {
+            justify-content: flex-end;
+        }
+        .filter-grid .filter-item-right .filter-label {
+            text-align: right;
+        }
+        .filter-grid .filter-item-right .filter-group {
+            justify-content: flex-end;
+        }
+
+        /* ============================================================
+           FILTERED EMPLOYEES DISPLAY - عرض المتدربين المفلترين
+           ============================================================ */
+        .filtered-employees {
+            background: var(--white);
+            border-radius: 14px;
+            padding: 16px 18px;
+            margin-top: 14px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border: 1px solid #e8ecf0;
+        }
+        .filtered-employees h4 {
+            font-size: 0.9rem;
+            color: var(--cpc-blue);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .filtered-employees .employee-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 10px;
+        }
+        .filtered-employees .emp-card {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 10px 14px;
+            border-right: 4px solid var(--cpc-blue);
+            transition: all 0.2s;
+        }
+        .filtered-employees .emp-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transform: translateY(-2px);
+        }
+        .filtered-employees .emp-card .emp-name {
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--cpc-blue);
+        }
+        .filtered-employees .emp-card .emp-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px 12px;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            margin-top: 3px;
+        }
+        .filtered-employees .emp-card .emp-details span {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .filtered-employees .emp-card .emp-badge {
+            font-size: 0.55rem;
+            font-weight: 600;
+            padding: 1px 10px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-top: 4px;
+        }
+        .filtered-employees .emp-card .emp-badge.attend {
+            background: rgba(16,185,129,0.15);
+            color: var(--success);
+        }
+        .filtered-employees .emp-card .emp-badge.not-attend {
+            background: rgba(239,68,68,0.15);
+            color: var(--danger);
+        }
+        .filtered-employees .emp-card .emp-badge.unknown {
+            background: rgba(107,122,143,0.15);
+            color: var(--text-muted);
+        }
+
+        .filtered-employees .no-results {
+            text-align: center;
+            padding: 30px 20px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+        .filtered-employees .no-results i {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 10px;
+            opacity: 0.4;
+        }
+
+        /* ============================================================
+           INSIGHTS
+           ============================================================ */
         .insights-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 16px 0 30px 0; }
         .insight-card { background: var(--white); padding: 16px 18px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border-left: 4px solid var(--koki-orange); transition: all 0.2s; }
         .insight-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); transform: translateX(4px); }
@@ -285,49 +411,6 @@
         .insight-tag.warning { background: rgba(245,158,11,0.15); color: var(--warning); }
         .insight-tag.danger { background: rgba(239,68,68,0.15); color: var(--danger); }
         .insight-tag.info { background: rgba(59,130,246,0.15); color: var(--info); }
-
-        /* ============================================================
-           الفلاتر - توزيع جديد مع مسافات مناسبة
-           ============================================================ */
-        .filter-group-horizontal {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 15px 30px;
-            width: 100%;
-        }
-        .filter-group-horizontal .filter-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-        .filter-group-horizontal .filter-item .filter-label {
-            font-size: 0.6rem;
-            font-weight: 700;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            min-width: 60px;
-            flex-shrink: 0;
-        }
-        .filter-group-horizontal .filter-item .filter-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px 6px;
-            align-items: center;
-        }
-        .filter-group-horizontal .filter-item .filter-btn {
-            font-size: 0.55rem;
-            padding: 3px 12px;
-            white-space: nowrap;
-        }
-        .filter-group-horizontal .filter-item .filter-select {
-            font-size: 0.55rem;
-            padding: 3px 24px 3px 10px;
-            min-width: 100px;
-            max-width: 180px;
-        }
 
         /* ============================================================
            RESPONSIVE
@@ -343,8 +426,11 @@
             .charts-grid-2 .chart-box .chart-container { height: 200px; }
             .top-bar { flex-direction: column; align-items: stretch; }
             .top-bar .action-buttons { justify-content: flex-start; }
-            .filter-group-horizontal { flex-direction: column; align-items: stretch; gap: 10px; }
-            .filter-group-horizontal .filter-item { flex-wrap: wrap; }
+            .filter-grid { grid-template-columns: 1fr; gap: 4px; }
+            .filter-grid .filter-item-right { justify-content: flex-start; }
+            .filter-grid .filter-item-right .filter-label { text-align: left; }
+            .filter-grid .filter-item-right .filter-group { justify-content: flex-start; }
+            .filtered-employees .employee-cards { grid-template-columns: 1fr 1fr; }
         }
         @media (max-width: 768px) {
             .navbar { flex-direction: column; text-align: center; }
@@ -362,8 +448,10 @@
             .employee-detail-table table { font-size: 0.65rem; }
             .employee-detail-table th, .employee-detail-table td { padding: 4px 8px; }
             .alerts-container .alert-item { font-size: 0.65rem; }
-            .filter-group-horizontal .filter-item .filter-label { min-width: 100%; }
+            .filtered-employees .employee-cards { grid-template-columns: 1fr; }
             .top-bar .slicer-section { flex-direction: column; align-items: stretch; }
+            .filter-grid .filter-item { flex-wrap: wrap; }
+            .filter-grid .filter-item .filter-label { min-width: 100%; }
         }
         @media (max-width: 480px) {
             .kpi-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
@@ -375,6 +463,7 @@
             .chart-box { padding: 12px 14px; }
             .top-bar .action-btn { font-size: 0.5rem; padding: 3px 10px; }
             .top-bar .slicer-section .slicer-btn { font-size: 0.55rem; padding: 4px 12px; }
+            .filtered-employees .employee-cards { grid-template-columns: 1fr; }
         }
 
         @media print {
@@ -385,7 +474,8 @@
             body { background: white !important; padding: 20px !important; font-size: 11px !important; color: #1a2332 !important; }
             .container { max-width: 100% !important; padding: 0 !important; }
             .kpi-card, .chart-box, .insight-card, .employee-detail-table,
-            .search-wrapper, .filter-bar, .brief-section, .alerts-container, .top-bar {
+            .search-wrapper, .filter-bar, .brief-section, .alerts-container, .top-bar,
+            .filtered-employees {
                 box-shadow: none !important;
                 border: 1px solid #ddd !important;
                 page-break-inside: avoid !important;
@@ -411,6 +501,8 @@
             .print-header .sub { color: #6b7a8f !important; font-size: 12px !important; }
             .print-footer { margin-top: 20px !important; padding-top: 10px !important; border-top: 1px solid #ddd !important; text-align: center !important; font-size: 10px !important; color: #6b7a8f !important; }
             .result-card { display: block !important; border-right: 4px solid var(--success) !important; background: #f8fafc !important; }
+            .filtered-employees .employee-cards { grid-template-columns: 1fr 1fr !important; }
+            .filtered-employees .emp-card { border: 1px solid #eee !important; }
         }
     </style>
 </head>
@@ -441,7 +533,7 @@
     <div class="container" id="printContainer">
 
         <!-- ============================================================
-        TOP BAR - سلايسر النشاط + أزرار الطباعة
+        TOP BAR
         ============================================================ -->
         <div class="top-bar no-print" id="topBar">
             <div class="slicer-section">
@@ -487,7 +579,7 @@
         </div>
 
         <!-- ============================================================
-        FILTER BAR
+        FILTER BAR - توزيع 3 يمين و 3 يسار
         ============================================================ -->
         <div class="filter-bar no-print" id="filterBar">
             
@@ -505,10 +597,10 @@
                 </div>
             </div>
 
-            <!-- الصف الثاني: Location + Level -->
-            <div class="filter-row">
-                <div class="filter-group-horizontal">
-                    <!-- Location -->
+            <!-- الصف الثاني: 3 يمين و 3 يسار -->
+            <div class="filter-row" style="border-bottom: none; padding-bottom: 0;">
+                <div class="filter-grid">
+                    <!-- الجهة اليسرى: Location + Level + Attend -->
                     <div class="filter-item">
                         <span class="filter-label"><i class="fa-solid fa-location-dot"></i> Location</span>
                         <div class="filter-group" id="locationFilters">
@@ -520,8 +612,7 @@
                         </div>
                     </div>
 
-                    <!-- Level -->
-                    <div class="filter-item">
+                    <div class="filter-item filter-item-right">
                         <span class="filter-label"><i class="fa-solid fa-layer-group"></i> Level</span>
                         <div class="filter-group" id="levelFilters">
                             <button class="filter-btn active" data-filter="level" data-value="all">All <span class="badge-count" id="lvlAllCount">0</span></button>
@@ -531,13 +622,7 @@
                             <button class="filter-btn" data-filter="level" data-value="L1">L1 <span class="badge-count" id="lvlL1Count">0</span></button>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <!-- الصف الثالث: Attend + Group + Phase -->
-            <div class="filter-row" style="border-bottom: none; padding-bottom: 0;">
-                <div class="filter-group-horizontal">
-                    <!-- Attend -->
                     <div class="filter-item">
                         <span class="filter-label"><i class="fa-solid fa-user-check"></i> Attend</span>
                         <div class="filter-group" id="attendanceFilters">
@@ -547,8 +632,7 @@
                         </div>
                     </div>
 
-                    <!-- Group -->
-                    <div class="filter-item">
+                    <div class="filter-item filter-item-right">
                         <span class="filter-label"><i class="fa-solid fa-layer-group"></i> Group</span>
                         <div class="filter-group">
                             <select class="filter-select" id="groupSelect">
@@ -557,7 +641,6 @@
                         </div>
                     </div>
 
-                    <!-- Phase -->
                     <div class="filter-item">
                         <span class="filter-label"><i class="fa-solid fa-clock"></i> Phase</span>
                         <div class="filter-group">
@@ -571,12 +654,16 @@
                             </select>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <!-- الصف الرابع: Reset Button فقط (أزرار الطباعة نقلت للأعلى) -->
-            <div class="filter-row" style="padding-top: 8px; border-top: 1px solid rgba(0,0,0,0.04);">
-                <button class="clear-filters-btn" onclick="clearAllFilters()"><i class="fa-solid fa-undo"></i> Reset All Filters</button>
+                    <div class="filter-item filter-item-right">
+                        <span class="filter-label"><i class="fa-solid fa-undo"></i> Reset</span>
+                        <div class="filter-group">
+                            <button class="clear-filters-btn" onclick="clearAllFilters()" style="margin:0;padding:4px 16px;border-radius:30px;border:2px solid #e2e8f0;background:transparent;font-family:'Cairo',sans-serif;font-size:0.6rem;font-weight:600;color:var(--text-muted);cursor:pointer;transition:all 0.2s;">
+                                <i class="fa-solid fa-undo"></i> Reset
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -681,10 +768,20 @@
         </div>
 
         <!-- ============================================================
-        EMPLOYEE DETAIL TABLE - إصلاح الجدول
+        FILTERED EMPLOYEES - عرض المتدربين المفلترين (بنفس شكل Employee Query)
+        ============================================================ -->
+        <div class="filtered-employees" id="filteredEmployees">
+            <h4><i class="fa-solid fa-users"></i> Filtered Employees <span id="filteredCount" style="font-size:0.7rem;color:var(--text-muted);font-weight:400;"></span></h4>
+            <div class="employee-cards" id="filteredCards">
+                <!-- سيتم ملؤها بواسطة JavaScript -->
+            </div>
+        </div>
+
+        <!-- ============================================================
+        EMPLOYEE DETAIL TABLE
         ============================================================ -->
         <div class="employee-detail-table" id="employeeDetailTable">
-            <h4><i class="fa-solid fa-users"></i> Employees Details <span id="detailCount" style="font-size:0.7rem;color:var(--text-muted);font-weight:400;"></span></h4>
+            <h4><i class="fa-solid fa-table"></i> Employees Details <span id="detailCount" style="font-size:0.7rem;color:var(--text-muted);font-weight:400;"></span></h4>
             <div style="overflow-x:auto;">
                 <table id="employee-table">
                     <thead>
@@ -763,10 +860,8 @@
         // ============================================================
         // CONFIG
         // ============================================================
-        // استخدام رابط CSV الصحيح
         const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRu0vhUS8c-hbFznxR_F9K9LNueNeabXiLwMjMzppgpIjJCSNCadsHDVVGxwiKYYHve9-Qtb37ALs8P/pub?gid=1032977671&single=true&output=csv";
 
-        // أسماء الأعمدة - يجب أن تتطابق مع الشيت
         const COLUMNS = {
             ID: 'ID',
             Name: 'Name',
@@ -798,7 +893,6 @@
             'Kick Start Program': COLUMNS.KickStart
         };
 
-        // مواقع التدريب المتوقعة
         const LOCATIONS = ['Nob', 'Online', 'Steigenberger', 'TOR'];
 
         let allData = [];
@@ -851,7 +945,6 @@
             console.log('📊 Total unique records loaded:', result.length);
             if (result.length > 0) {
                 console.log('📝 Sample record:', result[0]);
-                console.log('📝 Sample keys:', Object.keys(result[0]));
             }
             return result;
         }
@@ -982,15 +1075,28 @@
         function updateFilterBadges(data) {
             const progAll = data.length;
             document.getElementById('progAllCount').textContent = progAll;
+            
+            // تحديث أعداد البرامج
             Object.keys(PROGRAM_FIELDS).forEach(progName => {
                 const field = PROGRAM_FIELDS[progName];
-                const count = data.filter(r => {
+                const attendCount = data.filter(r => {
                     const val = String(r[field] || '').toLowerCase();
                     return val === 'attend' || val === 'attended' || val.includes('attend');
                 }).length;
+                const notAttendCount = data.filter(r => {
+                    const val = String(r[field] || '').toLowerCase();
+                    return val === 'not attend' || val.includes('not attend');
+                }).length;
                 const id = 'prog' + progName.replace(/ /g, '') + 'Count';
                 const el = document.getElementById(id);
-                if (el) el.textContent = count;
+                if (el) {
+                    // عرض الحضور وعدم الحضور للبرنامج المحدد
+                    if (activeFilters.program === progName || activeFilters.program === 'all') {
+                        el.textContent = `${attendCount} ✓ / ${notAttendCount} ✗`;
+                    } else {
+                        el.textContent = attendCount;
+                    }
+                }
             });
 
             // تحديث الـ Groups
@@ -1172,6 +1278,7 @@
             if (!allData || allData.length === 0) {
                 console.warn('⚠️ No data to filter');
                 updateEmployeeDetailTable([]);
+                updateFilteredEmployees([]);
                 updateActivitySlicer([]);
                 return;
             }
@@ -1239,6 +1346,7 @@
             updateActivitySlicer(filteredData);
             renderDashboard(filteredData);
             updateEmployeeDetailTable(filteredData);
+            updateFilteredEmployees(filteredData);
             checkSmartAlerts(filteredData);
         }
 
@@ -1328,7 +1436,88 @@
         }
 
         // ============================================================
-        // EMPLOYEE DETAIL TABLE - إصلاح الجدول
+        // FILTERED EMPLOYEES - عرض المتدربين المفلترين (بنفس شكل Employee Query)
+        // ============================================================
+        function updateFilteredEmployees(data) {
+            const container = document.getElementById('filteredCards');
+            const countSpan = document.getElementById('filteredCount');
+            
+            console.log('📋 Updating filtered employees with', data ? data.length : 0, 'records');
+            
+            if (!data || data.length === 0) {
+                container.innerHTML = `
+                    <div class="no-results">
+                        <i class="fa-solid fa-users-slash"></i>
+                        No employees match the current filters.
+                    </div>
+                `;
+                countSpan.textContent = '(0 employees)';
+                return;
+            }
+
+            // حساب العدد الفريد للموظفين
+            const uniqueIds = new Set();
+            data.forEach(emp => {
+                const id = String(emp[COLUMNS.ID] || '').trim();
+                if (id) uniqueIds.add(id);
+            });
+            const uniqueCount = uniqueIds.size;
+            countSpan.textContent = `(${uniqueCount} unique employees)`;
+            
+            // عرض أول 100 موظف
+            const displayData = data.slice(0, 100);
+            
+            container.innerHTML = displayData.map(emp => {
+                const name = emp[COLUMNS.Name] || 'Unknown';
+                const id = emp[COLUMNS.ID] || 'N/A';
+                const title = emp[COLUMNS.Title] || 'N/A';
+                const dept = emp[COLUMNS.Department] || 'N/A';
+                const location = emp[COLUMNS.TrainingLocation] || 'N/A';
+                const group = emp[COLUMNS.TrainingGroup] || 'N/A';
+                const phase = emp[COLUMNS.TrainingPhase] || 'N/A';
+                const level = emp['C-LVL'] || 'N/A';
+                
+                const sevenSens = String(emp[COLUMNS.SevenSens] || '').toLowerCase();
+                let attendanceText = 'Unknown';
+                let attendanceClass = 'unknown';
+                if (sevenSens === 'attend' || sevenSens === 'attended' || sevenSens.includes('attend')) {
+                    attendanceText = '✅ Attended';
+                    attendanceClass = 'attend';
+                } else if (sevenSens === 'not attend' || sevenSens.includes('not attend')) {
+                    attendanceText = '❌ Not Attended';
+                    attendanceClass = 'not-attend';
+                }
+                
+                return `
+                    <div class="emp-card">
+                        <div class="emp-name">${name}</div>
+                        <div class="emp-details">
+                            <span><i class="fa-regular fa-id-card"></i> ${id}</span>
+                            <span><i class="fa-regular fa-building"></i> ${dept}</span>
+                            <span><i class="fa-regular fa-user"></i> ${title}</span>
+                        </div>
+                        <div class="emp-details">
+                            <span><i class="fa-solid fa-location-dot"></i> ${location}</span>
+                            <span><i class="fa-solid fa-layer-group"></i> ${level}</span>
+                            <span><i class="fa-solid fa-users"></i> ${group}</span>
+                            <span><i class="fa-solid fa-clock"></i> ${phase}</span>
+                        </div>
+                        <span class="emp-badge ${attendanceClass}">${attendanceText}</span>
+                    </div>
+                `;
+            }).join('');
+
+            if (data.length > 100) {
+                container.innerHTML += `
+                    <div style="grid-column:1/-1;text-align:center;padding:15px;color:var(--text-muted);font-style:italic;font-size:0.75rem;">
+                        ... and ${data.length - 100} more records
+                    </div>
+                `;
+            }
+        }
+
+        // ============================================================
+        // EMPLOYEE DETAIL TABLE
         // ============================================================
         function updateEmployeeDetailTable(data) {
             const tbody = document.getElementById('detailTableBody');
@@ -1342,17 +1531,15 @@
                 return;
             }
 
-            // حساب العدد الفريد للموظفين (حسب ID)
+            // حساب العدد الفريد للموظفين
             const uniqueIds = new Set();
             data.forEach(emp => {
                 const id = String(emp[COLUMNS.ID] || '').trim();
                 if (id) uniqueIds.add(id);
             });
             const uniqueCount = uniqueIds.size;
-            
             countSpan.textContent = `(${uniqueCount} unique employees)`;
             
-            // عرض أول 100 موظف
             const displayData = data.slice(0, 100);
             
             tbody.innerHTML = displayData.map(emp => {
