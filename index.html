@@ -50,7 +50,7 @@
         .refresh-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
         /* ============================================================
-           SECTOR SLICER - النشا/مجازر
+           SECTOR SLICER
            ============================================================ */
         .sector-slicer {
             background: var(--white);
@@ -75,14 +75,8 @@
             align-items: center;
             gap: 6px;
         }
-        .sector-slicer .slicer-label i {
-            color: var(--koki-orange);
-        }
-        .sector-slicer .slicer-buttons {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
+        .sector-slicer .slicer-label i { color: var(--koki-orange); }
+        .sector-slicer .slicer-buttons { display: flex; gap: 6px; flex-wrap: wrap; }
         .sector-slicer .slicer-btn {
             padding: 5px 20px;
             border-radius: 30px;
@@ -95,27 +89,10 @@
             cursor: pointer;
             transition: all 0.2s;
         }
-        .sector-slicer .slicer-btn:hover {
-            border-color: var(--cpc-blue);
-            color: var(--cpc-blue);
-            background: rgba(30,61,89,0.04);
-        }
-        .sector-slicer .slicer-btn.active {
-            border-color: var(--koki-orange);
-            background: var(--koki-orange);
-            color: white;
-            box-shadow: 0 4px 12px rgba(255,110,64,0.3);
-        }
-        .sector-slicer .slicer-btn .badge {
-            background: rgba(255,255,255,0.2);
-            border-radius: 20px;
-            padding: 0 8px;
-            font-size: 0.5rem;
-            margin-left: 4px;
-        }
-        .sector-slicer .slicer-btn.active .badge {
-            background: rgba(255,255,255,0.25);
-        }
+        .sector-slicer .slicer-btn:hover { border-color: var(--cpc-blue); color: var(--cpc-blue); background: rgba(30,61,89,0.04); }
+        .sector-slicer .slicer-btn.active { border-color: var(--koki-orange); background: var(--koki-orange); color: white; box-shadow: 0 4px 12px rgba(255,110,64,0.3); }
+        .sector-slicer .slicer-btn .badge { background: rgba(255,255,255,0.2); border-radius: 20px; padding: 0 8px; font-size: 0.5rem; margin-left: 4px; }
+        .sector-slicer .slicer-btn.active .badge { background: rgba(255,255,255,0.25); }
 
         .alerts-container {
             background: var(--white);
@@ -169,12 +146,7 @@
         .clear-filters-btn { padding: 4px 16px; border-radius: 30px; border: 2px solid #e2e8f0; background: transparent; font-family: 'Cairo', sans-serif; font-size: 0.6rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.2s; margin-left: auto; flex-shrink: 0; }
         .clear-filters-btn:hover { border-color: var(--danger); color: var(--danger); background: rgba(239,68,68,0.05); }
 
-        .action-buttons {
-            display: flex;
-            gap: 6px;
-            margin-left: 10px;
-            flex-shrink: 0;
-        }
+        .action-buttons { display: flex; gap: 6px; margin-left: 10px; flex-shrink: 0; }
         .action-btn {
             padding: 4px 16px;
             border-radius: 30px;
@@ -190,27 +162,11 @@
             align-items: center;
             gap: 6px;
         }
-        .action-btn:hover {
-            background: var(--cpc-blue-dark);
-            border-color: var(--cpc-blue-dark);
-            transform: translateY(-1px);
-        }
-        .action-btn.print-btn {
-            background: var(--cpc-blue);
-            border-color: var(--cpc-blue);
-        }
-        .action-btn.print-btn:hover {
-            background: var(--cpc-blue-dark);
-            border-color: var(--cpc-blue-dark);
-        }
-        .action-btn.pdf-btn {
-            background: var(--danger);
-            border-color: var(--danger);
-        }
-        .action-btn.pdf-btn:hover {
-            background: #dc2626;
-            border-color: #dc2626;
-        }
+        .action-btn:hover { background: var(--cpc-blue-dark); border-color: var(--cpc-blue-dark); transform: translateY(-1px); }
+        .action-btn.print-btn { background: var(--cpc-blue); border-color: var(--cpc-blue); }
+        .action-btn.print-btn:hover { background: var(--cpc-blue-dark); border-color: var(--cpc-blue-dark); }
+        .action-btn.pdf-btn { background: var(--danger); border-color: var(--danger); }
+        .action-btn.pdf-btn:hover { background: #dc2626; border-color: #dc2626; }
 
         .container { max-width: 1440px; margin: 0 auto; padding: 0 12px; }
 
@@ -385,26 +341,12 @@
         }
 
         @media print {
-            body, body * {
-                visibility: visible !important;
-            }
-            .no-print, .no-print * {
-                display: none !important;
-            }
+            body, body * { visibility: visible !important; }
+            .no-print, .no-print * { display: none !important; }
             .action-btn, .refresh-btn, .print-btn, .preset-btn, .clear-filters-btn,
-            .search-box button, .filter-btn, .filter-select, .slicer-btn {
-                display: none !important;
-            }
-            body {
-                background: white !important;
-                padding: 20px !important;
-                font-size: 11px !important;
-                color: #1a2332 !important;
-            }
-            .container {
-                max-width: 100% !important;
-                padding: 0 !important;
-            }
+            .search-box button, .filter-btn, .filter-select, .slicer-btn { display: none !important; }
+            body { background: white !important; padding: 20px !important; font-size: 11px !important; color: #1a2332 !important; }
+            .container { max-width: 100% !important; padding: 0 !important; }
             .kpi-card, .chart-box, .insight-card, .employee-detail-table,
             .search-wrapper, .filter-bar, .brief-section, .alerts-container, .sector-slicer {
                 box-shadow: none !important;
@@ -414,88 +356,24 @@
                 padding: 10px 12px !important;
                 background: white !important;
             }
-            .kpi-grid {
-                display: grid !important;
-                grid-template-columns: repeat(4, 1fr) !important;
-                gap: 8px !important;
-            }
-            .charts-grid, .charts-grid-2 {
-                display: grid !important;
-                grid-template-columns: 1fr 1fr !important;
-                gap: 12px !important;
-            }
-            .search-charts-grid {
-                display: grid !important;
-                grid-template-columns: 1fr 2fr !important;
-                gap: 12px !important;
-            }
-            .insights-section {
-                display: grid !important;
-                grid-template-columns: repeat(3, 1fr) !important;
-                gap: 12px !important;
-            }
-            .chart-box canvas {
-                height: 180px !important;
-                max-height: 180px !important;
-            }
-            .chart-box .chart-container {
-                height: 180px !important;
-            }
-            .employee-detail-table table {
-                font-size: 9px !important;
-            }
-            .employee-detail-table th {
-                background: #1e3d59 !important;
-                color: white !important;
-                padding: 4px 8px !important;
-            }
-            .employee-detail-table td {
-                padding: 3px 8px !important;
-                border-bottom: 1px solid #eee !important;
-            }
-            .brief-section {
-                background: #1e3d59 !important;
-                color: white !important;
-            }
-            .brief-section .highlight {
-                color: #ff6e40 !important;
-            }
-            .kpi-card .num {
-                font-size: 1rem !important;
-            }
-            .insight-value {
-                font-size: 1.1rem !important;
-            }
-            .print-header {
-                display: flex !important;
-                justify-content: space-between !important;
-                align-items: center !important;
-                border-bottom: 3px solid #1e3d59 !important;
-                padding-bottom: 10px !important;
-                margin-bottom: 15px !important;
-            }
-            .print-header h1 {
-                color: #1e3d59 !important;
-                font-size: 20px !important;
-                margin: 0 !important;
-            }
-            .print-header .sub {
-                color: #6b7a8f !important;
-                font-size: 12px !important;
-            }
-            .print-footer {
-                margin-top: 20px !important;
-                padding-top: 10px !important;
-                border-top: 1px solid #ddd !important;
-                text-align: center !important;
-                font-size: 10px !important;
-                color: #6b7a8f !important;
-            }
-            .result-card {
-                display: block !important;
-                border-right: 4px solid var(--success) !important;
-                background: #f8fafc !important;
-            }
+            .kpi-grid { display: grid !important; grid-template-columns: repeat(4, 1fr) !important; gap: 8px !important; }
+            .charts-grid, .charts-grid-2 { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 12px !important; }
+            .search-charts-grid { display: grid !important; grid-template-columns: 1fr 2fr !important; gap: 12px !important; }
+            .insights-section { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 12px !important; }
+            .chart-box canvas { height: 180px !important; max-height: 180px !important; }
+            .chart-box .chart-container { height: 180px !important; }
+            .employee-detail-table table { font-size: 9px !important; }
+            .employee-detail-table th { background: #1e3d59 !important; color: white !important; padding: 4px 8px !important; }
+            .employee-detail-table td { padding: 3px 8px !important; border-bottom: 1px solid #eee !important; }
+            .brief-section { background: #1e3d59 !important; color: white !important; }
+            .brief-section .highlight { color: #ff6e40 !important; }
+            .kpi-card .num { font-size: 1rem !important; }
+            .insight-value { font-size: 1.1rem !important; }
+            .print-header { display: flex !important; justify-content: space-between !important; align-items: center !important; border-bottom: 3px solid #1e3d59 !important; padding-bottom: 10px !important; margin-bottom: 15px !important; }
+            .print-header h1 { color: #1e3d59 !important; font-size: 20px !important; margin: 0 !important; }
+            .print-header .sub { color: #6b7a8f !important; font-size: 12px !important; }
+            .print-footer { margin-top: 20px !important; padding-top: 10px !important; border-top: 1px solid #ddd !important; text-align: center !important; font-size: 10px !important; color: #6b7a8f !important; }
+            .result-card { display: block !important; border-right: 4px solid var(--success) !important; background: #f8fafc !important; }
         }
     </style>
 </head>
@@ -526,7 +404,7 @@
     <div class="container" id="printContainer">
 
         <!-- ============================================================
-        SECTOR SLICER - النشاط (أعلاف/مجازر)
+        SECTOR SLICER
         ============================================================ -->
         <div class="sector-slicer no-print" id="sectorSlicer">
             <div class="slicer-label">
@@ -578,9 +456,9 @@
                 </div>
             </div>
 
-            <!-- صف الفلاتر المدمج -->
+            <!-- صف الفلاتر المدمج - Location, Level, Attendance -->
             <div class="filter-row-compact">
-                <span class="filter-label"><i class="fa-solid fa-location-dot"></i></span>
+                <span class="filter-label"><i class="fa-solid fa-location-dot"></i> Location</span>
                 <div class="filter-group" id="locationFilters">
                     <button class="filter-btn active" data-filter="location" data-value="all">All <span class="badge-count" id="locAllCount">0</span></button>
                     <button class="filter-btn" data-filter="location" data-value="Steigenberger">Steigenberger <span class="badge-count" id="locSteigenbergerCount">0</span></button>
@@ -589,7 +467,7 @@
                     <button class="filter-btn" data-filter="location" data-value="Alsaff">Alsaff <span class="badge-count" id="locAlsaffCount">0</span></button>
                 </div>
 
-                <span class="filter-label" style="min-width:30px !important;"><i class="fa-solid fa-layer-group"></i></span>
+                <span class="filter-label" style="min-width:40px !important;"><i class="fa-solid fa-layer-group"></i> Level</span>
                 <div class="filter-group" id="levelFilters">
                     <button class="filter-btn active" data-filter="level" data-value="all">All <span class="badge-count" id="lvlAllCount">0</span></button>
                     <button class="filter-btn" data-filter="level" data-value="L4">L4 <span class="badge-count" id="lvlL4Count">0</span></button>
@@ -598,11 +476,11 @@
                     <button class="filter-btn" data-filter="level" data-value="L1">L1 <span class="badge-count" id="lvlL1Count">0</span></button>
                 </div>
 
-                <span class="filter-label" style="min-width:30px !important;"><i class="fa-solid fa-user-check"></i></span>
+                <span class="filter-label" style="min-width:40px !important;"><i class="fa-solid fa-user-check"></i> Attend</span>
                 <div class="filter-group" id="attendanceFilters">
                     <button class="filter-btn active attend-btn" data-filter="attendance" data-value="all">All <span class="badge-count" id="attAllCount">0</span></button>
-                    <button class="filter-btn attend-btn" data-filter="attendance" data-value="attend">✅ <span class="badge-count" id="attAttendCount">0</span></button>
-                    <button class="filter-btn not-attend-btn" data-filter="attendance" data-value="not-attend">❌ <span class="badge-count" id="attNotAttendCount">0</span></button>
+                    <button class="filter-btn attend-btn" data-filter="attendance" data-value="attend">✅ Attend <span class="badge-count" id="attAttendCount">0</span></button>
+                    <button class="filter-btn not-attend-btn" data-filter="attendance" data-value="not-attend">❌ Not Attend <span class="badge-count" id="attNotAttendCount">0</span></button>
                 </div>
 
                 <span class="filter-label" style="min-width:30px !important;"><i class="fa-solid fa-industry"></i></span>
@@ -655,7 +533,8 @@
             <div class="kpi-card"><div class="kpi-info"><h4>Total Workforce</h4><div class="num" id="kpiTotal">...</div></div><i class="fa-solid fa-users"></i></div>
             <div class="kpi-card"><div class="kpi-info"><h4>Active Sectors</h4><div class="num" id="kpiSectors">...</div></div><i class="fa-solid fa-building"></i></div>
             <div class="kpi-card"><div class="kpi-info"><h4>Departments</h4><div class="num" id="kpiDepartments">...</div></div><i class="fa-solid fa-sitemap"></i></div>
-            <div class="kpi-card"><div class="kpi-info"><h4>Attendance Rate</h4><div class="num" id="kpiAttendance">...</div></div><i class="fa-solid fa-user-check"></i></div>
+            <!-- تم تغيير Attendance Rate إلى Project Progress -->
+            <div class="kpi-card"><div class="kpi-info"><h4>Project Progress</h4><div class="num" id="kpiAttendance">...</div></div><i class="fa-solid fa-chart-line"></i></div>
             <div class="kpi-card"><div class="kpi-info"><h4>Completed Training</h4><div class="num" id="kpiPrograms">...</div></div><i class="fa-solid fa-book-open"></i></div>
             <div class="kpi-card"><div class="kpi-info"><h4>Training Locations</h4><div class="num" id="kpiLocations">...</div></div><i class="fa-solid fa-location-dot"></i></div>
             <div class="kpi-card"><div class="kpi-info"><h4>Data Quality</h4><div class="num" id="kpiQuality">...</div></div><i class="fa-solid fa-shield-halved"></i></div>
@@ -833,7 +712,7 @@
         // ============================================================
         const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRu0vhUS8c-hbFznxR_F9K9LNueNeabXiLwMjMzppgpIjJCSNCadsHDVVGxwiKYYHve9-Qtb37ALs8P/pub?gid=1032977671&single=true&output=csv";
 
-        // أسماء الأعمدة - يجب أن تتطابق مع الشيت
+        // أسماء الأعمدة - متطابقة مع الشيت
         const COLUMNS = {
             ID: 'ID',
             Name: 'Name',
@@ -905,7 +784,6 @@
             const result = [];
             for (let i = 1; i < lines.length; i++) {
                 if (!lines[i].trim()) continue;
-                // معالجة CSV مع وجود فواصل داخل النص
                 const row = lines[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(item => item.trim().replace(/^"|"$/g, ''));
                 const obj = {};
                 headers.forEach((h, idx) => { obj[h] = row[idx] || ''; });
@@ -916,6 +794,7 @@
             console.log('📊 Total records loaded:', result.length);
             if (result.length > 0) {
                 console.log('📝 Sample record:', result[0]);
+                console.log('📝 Sample keys:', Object.keys(result[0]));
             }
             return result;
         }
@@ -1012,14 +891,12 @@
             const total = data.length;
             document.getElementById('sectorAllCount').textContent = total;
             
-            // البحث عن "أعلاف" في عمود Sector
             const feedCount = data.filter(r => {
                 const sector = String(r[COLUMNS.Sector] || '');
                 return sector.includes('أعلاف') || sector.includes('اعلاف');
             }).length;
             document.getElementById('sectorFeedCount').textContent = feedCount;
             
-            // البحث عن "مجازر" في عمود Sector
             const slaughterCount = data.filter(r => {
                 const sector = String(r[COLUMNS.Sector] || '');
                 return sector.includes('مجازر');
@@ -1247,7 +1124,7 @@
         }
 
         // ============================================================
-        // FILTERS - التطبيق الرئيسي للفلاتر
+        // FILTERS
         // ============================================================
         function applyFilters() {
             console.log('🔄 Applying filters...');
@@ -1262,7 +1139,7 @@
             
             filteredData = [...allData];
 
-            // فلتر القطاع من السلايسر (أعلاف/مجازر)
+            // فلتر القطاع من السلايسر
             if (activeFilters.sectorSlicer && activeFilters.sectorSlicer !== 'all') {
                 const filterValue = activeFilters.sectorSlicer;
                 filteredData = filteredData.filter(r => {
@@ -1325,18 +1202,12 @@
             
             console.log('📊 Filtered data count:', filteredData.length);
             
-            // تحديث السلايسر
             updateSectorSlicer(filteredData);
-            
-            // عرض البيانات
             renderDashboard(filteredData);
             updateEmployeeDetailTable(filteredData);
             checkSmartAlerts(filteredData);
         }
 
-        // ============================================================
-        // SETUP FILTER BUTTONS
-        // ============================================================
         function setupFilterButtons() {
             document.querySelectorAll('#programFilters .filter-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
@@ -1583,6 +1454,7 @@
             document.getElementById('kpiTotal').textContent = total.toLocaleString();
             document.getElementById('kpiSectors').textContent = sectors.size.toLocaleString();
             document.getElementById('kpiDepartments').textContent = departments.size.toLocaleString();
+            // Project Progress بدلاً من Attendance Rate
             document.getElementById('kpiAttendance').textContent = attendanceRate + '%';
             document.getElementById('kpiPrograms').textContent = programCount;
             document.getElementById('kpiLocations').textContent = locationCount;
@@ -1844,8 +1716,6 @@
             }
 
             lastSearchedEmployee = emp;
-            
-            // إظهار زر الطباعة
             printBtn.style.display = 'inline-flex';
 
             document.getElementById('resName').textContent = emp[COLUMNS.Name] || 'Not recorded';
