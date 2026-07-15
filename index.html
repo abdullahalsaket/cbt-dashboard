@@ -49,6 +49,74 @@
         .refresh-btn:hover { background: rgba(255,255,255,0.25); }
         .refresh-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
+        /* ============================================================
+           SECTOR SLICER - سلايسر النشا/مجازر
+           ============================================================ */
+        .sector-slicer {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 10px 18px;
+            margin: 12px auto;
+            max-width: 1440px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border: 1px solid #e8ecf0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .sector-slicer .slicer-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--cpc-blue);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .sector-slicer .slicer-label i {
+            color: var(--koki-orange);
+        }
+        .sector-slicer .slicer-buttons {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .sector-slicer .slicer-btn {
+            padding: 5px 20px;
+            border-radius: 30px;
+            border: 2px solid #e2e8f0;
+            background: transparent;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .sector-slicer .slicer-btn:hover {
+            border-color: var(--cpc-blue);
+            color: var(--cpc-blue);
+            background: rgba(30,61,89,0.04);
+        }
+        .sector-slicer .slicer-btn.active {
+            border-color: var(--koki-orange);
+            background: var(--koki-orange);
+            color: white;
+            box-shadow: 0 4px 12px rgba(255,110,64,0.3);
+        }
+        .sector-slicer .slicer-btn .badge {
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: 0 8px;
+            font-size: 0.5rem;
+            margin-left: 4px;
+        }
+        .sector-slicer .slicer-btn.active .badge {
+            background: rgba(255,255,255,0.25);
+        }
+
         .alerts-container {
             background: var(--white);
             border-radius: 12px;
@@ -245,6 +313,7 @@
             .charts-grid-2 .chart-box canvas { height: 200px !important; max-height: 200px; }
             .charts-grid-2 .chart-box .chart-container { height: 200px; }
             .action-buttons { margin-left: 0; width: 100%; justify-content: flex-start; }
+            .sector-slicer { flex-direction: column; align-items: stretch; }
         }
         @media (max-width: 768px) {
             .navbar { flex-direction: column; text-align: center; }
@@ -273,44 +342,35 @@
             .chart-box .chart-container { height: 170px; }
             .chart-box { padding: 12px 14px; }
             .action-btn { font-size: 0.5rem; padding: 3px 10px; }
+            .sector-slicer .slicer-btn { font-size: 0.55rem; padding: 4px 12px; }
         }
 
         /* ============================================================
-           PRINT STYLES - طباعة كل محتويات الصفحة
+           PRINT STYLES
            ============================================================ */
         @media print {
-            /* إظهار كل العناصر في الطباعة */
             body, body * {
                 visibility: visible !important;
             }
-            
-            /* إخفاء العناصر غير المرغوب فيها */
             .no-print, .no-print * {
                 display: none !important;
             }
-            
-            /* إخفاء الأزرار التفاعلية */
             .action-btn, .refresh-btn, .print-btn, .preset-btn, .clear-filters-btn,
-            .search-box button, .filter-btn, .filter-select {
+            .search-box button, .filter-btn, .filter-select, .slicer-btn {
                 display: none !important;
             }
-            
-            /* تنسيق الصفحة للطباعة */
             body {
                 background: white !important;
                 padding: 20px !important;
                 font-size: 11px !important;
                 color: #1a2332 !important;
             }
-            
             .container {
                 max-width: 100% !important;
                 padding: 0 !important;
             }
-            
-            /* تنسيق البطاقات */
             .kpi-card, .chart-box, .insight-card, .employee-detail-table,
-            .search-wrapper, .filter-bar, .brief-section, .alerts-container {
+            .search-wrapper, .filter-bar, .brief-section, .alerts-container, .sector-slicer {
                 box-shadow: none !important;
                 border: 1px solid #ddd !important;
                 page-break-inside: avoid !important;
@@ -318,31 +378,26 @@
                 padding: 10px 12px !important;
                 background: white !important;
             }
-            
             .kpi-grid {
                 display: grid !important;
                 grid-template-columns: repeat(4, 1fr) !important;
                 gap: 8px !important;
             }
-            
             .charts-grid, .charts-grid-2 {
                 display: grid !important;
                 grid-template-columns: 1fr 1fr !important;
                 gap: 12px !important;
             }
-            
             .search-charts-grid {
                 display: grid !important;
                 grid-template-columns: 1fr 2fr !important;
                 gap: 12px !important;
             }
-            
             .insights-section {
                 display: grid !important;
                 grid-template-columns: repeat(3, 1fr) !important;
                 gap: 12px !important;
             }
-            
             .chart-box canvas {
                 height: 180px !important;
                 max-height: 180px !important;
@@ -350,8 +405,6 @@
             .chart-box .chart-container {
                 height: 180px !important;
             }
-            
-            /* تنسيق الجدول */
             .employee-detail-table table {
                 font-size: 9px !important;
             }
@@ -364,8 +417,6 @@
                 padding: 3px 8px !important;
                 border-bottom: 1px solid #eee !important;
             }
-            
-            /* تنسيق النصوص */
             .brief-section {
                 background: #1e3d59 !important;
                 color: white !important;
@@ -373,16 +424,12 @@
             .brief-section .highlight {
                 color: #ff6e40 !important;
             }
-            
             .kpi-card .num {
                 font-size: 1rem !important;
             }
-            
             .insight-value {
                 font-size: 1.1rem !important;
             }
-            
-            /* تنسيق رأس الطباعة */
             .print-header {
                 display: flex !important;
                 justify-content: space-between !important;
@@ -400,7 +447,6 @@
                 color: #6b7a8f !important;
                 font-size: 12px !important;
             }
-            
             .print-footer {
                 margin-top: 20px !important;
                 padding-top: 10px !important;
@@ -409,13 +455,6 @@
                 font-size: 10px !important;
                 color: #6b7a8f !important;
             }
-            
-            /* إجبار الصفحات على الفصل بشكل مناسب */
-            .page-break {
-                page-break-before: always !important;
-            }
-            
-            /* إظهار بيانات الموظف في الطباعة */
             .result-card {
                 display: block !important;
                 border-right: 4px solid var(--success) !important;
@@ -426,9 +465,7 @@
 </head>
 <body>
 
-    <!-- ============================================================
-    رأس الصفحة للطباعة (يظهر فقط في الطباعة)
-    ============================================================ -->
+    <!-- رأس الطباعة -->
     <div class="print-header" style="display:none;">
         <h1>📊 CBT Intelligence Dashboard</h1>
         <span class="sub">Generated: <span id="printDateHeader"></span></span>
@@ -451,6 +488,26 @@
     </div>
 
     <div class="container" id="printContainer">
+
+        <!-- ============================================================
+        SECTOR SLICER - النشا/مجازر
+        ============================================================ -->
+        <div class="sector-slicer no-print" id="sectorSlicer">
+            <div class="slicer-label">
+                <i class="fa-solid fa-industry"></i> القطاع:
+            </div>
+            <div class="slicer-buttons" id="sectorSlicerButtons">
+                <button class="slicer-btn active" data-sector="all">
+                    الكل <span class="badge" id="sectorAllCount">0</span>
+                </button>
+                <button class="slicer-btn" data-sector="الأعلاف">
+                    🌾 الأعلاف <span class="badge" id="sectorFeedCount">0</span>
+                </button>
+                <button class="slicer-btn" data-sector="المجازر">
+                    🥩 المجازر <span class="badge" id="sectorSlaughterCount">0</span>
+                </button>
+            </div>
+        </div>
 
         <div class="brief-section">
             <h2><i class="fa-solid fa-bullseye"></i> Program Overview</h2>
@@ -605,7 +662,7 @@
                     </div>
                     <div class="training-tags" id="resPrograms"></div>
                     <!-- زر طباعة بيانات الموظف -->
-                    <button class="print-btn" onclick="printEmployeeProfile()">
+                    <button class="print-btn" id="printEmployeeBtn" onclick="printEmployeeProfile()" style="display:inline-flex;">
                         <i class="fa-solid fa-print"></i> طباعة بيانات الموظف
                     </button>
                 </div>
@@ -727,9 +784,7 @@
             </div>
         </div>
 
-        <!-- ============================================================
-        تذييل الطباعة
-        ============================================================ -->
+        <!-- تذييل الطباعة -->
         <div class="print-footer" style="display:none;">
             CBT Intelligence Hub 2026 • All Rights Reserved • Generated: <span id="printDateFooter"></span>
         </div>
@@ -903,6 +958,20 @@
                 const container = document.getElementById('alertsContainer');
                 container.classList.remove('show');
             }, 5000);
+        }
+
+        // ============================================================
+        // SECTOR SLICER - تحديث الأعداد
+        // ============================================================
+        function updateSectorSlicer(data) {
+            const total = data.length;
+            document.getElementById('sectorAllCount').textContent = total;
+            
+            const feedCount = data.filter(r => String(r[COLUMNS.Sector] || '').includes('الأعلاف')).length;
+            document.getElementById('sectorFeedCount').textContent = feedCount;
+            
+            const slaughterCount = data.filter(r => String(r[COLUMNS.Sector] || '').includes('المجازر')).length;
+            document.getElementById('sectorSlaughterCount').textContent = slaughterCount;
         }
 
         // ============================================================
@@ -1116,6 +1185,13 @@
             if (!allData || allData.length === 0) return;
             filteredData = [...allData];
 
+            // فلتر القطاع من السلايسر
+            if (activeFilters.sectorSlicer && activeFilters.sectorSlicer !== 'all') {
+                filteredData = filteredData.filter(r => 
+                    String(r[COLUMNS.Sector] || '').includes(activeFilters.sectorSlicer)
+                );
+            }
+
             if (activeFilters.program !== 'all') {
                 const field = PROGRAM_FIELDS[activeFilters.program];
                 if (field) {
@@ -1159,9 +1235,28 @@
                     return val === 'not attend' || val.includes('not attend');
                 });
             }
+            
+            // تحديث السلايسر بالأعداد
+            updateSectorSlicer(filteredData);
+            
             renderDashboard(filteredData);
             updateEmployeeDetailTable(filteredData);
             checkSmartAlerts(filteredData);
+        }
+
+        // ============================================================
+        // SETUP SLICER BUTTONS
+        // ============================================================
+        function setupSlicerButtons() {
+            document.querySelectorAll('#sectorSlicerButtons .slicer-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const sector = this.dataset.sector;
+                    document.querySelectorAll('#sectorSlicerButtons .slicer-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    activeFilters.sectorSlicer = sector;
+                    applyFilters();
+                });
+            });
         }
 
         function setupFilterButtons() {
@@ -1228,11 +1323,27 @@
         }
 
         function clearAllFilters() {
-            activeFilters = { program: 'all', group: 'all', location: 'all', level: 'all', phase: 'all', attendance: 'all', sector: 'all' };
+            activeFilters = { 
+                program: 'all', 
+                group: 'all', 
+                location: 'all', 
+                level: 'all', 
+                phase: 'all', 
+                attendance: 'all', 
+                sector: 'all',
+                sectorSlicer: 'all'
+            };
+            
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.classList.remove('active');
                 if (btn.dataset.value === 'all') btn.classList.add('active');
             });
+            
+            document.querySelectorAll('#sectorSlicerButtons .slicer-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.sector === 'all') btn.classList.add('active');
+            });
+            
             document.getElementById('groupSelect').value = 'all';
             document.getElementById('phaseSelect').value = 'all';
             document.getElementById('sectorSelect').value = 'all';
@@ -1634,13 +1745,28 @@
         function searchEmployee() {
             const id = document.getElementById('empIdInput').value.trim();
             const card = document.getElementById('resultProfile');
-            if (!id) { alert('Enter Employee ID'); return; }
-            if (!allData || allData.length === 0) { alert('Data not loaded yet. Please wait.'); return; }
+            const printBtn = document.getElementById('printEmployeeBtn');
+            
+            if (!id) { 
+                alert('Enter Employee ID'); 
+                return; 
+            }
+            if (!allData || allData.length === 0) { 
+                alert('Data not loaded yet. Please wait.'); 
+                return; 
+            }
 
             const emp = allData.find(r => String(r['ID']).trim() === id);
-            if (!emp) { alert('Employee ID not found.'); card.style.display = 'none'; return; }
+            if (!emp) { 
+                alert('Employee ID not found.'); 
+                card.style.display = 'none'; 
+                return; 
+            }
 
             lastSearchedEmployee = emp;
+            
+            // إظهار زر الطباعة
+            printBtn.style.display = 'inline-flex';
 
             document.getElementById('resName').textContent = emp[COLUMNS.Name] || 'Not recorded';
             document.getElementById('resTitle').textContent = emp[COLUMNS.Title] || 'Not recorded';
@@ -1697,7 +1823,7 @@
         }
 
         // ============================================================
-        // PRINT EMPLOYEE PROFILE - طباعة بيانات الموظف فقط
+        // PRINT EMPLOYEE PROFILE
         // ============================================================
         function printEmployeeProfile() {
             if (!lastSearchedEmployee) {
@@ -1836,6 +1962,11 @@
                 document.getElementById('printDateHeader').textContent = now;
                 document.getElementById('printDateFooter').textContent = now;
 
+                // تفعيل السلايسر
+                if (!activeFilters.sectorSlicer) {
+                    activeFilters.sectorSlicer = 'all';
+                }
+
                 applyFilters();
                 
                 showAlert('success', `✅ Data refreshed! ${allData.length} employees loaded.`);
@@ -1859,6 +1990,7 @@
         // ============================================================
         document.addEventListener('DOMContentLoaded', function() {
             setupFilterButtons();
+            setupSlicerButtons();
             loadData();
 
             refreshInterval = setInterval(() => {
