@@ -347,9 +347,6 @@
             .sector-slicer .slicer-btn { font-size: 0.55rem; padding: 4px 12px; }
         }
 
-        /* ============================================================
-           صف الفلاتر المدمج - Location, Level, Attend جنب بعض
-           ============================================================ */
         .filter-row-compact {
             display: flex !important;
             flex-wrap: nowrap !important;
@@ -387,9 +384,6 @@
             max-width: 150px !important;
         }
 
-        /* ============================================================
-           PRINT STYLES
-           ============================================================ */
         @media print {
             body, body * {
                 visibility: visible !important;
@@ -532,7 +526,7 @@
     <div class="container" id="printContainer">
 
         <!-- ============================================================
-        SECTOR SLICER - النشا/مجازر
+        SECTOR SLICER - النشاط (أعلاف/مجازر)
         ============================================================ -->
         <div class="sector-slicer no-print" id="sectorSlicer">
             <div class="slicer-label">
@@ -542,10 +536,10 @@
                 <button class="slicer-btn active" data-sector="all">
                     الكل <span class="badge" id="sectorAllCount">0</span>
                 </button>
-                <button class="slicer-btn" data-sector="الأعلاف">
+                <button class="slicer-btn" data-sector="أعلاف">
                     🌾 أعلاف <span class="badge" id="sectorFeedCount">0</span>
                 </button>
-                <button class="slicer-btn" data-sector="المجازر">
+                <button class="slicer-btn" data-sector="مجازر">
                     🥩 مجازر <span class="badge" id="sectorSlaughterCount">0</span>
                 </button>
             </div>
@@ -584,7 +578,7 @@
                 </div>
             </div>
 
-            <!-- صف الفلاتر المدمج: Location + Level + Attend جنب بعض -->
+            <!-- صف الفلاتر المدمج -->
             <div class="filter-row-compact">
                 <span class="filter-label"><i class="fa-solid fa-location-dot"></i></span>
                 <div class="filter-group" id="locationFilters">
@@ -615,8 +609,8 @@
                 <div class="filter-group">
                     <select class="filter-select" id="sectorSelect">
                         <option value="all">All Sectors</option>
-                        <option value="الأعلاف">الأعلاف</option>
-                        <option value="المجازر">المجازر</option>
+                        <option value="أعلاف">أعلاف</option>
+                        <option value="مجازر">مجازر</option>
                     </select>
                 </div>
             </div>
@@ -755,7 +749,7 @@
         </div>
 
         <!-- ============================================================
-        EMPLOYEE DETAIL TABLE - مع عمود Accommodation بدلاً من Status
+        EMPLOYEE DETAIL TABLE
         ============================================================ -->
         <div class="employee-detail-table" id="employeeDetailTable">
             <h4><i class="fa-solid fa-users"></i> Employees Details <span id="detailCount" style="font-size:0.7rem;color:var(--text-muted);font-weight:400;"></span></h4>
@@ -839,6 +833,7 @@
         // ============================================================
         const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRu0vhUS8c-hbFznxR_F9K9LNueNeabXiLwMjMzppgpIjJCSNCadsHDVVGxwiKYYHve9-Qtb37ALs8P/pub?gid=1032977671&single=true&output=csv";
 
+        // أسماء الأعمدة - يجب أن تتطابق مع الشيت
         const COLUMNS = {
             ID: 'ID',
             Name: 'Name',
@@ -904,16 +899,23 @@
             const lines = csv.split("\n");
             if (lines.length < 2) return [];
             const headers = lines[0].split(",").map(h => h.trim().replace(/^"|"$/g, ''));
+            console.log('📋 Headers from sheet:', headers);
+            
             const seenIds = new Set();
             const result = [];
             for (let i = 1; i < lines.length; i++) {
                 if (!lines[i].trim()) continue;
+                // معالجة CSV مع وجود فواصل داخل النص
                 const row = lines[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(item => item.trim().replace(/^"|"$/g, ''));
                 const obj = {};
                 headers.forEach((h, idx) => { obj[h] = row[idx] || ''; });
                 const id = String(obj['ID'] || '').trim();
                 if (id && !seenIds.has(id)) { seenIds.add(id); result.push(obj); }
                 else if (!id) { obj['_tempId'] = 'temp_' + i; result.push(obj); }
+            }
+            console.log('📊 Total records loaded:', result.length);
+            if (result.length > 0) {
+                console.log('📝 Sample record:', result[0]);
             }
             return result;
         }
@@ -1010,11 +1012,21 @@
             const total = data.length;
             document.getElementById('sectorAllCount').textContent = total;
             
-            const feedCount = data.filter(r => String(r[COLUMNS.Sector] || '').includes('الأعلاف')).length;
+            // البحث عن "أعلاف" في عمود Sector
+            const feedCount = data.filter(r => {
+                const sector = String(r[COLUMNS.Sector] || '');
+                return sector.includes('أعلاف') || sector.includes('اعلاف');
+            }).length;
             document.getElementById('sectorFeedCount').textContent = feedCount;
             
-            const slaughterCount = data.filter(r => String(r[COLUMNS.Sector] || '').includes('المجازر')).length;
+            // البحث عن "مجازر" في عمود Sector
+            const slaughterCount = data.filter(r => {
+                const sector = String(r[COLUMNS.Sector] || '');
+                return sector.includes('مجازر');
+            }).length;
             document.getElementById('sectorSlaughterCount').textContent = slaughterCount;
+            
+            console.log('📊 Sector counts - Total:', total, 'Feed:', feedCount, 'Slaughter:', slaughterCount);
         }
 
         function setupSlicerButtons() {
@@ -1024,6 +1036,7 @@
                     document.querySelectorAll('#sectorSlicerButtons .slicer-btn').forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
                     activeFilters.sectorSlicer = sector;
+                    console.log('🔍 Sector slicer changed to:', sector);
                     applyFilters();
                 });
             });
@@ -1234,23 +1247,32 @@
         }
 
         // ============================================================
-        // FILTERS
+        // FILTERS - التطبيق الرئيسي للفلاتر
         // ============================================================
         function applyFilters() {
+            console.log('🔄 Applying filters...');
+            console.log('📊 All data count:', allData.length);
+            
             if (!allData || allData.length === 0) {
-                // إظهار الجدول فارغ مع رسالة
+                console.warn('⚠️ No data to filter');
                 updateEmployeeDetailTable([]);
+                updateSectorSlicer([]);
                 return;
             }
+            
             filteredData = [...allData];
 
-            // فلتر القطاع من السلايسر
+            // فلتر القطاع من السلايسر (أعلاف/مجازر)
             if (activeFilters.sectorSlicer && activeFilters.sectorSlicer !== 'all') {
-                filteredData = filteredData.filter(r => 
-                    String(r[COLUMNS.Sector] || '').includes(activeFilters.sectorSlicer)
-                );
+                const filterValue = activeFilters.sectorSlicer;
+                filteredData = filteredData.filter(r => {
+                    const sector = String(r[COLUMNS.Sector] || '');
+                    return sector.includes(filterValue);
+                });
+                console.log(`🔍 After sector slicer (${filterValue}):`, filteredData.length);
             }
 
+            // فلتر البرنامج
             if (activeFilters.program !== 'all') {
                 const field = PROGRAM_FIELDS[activeFilters.program];
                 if (field) {
@@ -1261,28 +1283,34 @@
                 }
             }
 
+            // فلتر المجموعة
             if (activeFilters.group !== 'all') {
                 filteredData = filteredData.filter(r => 
                     String(r[COLUMNS.TrainingGroup] || '').includes(activeFilters.group)
                 );
             }
 
+            // فلتر الموقع
             if (activeFilters.location !== 'all') {
                 filteredData = filteredData.filter(r => String(r[COLUMNS.TrainingLocation] || '').includes(activeFilters.location));
             }
 
+            // فلتر المستوى
             if (activeFilters.level !== 'all') {
                 filteredData = filteredData.filter(r => String(r['C-LVL'] || '').includes(activeFilters.level));
             }
 
+            // فلتر القطاع من dropdown
             if (activeFilters.sector !== 'all') {
                 filteredData = filteredData.filter(r => String(r[COLUMNS.Sector] || '').includes(activeFilters.sector));
             }
 
+            // فلتر المرحلة
             if (activeFilters.phase !== 'all') {
                 filteredData = filteredData.filter(r => String(r[COLUMNS.TrainingPhase] || '').includes(activeFilters.phase));
             }
 
+            // فلتر الحضور
             if (activeFilters.attendance === 'attend') {
                 filteredData = filteredData.filter(r => {
                     const val = String(r[COLUMNS.SevenSens] || '').toLowerCase();
@@ -1295,13 +1323,20 @@
                 });
             }
             
+            console.log('📊 Filtered data count:', filteredData.length);
+            
+            // تحديث السلايسر
             updateSectorSlicer(filteredData);
             
+            // عرض البيانات
             renderDashboard(filteredData);
             updateEmployeeDetailTable(filteredData);
             checkSmartAlerts(filteredData);
         }
 
+        // ============================================================
+        // SETUP FILTER BUTTONS
+        // ============================================================
         function setupFilterButtons() {
             document.querySelectorAll('#programFilters .filter-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
@@ -1394,11 +1429,13 @@
         }
 
         // ============================================================
-        // EMPLOYEE DETAIL TABLE - مع Accommodation بدلاً من Status
+        // EMPLOYEE DETAIL TABLE
         // ============================================================
         function updateEmployeeDetailTable(data) {
             const tbody = document.getElementById('detailTableBody');
             const countSpan = document.getElementById('detailCount');
+            
+            console.log('📋 Updating employee table with', data ? data.length : 0, 'records');
             
             if (!data || data.length === 0) {
                 tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;padding:20px;color:var(--text-muted);">No employees match the current filters.</td></tr>`;
@@ -1499,7 +1536,7 @@
         // ============================================================
         function renderDashboard(data) {
             if (!data || data.length === 0) {
-                console.warn("No data.");
+                console.warn("No data to render.");
                 return;
             }
             const total = data.length;
@@ -2012,12 +2049,10 @@
             } catch (err) {
                 console.error('❌ Error loading data:', err);
                 loadError = true;
-                // إخفاء رسالة الخطأ بدلاً من عرضها
                 msg.className = 'loading-status';
                 msg.innerHTML = '';
                 document.getElementById('statusText').textContent = 'Error';
                 document.getElementById('statusIcon').className = 'fa-solid fa-cloud-arrow-up';
-                // عدم عرض alert خطأ
             } finally {
                 isLoading = false;
                 document.getElementById('refreshBtn').disabled = false;
