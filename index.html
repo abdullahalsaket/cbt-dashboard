@@ -50,7 +50,7 @@
         .refresh-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
         /* ============================================================
-           SECTOR SLICER
+           SECTOR SLICER - السلايسر الوحيد للنشاط
            ============================================================ */
         .sector-slicer {
             background: var(--white);
@@ -259,6 +259,52 @@
         .insight-tag.danger { background: rgba(239,68,68,0.15); color: var(--danger); }
         .insight-tag.info { background: rgba(59,130,246,0.15); color: var(--info); }
 
+        /* ============================================================
+           الفلاتر تحت بعض - محاذاة يسار
+           ============================================================ */
+        .filter-vertical {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            width: 100%;
+        }
+        .filter-vertical .filter-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 3px 0;
+        }
+        .filter-vertical .filter-item .filter-label {
+            font-size: 0.6rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            min-width: 70px;
+            flex-shrink: 0;
+            text-align: left;
+        }
+        .filter-vertical .filter-item .filter-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3px 5px;
+            align-items: center;
+        }
+        .filter-vertical .filter-item .filter-btn {
+            font-size: 0.55rem;
+            padding: 2px 10px;
+            white-space: nowrap;
+        }
+        .filter-vertical .filter-item .filter-select {
+            font-size: 0.55rem;
+            padding: 3px 24px 3px 10px;
+            min-width: 100px;
+            max-width: 200px;
+        }
+
+        /* ============================================================
+           RESPONSIVE
+           ============================================================ */
         @media (max-width: 992px) {
             .search-charts-grid { grid-template-columns: 1fr; }
             .charts-grid { grid-template-columns: 1fr 1fr; }
@@ -270,7 +316,6 @@
             .charts-grid-2 .chart-box .chart-container { height: 200px; }
             .action-buttons { margin-left: 0; width: 100%; justify-content: flex-start; }
             .sector-slicer { flex-direction: column; align-items: stretch; }
-            .filter-row-compact { flex-wrap: nowrap !important; overflow-x: auto !important; }
         }
         @media (max-width: 768px) {
             .navbar { flex-direction: column; text-align: center; }
@@ -289,7 +334,8 @@
             .employee-detail-table th, .employee-detail-table td { padding: 4px 8px; }
             .alerts-container .alert-item { font-size: 0.65rem; }
             .action-buttons { flex-wrap: wrap; }
-            .filter-row-compact { flex-wrap: wrap !important; }
+            .filter-vertical .filter-item { flex-wrap: wrap; }
+            .filter-vertical .filter-item .filter-label { min-width: 100%; }
         }
         @media (max-width: 480px) {
             .kpi-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
@@ -301,43 +347,6 @@
             .chart-box { padding: 12px 14px; }
             .action-btn { font-size: 0.5rem; padding: 3px 10px; }
             .sector-slicer .slicer-btn { font-size: 0.55rem; padding: 4px 12px; }
-        }
-
-        .filter-row-compact {
-            display: flex !important;
-            flex-wrap: nowrap !important;
-            align-items: center !important;
-            gap: 8px 12px !important;
-            padding: 6px 0 !important;
-            border-bottom: 1px solid rgba(0,0,0,0.04) !important;
-            overflow-x: auto !important;
-        }
-        .filter-row-compact .filter-group {
-            display: flex !important;
-            flex-wrap: nowrap !important;
-            gap: 4px 6px !important;
-            align-items: center !important;
-            flex-shrink: 0 !important;
-        }
-        .filter-row-compact .filter-label {
-            font-size: 0.6rem !important;
-            font-weight: 700 !important;
-            color: var(--text-muted) !important;
-            text-transform: uppercase !important;
-            letter-spacing: 0.5px !important;
-            min-width: 40px !important;
-            flex-shrink: 0 !important;
-        }
-        .filter-row-compact .filter-btn {
-            font-size: 0.55rem !important;
-            padding: 3px 10px !important;
-            white-space: nowrap !important;
-        }
-        .filter-row-compact .filter-select {
-            font-size: 0.55rem !important;
-            padding: 3px 24px 3px 10px !important;
-            min-width: 80px !important;
-            max-width: 150px !important;
         }
 
         @media print {
@@ -404,7 +413,7 @@
     <div class="container" id="printContainer">
 
         <!-- ============================================================
-        SECTOR SLICER
+        SECTOR SLICER - السلايسر الوحيد للنشاط
         ============================================================ -->
         <div class="sector-slicer no-print" id="sectorSlicer">
             <div class="slicer-label">
@@ -443,6 +452,7 @@
         FILTER BAR
         ============================================================ -->
         <div class="filter-bar no-print" id="filterBar">
+            <!-- صف البرامج -->
             <div class="filter-row">
                 <span class="filter-label"><i class="fa-solid fa-book"></i> Programs:</span>
                 <div class="filter-group" id="programFilters">
@@ -456,43 +466,60 @@
                 </div>
             </div>
 
-            <!-- صف الفلاتر المدمج - Location, Level, Attendance -->
-            <div class="filter-row-compact">
-                <span class="filter-label"><i class="fa-solid fa-location-dot"></i> Location</span>
-                <div class="filter-group" id="locationFilters">
-                    <button class="filter-btn active" data-filter="location" data-value="all">All <span class="badge-count" id="locAllCount">0</span></button>
-                    <button class="filter-btn" data-filter="location" data-value="Steigenberger">Steigenberger <span class="badge-count" id="locSteigenbergerCount">0</span></button>
-                    <button class="filter-btn" data-filter="location" data-value="TOR">TOR <span class="badge-count" id="locTORCount">0</span></button>
-                    <button class="filter-btn" data-filter="location" data-value="Nob">Nob <span class="badge-count" id="locNobCount">0</span></button>
-                    <button class="filter-btn" data-filter="location" data-value="Alsaff">Alsaff <span class="badge-count" id="locAlsaffCount">0</span></button>
-                </div>
+            <!-- الفلاتر تحت بعض (Location, Level, Attend) -->
+            <div class="filter-row" style="border-bottom: none; padding-bottom: 0;">
+                <div class="filter-vertical" style="width:100%;">
+                    
+                    <!-- Location -->
+                    <div class="filter-item">
+                        <span class="filter-label"><i class="fa-solid fa-location-dot"></i> Location</span>
+                        <div class="filter-group" id="locationFilters">
+                            <button class="filter-btn active" data-filter="location" data-value="all">All <span class="badge-count" id="locAllCount">0</span></button>
+                            <button class="filter-btn" data-filter="location" data-value="Steigenberger">Steigenberger <span class="badge-count" id="locSteigenbergerCount">0</span></button>
+                            <button class="filter-btn" data-filter="location" data-value="TOR">TOR <span class="badge-count" id="locTORCount">0</span></button>
+                            <button class="filter-btn" data-filter="location" data-value="Nob">Nob <span class="badge-count" id="locNobCount">0</span></button>
+                            <button class="filter-btn" data-filter="location" data-value="Alsaff">Alsaff <span class="badge-count" id="locAlsaffCount">0</span></button>
+                        </div>
+                    </div>
 
-                <span class="filter-label" style="min-width:40px !important;"><i class="fa-solid fa-layer-group"></i> Level</span>
-                <div class="filter-group" id="levelFilters">
-                    <button class="filter-btn active" data-filter="level" data-value="all">All <span class="badge-count" id="lvlAllCount">0</span></button>
-                    <button class="filter-btn" data-filter="level" data-value="L4">L4 <span class="badge-count" id="lvlL4Count">0</span></button>
-                    <button class="filter-btn" data-filter="level" data-value="L3">L3 <span class="badge-count" id="lvlL3Count">0</span></button>
-                    <button class="filter-btn" data-filter="level" data-value="L2">L2 <span class="badge-count" id="lvlL2Count">0</span></button>
-                    <button class="filter-btn" data-filter="level" data-value="L1">L1 <span class="badge-count" id="lvlL1Count">0</span></button>
-                </div>
+                    <!-- Level -->
+                    <div class="filter-item">
+                        <span class="filter-label"><i class="fa-solid fa-layer-group"></i> Level</span>
+                        <div class="filter-group" id="levelFilters">
+                            <button class="filter-btn active" data-filter="level" data-value="all">All <span class="badge-count" id="lvlAllCount">0</span></button>
+                            <button class="filter-btn" data-filter="level" data-value="L4">L4 <span class="badge-count" id="lvlL4Count">0</span></button>
+                            <button class="filter-btn" data-filter="level" data-value="L3">L3 <span class="badge-count" id="lvlL3Count">0</span></button>
+                            <button class="filter-btn" data-filter="level" data-value="L2">L2 <span class="badge-count" id="lvlL2Count">0</span></button>
+                            <button class="filter-btn" data-filter="level" data-value="L1">L1 <span class="badge-count" id="lvlL1Count">0</span></button>
+                        </div>
+                    </div>
 
-                <span class="filter-label" style="min-width:40px !important;"><i class="fa-solid fa-user-check"></i> Attend</span>
-                <div class="filter-group" id="attendanceFilters">
-                    <button class="filter-btn active attend-btn" data-filter="attendance" data-value="all">All <span class="badge-count" id="attAllCount">0</span></button>
-                    <button class="filter-btn attend-btn" data-filter="attendance" data-value="attend">✅ Attend <span class="badge-count" id="attAttendCount">0</span></button>
-                    <button class="filter-btn not-attend-btn" data-filter="attendance" data-value="not-attend">❌ Not Attend <span class="badge-count" id="attNotAttendCount">0</span></button>
-                </div>
+                    <!-- Attend -->
+                    <div class="filter-item">
+                        <span class="filter-label"><i class="fa-solid fa-user-check"></i> Attend</span>
+                        <div class="filter-group" id="attendanceFilters">
+                            <button class="filter-btn active attend-btn" data-filter="attendance" data-value="all">All <span class="badge-count" id="attAllCount">0</span></button>
+                            <button class="filter-btn attend-btn" data-filter="attendance" data-value="attend">✅ Attend <span class="badge-count" id="attAttendCount">0</span></button>
+                            <button class="filter-btn not-attend-btn" data-filter="attendance" data-value="not-attend">❌ Not Attend <span class="badge-count" id="attNotAttendCount">0</span></button>
+                        </div>
+                    </div>
 
-                <span class="filter-label" style="min-width:30px !important;"><i class="fa-solid fa-industry"></i></span>
-                <div class="filter-group">
-                    <select class="filter-select" id="sectorSelect">
-                        <option value="all">All Sectors</option>
-                        <option value="أعلاف">أعلاف</option>
-                        <option value="مجازر">مجازر</option>
-                    </select>
+                    <!-- Sector Dropdown (اختياري إضافي) -->
+                    <div class="filter-item">
+                        <span class="filter-label"><i class="fa-solid fa-industry"></i> Sector</span>
+                        <div class="filter-group">
+                            <select class="filter-select" id="sectorSelect">
+                                <option value="all">All Sectors</option>
+                                <option value="أعلاف">أعلاف</option>
+                                <option value="مجازر">مجازر</option>
+                            </select>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
+            <!-- صف Group و Phase والأزرار -->
             <div class="filter-row">
                 <span class="filter-label"><i class="fa-solid fa-layer-group"></i> Group:</span>
                 <div class="filter-group">
@@ -533,7 +560,6 @@
             <div class="kpi-card"><div class="kpi-info"><h4>Total Workforce</h4><div class="num" id="kpiTotal">...</div></div><i class="fa-solid fa-users"></i></div>
             <div class="kpi-card"><div class="kpi-info"><h4>Active Sectors</h4><div class="num" id="kpiSectors">...</div></div><i class="fa-solid fa-building"></i></div>
             <div class="kpi-card"><div class="kpi-info"><h4>Departments</h4><div class="num" id="kpiDepartments">...</div></div><i class="fa-solid fa-sitemap"></i></div>
-            <!-- تم تغيير Attendance Rate إلى Project Progress -->
             <div class="kpi-card"><div class="kpi-info"><h4>Project Progress</h4><div class="num" id="kpiAttendance">...</div></div><i class="fa-solid fa-chart-line"></i></div>
             <div class="kpi-card"><div class="kpi-info"><h4>Completed Training</h4><div class="num" id="kpiPrograms">...</div></div><i class="fa-solid fa-book-open"></i></div>
             <div class="kpi-card"><div class="kpi-info"><h4>Training Locations</h4><div class="num" id="kpiLocations">...</div></div><i class="fa-solid fa-location-dot"></i></div>
@@ -1454,7 +1480,6 @@
             document.getElementById('kpiTotal').textContent = total.toLocaleString();
             document.getElementById('kpiSectors').textContent = sectors.size.toLocaleString();
             document.getElementById('kpiDepartments').textContent = departments.size.toLocaleString();
-            // Project Progress بدلاً من Attendance Rate
             document.getElementById('kpiAttendance').textContent = attendanceRate + '%';
             document.getElementById('kpiPrograms').textContent = programCount;
             document.getElementById('kpiLocations').textContent = locationCount;
