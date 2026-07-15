@@ -50,7 +50,7 @@
         .refresh-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
         /* ============================================================
-           SMART ALERTS - لوحة التنبيهات الذكية
+           SMART ALERTS
            ============================================================ */
         .alerts-container {
             background: var(--white);
@@ -94,14 +94,6 @@
         .filter-select:focus { outline: none; border-color: var(--koki-orange); box-shadow: 0 0 0 3px rgba(255,110,64,0.15); }
         .filter-select option { padding: 4px 8px; font-family: 'Cairo', sans-serif; }
 
-        /* أزرار حفظ وتحميل الفلاتر */
-        .preset-btn { padding: 4px 14px; border-radius: 30px; border: 2px solid var(--purple); background: transparent; font-family: 'Cairo', sans-serif; font-size: 0.6rem; font-weight: 600; color: var(--purple); cursor: pointer; transition: all 0.2s; }
-        .preset-btn:hover { background: var(--purple); color: white; border-color: var(--purple); }
-        .preset-btn.save { border-color: var(--success); color: var(--success); }
-        .preset-btn.save:hover { background: var(--success); color: white; }
-        .preset-btn.load { border-color: var(--info); color: var(--info); }
-        .preset-btn.load:hover { background: var(--info); color: white; }
-
         .filter-btn { padding: 4px 14px; border-radius: 30px; border: 2px solid #e2e8f0; background: transparent; font-family: 'Cairo', sans-serif; font-size: 0.6rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.2s; white-space: nowrap; }
         .filter-btn:hover { border-color: var(--cpc-blue); color: var(--cpc-blue); background: rgba(30,61,89,0.04); }
         .filter-btn.active { border-color: var(--koki-orange); background: var(--koki-orange); color: white; box-shadow: 0 4px 12px rgba(255,110,64,0.3); }
@@ -115,7 +107,7 @@
         .clear-filters-btn { padding: 4px 16px; border-radius: 30px; border: 2px solid #e2e8f0; background: transparent; font-family: 'Cairo', sans-serif; font-size: 0.6rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.2s; margin-left: auto; flex-shrink: 0; }
         .clear-filters-btn:hover { border-color: var(--danger); color: var(--danger); background: rgba(239,68,68,0.05); }
 
-        /* أزرار الطباعة والحفظ */
+        /* أزرار الطباعة */
         .action-buttons {
             display: flex;
             gap: 6px;
@@ -187,7 +179,7 @@
         .loading-status.success { color: var(--success); }
 
         /* ============================================================
-           RESULT CARD - مع Quick View
+           RESULT CARD
            ============================================================ */
         .result-card { margin-top: 10px; background: #f8fafc; border-radius: 12px; padding: 12px; display: none; border-right: 4px solid var(--success); }
         .employee-profile { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 10px; }
@@ -201,7 +193,6 @@
         .stat-badge.location { background: rgba(255,110,64,0.15); color: var(--koki-orange); }
         .stat-badge.accommodation { background: rgba(139,92,246,0.15); color: var(--purple); }
         
-        /* Performance Stats */
         .perf-stats { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
         .perf-stat { background: var(--white); padding: 4px 12px; border-radius: 8px; font-size: 0.65rem; font-weight: 600; border: 1px solid #e8ecf0; }
         .perf-stat .num { font-size: 1rem; font-weight: 800; color: var(--cpc-blue); }
@@ -211,30 +202,6 @@
 
         .print-btn { background: var(--cpc-blue); color: white; border: none; padding: 6px 16px; border-radius: 8px; font-family: 'Cairo', sans-serif; font-size: 0.7rem; font-weight: 600; cursor: pointer; transition: all 0.2s; margin-top: 8px; display: inline-flex; align-items: center; gap: 6px; }
         .print-btn:hover { background: var(--cpc-blue-dark); }
-
-        /* ============================================================
-           QUICK VIEW TOOLTIP
-           ============================================================ */
-        .quick-view-tooltip {
-            display: none;
-            position: fixed;
-            background: var(--white);
-            border-radius: 12px;
-            padding: 14px 18px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-            border: 1px solid #e8ecf0;
-            z-index: 999;
-            min-width: 200px;
-            max-width: 280px;
-            pointer-events: none;
-            font-size: 0.7rem;
-        }
-        .quick-view-tooltip.show { display: block; }
-        .quick-view-tooltip .qv-name { font-size: 0.9rem; font-weight: 700; color: var(--cpc-blue); }
-        .quick-view-tooltip .qv-detail { display: flex; justify-content: space-between; padding: 2px 0; border-bottom: 1px solid #f0f0f0; }
-        .quick-view-tooltip .qv-detail:last-child { border-bottom: none; }
-        .quick-view-tooltip .qv-label { color: var(--text-muted); }
-        .quick-view-tooltip .qv-value { font-weight: 600; }
 
         /* ============================================================
            CHARTS
@@ -330,12 +297,14 @@
         }
 
         /* ============================================================
-           PRINT STYLES
+           PRINT STYLES - مهم جداً عشان تظهر البيانات في الطباعة
            ============================================================ */
         @media print {
+            /* إخفاء كل العناصر */
             body * {
                 visibility: hidden;
             }
+            /* إظهار منطقة الطباعة فقط */
             #printArea, #printArea * {
                 visibility: visible;
             }
@@ -356,12 +325,16 @@
             #printArea th {
                 background: #1e3d59 !important;
                 color: white !important;
-                padding: 6px 10px;
+                padding: 8px 12px;
                 text-align: left;
+                border: 1px solid #1e3d59;
             }
             #printArea td {
-                padding: 5px 10px;
-                border-bottom: 1px solid #e8ecf0;
+                padding: 6px 12px;
+                border: 1px solid #ddd;
+            }
+            #printArea tr:nth-child(even) {
+                background: #f9f9f9;
             }
             #printArea .badge-attend { color: #10b981; font-weight: bold; }
             #printArea .badge-not-attend { color: #ef4444; font-weight: bold; }
@@ -369,6 +342,32 @@
             #printArea h2 {
                 color: #1e3d59;
                 margin-bottom: 15px;
+                font-size: 18px;
+            }
+            #printArea .print-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 3px solid #1e3d59;
+                padding-bottom: 10px;
+                margin-bottom: 15px;
+            }
+            #printArea .print-header h1 {
+                color: #1e3d59;
+                font-size: 20px;
+                margin: 0;
+            }
+            #printArea .print-header .sub {
+                color: #6b7a8f;
+                font-size: 12px;
+            }
+            #printArea .print-footer {
+                margin-top: 20px;
+                padding-top: 10px;
+                border-top: 1px solid #ddd;
+                text-align: center;
+                font-size: 11px;
+                color: #6b7a8f;
             }
             .no-print {
                 display: none !important;
@@ -488,7 +487,7 @@
                     <button class="filter-btn not-attend-btn" data-filter="attendance" data-value="not-attend">❌ Not Attend <span class="badge-count" id="attNotAttendCount">0</span></button>
                 </div>
 
-                <!-- أزرار الطباعة والحفظ -->
+                <!-- أزرار الطباعة -->
                 <div class="action-buttons">
                     <button class="action-btn print-btn" onclick="printPage()">
                         <i class="fa-solid fa-print"></i> طباعة
@@ -498,9 +497,6 @@
                     </button>
                 </div>
 
-                <!-- Preset Buttons -->
-                <button class="preset-btn save" onclick="saveFilterPreset()"><i class="fa-solid fa-floppy-disk"></i> Save</button>
-                <button class="preset-btn load" onclick="loadFilterPreset()"><i class="fa-solid fa-upload"></i> Load</button>
                 <button class="clear-filters-btn" onclick="clearAllFilters()"><i class="fa-solid fa-undo"></i> Reset</button>
             </div>
         </div>
@@ -604,24 +600,36 @@
         </div>
 
         <!-- ============================================================
-        EMPLOYEE DETAIL TABLE (مع ID للطباعة)
+        EMPLOYEE DETAIL TABLE - منطقة الطباعة
         ============================================================ -->
         <div class="employee-detail-table" id="employeeDetailTable">
             <h4><i class="fa-solid fa-users"></i> Employees Details <span id="detailCount" style="font-size:0.7rem;color:var(--text-muted);font-weight:400;"></span></h4>
-            <div id="printArea" style="overflow-x:auto;">
-                <table id="employee-table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Department</th>
-                            <th>Title</th>
-                            <th>Attendance</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody id="detailTableBody"></tbody>
-                </table>
+            <!-- هذه المنطقة سيتم طباعتها -->
+            <div id="printArea">
+                <div class="print-header no-print" style="display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid #1e3d59;padding-bottom:10px;margin-bottom:15px;">
+                    <h1 style="color:#1e3d59;font-size:20px;margin:0;">📋 CBT Employees Report</h1>
+                    <span class="sub" style="color:#6b7a8f;font-size:12px;">Generated: <span id="printDate"></span></span>
+                </div>
+                <div style="overflow-x:auto;">
+                    <table id="employee-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Department</th>
+                                <th>Title</th>
+                                <th>Training Group</th>
+                                <th>Phase</th>
+                                <th>Attendance</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="detailTableBody"></tbody>
+                    </table>
+                </div>
+                <div class="print-footer no-print" style="margin-top:20px;padding-top:10px;border-top:1px solid #ddd;text-align:center;font-size:11px;color:#6b7a8f;">
+                    CBT Intelligence Hub 2026 • All Rights Reserved
+                </div>
             </div>
         </div>
 
@@ -673,18 +681,6 @@
             </div>
         </div>
 
-    </div>
-
-    <!-- ============================================================
-    QUICK VIEW TOOLTIP
-    ============================================================ -->
-    <div class="quick-view-tooltip no-print" id="quickViewTooltip">
-        <div class="qv-name" id="qvName">-</div>
-        <div class="qv-detail"><span class="qv-label">ID</span><span class="qv-value" id="qvId">-</span></div>
-        <div class="qv-detail"><span class="qv-label">Department</span><span class="qv-value" id="qvDept">-</span></div>
-        <div class="qv-detail"><span class="qv-label">Title</span><span class="qv-value" id="qvTitle">-</span></div>
-        <div class="qv-detail"><span class="qv-label">Attendance</span><span class="qv-value" id="qvAttendance">-</span></div>
-        <div class="qv-detail"><span class="qv-label">Status</span><span class="qv-value" id="qvStatus">-</span></div>
     </div>
 
     <script>
@@ -743,11 +739,14 @@
         let isLoading = false;
         let loadError = false;
         let lastSearchedEmployee = null;
+        let refreshInterval = null;
 
         // ============================================================
         // PRINT FUNCTIONS
         // ============================================================
         function printPage() {
+            // تحديث تاريخ الطباعة
+            document.getElementById('printDate').textContent = new Date().toLocaleString();
             window.print();
         }
 
@@ -776,50 +775,6 @@
             Object.keys(chartInstances).forEach(key => {
                 if (chartInstances[key]) { chartInstances[key].destroy(); delete chartInstances[key]; }
             });
-        }
-
-        // ============================================================
-        // FILTER PRESETS
-        // ============================================================
-        function saveFilterPreset() {
-            const name = prompt('Enter a name for this filter preset:', 'My Filter');
-            if (!name) return;
-            const presets = JSON.parse(localStorage.getItem('ctih_filter_presets') || '{}');
-            presets[name] = { ...activeFilters };
-            localStorage.setItem('ctih_filter_presets', JSON.stringify(presets));
-            showAlert('success', `✅ Filter "${name}" saved successfully!`);
-        }
-
-        function loadFilterPreset() {
-            const presets = JSON.parse(localStorage.getItem('ctih_filter_presets') || '{}');
-            const names = Object.keys(presets);
-            if (names.length === 0) {
-                showAlert('warning', '⚠️ No saved filters found.');
-                return;
-            }
-            const name = prompt('Enter the name of the filter to load:\n\nAvailable: ' + names.join(', '));
-            if (!name || !presets[name]) {
-                showAlert('error', '❌ Filter not found.');
-                return;
-            }
-            const preset = presets[name];
-            Object.keys(preset).forEach(key => {
-                activeFilters[key] = preset[key];
-            });
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.dataset.value === preset[btn.dataset.filter]) {
-                    btn.classList.add('active');
-                }
-                if (btn.dataset.value === 'all' && !preset[btn.dataset.filter]) {
-                    btn.classList.add('active');
-                }
-            });
-            document.getElementById('groupSelect').value = preset.group || 'all';
-            document.getElementById('phaseSelect').value = preset.phase || 'all';
-            document.getElementById('sectorSelect').value = preset.sector || 'all';
-            applyFilters();
-            showAlert('success', `✅ Filter "${name}" loaded successfully!`);
         }
 
         // ============================================================
@@ -1236,14 +1191,13 @@
         }
 
         // ============================================================
-        // EMPLOYEE DETAIL TABLE - المعدلة لعرض البيانات بناءً على الفلاتر
+        // EMPLOYEE DETAIL TABLE - عرض جميع البيانات مع تفاصيل البرامج
         // ============================================================
         function updateEmployeeDetailTable(data) {
             const tableContainer = document.getElementById('employeeDetailTable');
             const tbody = document.getElementById('detailTableBody');
             const countSpan = document.getElementById('detailCount');
             
-            // نعرض الجدول طالما فيه بيانات (دائماً)
             if (!data || data.length === 0) {
                 tableContainer.classList.remove('show');
                 return;
@@ -1252,7 +1206,7 @@
             tableContainer.classList.add('show');
             countSpan.textContent = `(${data.length} employees)`;
             
-            // عرض جميع البيانات (أو حد أقصى 100 صف للسرعة)
+            // عرض جميع البيانات (حد أقصى 100 صف)
             const displayData = data.slice(0, 100);
             
             tbody.innerHTML = displayData.map(emp => {
@@ -1274,79 +1228,19 @@
                 
                 return `<tr>
                     <td><strong>${emp[COLUMNS.ID] || 'N/A'}</strong></td>
-                    <td>${emp[COLUMNS.Name] || 'Unknown'}</td>
+                    <td><strong>${emp[COLUMNS.Name] || 'Unknown'}</strong></td>
                     <td>${emp[COLUMNS.Department] || 'N/A'}</td>
                     <td>${emp[COLUMNS.Title] || 'N/A'}</td>
+                    <td>${emp[COLUMNS.TrainingGroup] || 'N/A'}</td>
+                    <td>${emp[COLUMNS.TrainingPhase] || 'N/A'}</td>
                     <td>${attendanceBadge}</td>
                     <td>${status}</td>
                 </tr>`;
             }).join('');
 
-            // إذا كان عدد البيانات أكثر من 100، أضف رسالة
             if (data.length > 100) {
-                tbody.innerHTML += `<tr><td colspan="6" style="text-align:center;color:var(--text-muted);font-style:italic;">... and ${data.length - 100} more records</td></tr>`;
+                tbody.innerHTML += `<tr><td colspan="8" style="text-align:center;color:var(--text-muted);font-style:italic;">... and ${data.length - 100} more records</td></tr>`;
             }
-        }
-
-        // ============================================================
-        // QUICK VIEW
-        // ============================================================
-        function setupQuickView() {
-            const tooltip = document.getElementById('quickViewTooltip');
-            let timeout = null;
-
-            document.addEventListener('mouseover', function(e) {
-                const cell = e.target.closest('td');
-                if (!cell) return;
-                const row = cell.closest('tr');
-                if (!row) return;
-                const table = row.closest('#employee-table');
-                if (!table) return;
-
-                const cells = row.querySelectorAll('td');
-                if (cells.length < 6) return;
-
-                const id = cells[0]?.textContent?.trim() || '';
-                const name = cells[1]?.textContent?.trim() || '';
-                const dept = cells[2]?.textContent?.trim() || '';
-                const title = cells[3]?.textContent?.trim() || '';
-                const attendance = cells[4]?.textContent?.trim() || 'N/A';
-                const status = cells[5]?.textContent?.trim() || 'N/A';
-
-                if (e.target.closest('td') === cells[1] || e.target.closest('td') === cells[0]) {
-                    clearTimeout(timeout);
-                    tooltip.querySelector('#qvName').textContent = name || 'Unknown';
-                    tooltip.querySelector('#qvId').textContent = id || 'N/A';
-                    tooltip.querySelector('#qvDept').textContent = dept || 'N/A';
-                    tooltip.querySelector('#qvTitle').textContent = title || 'N/A';
-                    tooltip.querySelector('#qvAttendance').textContent = attendance || 'N/A';
-                    tooltip.querySelector('#qvStatus').textContent = status || 'N/A';
-                    
-                    const rect = e.target.getBoundingClientRect();
-                    let top = rect.bottom + 10;
-                    let left = rect.left;
-                    if (top + 300 > window.innerHeight) top = rect.top - 300;
-                    if (left + 280 > window.innerWidth) left = window.innerWidth - 290;
-                    tooltip.style.top = top + 'px';
-                    tooltip.style.left = left + 'px';
-                    tooltip.classList.add('show');
-                }
-            });
-
-            document.addEventListener('mouseout', function(e) {
-                const cell = e.target.closest('td');
-                if (cell) {
-                    const row = cell.closest('tr');
-                    if (row) {
-                        const cells = row.querySelectorAll('td');
-                        if (cells.length >= 6 && (e.target.closest('td') === cells[1] || e.target.closest('td') === cells[0])) {
-                            timeout = setTimeout(() => {
-                                tooltip.classList.remove('show');
-                            }, 300);
-                        }
-                    }
-                }
-            });
         }
 
         // ============================================================
@@ -1676,7 +1570,6 @@
             });
 
             setupChartInteractivity();
-            setupQuickView();
 
             document.getElementById('statusText').textContent = 'Live';
             document.getElementById('statusIcon').className = 'fa-solid fa-cloud';
@@ -1871,7 +1764,7 @@ setTimeout(() => { printWindow.print(); }, 500);
 }
 
 // ============================================================
-// LOAD DATA
+// LOAD DATA مع تحديث تلقائي كل 30 ثانية
 // ============================================================
 async function loadData() {
 if (isLoading) return;
@@ -1891,7 +1784,12 @@ if (jsonData.length === 0) throw new Error('No data found in sheet');
 allData = jsonData;
 console.log('✅ Data loaded:', allData.length, 'records');
 loadError = false;
+
+// تحديث التاريخ في الطباعة
+document.getElementById('printDate').textContent = new Date().toLocaleString();
+
 applyFilters();
+showAlert('success', `✅ Data refreshed! ${allData.length} employees loaded.`);
 } catch (err) {
 console.error('❌ Error loading data:', err);
 loadError = true;
@@ -1899,6 +1797,7 @@ msg.className = 'loading-status error';
 msg.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Error loading data. Please try again.';
 document.getElementById('statusText').textContent = 'Error';
 document.getElementById('statusIcon').className = 'fa-solid fa-cloud-arrow-up';
+showAlert('danger', '❌ Failed to load data: ' + err.message);
 } finally {
 isLoading = false;
 document.getElementById('refreshBtn').disabled = false;
@@ -1912,6 +1811,12 @@ document.addEventListener('DOMContentLoaded', function() {
 setupFilterButtons();
 loadData();
 
+// تحديث تلقائي كل 30 ثانية
+refreshInterval = setInterval(() => {
+console.log('🔄 Auto-refreshing data...');
+loadData();
+}, 30000);
+
 document.getElementById('refreshBtn').addEventListener('click', function() {
 loadData();
 });
@@ -1919,8 +1824,19 @@ loadData();
 document.getElementById('empIdInput').addEventListener('keypress', function(e) {
 if (e.key === 'Enter') searchEmployee();
 });
+
+// تحديث تاريخ الطباعة عند فتح نافذة الطباعة
+window.addEventListener('beforeprint', function() {
+document.getElementById('printDate').textContent = new Date().toLocaleString();
+});
 });
 
+// تنظيف الـ Interval عند إغلاق الصفحة
+window.addEventListener('beforeunload', function() {
+if (refreshInterval) {
+clearInterval(refreshInterval);
+}
+});
 </script>
 </body>
 </html>
