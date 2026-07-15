@@ -203,9 +203,6 @@
         .charts-grid-2 .chart-box canvas { height: 260px !important; max-height: 260px; }
         .charts-grid-2 .chart-box .chart-container { height: 260px; }
 
-        /* ============================================================
-           EMPLOYEE DETAIL TABLE - تظهر تحت الرسوم البيانية
-           ============================================================ */
         .employee-detail-table {
             background: var(--white);
             border-radius: 14px;
@@ -279,49 +276,114 @@
         }
 
         /* ============================================================
-           PRINT STYLES - مهم: إظهار الجدول فقط
+           PRINT STYLES - طباعة كل محتويات الصفحة
            ============================================================ */
         @media print {
-            /* إخفاء كل العناصر في الصفحة */
-            body * {
-                visibility: hidden !important;
-            }
-            /* إظهار منطقة الطباعة فقط */
-            #printArea, #printArea * {
+            /* إظهار كل العناصر في الطباعة */
+            body, body * {
                 visibility: visible !important;
             }
-            #printArea {
-                position: absolute !important;
-                left: 0 !important;
-                top: 0 !important;
-                width: 100% !important;
-                padding: 30px !important;
+            
+            /* إخفاء العناصر غير المرغوب فيها */
+            .no-print, .no-print * {
+                display: none !important;
+            }
+            
+            /* إخفاء الأزرار التفاعلية */
+            .action-btn, .refresh-btn, .print-btn, .preset-btn, .clear-filters-btn,
+            .search-box button, .filter-btn, .filter-select {
+                display: none !important;
+            }
+            
+            /* تنسيق الصفحة للطباعة */
+            body {
                 background: white !important;
-                font-size: 12px !important;
+                padding: 20px !important;
+                font-size: 11px !important;
+                color: #1a2332 !important;
             }
-            #printArea table {
-                width: 100% !important;
-                border-collapse: collapse !important;
-                font-size: 10px !important;
+            
+            .container {
+                max-width: 100% !important;
+                padding: 0 !important;
             }
-            #printArea th {
+            
+            /* تنسيق البطاقات */
+            .kpi-card, .chart-box, .insight-card, .employee-detail-table,
+            .search-wrapper, .filter-bar, .brief-section, .alerts-container {
+                box-shadow: none !important;
+                border: 1px solid #ddd !important;
+                page-break-inside: avoid !important;
+                margin: 8px 0 !important;
+                padding: 10px 12px !important;
+                background: white !important;
+            }
+            
+            .kpi-grid {
+                display: grid !important;
+                grid-template-columns: repeat(4, 1fr) !important;
+                gap: 8px !important;
+            }
+            
+            .charts-grid, .charts-grid-2 {
+                display: grid !important;
+                grid-template-columns: 1fr 1fr !important;
+                gap: 12px !important;
+            }
+            
+            .search-charts-grid {
+                display: grid !important;
+                grid-template-columns: 1fr 2fr !important;
+                gap: 12px !important;
+            }
+            
+            .insights-section {
+                display: grid !important;
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 12px !important;
+            }
+            
+            .chart-box canvas {
+                height: 180px !important;
+                max-height: 180px !important;
+            }
+            .chart-box .chart-container {
+                height: 180px !important;
+            }
+            
+            /* تنسيق الجدول */
+            .employee-detail-table table {
+                font-size: 9px !important;
+            }
+            .employee-detail-table th {
                 background: #1e3d59 !important;
                 color: white !important;
-                padding: 8px 10px !important;
-                text-align: left !important;
-                border: 1px solid #1e3d59 !important;
+                padding: 4px 8px !important;
             }
-            #printArea td {
-                padding: 6px 10px !important;
-                border: 1px solid #ddd !important;
+            .employee-detail-table td {
+                padding: 3px 8px !important;
+                border-bottom: 1px solid #eee !important;
             }
-            #printArea tr:nth-child(even) {
-                background: #f9f9f9 !important;
+            
+            /* تنسيق النصوص */
+            .brief-section {
+                background: #1e3d59 !important;
+                color: white !important;
             }
-            #printArea .badge-attend { color: #10b981 !important; font-weight: bold !important; }
-            #printArea .badge-not-attend { color: #ef4444 !important; font-weight: bold !important; }
-            #printArea .badge-unknown { color: #6b7a8f !important; }
-            #printArea .print-header {
+            .brief-section .highlight {
+                color: #ff6e40 !important;
+            }
+            
+            .kpi-card .num {
+                font-size: 1rem !important;
+            }
+            
+            .insight-value {
+                font-size: 1.1rem !important;
+            }
+            
+            /* تنسيق رأس الطباعة */
+            .print-header {
                 display: flex !important;
                 justify-content: space-between !important;
                 align-items: center !important;
@@ -329,16 +391,17 @@
                 padding-bottom: 10px !important;
                 margin-bottom: 15px !important;
             }
-            #printArea .print-header h1 {
+            .print-header h1 {
                 color: #1e3d59 !important;
-                font-size: 18px !important;
+                font-size: 20px !important;
                 margin: 0 !important;
             }
-            #printArea .print-header .sub {
+            .print-header .sub {
                 color: #6b7a8f !important;
-                font-size: 11px !important;
+                font-size: 12px !important;
             }
-            #printArea .print-footer {
+            
+            .print-footer {
                 margin-top: 20px !important;
                 padding-top: 10px !important;
                 border-top: 1px solid #ddd !important;
@@ -346,13 +409,30 @@
                 font-size: 10px !important;
                 color: #6b7a8f !important;
             }
-            .no-print {
-                display: none !important;
+            
+            /* إجبار الصفحات على الفصل بشكل مناسب */
+            .page-break {
+                page-break-before: always !important;
+            }
+            
+            /* إظهار بيانات الموظف في الطباعة */
+            .result-card {
+                display: block !important;
+                border-right: 4px solid var(--success) !important;
+                background: #f8fafc !important;
             }
         }
     </style>
 </head>
 <body>
+
+    <!-- ============================================================
+    رأس الصفحة للطباعة (يظهر فقط في الطباعة)
+    ============================================================ -->
+    <div class="print-header" style="display:none;">
+        <h1>📊 CBT Intelligence Dashboard</h1>
+        <span class="sub">Generated: <span id="printDateHeader"></span></span>
+    </div>
 
     <div class="navbar no-print">
         <div class="logo-left"><img src="CPC.png" alt="CPC Logo"></div>
@@ -370,9 +450,9 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container" id="printContainer">
 
-        <div class="brief-section no-print">
+        <div class="brief-section">
             <h2><i class="fa-solid fa-bullseye"></i> Program Overview</h2>
             <p>
                 This dashboard provides <span class="highlight">real-time intelligence</span> for the
@@ -383,7 +463,7 @@
             </p>
         </div>
 
-        <div class="alerts-container no-print" id="alertsContainer">
+        <div class="alerts-container" id="alertsContainer">
             <h3><i class="fa-solid fa-bell"></i> Smart Alerts</h3>
             <div id="alertsList"></div>
         </div>
@@ -463,7 +543,7 @@
 
                 <div class="action-buttons">
                     <button class="action-btn print-btn" onclick="printPage()">
-                        <i class="fa-solid fa-print"></i> طباعة
+                        <i class="fa-solid fa-print"></i> طباعة الكل
                     </button>
                     <button class="action-btn pdf-btn" onclick="printPage()">
                         <i class="fa-solid fa-file-pdf"></i> حفظ PDF
@@ -477,7 +557,7 @@
         <!-- ============================================================
         KPI GRID
         ============================================================ -->
-        <div class="kpi-grid no-print" id="kpiGrid">
+        <div class="kpi-grid" id="kpiGrid">
             <div class="kpi-card"><div class="kpi-info"><h4>Total Workforce</h4><div class="num" id="kpiTotal">...</div></div><i class="fa-solid fa-users"></i></div>
             <div class="kpi-card"><div class="kpi-info"><h4>Active Sectors</h4><div class="num" id="kpiSectors">...</div></div><i class="fa-solid fa-building"></i></div>
             <div class="kpi-card"><div class="kpi-info"><h4>Departments</h4><div class="num" id="kpiDepartments">...</div></div><i class="fa-solid fa-sitemap"></i></div>
@@ -491,7 +571,7 @@
         <!-- ============================================================
         SEARCH + CHARTS
         ============================================================ -->
-        <div class="search-charts-grid no-print">
+        <div class="search-charts-grid">
             <div class="search-wrapper">
                 <h3><i class="fa-solid fa-magnifying-glass"></i> Employee Query</h3>
                 <p>Enter Employee ID for full profile</p>
@@ -524,7 +604,10 @@
                         <div class="perf-stat">⏳ Pending: <span class="num" id="perfPending">0</span></div>
                     </div>
                     <div class="training-tags" id="resPrograms"></div>
-                    <button class="print-btn" onclick="printEmployeeProfile()"><i class="fa-solid fa-print"></i> Print Profile</button>
+                    <!-- زر طباعة بيانات الموظف -->
+                    <button class="print-btn" onclick="printEmployeeProfile()">
+                        <i class="fa-solid fa-print"></i> طباعة بيانات الموظف
+                    </button>
                 </div>
             </div>
             <div class="charts-grid">
@@ -542,7 +625,7 @@
         <!-- ============================================================
         CHARTS
         ============================================================ -->
-        <div class="charts-grid-2 no-print">
+        <div class="charts-grid-2">
             <div class="chart-box" id="chartBoxDept">
                 <h4><i class="fa-solid fa-users-between-lines" style="color:var(--success);"></i> Department Size</h4>
                 <div class="chart-container"><canvas id="chartDepartment"></canvas></div>
@@ -561,7 +644,7 @@
             </div>
         </div>
 
-        <div class="charts-grid-2 no-print" style="margin-top:14px;">
+        <div class="charts-grid-2" style="margin-top:14px;">
             <div class="chart-box" id="chartBoxQuality">
                 <h4><i class="fa-solid fa-gauge-high" style="color:var(--cpc-blue);"></i> Data Quality Overview</h4>
                 <div class="chart-container"><canvas id="chartQuality"></canvas></div>
@@ -573,43 +656,33 @@
         </div>
 
         <!-- ============================================================
-        EMPLOYEE DETAIL TABLE - تظهر دائماً تحت الرسوم البيانية
+        EMPLOYEE DETAIL TABLE
         ============================================================ -->
         <div class="employee-detail-table" id="employeeDetailTable">
             <h4><i class="fa-solid fa-users"></i> Employees Details <span id="detailCount" style="font-size:0.7rem;color:var(--text-muted);font-weight:400;"></span></h4>
-            <!-- منطقة الطباعة -->
-            <div id="printArea">
-                <div class="print-header no-print" style="display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid #1e3d59;padding-bottom:10px;margin-bottom:15px;">
-                    <h1 style="color:#1e3d59;font-size:18px;margin:0;">📋 CBT Employees Report</h1>
-                    <span class="sub" style="color:#6b7a8f;font-size:11px;">Generated: <span id="printDate"></span></span>
-                </div>
-                <div style="overflow-x:auto;">
-                    <table id="employee-table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Department</th>
-                                <th>Title</th>
-                                <th>Training Group</th>
-                                <th>Phase</th>
-                                <th>Attendance</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody id="detailTableBody"></tbody>
-                    </table>
-                </div>
-                <div class="print-footer no-print" style="margin-top:20px;padding-top:10px;border-top:1px solid #ddd;text-align:center;font-size:10px;color:#6b7a8f;">
-                    CBT Intelligence Hub 2026 • All Rights Reserved
-                </div>
+            <div style="overflow-x:auto;">
+                <table id="employee-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Department</th>
+                            <th>Title</th>
+                            <th>Training Group</th>
+                            <th>Phase</th>
+                            <th>Attendance</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="detailTableBody"></tbody>
+                </table>
             </div>
         </div>
 
         <!-- ============================================================
         INSIGHTS
         ============================================================ -->
-        <div class="insights-section no-print" id="insightsSection">
+        <div class="insights-section" id="insightsSection">
             <div class="insight-card">
                 <div class="insight-icon"><i class="fa-solid fa-users"></i></div>
                 <h4>Largest Department</h4>
@@ -652,6 +725,13 @@
                 <div class="insight-desc" id="insightQualityStatusDesc">Overall Quality</div>
                 <span class="insight-tag good" id="insightQualityTag">✅ Good</span>
             </div>
+        </div>
+
+        <!-- ============================================================
+        تذييل الطباعة
+        ============================================================ -->
+        <div class="print-footer" style="display:none;">
+            CBT Intelligence Hub 2026 • All Rights Reserved • Generated: <span id="printDateFooter"></span>
         </div>
 
     </div>
@@ -713,7 +793,9 @@
         // PRINT FUNCTIONS
         // ============================================================
         function printPage() {
-            document.getElementById('printDate').textContent = new Date().toLocaleString();
+            const now = new Date().toLocaleString();
+            document.getElementById('printDateHeader').textContent = now;
+            document.getElementById('printDateFooter').textContent = now;
             window.print();
         }
 
@@ -812,6 +894,15 @@
                     <span>${a.msg}</span>
                 </div>
             `).join('');
+        }
+
+        function showAlert(type, msg) {
+            const alerts = [{ type, icon: type === 'success' ? 'fa-check-circle' : type === 'warning' ? 'fa-circle-exclamation' : 'fa-triangle-exclamation', msg }];
+            renderAlerts(alerts);
+            setTimeout(() => {
+                const container = document.getElementById('alertsContainer');
+                container.classList.remove('show');
+            }, 5000);
         }
 
         // ============================================================
@@ -1149,7 +1240,7 @@
         }
 
         // ============================================================
-        // EMPLOYEE DETAIL TABLE - تعرض تحت الرسوم البيانية
+        // EMPLOYEE DETAIL TABLE
         // ============================================================
         function updateEmployeeDetailTable(data) {
             const tbody = document.getElementById('detailTableBody');
@@ -1163,7 +1254,6 @@
 
             countSpan.textContent = `(${data.length} employees)`;
             
-            // عرض أول 100 موظف
             const displayData = data.slice(0, 100);
             
             tbody.innerHTML = displayData.map(emp => {
@@ -1607,7 +1697,7 @@
         }
 
         // ============================================================
-        // PRINT EMPLOYEE PROFILE
+        // PRINT EMPLOYEE PROFILE - طباعة بيانات الموظف فقط
         // ============================================================
         function printEmployeeProfile() {
             if (!lastSearchedEmployee) {
@@ -1721,7 +1811,7 @@
         }
 
         // ============================================================
-        // LOAD DATA مع تحديث تلقائي كل 30 ثانية
+        // LOAD DATA
         // ============================================================
         async function loadData() {
             if (isLoading) return;
@@ -1742,13 +1832,13 @@
                 console.log('✅ Data loaded:', allData.length, 'records');
                 loadError = false;
 
-                document.getElementById('printDate').textContent = new Date().toLocaleString();
+                const now = new Date().toLocaleString();
+                document.getElementById('printDateHeader').textContent = now;
+                document.getElementById('printDateFooter').textContent = now;
 
                 applyFilters();
                 
-                // تحديث رسالة الحالة
-                const alertMsg = `✅ Data refreshed! ${allData.length} employees loaded.`;
-                showAlert('success', alertMsg);
+                showAlert('success', `✅ Data refreshed! ${allData.length} employees loaded.`);
                 
             } catch (err) {
                 console.error('❌ Error loading data:', err);
@@ -1771,7 +1861,6 @@
             setupFilterButtons();
             loadData();
 
-            // تحديث تلقائي كل 30 ثانية
             refreshInterval = setInterval(() => {
                 console.log('🔄 Auto-refreshing data...');
                 loadData();
@@ -1786,7 +1875,9 @@
             });
 
             window.addEventListener('beforeprint', function() {
-                document.getElementById('printDate').textContent = new Date().toLocaleString();
+                const now = new Date().toLocaleString();
+                document.getElementById('printDateHeader').textContent = now;
+                document.getElementById('printDateFooter').textContent = now;
             });
         });
 
