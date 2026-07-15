@@ -50,7 +50,7 @@
         .refresh-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
         /* ============================================================
-           TOP BAR
+           TOP BAR - سلايسر النشاط + أزرار الطباعة
            ============================================================ */
         .top-bar {
             background: var(--white);
@@ -101,9 +101,14 @@
         .top-bar .slicer-section .slicer-btn .badge { background: rgba(255,255,255,0.2); border-radius: 20px; padding: 0 8px; font-size: 0.5rem; margin-left: 4px; }
         .top-bar .slicer-section .slicer-btn.active .badge { background: rgba(255,255,255,0.25); }
 
-        .top-bar .action-buttons { display: flex; gap: 6px; flex-shrink: 0; }
+        .top-bar .action-buttons {
+            display: flex;
+            gap: 8px;
+            flex-shrink: 0;
+            align-items: center;
+        }
         .top-bar .action-btn {
-            padding: 4px 16px;
+            padding: 6px 20px;
             border-radius: 30px;
             border: 2px solid var(--cpc-blue);
             background: var(--cpc-blue);
@@ -116,12 +121,31 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
+            height: 32px;
+            min-width: 100px;
+            justify-content: center;
         }
-        .top-bar .action-btn:hover { background: var(--cpc-blue-dark); border-color: var(--cpc-blue-dark); transform: translateY(-1px); }
-        .top-bar .action-btn.print-btn { background: var(--cpc-blue); border-color: var(--cpc-blue); }
-        .top-bar .action-btn.print-btn:hover { background: var(--cpc-blue-dark); border-color: var(--cpc-blue-dark); }
-        .top-bar .action-btn.pdf-btn { background: var(--danger); border-color: var(--danger); }
-        .top-bar .action-btn.pdf-btn:hover { background: #dc2626; border-color: #dc2626; }
+        .top-bar .action-btn:hover {
+            background: var(--cpc-blue-dark);
+            border-color: var(--cpc-blue-dark);
+            transform: translateY(-1px);
+        }
+        .top-bar .action-btn.print-btn {
+            background: var(--cpc-blue);
+            border-color: var(--cpc-blue);
+        }
+        .top-bar .action-btn.print-btn:hover {
+            background: var(--cpc-blue-dark);
+            border-color: var(--cpc-blue-dark);
+        }
+        .top-bar .action-btn.pdf-btn {
+            background: var(--danger);
+            border-color: var(--danger);
+        }
+        .top-bar .action-btn.pdf-btn:hover {
+            background: #dc2626;
+            border-color: #dc2626;
+        }
 
         .alerts-container {
             background: var(--white);
@@ -157,22 +181,136 @@
         .filter-bar .filter-label { font-size: 0.6rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; min-width: 60px; flex-shrink: 0; }
         .filter-bar .filter-group { display: flex; flex-wrap: wrap; gap: 3px 6px; flex: 1; align-items: center; }
 
-        .filter-select { padding: 4px 24px 4px 10px; border-radius: 30px; border: 2px solid #e2e8f0; background: var(--white); font-family: 'Cairo', sans-serif; font-size: 0.55rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.2s; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7a8f' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 8px center; min-width: 100px; max-width: 200px; }
-        .filter-select:hover { border-color: var(--cpc-blue); }
-        .filter-select:focus { outline: none; border-color: var(--koki-orange); box-shadow: 0 0 0 3px rgba(255,110,64,0.15); }
-        .filter-select option { padding: 4px 8px; font-family: 'Cairo', sans-serif; }
+        /* ============================================================
+           FILTER ITEMS - كل مفتاح في سطر مع أيقونة
+           ============================================================ */
+        .filter-items-container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 100%;
+            padding: 4px 0;
+        }
+        .filter-item-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            padding: 4px 0;
+        }
+        .filter-item-row .filter-icon-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            min-width: 100px;
+            flex-shrink: 0;
+        }
+        .filter-item-row .filter-icon-label i {
+            font-size: 0.85rem;
+            color: var(--cpc-blue);
+            width: 20px;
+            text-align: center;
+        }
+        .filter-item-row .filter-icon-label span {
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        .filter-item-row .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px 6px;
+            flex: 1;
+            align-items: center;
+        }
+        .filter-item-row .filter-btn {
+            padding: 3px 12px;
+            border-radius: 30px;
+            border: 2px solid #e2e8f0;
+            background: transparent;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.55rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .filter-item-row .filter-btn:hover {
+            border-color: var(--cpc-blue);
+            color: var(--cpc-blue);
+            background: rgba(30,61,89,0.04);
+        }
+        .filter-item-row .filter-btn.active {
+            border-color: var(--koki-orange);
+            background: var(--koki-orange);
+            color: white;
+            box-shadow: 0 4px 12px rgba(255,110,64,0.3);
+        }
+        .filter-item-row .filter-btn .badge-count {
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: 0 6px;
+            font-size: 0.45rem;
+            margin-left: 2px;
+        }
+        .filter-item-row .filter-btn.active .badge-count {
+            background: rgba(255,255,255,0.25);
+        }
+        .filter-item-row .filter-btn .badge-attend {
+            color: var(--success);
+        }
+        .filter-item-row .filter-btn .badge-not-attend {
+            color: var(--danger);
+        }
+        .filter-item-row .filter-btn.active .badge-attend {
+            color: rgba(255,255,255,0.9);
+        }
+        .filter-item-row .filter-btn.active .badge-not-attend {
+            color: rgba(255,255,255,0.9);
+        }
+        .filter-item-row .filter-select {
+            padding: 3px 24px 3px 10px;
+            border-radius: 30px;
+            border: 2px solid #e2e8f0;
+            background: var(--white);
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.55rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7a8f' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            min-width: 100px;
+            max-width: 200px;
+        }
+        .filter-item-row .filter-select:hover { border-color: var(--cpc-blue); }
+        .filter-item-row .filter-select:focus { outline: none; border-color: var(--koki-orange); box-shadow: 0 0 0 3px rgba(255,110,64,0.15); }
 
-        .filter-btn { padding: 3px 12px; border-radius: 30px; border: 2px solid #e2e8f0; background: transparent; font-family: 'Cairo', sans-serif; font-size: 0.55rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.2s; white-space: nowrap; }
-        .filter-btn:hover { border-color: var(--cpc-blue); color: var(--cpc-blue); background: rgba(30,61,89,0.04); }
-        .filter-btn.active { border-color: var(--koki-orange); background: var(--koki-orange); color: white; box-shadow: 0 4px 12px rgba(255,110,64,0.3); }
-        .filter-btn .badge-count { background: rgba(255,255,255,0.2); border-radius: 20px; padding: 0 6px; font-size: 0.45rem; margin-left: 3px; }
-        .filter-btn.active .badge-count { background: rgba(255,255,255,0.25); }
-        .filter-btn.attend-btn { border-color: var(--success); color: var(--success); }
-        .filter-btn.attend-btn.active { background: var(--success); border-color: var(--success); color: white; }
-        .filter-btn.not-attend-btn { border-color: var(--danger); color: var(--danger); }
-        .filter-btn.not-attend-btn.active { background: var(--danger); border-color: var(--danger); color: white; }
-
-        .clear-filters-btn { padding: 3px 14px; border-radius: 30px; border: 2px solid #e2e8f0; background: transparent; font-family: 'Cairo', sans-serif; font-size: 0.55rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.2s; }
+        .clear-filters-btn {
+            padding: 4px 16px;
+            border-radius: 30px;
+            border: 2px solid #e2e8f0;
+            background: transparent;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.55rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
         .clear-filters-btn:hover { border-color: var(--danger); color: var(--danger); background: rgba(239,68,68,0.05); }
 
         .container { max-width: 1440px; margin: 0 auto; padding: 0 12px; }
@@ -188,144 +326,6 @@
         .kpi-card i { font-size: 1.2rem; color: var(--koki-orange); opacity: 0.8; }
         .kpi-info h4 { font-size: 0.55rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 2px; }
         .kpi-info .num { font-size: 1.1rem; font-weight: 800; color: var(--cpc-blue); }
-
-        /* ============================================================
-           FILTER GRID - توزيع متساوٍ ومنتظم
-           ============================================================ */
-        .filter-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-            gap: 6px 12px;
-            width: 100%;
-            align-items: center;
-        }
-        .filter-grid .filter-item {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            flex-wrap: wrap;
-            padding: 2px 0;
-        }
-        .filter-grid .filter-item .filter-label {
-            font-size: 0.55rem;
-            font-weight: 700;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-            min-width: 50px;
-            flex-shrink: 0;
-        }
-        .filter-grid .filter-item .filter-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2px 4px;
-            align-items: center;
-        }
-        .filter-grid .filter-item .filter-btn {
-            font-size: 0.5rem;
-            padding: 2px 8px;
-            white-space: nowrap;
-        }
-        .filter-grid .filter-item .filter-select {
-            font-size: 0.5rem;
-            padding: 2px 20px 2px 8px;
-            min-width: 80px;
-            max-width: 140px;
-        }
-        .filter-grid .filter-item-right {
-            justify-content: flex-end;
-        }
-        .filter-grid .filter-item-right .filter-label {
-            text-align: right;
-        }
-        .filter-grid .filter-item-right .filter-group {
-            justify-content: flex-end;
-        }
-
-        /* ============================================================
-           EMPLOYEE CARDS
-           ============================================================ */
-        .filtered-employees {
-            background: var(--white);
-            border-radius: 14px;
-            padding: 16px 18px;
-            margin-top: 14px;
-            margin-bottom: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-            border: 1px solid #e8ecf0;
-        }
-        .filtered-employees h4 {
-            font-size: 0.9rem;
-            color: var(--cpc-blue);
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        .filtered-employees .employee-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 10px;
-        }
-        .filtered-employees .emp-card {
-            background: #f8fafc;
-            border-radius: 10px;
-            padding: 10px 14px;
-            border-right: 4px solid var(--cpc-blue);
-            transition: all 0.2s;
-        }
-        .filtered-employees .emp-card:hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            transform: translateY(-2px);
-        }
-        .filtered-employees .emp-card .emp-name {
-            font-weight: 700;
-            font-size: 0.85rem;
-            color: var(--cpc-blue);
-        }
-        .filtered-employees .emp-card .emp-details {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px 12px;
-            font-size: 0.65rem;
-            color: var(--text-muted);
-            margin-top: 3px;
-        }
-        .filtered-employees .emp-card .emp-details span {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-        }
-        .filtered-employees .emp-card .emp-badge {
-            font-size: 0.55rem;
-            font-weight: 600;
-            padding: 1px 10px;
-            border-radius: 20px;
-            display: inline-block;
-            margin-top: 4px;
-        }
-        .filtered-employees .emp-card .emp-badge.attend {
-            background: rgba(16,185,129,0.15);
-            color: var(--success);
-        }
-        .filtered-employees .emp-card .emp-badge.not-attend {
-            background: rgba(239,68,68,0.15);
-            color: var(--danger);
-        }
-        .filtered-employees .emp-card .emp-badge.unknown {
-            background: rgba(107,122,143,0.15);
-            color: var(--text-muted);
-        }
-        .filtered-employees .no-results {
-            text-align: center;
-            padding: 30px 20px;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-        .filtered-employees .no-results i {
-            font-size: 2rem;
-            display: block;
-            margin-bottom: 10px;
-            opacity: 0.4;
-        }
 
         .search-charts-grid { display: grid; grid-template-columns: 280px 1fr; gap: 16px; margin: 12px 0; }
         .search-wrapper { background: var(--white); padding: 16px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid #e8ecf0; }
@@ -372,6 +372,33 @@
         .charts-grid-2 .chart-box canvas { height: 260px !important; max-height: 260px; }
         .charts-grid-2 .chart-box .chart-container { height: 260px; }
 
+        /* ============================================================
+           GROUP EMPLOYEES TABLE - جدول منفصل للمجموعات
+           ============================================================ */
+        .group-employees-table {
+            background: var(--white);
+            border-radius: 14px;
+            padding: 16px 18px;
+            margin-top: 14px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border: 1px solid #e8ecf0;
+            overflow-x: auto;
+        }
+        .group-employees-table h4 {
+            font-size: 0.9rem;
+            color: var(--cpc-blue);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .group-employees-table table { width: 100%; border-collapse: collapse; font-size: 0.75rem; }
+        .group-employees-table th { background: var(--cpc-blue); color: white; padding: 10px 12px; text-align: left; font-weight: 600; white-space: nowrap; }
+        .group-employees-table td { padding: 8px 12px; border-bottom: 1px solid #e8ecf0; vertical-align: middle; }
+        .group-employees-table tr:hover td { background: #f8fafc; }
+        .group-employees-table .badge-attend { background: rgba(16,185,129,0.15); color: var(--success); padding: 2px 10px; border-radius: 20px; font-size: 0.6rem; font-weight: 600; }
+        .group-employees-table .badge-not-attend { background: rgba(239,68,68,0.15); color: var(--danger); padding: 2px 10px; border-radius: 20px; font-size: 0.6rem; font-weight: 600; }
+        .group-employees-table .badge-unknown { background: rgba(107,122,143,0.15); color: var(--text-muted); padding: 2px 10px; border-radius: 20px; font-size: 0.6rem; font-weight: 600; }
+
         .employee-detail-table {
             background: var(--white);
             border-radius: 14px;
@@ -404,12 +431,6 @@
         .insight-tag.danger { background: rgba(239,68,68,0.15); color: var(--danger); }
         .insight-tag.info { background: rgba(59,130,246,0.15); color: var(--info); }
 
-        @media (max-width: 1200px) {
-            .filter-grid { grid-template-columns: 1fr 1fr 1fr; gap: 8px 15px; }
-            .filter-grid .filter-item-right { justify-content: flex-start; }
-            .filter-grid .filter-item-right .filter-label { text-align: left; }
-            .filter-grid .filter-item-right .filter-group { justify-content: flex-start; }
-        }
         @media (max-width: 992px) {
             .search-charts-grid { grid-template-columns: 1fr; }
             .charts-grid { grid-template-columns: 1fr 1fr; }
@@ -421,7 +442,9 @@
             .charts-grid-2 .chart-box .chart-container { height: 200px; }
             .top-bar { flex-direction: column; align-items: stretch; }
             .top-bar .action-buttons { justify-content: flex-start; }
-            .filter-grid { grid-template-columns: 1fr 1fr; gap: 6px 12px; }
+            .filter-item-row { flex-direction: column; align-items: stretch; gap: 4px; }
+            .filter-item-row .filter-icon-label { min-width: auto; }
+            .filter-item-row .filter-buttons { flex-wrap: wrap; }
         }
         @media (max-width: 768px) {
             .navbar { flex-direction: column; text-align: center; }
@@ -437,24 +460,23 @@
             .insights-section { grid-template-columns: 1fr; }
             .employee-detail-table table { font-size: 0.65rem; }
             .employee-detail-table th, .employee-detail-table td { padding: 4px 8px; }
+            .group-employees-table table { font-size: 0.65rem; }
+            .group-employees-table th, .group-employees-table td { padding: 4px 8px; }
             .alerts-container .alert-item { font-size: 0.65rem; }
-            .filter-grid { grid-template-columns: 1fr; gap: 4px; }
-            .filter-grid .filter-item { flex-wrap: wrap; }
-            .filter-grid .filter-item .filter-label { min-width: 100%; }
-            .filtered-employees .employee-cards { grid-template-columns: 1fr; }
             .top-bar .slicer-section { flex-direction: column; align-items: stretch; }
+            .top-bar .action-btn { min-width: 80px; font-size: 0.55rem; padding: 4px 14px; height: 28px; }
         }
         @media (max-width: 480px) {
             .kpi-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
             .kpi-card { padding: 6px 8px; }
-            .filter-btn { font-size: 0.45rem; padding: 2px 6px; }
+            .filter-btn { font-size: 0.45rem; padding: 2px 8px; }
             .filter-select { font-size: 0.45rem; padding: 2px 16px 2px 6px; min-width: 70px; }
             .chart-box canvas { height: 170px !important; max-height: 170px; }
             .chart-box .chart-container { height: 170px; }
             .chart-box { padding: 12px 14px; }
-            .top-bar .action-btn { font-size: 0.5rem; padding: 3px 10px; }
+            .top-bar .action-btn { min-width: 60px; font-size: 0.5rem; padding: 3px 10px; height: 24px; }
             .top-bar .slicer-section .slicer-btn { font-size: 0.5rem; padding: 3px 10px; }
-            .filtered-employees .employee-cards { grid-template-columns: 1fr; }
+            .filter-item-row .filter-btn { font-size: 0.45rem; padding: 2px 8px; }
         }
 
         @media print {
@@ -466,7 +488,7 @@
             .container { max-width: 100% !important; padding: 0 !important; }
             .kpi-card, .chart-box, .insight-card, .employee-detail-table,
             .search-wrapper, .filter-bar, .brief-section, .alerts-container, .top-bar,
-            .filtered-employees {
+            .group-employees-table {
                 box-shadow: none !important;
                 border: 1px solid #ddd !important;
                 page-break-inside: avoid !important;
@@ -483,6 +505,9 @@
             .employee-detail-table table { font-size: 9px !important; }
             .employee-detail-table th { background: #1e3d59 !important; color: white !important; padding: 4px 8px !important; }
             .employee-detail-table td { padding: 3px 8px !important; border-bottom: 1px solid #eee !important; }
+            .group-employees-table table { font-size: 9px !important; }
+            .group-employees-table th { background: #1e3d59 !important; color: white !important; padding: 4px 8px !important; }
+            .group-employees-table td { padding: 3px 8px !important; border-bottom: 1px solid #eee !important; }
             .brief-section { background: #1e3d59 !important; color: white !important; }
             .brief-section .highlight { color: #ff6e40 !important; }
             .kpi-card .num { font-size: 1rem !important; }
@@ -492,8 +517,6 @@
             .print-header .sub { color: #6b7a8f !important; font-size: 12px !important; }
             .print-footer { margin-top: 20px !important; padding-top: 10px !important; border-top: 1px solid #ddd !important; text-align: center !important; font-size: 10px !important; color: #6b7a8f !important; }
             .result-card { display: block !important; border-right: 4px solid var(--success) !important; background: #f8fafc !important; }
-            .filtered-employees .employee-cards { grid-template-columns: 1fr 1fr !important; }
-            .filtered-employees .emp-card { border: 1px solid #eee !important; }
         }
     </style>
 </head>
@@ -545,7 +568,7 @@
             </div>
             <div class="action-buttons">
                 <button class="action-btn print-btn" onclick="printPage()">
-                    <i class="fa-solid fa-print"></i> طباعة الكل
+                    <i class="fa-solid fa-print"></i> طباعة
                 </button>
                 <button class="action-btn pdf-btn" onclick="printPage()">
                     <i class="fa-solid fa-file-pdf"></i> حفظ PDF
@@ -570,7 +593,7 @@
         </div>
 
         <!-- ============================================================
-        FILTER BAR - توزيع 6 أعمدة متساوية
+        FILTER BAR - كل مفتاح في سطر مع أيقونة
         ============================================================ -->
         <div class="filter-bar no-print" id="filterBar">
             
@@ -588,78 +611,96 @@
                 </div>
             </div>
 
-            <!-- الصف الثاني: 6 أعمدة متساوية -->
-            <div class="filter-row" style="border-bottom: none; padding-bottom: 0;">
-                <div class="filter-grid">
-                    <!-- 1. Location -->
-                    <div class="filter-item">
-                        <span class="filter-label"><i class="fa-solid fa-location-dot"></i> Loc</span>
-                        <div class="filter-group" id="locationFilters">
-                            <button class="filter-btn active" data-filter="location" data-value="all">All <span class="badge-count" id="locAllCount">0</span></button>
-                            <button class="filter-btn" data-filter="location" data-value="Nob">Nob <span class="badge-count" id="locNobCount">0</span></button>
-                            <button class="filter-btn" data-filter="location" data-value="Online">Online <span class="badge-count" id="locOnlineCount">0</span></button>
-                            <button class="filter-btn" data-filter="location" data-value="Steigenberger">Stei <span class="badge-count" id="locSteigenbergerCount">0</span></button>
-                            <button class="filter-btn" data-filter="location" data-value="TOR">TOR <span class="badge-count" id="locTORCount">0</span></button>
-                        </div>
-                    </div>
+            <!-- باقي المفاتيح - كل واحد في سطر -->
+            <div class="filter-items-container">
 
-                    <!-- 2. Level -->
-                    <div class="filter-item">
-                        <span class="filter-label"><i class="fa-solid fa-layer-group"></i> Lvl</span>
-                        <div class="filter-group" id="levelFilters">
-                            <button class="filter-btn active" data-filter="level" data-value="all">All <span class="badge-count" id="lvlAllCount">0</span></button>
-                            <button class="filter-btn" data-filter="level" data-value="L4">L4 <span class="badge-count" id="lvlL4Count">0</span></button>
-                            <button class="filter-btn" data-filter="level" data-value="L3">L3 <span class="badge-count" id="lvlL3Count">0</span></button>
-                            <button class="filter-btn" data-filter="level" data-value="L2">L2 <span class="badge-count" id="lvlL2Count">0</span></button>
-                            <button class="filter-btn" data-filter="level" data-value="L1">L1 <span class="badge-count" id="lvlL1Count">0</span></button>
-                        </div>
+                <!-- Location -->
+                <div class="filter-item-row">
+                    <div class="filter-icon-label">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span>Location</span>
                     </div>
-
-                    <!-- 3. Attend -->
-                    <div class="filter-item">
-                        <span class="filter-label"><i class="fa-solid fa-user-check"></i> Att</span>
-                        <div class="filter-group" id="attendanceFilters">
-                            <button class="filter-btn active attend-btn" data-filter="attendance" data-value="all">All <span class="badge-count" id="attAllCount">0</span></button>
-                            <button class="filter-btn attend-btn" data-filter="attendance" data-value="attend">✅ <span class="badge-count" id="attAttendCount">0</span></button>
-                            <button class="filter-btn not-attend-btn" data-filter="attendance" data-value="not-attend">❌ <span class="badge-count" id="attNotAttendCount">0</span></button>
-                        </div>
-                    </div>
-
-                    <!-- 4. Group -->
-                    <div class="filter-item">
-                        <span class="filter-label"><i class="fa-solid fa-users"></i> Grp</span>
-                        <div class="filter-group">
-                            <select class="filter-select" id="groupSelect">
-                                <option value="all">All</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- 5. Phase -->
-                    <div class="filter-item">
-                        <span class="filter-label"><i class="fa-solid fa-clock"></i> Phs</span>
-                        <div class="filter-group">
-                            <select class="filter-select" id="phaseSelect">
-                                <option value="all">All</option>
-                                <option value="Phase1">Ph1</option>
-                                <option value="Phase2">Ph2</option>
-                                <option value="Phase3">Ph3</option>
-                                <option value="Phase4">Ph4</option>
-                                <option value="Online-Phase4">Online</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- 6. Reset -->
-                    <div class="filter-item filter-item-right">
-                        <span class="filter-label"><i class="fa-solid fa-undo"></i></span>
-                        <div class="filter-group">
-                            <button class="clear-filters-btn" onclick="clearAllFilters()">
-                                <i class="fa-solid fa-undo"></i> Reset
-                            </button>
-                        </div>
+                    <div class="filter-buttons" id="locationFilters">
+                        <button class="filter-btn active" data-filter="location" data-value="all">All <span class="badge-count" id="locAllCount">0</span></button>
+                        <button class="filter-btn" data-filter="location" data-value="Nob">Nob <span class="badge-count" id="locNobCount">0</span></button>
+                        <button class="filter-btn" data-filter="location" data-value="Online">Online <span class="badge-count" id="locOnlineCount">0</span></button>
+                        <button class="filter-btn" data-filter="location" data-value="Steigenberger">Steigenberger <span class="badge-count" id="locSteigenbergerCount">0</span></button>
+                        <button class="filter-btn" data-filter="location" data-value="TOR">TOR <span class="badge-count" id="locTORCount">0</span></button>
                     </div>
                 </div>
+
+                <!-- Level -->
+                <div class="filter-item-row">
+                    <div class="filter-icon-label">
+                        <i class="fa-solid fa-layer-group"></i>
+                        <span>Level</span>
+                    </div>
+                    <div class="filter-buttons" id="levelFilters">
+                        <button class="filter-btn active" data-filter="level" data-value="all">All <span class="badge-count" id="lvlAllCount">0</span></button>
+                        <button class="filter-btn" data-filter="level" data-value="L4">L4 <span class="badge-count" id="lvlL4Count">0</span></button>
+                        <button class="filter-btn" data-filter="level" data-value="L3">L3 <span class="badge-count" id="lvlL3Count">0</span></button>
+                        <button class="filter-btn" data-filter="level" data-value="L2">L2 <span class="badge-count" id="lvlL2Count">0</span></button>
+                        <button class="filter-btn" data-filter="level" data-value="L1">L1 <span class="badge-count" id="lvlL1Count">0</span></button>
+                    </div>
+                </div>
+
+                <!-- Attend -->
+                <div class="filter-item-row">
+                    <div class="filter-icon-label">
+                        <i class="fa-solid fa-user-check"></i>
+                        <span>Attendance</span>
+                    </div>
+                    <div class="filter-buttons" id="attendanceFilters">
+                        <button class="filter-btn active attend-btn" data-filter="attendance" data-value="all">All <span class="badge-count" id="attAllCount">0</span></button>
+                        <button class="filter-btn attend-btn" data-filter="attendance" data-value="attend">✅ Attend <span class="badge-count" id="attAttendCount">0</span></button>
+                        <button class="filter-btn not-attend-btn" data-filter="attendance" data-value="not-attend">❌ Not Attend <span class="badge-count" id="attNotAttendCount">0</span></button>
+                    </div>
+                </div>
+
+                <!-- Group -->
+                <div class="filter-item-row">
+                    <div class="filter-icon-label">
+                        <i class="fa-solid fa-users"></i>
+                        <span>Group</span>
+                    </div>
+                    <div class="filter-buttons">
+                        <select class="filter-select" id="groupSelect">
+                            <option value="all">All Groups</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Phase -->
+                <div class="filter-item-row">
+                    <div class="filter-icon-label">
+                        <i class="fa-solid fa-clock"></i>
+                        <span>Phase</span>
+                    </div>
+                    <div class="filter-buttons">
+                        <select class="filter-select" id="phaseSelect">
+                            <option value="all">All Phases</option>
+                            <option value="Phase1">Phase 1</option>
+                            <option value="Phase2">Phase 2</option>
+                            <option value="Phase3">Phase 3</option>
+                            <option value="Phase4">Phase 4</option>
+                            <option value="Online-Phase4">Online Phase 4</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Reset -->
+                <div class="filter-item-row" style="border-top: 1px solid #e8ecf0; padding-top: 8px; margin-top: 4px;">
+                    <div class="filter-icon-label">
+                        <i class="fa-solid fa-undo" style="color:var(--koki-orange);"></i>
+                        <span>Actions</span>
+                    </div>
+                    <div class="filter-buttons">
+                        <button class="clear-filters-btn" onclick="clearAllFilters()">
+                            <i class="fa-solid fa-undo"></i> Reset All Filters
+                        </button>
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -764,15 +805,26 @@
         </div>
 
         <!-- ============================================================
-        FILTERED EMPLOYEES
+        GROUP EMPLOYEES TABLE - جدول منفصل للمجموعات
         ============================================================ -->
-        <div class="filtered-employees" id="filteredEmployees">
-            <h4><i class="fa-solid fa-users"></i> Filtered Employees <span id="filteredCount" style="font-size:0.7rem;color:var(--text-muted);font-weight:400;"></span></h4>
-            <div class="employee-cards" id="filteredCards">
-                <div class="no-results">
-                    <i class="fa-solid fa-spinner fa-spin"></i>
-                    Loading employees...
-                </div>
+        <div class="group-employees-table" id="groupEmployeesTable">
+            <h4><i class="fa-solid fa-users"></i> Group Employees <span id="groupCount" style="font-size:0.7rem;color:var(--text-muted);font-weight:400;"></span></h4>
+            <div style="overflow-x:auto;">
+                <table id="group-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Department</th>
+                            <th>Title</th>
+                            <th>Training Group</th>
+                            <th>Phase</th>
+                            <th>Attendance</th>
+                            <th>Accommodation</th>
+                        </tr>
+                    </thead>
+                    <tbody id="groupTableBody"></tbody>
+                </table>
             </div>
         </div>
 
@@ -780,7 +832,7 @@
         EMPLOYEE DETAIL TABLE
         ============================================================ -->
         <div class="employee-detail-table" id="employeeDetailTable">
-            <h4><i class="fa-solid fa-table"></i> Employees Details <span id="detailCount" style="font-size:0.7rem;color:var(--text-muted);font-weight:400;"></span></h4>
+            <h4><i class="fa-solid fa-table"></i> All Employees Details <span id="detailCount" style="font-size:0.7rem;color:var(--text-muted);font-weight:400;"></span></h4>
             <div style="overflow-x:auto;">
                 <table id="employee-table">
                     <thead>
@@ -857,12 +909,10 @@
 
     <script>
         // ============================================================
-        // CONFIG - استخدام رابط CSV الصحيح
+        // CONFIG
         // ============================================================
-        // استخدام رابط CSV من Google Sheets
         const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRu0vhUS8c-hbFznxR_F9K9LNueNeabXiLwMjMzppgpIjJCSNCadsHDVVGxwiKYYHve9-Qtb37ALs8P/pub?gid=1032977671&single=true&output=csv";
 
-        // أسماء الأعمدة - تأكد من تطابقها مع الشيت
         const COLUMNS = {
             ID: 'ID',
             Name: 'Name',
@@ -926,7 +976,7 @@
         }
 
         // ============================================================
-        // CSV TO JSON - محسّن للتعامل مع البيانات بشكل أفضل
+        // CSV TO JSON
         // ============================================================
         function csvToJSON(csv) {
             if (!csv || csv.trim() === '') {
@@ -940,7 +990,6 @@
                 return [];
             }
             
-            // استخراج العناوين
             const headers = lines[0].split(",").map(h => h.trim().replace(/^"|"$/g, ''));
             console.log('📋 Headers from sheet:', headers);
             
@@ -971,7 +1020,6 @@
             console.log('📊 Total unique records loaded:', result.length);
             if (result.length > 0) {
                 console.log('📝 Sample record:', result[0]);
-                console.log('📝 Available keys:', Object.keys(result[0]));
             }
             return result;
         }
@@ -1091,6 +1139,23 @@
         }
 
         // ============================================================
+        // حساب الحضور وعدم الحضور للبرامج (الخانات الفارغة = not attend)
+        // ============================================================
+        function getProgramAttendance(data, field) {
+            let attend = 0;
+            let notAttend = 0;
+            data.forEach(r => {
+                const val = String(r[field] || '').toLowerCase().trim();
+                if (val === 'attend' || val === 'attended' || val.includes('attend')) {
+                    attend++;
+                } else {
+                    notAttend++;
+                }
+            });
+            return { attend, notAttend };
+        }
+
+        // ============================================================
         // UPDATE FILTER BADGES
         // ============================================================
         function updateFilterBadges(data) {
@@ -1099,21 +1164,14 @@
             
             Object.keys(PROGRAM_FIELDS).forEach(progName => {
                 const field = PROGRAM_FIELDS[progName];
-                const attendCount = data.filter(r => {
-                    const val = String(r[field] || '').toLowerCase();
-                    return val === 'attend' || val === 'attended' || val.includes('attend');
-                }).length;
-                const notAttendCount = data.filter(r => {
-                    const val = String(r[field] || '').toLowerCase();
-                    return val === 'not attend' || val.includes('not attend');
-                }).length;
+                const { attend, notAttend } = getProgramAttendance(data, field);
                 const id = 'prog' + progName.replace(/ /g, '') + 'Count';
                 const el = document.getElementById(id);
                 if (el) {
                     if (activeFilters.program === progName || activeFilters.program === 'all') {
-                        el.textContent = `${attendCount}✓/${notAttendCount}✗`;
+                        el.innerHTML = `<span class="badge-attend">${attend}✓</span><span class="badge-not-attend">${notAttend}✗</span>`;
                     } else {
-                        el.textContent = attendCount;
+                        el.textContent = attend;
                     }
                 }
             });
@@ -1129,7 +1187,7 @@
             const sortedGroups = Object.entries(groupCounts).sort((a, b) => b[1] - a[1]);
             const groupSelect = document.getElementById('groupSelect');
             const currentValue = groupSelect.value;
-            groupSelect.innerHTML = '<option value="all">All (' + data.length + ')</option>';
+            groupSelect.innerHTML = '<option value="all">All Groups (' + data.length + ')</option>';
             sortedGroups.forEach(([group, count]) => {
                 const opt = document.createElement('option');
                 opt.value = group;
@@ -1166,12 +1224,12 @@
             const currentPhase = phaseSelect.value;
             phaseSelect.innerHTML = '';
             const phaseOptions = [
-                { value: 'all', label: 'All' },
-                { value: 'Phase1', label: 'Ph1' },
-                { value: 'Phase2', label: 'Ph2' },
-                { value: 'Phase3', label: 'Ph3' },
-                { value: 'Phase4', label: 'Ph4' },
-                { value: 'Online-Phase4', label: 'Online' }
+                { value: 'all', label: 'All Phases' },
+                { value: 'Phase1', label: 'Phase 1' },
+                { value: 'Phase2', label: 'Phase 2' },
+                { value: 'Phase3', label: 'Phase 3' },
+                { value: 'Phase4', label: 'Phase 4' },
+                { value: 'Online-Phase4', label: 'Online Phase 4' }
             ];
             phaseOptions.forEach(po => {
                 const opt = document.createElement('option');
@@ -1194,14 +1252,7 @@
 
             // Attendance
             const attAll = data.length;
-            const attAttend = data.filter(r => {
-                const val = String(r[COLUMNS.SevenSens] || '').toLowerCase();
-                return val === 'attend' || val === 'attended' || val.includes('attend');
-            }).length;
-            const attNotAttend = data.filter(r => {
-                const val = String(r[COLUMNS.SevenSens] || '').toLowerCase();
-                return val === 'not attend' || val.includes('not attend');
-            }).length;
+            const { attend: attAttend, notAttend: attNotAttend } = getProgramAttendance(data, COLUMNS.SevenSens);
             document.getElementById('attAllCount').textContent = attAll;
             document.getElementById('attAttendCount').textContent = attAttend;
             document.getElementById('attNotAttendCount').textContent = attNotAttend;
@@ -1296,7 +1347,7 @@
             
             if (!allData || allData.length === 0) {
                 console.warn('⚠️ No data to filter');
-                updateFilteredEmployees([]);
+                updateGroupEmployeesTable([]);
                 updateEmployeeDetailTable([]);
                 updateActivitySlicer([]);
                 return;
@@ -1364,7 +1415,7 @@
             
             updateActivitySlicer(filteredData);
             renderDashboard(filteredData);
-            updateFilteredEmployees(filteredData);
+            updateGroupEmployeesTable(filteredData);
             updateEmployeeDetailTable(filteredData);
             checkSmartAlerts(filteredData);
         }
@@ -1386,7 +1437,7 @@
                 btn.addEventListener('click', function() {
                     const type = this.dataset.filter;
                     const value = this.dataset.value;
-                    const group = this.closest('.filter-group');
+                    const group = this.closest('.filter-buttons');
                     group.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
                     activeFilters[type] = value;
@@ -1398,7 +1449,7 @@
                 btn.addEventListener('click', function() {
                     const type = this.dataset.filter;
                     const value = this.dataset.value;
-                    const group = this.closest('.filter-group');
+                    const group = this.closest('.filter-buttons');
                     group.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
                     activeFilters[type] = value;
@@ -1410,7 +1461,7 @@
                 btn.addEventListener('click', function() {
                     const type = this.dataset.filter;
                     const value = this.dataset.value;
-                    const group = this.closest('.filter-group');
+                    const group = this.closest('.filter-buttons');
                     group.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
                     activeFilters[type] = value;
@@ -1455,22 +1506,16 @@
         }
 
         // ============================================================
-        // FILTERED EMPLOYEES
+        // GROUP EMPLOYEES TABLE
         // ============================================================
-        function updateFilteredEmployees(data) {
-            const container = document.getElementById('filteredCards');
-            const countSpan = document.getElementById('filteredCount');
+        function updateGroupEmployeesTable(data) {
+            const tbody = document.getElementById('groupTableBody');
+            const countSpan = document.getElementById('groupCount');
             
-            console.log('📋 Updating filtered employees with', data ? data.length : 0, 'records');
-            
-            if (!data || data.length === 0) {
-                container.innerHTML = `
-                    <div class="no-results">
-                        <i class="fa-solid fa-users-slash"></i>
-                        No employees match the current filters.
-                    </div>
-                `;
-                countSpan.textContent = '(0 employees)';
+            // فلتر فقط عندما يكون هناك مجموعة محددة
+            if (activeFilters.group === 'all' || !data || data.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;padding:20px;color:var(--text-muted);">Select a specific group to view its members.</td></tr>`;
+                countSpan.textContent = '';
                 return;
             }
 
@@ -1480,56 +1525,41 @@
                 if (id) uniqueIds.add(id);
             });
             const uniqueCount = uniqueIds.size;
-            countSpan.textContent = `(${uniqueCount} unique employees)`;
+            countSpan.textContent = `(${uniqueCount} employees in group: ${activeFilters.group})`;
             
             const displayData = data.slice(0, 100);
             
-            container.innerHTML = displayData.map(emp => {
-                const name = emp[COLUMNS.Name] || 'Unknown';
-                const id = emp[COLUMNS.ID] || 'N/A';
-                const title = emp[COLUMNS.Title] || 'N/A';
-                const dept = emp[COLUMNS.Department] || 'N/A';
-                const location = emp[COLUMNS.TrainingLocation] || 'N/A';
-                const group = emp[COLUMNS.TrainingGroup] || 'N/A';
-                const phase = emp[COLUMNS.TrainingPhase] || 'N/A';
-                const level = emp['C-LVL'] || 'N/A';
-                
+            tbody.innerHTML = displayData.map(emp => {
                 const sevenSens = String(emp[COLUMNS.SevenSens] || '').toLowerCase();
-                let attendanceText = 'Unknown';
-                let attendanceClass = 'unknown';
+                let attendanceBadge = '<span class="badge-unknown">Unknown</span>';
                 if (sevenSens === 'attend' || sevenSens === 'attended' || sevenSens.includes('attend')) {
-                    attendanceText = '✅ Attended';
-                    attendanceClass = 'attend';
+                    attendanceBadge = '<span class="badge-attend">✅ Attended</span>';
                 } else if (sevenSens === 'not attend' || sevenSens.includes('not attend')) {
-                    attendanceText = '❌ Not Attended';
-                    attendanceClass = 'not-attend';
+                    attendanceBadge = '<span class="badge-not-attend">❌ Not Attended</span>';
                 }
                 
-                return `
-                    <div class="emp-card">
-                        <div class="emp-name">${name}</div>
-                        <div class="emp-details">
-                            <span><i class="fa-regular fa-id-card"></i> ${id}</span>
-                            <span><i class="fa-regular fa-building"></i> ${dept}</span>
-                            <span><i class="fa-regular fa-user"></i> ${title}</span>
-                        </div>
-                        <div class="emp-details">
-                            <span><i class="fa-solid fa-location-dot"></i> ${location}</span>
-                            <span><i class="fa-solid fa-layer-group"></i> ${level}</span>
-                            <span><i class="fa-solid fa-users"></i> ${group}</span>
-                            <span><i class="fa-solid fa-clock"></i> ${phase}</span>
-                        </div>
-                        <span class="emp-badge ${attendanceClass}">${attendanceText}</span>
-                    </div>
-                `;
+                const accommodation = String(emp[COLUMNS.Accommodation] || '').toLowerCase();
+                let accomBadge = '<span class="badge-unknown">N/A</span>';
+                if (accommodation === 'yes') {
+                    accomBadge = '<span class="badge-attend">✅ Yes</span>';
+                } else if (accommodation === 'no') {
+                    accomBadge = '<span class="badge-not-attend">❌ No</span>';
+                }
+                
+                return `<tr>
+                    <td><strong>${emp[COLUMNS.ID] || 'N/A'}</strong></td>
+                    <td><strong>${emp[COLUMNS.Name] || 'Unknown'}</strong></td>
+                    <td>${emp[COLUMNS.Department] || 'N/A'}</td>
+                    <td>${emp[COLUMNS.Title] || 'N/A'}</td>
+                    <td>${emp[COLUMNS.TrainingGroup] || 'N/A'}</td>
+                    <td>${emp[COLUMNS.TrainingPhase] || 'N/A'}</td>
+                    <td>${attendanceBadge}</td>
+                    <td>${accomBadge}</td>
+                </tr>`;
             }).join('');
 
             if (data.length > 100) {
-                container.innerHTML += `
-                    <div style="grid-column:1/-1;text-align:center;padding:15px;color:var(--text-muted);font-style:italic;font-size:0.75rem;">
-                        ... and ${data.length - 100} more records
-                    </div>
-                `;
+                tbody.innerHTML += `<tr><td colspan="8" style="text-align:center;color:var(--text-muted);font-style:italic;padding:10px;">... and ${data.length - 100} more records</td></tr>`;
             }
         }
 
@@ -1973,7 +2003,7 @@
             fields.forEach(field => {
                 const val = String(emp[field] || '').toLowerCase();
                 if (val === 'attend' || val === 'attended' || val.includes('attend')) attendedCount++;
-                else if (val === 'not attend' || val.includes('not attend')) notAttendedCount++;
+                else notAttendedCount++;
             });
             document.getElementById('statAttended').textContent = '✅ Attended: ' + attendedCount;
             document.getElementById('statNotAttended').textContent = '❌ Not Attended: ' + notAttendedCount;
@@ -2038,7 +2068,7 @@
             fields.forEach(field => {
                 const val = String(emp[field] || '').toLowerCase();
                 if (val === 'attend' || val === 'attended' || val.includes('attend')) attendedCount++;
-                else if (val === 'not attend' || val.includes('not attend')) notAttendedCount++;
+                else notAttendedCount++;
             });
 
             const programs = [
@@ -2121,7 +2151,7 @@
         }
 
         // ============================================================
-        // LOAD DATA - محسّن مع إعادة المحاولة
+        // LOAD DATA
         // ============================================================
         async function loadData() {
             if (isLoading) return;
@@ -2191,7 +2221,7 @@
             refreshInterval = setInterval(() => {
                 console.log('🔄 Auto-refreshing data...');
                 loadData();
-            }, 60000); // كل دقيقة
+            }, 60000);
 
             document.getElementById('refreshBtn').addEventListener('click', function() {
                 loadData();
