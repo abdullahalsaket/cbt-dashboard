@@ -50,7 +50,7 @@
         .refresh-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
         /* ============================================================
-           SECTOR SLICER - سلايسر النشا/مجازر
+           SECTOR SLICER - النشا/مجازر
            ============================================================ */
         .sector-slicer {
             background: var(--white);
@@ -314,6 +314,7 @@
             .charts-grid-2 .chart-box .chart-container { height: 200px; }
             .action-buttons { margin-left: 0; width: 100%; justify-content: flex-start; }
             .sector-slicer { flex-direction: column; align-items: stretch; }
+            .filter-row-compact { flex-wrap: nowrap !important; overflow-x: auto !important; }
         }
         @media (max-width: 768px) {
             .navbar { flex-direction: column; text-align: center; }
@@ -332,6 +333,7 @@
             .employee-detail-table th, .employee-detail-table td { padding: 4px 8px; }
             .alerts-container .alert-item { font-size: 0.65rem; }
             .action-buttons { flex-wrap: wrap; }
+            .filter-row-compact { flex-wrap: wrap !important; }
         }
         @media (max-width: 480px) {
             .kpi-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
@@ -343,6 +345,46 @@
             .chart-box { padding: 12px 14px; }
             .action-btn { font-size: 0.5rem; padding: 3px 10px; }
             .sector-slicer .slicer-btn { font-size: 0.55rem; padding: 4px 12px; }
+        }
+
+        /* ============================================================
+           صف الفلاتر المدمج - Location, Level, Attend جنب بعض
+           ============================================================ */
+        .filter-row-compact {
+            display: flex !important;
+            flex-wrap: nowrap !important;
+            align-items: center !important;
+            gap: 8px 12px !important;
+            padding: 6px 0 !important;
+            border-bottom: 1px solid rgba(0,0,0,0.04) !important;
+            overflow-x: auto !important;
+        }
+        .filter-row-compact .filter-group {
+            display: flex !important;
+            flex-wrap: nowrap !important;
+            gap: 4px 6px !important;
+            align-items: center !important;
+            flex-shrink: 0 !important;
+        }
+        .filter-row-compact .filter-label {
+            font-size: 0.6rem !important;
+            font-weight: 700 !important;
+            color: var(--text-muted) !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.5px !important;
+            min-width: 40px !important;
+            flex-shrink: 0 !important;
+        }
+        .filter-row-compact .filter-btn {
+            font-size: 0.55rem !important;
+            padding: 3px 10px !important;
+            white-space: nowrap !important;
+        }
+        .filter-row-compact .filter-select {
+            font-size: 0.55rem !important;
+            padding: 3px 24px 3px 10px !important;
+            min-width: 80px !important;
+            max-width: 150px !important;
         }
 
         /* ============================================================
@@ -494,17 +536,17 @@
         ============================================================ -->
         <div class="sector-slicer no-print" id="sectorSlicer">
             <div class="slicer-label">
-                <i class="fa-solid fa-industry"></i> القطاع:
+                <i class="fa-solid fa-industry"></i> النشاط:
             </div>
             <div class="slicer-buttons" id="sectorSlicerButtons">
                 <button class="slicer-btn active" data-sector="all">
                     الكل <span class="badge" id="sectorAllCount">0</span>
                 </button>
                 <button class="slicer-btn" data-sector="الأعلاف">
-                    🌾 الأعلاف <span class="badge" id="sectorFeedCount">0</span>
+                    🌾 أعلاف <span class="badge" id="sectorFeedCount">0</span>
                 </button>
                 <button class="slicer-btn" data-sector="المجازر">
-                    🥩 المجازر <span class="badge" id="sectorSlaughterCount">0</span>
+                    🥩 مجازر <span class="badge" id="sectorSlaughterCount">0</span>
                 </button>
             </div>
         </div>
@@ -542,8 +584,9 @@
                 </div>
             </div>
 
-            <div class="filter-row">
-                <span class="filter-label"><i class="fa-solid fa-location-dot"></i> Location:</span>
+            <!-- صف الفلاتر المدمج: Location + Level + Attend جنب بعض -->
+            <div class="filter-row-compact">
+                <span class="filter-label"><i class="fa-solid fa-location-dot"></i></span>
                 <div class="filter-group" id="locationFilters">
                     <button class="filter-btn active" data-filter="location" data-value="all">All <span class="badge-count" id="locAllCount">0</span></button>
                     <button class="filter-btn" data-filter="location" data-value="Steigenberger">Steigenberger <span class="badge-count" id="locSteigenbergerCount">0</span></button>
@@ -552,7 +595,7 @@
                     <button class="filter-btn" data-filter="location" data-value="Alsaff">Alsaff <span class="badge-count" id="locAlsaffCount">0</span></button>
                 </div>
 
-                <span class="filter-label" style="margin-left:6px;"><i class="fa-solid fa-layer-group"></i> Level:</span>
+                <span class="filter-label" style="min-width:30px !important;"><i class="fa-solid fa-layer-group"></i></span>
                 <div class="filter-group" id="levelFilters">
                     <button class="filter-btn active" data-filter="level" data-value="all">All <span class="badge-count" id="lvlAllCount">0</span></button>
                     <button class="filter-btn" data-filter="level" data-value="L4">L4 <span class="badge-count" id="lvlL4Count">0</span></button>
@@ -561,7 +604,14 @@
                     <button class="filter-btn" data-filter="level" data-value="L1">L1 <span class="badge-count" id="lvlL1Count">0</span></button>
                 </div>
 
-                <span class="filter-label" style="margin-left:6px;"><i class="fa-solid fa-industry"></i> Sector:</span>
+                <span class="filter-label" style="min-width:30px !important;"><i class="fa-solid fa-user-check"></i></span>
+                <div class="filter-group" id="attendanceFilters">
+                    <button class="filter-btn active attend-btn" data-filter="attendance" data-value="all">All <span class="badge-count" id="attAllCount">0</span></button>
+                    <button class="filter-btn attend-btn" data-filter="attendance" data-value="attend">✅ <span class="badge-count" id="attAttendCount">0</span></button>
+                    <button class="filter-btn not-attend-btn" data-filter="attendance" data-value="not-attend">❌ <span class="badge-count" id="attNotAttendCount">0</span></button>
+                </div>
+
+                <span class="filter-label" style="min-width:30px !important;"><i class="fa-solid fa-industry"></i></span>
                 <div class="filter-group">
                     <select class="filter-select" id="sectorSelect">
                         <option value="all">All Sectors</option>
@@ -589,13 +639,6 @@
                         <option value="Phase4">Phase 4</option>
                         <option value="Online-Phase4">Online Phase 4</option>
                     </select>
-                </div>
-
-                <span class="filter-label" style="margin-left:6px;"><i class="fa-solid fa-user-check"></i> Attend:</span>
-                <div class="filter-group" id="attendanceFilters">
-                    <button class="filter-btn active attend-btn" data-filter="attendance" data-value="all">All <span class="badge-count" id="attAllCount">0</span></button>
-                    <button class="filter-btn attend-btn" data-filter="attendance" data-value="attend">✅ Attend <span class="badge-count" id="attAttendCount">0</span></button>
-                    <button class="filter-btn not-attend-btn" data-filter="attendance" data-value="not-attend">❌ Not Attend <span class="badge-count" id="attNotAttendCount">0</span></button>
                 </div>
 
                 <div class="action-buttons">
@@ -646,7 +689,7 @@
                         <div class="info-group"><h4>Location</h4><p id="resLocation">-</p></div>
                         <div class="info-group"><h4>Phase</h4><p id="resPhase">-</p></div>
                         <div class="info-group"><h4>Attendance</h4><p id="resAttendance">-</p></div>
-                        <div class="info-group"><h4>Status</h4><p id="resStatus">-</p></div>
+                        <div class="info-group"><h4>Accommodation</h4><p id="resAccommodation">-</p></div>
                     </div>
                     <div class="employee-stats">
                         <span class="stat-badge attend" id="statAttended">✅ Attended: 0</span>
@@ -661,8 +704,7 @@
                         <div class="perf-stat">⏳ Pending: <span class="num" id="perfPending">0</span></div>
                     </div>
                     <div class="training-tags" id="resPrograms"></div>
-                    <!-- زر طباعة بيانات الموظف -->
-                    <button class="print-btn" id="printEmployeeBtn" onclick="printEmployeeProfile()" style="display:inline-flex;">
+                    <button class="print-btn" id="printEmployeeBtn" onclick="printEmployeeProfile()" style="display:none;">
                         <i class="fa-solid fa-print"></i> طباعة بيانات الموظف
                     </button>
                 </div>
@@ -713,7 +755,7 @@
         </div>
 
         <!-- ============================================================
-        EMPLOYEE DETAIL TABLE
+        EMPLOYEE DETAIL TABLE - مع عمود Accommodation بدلاً من Status
         ============================================================ -->
         <div class="employee-detail-table" id="employeeDetailTable">
             <h4><i class="fa-solid fa-users"></i> Employees Details <span id="detailCount" style="font-size:0.7rem;color:var(--text-muted);font-weight:400;"></span></h4>
@@ -728,7 +770,7 @@
                             <th>Training Group</th>
                             <th>Phase</th>
                             <th>Attendance</th>
-                            <th>Status</th>
+                            <th>Accommodation</th>
                         </tr>
                     </thead>
                     <tbody id="detailTableBody"></tbody>
@@ -837,7 +879,8 @@
             level: 'all', 
             phase: 'all', 
             attendance: 'all',
-            sector: 'all'
+            sector: 'all',
+            sectorSlicer: 'all'
         };
         let isLoading = false;
         let loadError = false;
@@ -961,7 +1004,7 @@
         }
 
         // ============================================================
-        // SECTOR SLICER - تحديث الأعداد
+        // SECTOR SLICER
         // ============================================================
         function updateSectorSlicer(data) {
             const total = data.length;
@@ -972,6 +1015,18 @@
             
             const slaughterCount = data.filter(r => String(r[COLUMNS.Sector] || '').includes('المجازر')).length;
             document.getElementById('sectorSlaughterCount').textContent = slaughterCount;
+        }
+
+        function setupSlicerButtons() {
+            document.querySelectorAll('#sectorSlicerButtons .slicer-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const sector = this.dataset.sector;
+                    document.querySelectorAll('#sectorSlicerButtons .slicer-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    activeFilters.sectorSlicer = sector;
+                    applyFilters();
+                });
+            });
         }
 
         // ============================================================
@@ -1182,7 +1237,11 @@
         // FILTERS
         // ============================================================
         function applyFilters() {
-            if (!allData || allData.length === 0) return;
+            if (!allData || allData.length === 0) {
+                // إظهار الجدول فارغ مع رسالة
+                updateEmployeeDetailTable([]);
+                return;
+            }
             filteredData = [...allData];
 
             // فلتر القطاع من السلايسر
@@ -1236,27 +1295,11 @@
                 });
             }
             
-            // تحديث السلايسر بالأعداد
             updateSectorSlicer(filteredData);
             
             renderDashboard(filteredData);
             updateEmployeeDetailTable(filteredData);
             checkSmartAlerts(filteredData);
-        }
-
-        // ============================================================
-        // SETUP SLICER BUTTONS
-        // ============================================================
-        function setupSlicerButtons() {
-            document.querySelectorAll('#sectorSlicerButtons .slicer-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const sector = this.dataset.sector;
-                    document.querySelectorAll('#sectorSlicerButtons .slicer-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    activeFilters.sectorSlicer = sector;
-                    applyFilters();
-                });
-            });
         }
 
         function setupFilterButtons() {
@@ -1351,7 +1394,7 @@
         }
 
         // ============================================================
-        // EMPLOYEE DETAIL TABLE
+        // EMPLOYEE DETAIL TABLE - مع Accommodation بدلاً من Status
         // ============================================================
         function updateEmployeeDetailTable(data) {
             const tbody = document.getElementById('detailTableBody');
@@ -1376,13 +1419,13 @@
                     attendanceBadge = '<span class="badge-not-attend">❌ Not Attended</span>';
                 }
                 
-                const statusMap = {
-                    'active': 'Active',
-                    'sick': 'Sick Leave',
-                    'legal': 'Legal',
-                    'inactive': 'Inactive'
-                };
-                const status = statusMap[String(emp[COLUMNS.Status] || '').toLowerCase()] || emp[COLUMNS.Status] || 'N/A';
+                const accommodation = String(emp[COLUMNS.Accommodation] || '').toLowerCase();
+                let accomBadge = '<span class="badge-unknown">N/A</span>';
+                if (accommodation === 'yes') {
+                    accomBadge = '<span class="badge-attend">✅ Yes</span>';
+                } else if (accommodation === 'no') {
+                    accomBadge = '<span class="badge-not-attend">❌ No</span>';
+                }
                 
                 return `<tr>
                     <td><strong>${emp[COLUMNS.ID] || 'N/A'}</strong></td>
@@ -1392,7 +1435,7 @@
                     <td>${emp[COLUMNS.TrainingGroup] || 'N/A'}</td>
                     <td>${emp[COLUMNS.TrainingPhase] || 'N/A'}</td>
                     <td>${attendanceBadge}</td>
-                    <td>${status}</td>
+                    <td>${accomBadge}</td>
                 </tr>`;
             }).join('');
 
@@ -1776,7 +1819,9 @@
             document.getElementById('resPhase').textContent = emp[COLUMNS.TrainingPhase] || 'Not specified';
             const v = String(emp[COLUMNS.SevenSens] || '').toLowerCase();
             document.getElementById('resAttendance').textContent = (v === 'attend' || v === 'attended' || v.includes('attend')) ? '✅ Attended' : '❌ Not Attended';
-            document.getElementById('resStatus').textContent = emp['Status'] || 'Not specified';
+            
+            const accommodation = String(emp[COLUMNS.Accommodation] || '').toLowerCase();
+            document.getElementById('resAccommodation').textContent = accommodation === 'yes' ? '✅ Yes' : accommodation === 'no' ? '❌ No' : 'N/A';
 
             const fields = Object.values(PROGRAM_FIELDS);
             let attendedCount = 0, notAttendedCount = 0;
@@ -1789,8 +1834,7 @@
             document.getElementById('statNotAttended').textContent = '❌ Not Attended: ' + notAttendedCount;
             document.getElementById('statGroup').textContent = '📋 Group: ' + (emp[COLUMNS.TrainingGroup] || 'N/A');
             document.getElementById('statLocation').textContent = '📍 Location: ' + (emp[COLUMNS.TrainingLocation] || 'N/A');
-            const accom = String(emp[COLUMNS.Accommodation] || '').toLowerCase();
-            document.getElementById('statAccommodation').textContent = '🏠 Accommodation: ' + (accom === 'yes' ? '✅ Yes' : accom === 'no' ? '❌ No' : 'N/A');
+            document.getElementById('statAccommodation').textContent = '🏠 Accommodation: ' + (accommodation === 'yes' ? '✅ Yes' : accommodation === 'no' ? '❌ No' : 'N/A');
 
             const totalPrograms = fields.length;
             document.getElementById('perfTotal').textContent = totalPrograms;
@@ -1838,15 +1882,11 @@
                 return;
             }
 
-            const statusMap = {
-                'active': 'Active',
-                'sick': 'Sick Leave',
-                'legal': 'Legal',
-                'inactive': 'Inactive'
-            };
-
             const sevenSens = String(emp[COLUMNS.SevenSens] || '').toLowerCase();
             const attendanceText = (sevenSens === 'attend' || sevenSens === 'attended' || sevenSens.includes('attend')) ? '✅ Attended' : '❌ Not Attended';
+            
+            const accommodation = String(emp[COLUMNS.Accommodation] || '').toLowerCase();
+            const accommodationText = accommodation === 'yes' ? '✅ Yes' : accommodation === 'no' ? '❌ No' : 'N/A';
 
             const fields = Object.values(PROGRAM_FIELDS);
             let attendedCount = 0, notAttendedCount = 0;
@@ -1907,8 +1947,7 @@
                     <div><div class="label">Training Group</div><div class="value">${emp[COLUMNS.TrainingGroup] || 'N/A'}</div></div>
                     <div><div class="label">Training Phase</div><div class="value">${emp[COLUMNS.TrainingPhase] || 'Not specified'}</div></div>
                     <div><div class="label">Attendance (7 Sens)</div><div class="value"><span class="badge ${sevenSens === 'attend' || sevenSens === 'attended' || sevenSens.includes('attend') ? 'badge-attend' : 'badge-not-attend'}">${attendanceText}</span></div></div>
-                    <div><div class="label">Status</div><div class="value">${statusMap[String(emp[COLUMNS.Status] || '').toLowerCase()] || emp[COLUMNS.Status] || 'Not specified'}</div></div>
-                    <div><div class="label">Accommodation</div><div class="value">${String(emp[COLUMNS.Accommodation] || '').toLowerCase() === 'yes' ? '✅ Yes' : String(emp[COLUMNS.Accommodation] || '').toLowerCase() === 'no' ? '❌ No' : 'N/A'}</div></div>
+                    <div><div class="label">Accommodation</div><div class="value">${accommodationText}</div></div>
                 </div>
 
                 <div class="section-title">📊 Training Summary</div>
@@ -1962,7 +2001,6 @@
                 document.getElementById('printDateHeader').textContent = now;
                 document.getElementById('printDateFooter').textContent = now;
 
-                // تفعيل السلايسر
                 if (!activeFilters.sectorSlicer) {
                     activeFilters.sectorSlicer = 'all';
                 }
@@ -1974,11 +2012,12 @@
             } catch (err) {
                 console.error('❌ Error loading data:', err);
                 loadError = true;
-                msg.className = 'loading-status error';
-                msg.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Error loading data. Please try again.';
+                // إخفاء رسالة الخطأ بدلاً من عرضها
+                msg.className = 'loading-status';
+                msg.innerHTML = '';
                 document.getElementById('statusText').textContent = 'Error';
                 document.getElementById('statusIcon').className = 'fa-solid fa-cloud-arrow-up';
-                showAlert('danger', '❌ Failed to load data: ' + err.message);
+                // عدم عرض alert خطأ
             } finally {
                 isLoading = false;
                 document.getElementById('refreshBtn').disabled = false;
