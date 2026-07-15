@@ -50,7 +50,7 @@
         .refresh-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
         /* ============================================================
-           TOP BAR - سلايسر النشاط + أزرار الطباعة
+           TOP BAR - سلايسر النشاط + أزرار الطباعة (تحت بعض)
            ============================================================ */
         .top-bar {
             background: var(--white);
@@ -101,14 +101,17 @@
         .top-bar .slicer-section .slicer-btn .badge { background: rgba(255,255,255,0.2); border-radius: 20px; padding: 0 8px; font-size: 0.5rem; margin-left: 4px; }
         .top-bar .slicer-section .slicer-btn.active .badge { background: rgba(255,255,255,0.25); }
 
+        /* أزرار الطباعة - تحت بعض */
         .top-bar .action-buttons {
             display: flex;
-            gap: 8px;
+            flex-direction: column;
+            gap: 6px;
             flex-shrink: 0;
-            align-items: center;
+            align-items: stretch;
+            min-width: 110px;
         }
         .top-bar .action-btn {
-            padding: 6px 20px;
+            padding: 6px 14px;
             border-radius: 30px;
             border: 2px solid var(--cpc-blue);
             background: var(--cpc-blue);
@@ -120,10 +123,11 @@
             transition: all 0.2s;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            height: 32px;
-            min-width: 100px;
             justify-content: center;
+            gap: 6px;
+            height: 30px;
+            width: 100%;
+            min-width: 100px;
         }
         .top-bar .action-btn:hover {
             background: var(--cpc-blue-dark);
@@ -179,7 +183,83 @@
         .filter-bar .filter-row:last-child { border-bottom: none; padding-bottom: 0; }
         .filter-bar .filter-row:first-child { padding-top: 0; }
         .filter-bar .filter-label { font-size: 0.6rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; min-width: 60px; flex-shrink: 0; }
-        .filter-bar .filter-group { display: flex; flex-wrap: wrap; gap: 3px 6px; flex: 1; align-items: center; }
+
+        /* ============================================================
+           PROGRAM CARDS - شكل البطاقات الجديد
+           ============================================================ */
+        .program-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 10px;
+            padding: 4px 0;
+            width: 100%;
+        }
+        .program-card {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 14px;
+            border-radius: 30px;
+            border: 2px solid #e2e8f0;
+            background: var(--white);
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+        }
+        .program-card:hover {
+            border-color: var(--cpc-blue);
+            color: var(--cpc-blue);
+            background: rgba(30,61,89,0.04);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .program-card.active {
+            border-color: var(--koki-orange);
+            background: var(--koki-orange);
+            color: white;
+            box-shadow: 0 4px 12px rgba(255,110,64,0.3);
+        }
+        .program-card .prog-icon {
+            font-size: 0.7rem;
+            opacity: 0.7;
+        }
+        .program-card.active .prog-icon {
+            opacity: 1;
+        }
+        .program-card .prog-name {
+            font-weight: 700;
+        }
+        .program-card .prog-count {
+            background: rgba(0,0,0,0.06);
+            border-radius: 20px;
+            padding: 0 8px;
+            font-size: 0.5rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+        }
+        .program-card.active .prog-count {
+            background: rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.95);
+        }
+        .program-card .prog-count .attend-count {
+            color: var(--success);
+        }
+        .program-card .prog-count .not-attend-count {
+            color: var(--danger);
+        }
+        .program-card.active .prog-count .attend-count {
+            color: rgba(255,255,255,0.9);
+        }
+        .program-card.active .prog-count .not-attend-count {
+            color: rgba(255,255,255,0.9);
+        }
 
         /* ============================================================
            FILTER ITEMS - كل مفتاح في سطر مع أيقونة
@@ -187,7 +267,7 @@
         .filter-items-container {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
             width: 100%;
             padding: 4px 0;
         }
@@ -196,7 +276,7 @@
             align-items: center;
             gap: 12px;
             flex-wrap: wrap;
-            padding: 4px 0;
+            padding: 3px 0;
         }
         .filter-item-row .filter-icon-label {
             display: flex;
@@ -373,32 +453,8 @@
         .charts-grid-2 .chart-box .chart-container { height: 260px; }
 
         /* ============================================================
-           GROUP EMPLOYEES TABLE - جدول منفصل للمجموعات
+           EMPLOYEE DETAIL TABLE
            ============================================================ */
-        .group-employees-table {
-            background: var(--white);
-            border-radius: 14px;
-            padding: 16px 18px;
-            margin-top: 14px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-            border: 1px solid #e8ecf0;
-            overflow-x: auto;
-        }
-        .group-employees-table h4 {
-            font-size: 0.9rem;
-            color: var(--cpc-blue);
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        .group-employees-table table { width: 100%; border-collapse: collapse; font-size: 0.75rem; }
-        .group-employees-table th { background: var(--cpc-blue); color: white; padding: 10px 12px; text-align: left; font-weight: 600; white-space: nowrap; }
-        .group-employees-table td { padding: 8px 12px; border-bottom: 1px solid #e8ecf0; vertical-align: middle; }
-        .group-employees-table tr:hover td { background: #f8fafc; }
-        .group-employees-table .badge-attend { background: rgba(16,185,129,0.15); color: var(--success); padding: 2px 10px; border-radius: 20px; font-size: 0.6rem; font-weight: 600; }
-        .group-employees-table .badge-not-attend { background: rgba(239,68,68,0.15); color: var(--danger); padding: 2px 10px; border-radius: 20px; font-size: 0.6rem; font-weight: 600; }
-        .group-employees-table .badge-unknown { background: rgba(107,122,143,0.15); color: var(--text-muted); padding: 2px 10px; border-radius: 20px; font-size: 0.6rem; font-weight: 600; }
-
         .employee-detail-table {
             background: var(--white);
             border-radius: 14px;
@@ -441,10 +497,13 @@
             .charts-grid-2 .chart-box canvas { height: 200px !important; max-height: 200px; }
             .charts-grid-2 .chart-box .chart-container { height: 200px; }
             .top-bar { flex-direction: column; align-items: stretch; }
-            .top-bar .action-buttons { justify-content: flex-start; }
+            .top-bar .action-buttons { flex-direction: row; justify-content: flex-start; }
+            .top-bar .action-btn { width: auto; min-width: 80px; }
             .filter-item-row { flex-direction: column; align-items: stretch; gap: 4px; }
             .filter-item-row .filter-icon-label { min-width: auto; }
             .filter-item-row .filter-buttons { flex-wrap: wrap; }
+            .program-cards { gap: 6px; }
+            .program-card { font-size: 0.55rem; padding: 4px 10px; }
         }
         @media (max-width: 768px) {
             .navbar { flex-direction: column; text-align: center; }
@@ -460,11 +519,12 @@
             .insights-section { grid-template-columns: 1fr; }
             .employee-detail-table table { font-size: 0.65rem; }
             .employee-detail-table th, .employee-detail-table td { padding: 4px 8px; }
-            .group-employees-table table { font-size: 0.65rem; }
-            .group-employees-table th, .group-employees-table td { padding: 4px 8px; }
             .alerts-container .alert-item { font-size: 0.65rem; }
             .top-bar .slicer-section { flex-direction: column; align-items: stretch; }
-            .top-bar .action-btn { min-width: 80px; font-size: 0.55rem; padding: 4px 14px; height: 28px; }
+            .top-bar .action-btn { min-width: 60px; font-size: 0.55rem; padding: 4px 10px; height: 26px; }
+            .program-cards { gap: 4px; }
+            .program-card { font-size: 0.5rem; padding: 3px 8px; gap: 4px; }
+            .program-card .prog-count { font-size: 0.45rem; padding: 0 5px; }
         }
         @media (max-width: 480px) {
             .kpi-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
@@ -474,21 +534,23 @@
             .chart-box canvas { height: 170px !important; max-height: 170px; }
             .chart-box .chart-container { height: 170px; }
             .chart-box { padding: 12px 14px; }
-            .top-bar .action-btn { min-width: 60px; font-size: 0.5rem; padding: 3px 10px; height: 24px; }
+            .top-bar .action-btn { min-width: 50px; font-size: 0.5rem; padding: 3px 8px; height: 24px; }
             .top-bar .slicer-section .slicer-btn { font-size: 0.5rem; padding: 3px 10px; }
             .filter-item-row .filter-btn { font-size: 0.45rem; padding: 2px 8px; }
+            .program-card { font-size: 0.45rem; padding: 2px 6px; gap: 3px; }
+            .program-card .prog-count { font-size: 0.4rem; padding: 0 4px; }
         }
 
         @media print {
             body, body * { visibility: visible !important; }
             .no-print, .no-print * { display: none !important; }
             .action-btn, .refresh-btn, .print-btn, .clear-filters-btn,
-            .search-box button, .filter-btn, .filter-select, .slicer-btn { display: none !important; }
+            .search-box button, .filter-btn, .filter-select, .slicer-btn,
+            .program-card { display: none !important; }
             body { background: white !important; padding: 20px !important; font-size: 11px !important; color: #1a2332 !important; }
             .container { max-width: 100% !important; padding: 0 !important; }
             .kpi-card, .chart-box, .insight-card, .employee-detail-table,
-            .search-wrapper, .filter-bar, .brief-section, .alerts-container, .top-bar,
-            .group-employees-table {
+            .search-wrapper, .filter-bar, .brief-section, .alerts-container, .top-bar {
                 box-shadow: none !important;
                 border: 1px solid #ddd !important;
                 page-break-inside: avoid !important;
@@ -505,9 +567,6 @@
             .employee-detail-table table { font-size: 9px !important; }
             .employee-detail-table th { background: #1e3d59 !important; color: white !important; padding: 4px 8px !important; }
             .employee-detail-table td { padding: 3px 8px !important; border-bottom: 1px solid #eee !important; }
-            .group-employees-table table { font-size: 9px !important; }
-            .group-employees-table th { background: #1e3d59 !important; color: white !important; padding: 4px 8px !important; }
-            .group-employees-table td { padding: 3px 8px !important; border-bottom: 1px solid #eee !important; }
             .brief-section { background: #1e3d59 !important; color: white !important; }
             .brief-section .highlight { color: #ff6e40 !important; }
             .kpi-card .num { font-size: 1rem !important; }
@@ -593,21 +652,15 @@
         </div>
 
         <!-- ============================================================
-        FILTER BAR - كل مفتاح في سطر مع أيقونة
+        FILTER BAR
         ============================================================ -->
         <div class="filter-bar no-print" id="filterBar">
             
-            <!-- الصف الأول: Programs -->
+            <!-- الصف الأول: Programs - على شكل بطاقات أفقية -->
             <div class="filter-row">
-                <span class="filter-label"><i class="fa-solid fa-book"></i> Programs:</span>
-                <div class="filter-group" id="programFilters">
-                    <button class="filter-btn active" data-filter="program" data-value="all">All <span class="badge-count" id="progAllCount">0</span></button>
-                    <button class="filter-btn" data-filter="program" data-value="7 Sens Program">7 Sens <span class="badge-count" id="prog7SensCount">0</span></button>
-                    <button class="filter-btn" data-filter="program" data-value="Analytical Thinking Program">Analytical <span class="badge-count" id="progAnalyticalCount">0</span></button>
-                    <button class="filter-btn" data-filter="program" data-value="Mind field Program">Mind Field <span class="badge-count" id="progMindFieldCount">0</span></button>
-                    <button class="filter-btn" data-filter="program" data-value="Leader Ship Program">Leadership <span class="badge-count" id="progLeadershipCount">0</span></button>
-                    <button class="filter-btn" data-filter="program" data-value="Drive Performance Program">Drive <span class="badge-count" id="progDriveCount">0</span></button>
-                    <button class="filter-btn" data-filter="program" data-value="Kick Start Program">Kick Start <span class="badge-count" id="progKickCount">0</span></button>
+                <span class="filter-label"><i class="fa-solid fa-book"></i> Programs</span>
+                <div class="program-cards" id="programFilters">
+                    <!-- سيتم ملؤها بواسطة JavaScript -->
                 </div>
             </div>
 
@@ -805,34 +858,10 @@
         </div>
 
         <!-- ============================================================
-        GROUP EMPLOYEES TABLE - جدول منفصل للمجموعات
-        ============================================================ -->
-        <div class="group-employees-table" id="groupEmployeesTable">
-            <h4><i class="fa-solid fa-users"></i> Group Employees <span id="groupCount" style="font-size:0.7rem;color:var(--text-muted);font-weight:400;"></span></h4>
-            <div style="overflow-x:auto;">
-                <table id="group-table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Department</th>
-                            <th>Title</th>
-                            <th>Training Group</th>
-                            <th>Phase</th>
-                            <th>Attendance</th>
-                            <th>Accommodation</th>
-                        </tr>
-                    </thead>
-                    <tbody id="groupTableBody"></tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- ============================================================
         EMPLOYEE DETAIL TABLE
         ============================================================ -->
         <div class="employee-detail-table" id="employeeDetailTable">
-            <h4><i class="fa-solid fa-table"></i> All Employees Details <span id="detailCount" style="font-size:0.7rem;color:var(--text-muted);font-weight:400;"></span></h4>
+            <h4><i class="fa-solid fa-table"></i> Employees Details <span id="detailCount" style="font-size:0.7rem;color:var(--text-muted);font-weight:400;"></span></h4>
             <div style="overflow-x:auto;">
                 <table id="employee-table">
                     <thead>
@@ -942,6 +971,15 @@
             'Leader Ship Program': COLUMNS.Leadership,
             'Drive Performance Program': COLUMNS.DrivePerformance,
             'Kick Start Program': COLUMNS.KickStart
+        };
+
+        const PROGRAM_ICONS = {
+            '7 Sens Program': 'fa-solid fa-brain',
+            'Analytical Thinking Program': 'fa-solid fa-lightbulb',
+            'Mind field Program': 'fa-solid fa-arrow-trend-up',
+            'Leader Ship Program': 'fa-solid fa-crown',
+            'Drive Performance Program': 'fa-solid fa-gauge-high',
+            'Kick Start Program': 'fa-solid fa-rocket'
         };
 
         const LOCATIONS = ['Nob', 'Online', 'Steigenberger', 'TOR'];
@@ -1139,7 +1177,7 @@
         }
 
         // ============================================================
-        // حساب الحضور وعدم الحضور للبرامج (الخانات الفارغة = not attend)
+        // حساب الحضور وعدم الحضور للبرامج
         // ============================================================
         function getProgramAttendance(data, field) {
             let attend = 0;
@@ -1156,26 +1194,54 @@
         }
 
         // ============================================================
-        // UPDATE FILTER BADGES
+        // UPDATE PROGRAM CARDS
         // ============================================================
-        function updateFilterBadges(data) {
-            const progAll = data.length;
-            document.getElementById('progAllCount').textContent = progAll;
+        function updateProgramCards(data) {
+            const container = document.getElementById('programFilters');
+            const total = data.length;
+            
+            let html = `<div class="program-card active" data-program="all" data-value="all">
+                <span class="prog-icon">📋</span>
+                <span class="prog-name">All</span>
+                <span class="prog-count">${total}</span>
+            </div>`;
             
             Object.keys(PROGRAM_FIELDS).forEach(progName => {
                 const field = PROGRAM_FIELDS[progName];
                 const { attend, notAttend } = getProgramAttendance(data, field);
-                const id = 'prog' + progName.replace(/ /g, '') + 'Count';
-                const el = document.getElementById(id);
-                if (el) {
-                    if (activeFilters.program === progName || activeFilters.program === 'all') {
-                        el.innerHTML = `<span class="badge-attend">${attend}✓</span><span class="badge-not-attend">${notAttend}✗</span>`;
-                    } else {
-                        el.textContent = attend;
-                    }
-                }
+                const icon = PROGRAM_ICONS[progName] || 'fa-solid fa-book';
+                const shortName = progName.replace(' Program', '').replace('Thinking', 'Think').replace('Performance', 'Perf');
+                
+                const isActive = activeFilters.program === progName ? 'active' : '';
+                
+                html += `<div class="program-card ${isActive}" data-program="${progName}" data-value="${progName}">
+                    <span class="prog-icon"><i class="${icon}"></i></span>
+                    <span class="prog-name">${shortName}</span>
+                    <span class="prog-count">
+                        <span class="attend-count">${attend}✓</span>
+                        <span class="not-attend-count">${notAttend}✗</span>
+                    </span>
+                </div>`;
             });
+            
+            container.innerHTML = html;
+            
+            // إضافة حدث النقر للبطاقات
+            container.querySelectorAll('.program-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const value = this.dataset.value;
+                    container.querySelectorAll('.program-card').forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                    activeFilters.program = value;
+                    applyFilters();
+                });
+            });
+        }
 
+        // ============================================================
+        // UPDATE FILTER BADGES
+        // ============================================================
+        function updateFilterBadges(data) {
             // Groups
             const groupCounts = {};
             data.forEach(r => {
@@ -1347,7 +1413,6 @@
             
             if (!allData || allData.length === 0) {
                 console.warn('⚠️ No data to filter');
-                updateGroupEmployeesTable([]);
                 updateEmployeeDetailTable([]);
                 updateActivitySlicer([]);
                 return;
@@ -1415,24 +1480,12 @@
             
             updateActivitySlicer(filteredData);
             renderDashboard(filteredData);
-            updateGroupEmployeesTable(filteredData);
             updateEmployeeDetailTable(filteredData);
             checkSmartAlerts(filteredData);
         }
 
         function setupFilterButtons() {
-            document.querySelectorAll('#programFilters .filter-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const type = this.dataset.filter;
-                    const value = this.dataset.value;
-                    const group = this.closest('.filter-group');
-                    group.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    activeFilters[type] = value;
-                    applyFilters();
-                });
-            });
-
+            // Location filters
             document.querySelectorAll('#locationFilters .filter-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const type = this.dataset.filter;
@@ -1445,6 +1498,7 @@
                 });
             });
 
+            // Level filters
             document.querySelectorAll('#levelFilters .filter-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const type = this.dataset.filter;
@@ -1457,6 +1511,7 @@
                 });
             });
 
+            // Attendance filters
             document.querySelectorAll('#attendanceFilters .filter-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const type = this.dataset.filter;
@@ -1469,10 +1524,13 @@
                 });
             });
 
+            // Group select
             document.getElementById('groupSelect').addEventListener('change', function() {
                 activeFilters.group = this.value;
                 applyFilters();
             });
+
+            // Phase select
             document.getElementById('phaseSelect').addEventListener('change', function() {
                 activeFilters.phase = this.value;
                 applyFilters();
@@ -1490,77 +1548,27 @@
                 activity: 'all'
             };
             
+            // Clear filter buttons
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.classList.remove('active');
                 if (btn.dataset.value === 'all') btn.classList.add('active');
             });
             
+            // Clear slicer buttons
             document.querySelectorAll('#sectorSlicerButtons .slicer-btn').forEach(btn => {
                 btn.classList.remove('active');
                 if (btn.dataset.activity === 'all') btn.classList.add('active');
             });
             
+            // Clear program cards
+            document.querySelectorAll('.program-card').forEach(card => {
+                card.classList.remove('active');
+                if (card.dataset.value === 'all') card.classList.add('active');
+            });
+            
             document.getElementById('groupSelect').value = 'all';
             document.getElementById('phaseSelect').value = 'all';
             applyFilters();
-        }
-
-        // ============================================================
-        // GROUP EMPLOYEES TABLE
-        // ============================================================
-        function updateGroupEmployeesTable(data) {
-            const tbody = document.getElementById('groupTableBody');
-            const countSpan = document.getElementById('groupCount');
-            
-            // فلتر فقط عندما يكون هناك مجموعة محددة
-            if (activeFilters.group === 'all' || !data || data.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;padding:20px;color:var(--text-muted);">Select a specific group to view its members.</td></tr>`;
-                countSpan.textContent = '';
-                return;
-            }
-
-            const uniqueIds = new Set();
-            data.forEach(emp => {
-                const id = String(emp[COLUMNS.ID] || '').trim();
-                if (id) uniqueIds.add(id);
-            });
-            const uniqueCount = uniqueIds.size;
-            countSpan.textContent = `(${uniqueCount} employees in group: ${activeFilters.group})`;
-            
-            const displayData = data.slice(0, 100);
-            
-            tbody.innerHTML = displayData.map(emp => {
-                const sevenSens = String(emp[COLUMNS.SevenSens] || '').toLowerCase();
-                let attendanceBadge = '<span class="badge-unknown">Unknown</span>';
-                if (sevenSens === 'attend' || sevenSens === 'attended' || sevenSens.includes('attend')) {
-                    attendanceBadge = '<span class="badge-attend">✅ Attended</span>';
-                } else if (sevenSens === 'not attend' || sevenSens.includes('not attend')) {
-                    attendanceBadge = '<span class="badge-not-attend">❌ Not Attended</span>';
-                }
-                
-                const accommodation = String(emp[COLUMNS.Accommodation] || '').toLowerCase();
-                let accomBadge = '<span class="badge-unknown">N/A</span>';
-                if (accommodation === 'yes') {
-                    accomBadge = '<span class="badge-attend">✅ Yes</span>';
-                } else if (accommodation === 'no') {
-                    accomBadge = '<span class="badge-not-attend">❌ No</span>';
-                }
-                
-                return `<tr>
-                    <td><strong>${emp[COLUMNS.ID] || 'N/A'}</strong></td>
-                    <td><strong>${emp[COLUMNS.Name] || 'Unknown'}</strong></td>
-                    <td>${emp[COLUMNS.Department] || 'N/A'}</td>
-                    <td>${emp[COLUMNS.Title] || 'N/A'}</td>
-                    <td>${emp[COLUMNS.TrainingGroup] || 'N/A'}</td>
-                    <td>${emp[COLUMNS.TrainingPhase] || 'N/A'}</td>
-                    <td>${attendanceBadge}</td>
-                    <td>${accomBadge}</td>
-                </tr>`;
-            }).join('');
-
-            if (data.length > 100) {
-                tbody.innerHTML += `<tr><td colspan="8" style="text-align:center;color:var(--text-muted);font-style:italic;padding:10px;">... and ${data.length - 100} more records</td></tr>`;
-            }
         }
 
         // ============================================================
@@ -1729,6 +1737,8 @@
             document.getElementById('kpiQuality').textContent = qualityScore + '%';
             document.getElementById('kpiPhases').textContent = phaseCount;
 
+            // تحديث البرامج (بطاقات)
+            updateProgramCards(data);
             updateFilterBadges(data);
             updateInsights(data);
 
