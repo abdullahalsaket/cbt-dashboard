@@ -49,9 +49,6 @@
         .refresh-btn:hover { background: rgba(255,255,255,0.25); }
         .refresh-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-        /* ============================================================
-           SMART ALERTS
-           ============================================================ */
         .alerts-container {
             background: var(--white);
             border-radius: 12px;
@@ -71,9 +68,6 @@
         .alert-info { background: rgba(59,130,246,0.08); color: var(--info); border-left: 3px solid var(--info); }
         .alert-success { background: rgba(16,185,129,0.08); color: var(--success); border-left: 3px solid var(--success); }
 
-        /* ============================================================
-           FILTER BAR
-           ============================================================ */
         .filter-bar {
             background: var(--white);
             padding: 14px 18px;
@@ -107,7 +101,6 @@
         .clear-filters-btn { padding: 4px 16px; border-radius: 30px; border: 2px solid #e2e8f0; background: transparent; font-family: 'Cairo', sans-serif; font-size: 0.6rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.2s; margin-left: auto; flex-shrink: 0; }
         .clear-filters-btn:hover { border-color: var(--danger); color: var(--danger); background: rgba(239,68,68,0.05); }
 
-        /* أزرار الطباعة */
         .action-buttons {
             display: flex;
             gap: 6px;
@@ -178,9 +171,6 @@
         .loading-status.error { color: var(--danger); }
         .loading-status.success { color: var(--success); }
 
-        /* ============================================================
-           RESULT CARD
-           ============================================================ */
         .result-card { margin-top: 10px; background: #f8fafc; border-radius: 12px; padding: 12px; display: none; border-right: 4px solid var(--success); }
         .employee-profile { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 10px; }
         .info-group h4 { font-size: 0.5rem; color: var(--text-muted); text-transform: uppercase; }
@@ -203,9 +193,6 @@
         .print-btn { background: var(--cpc-blue); color: white; border: none; padding: 6px 16px; border-radius: 8px; font-family: 'Cairo', sans-serif; font-size: 0.7rem; font-weight: 600; cursor: pointer; transition: all 0.2s; margin-top: 8px; display: inline-flex; align-items: center; gap: 6px; }
         .print-btn:hover { background: var(--cpc-blue-dark); }
 
-        /* ============================================================
-           CHARTS
-           ============================================================ */
         .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 14px 0; }
         .charts-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 14px 0; }
         .chart-box { background: var(--white); padding: 20px 22px; border-radius: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid #e8ecf0; cursor: pointer; transition: all 0.2s; }
@@ -217,7 +204,7 @@
         .charts-grid-2 .chart-box .chart-container { height: 260px; }
 
         /* ============================================================
-           EMPLOYEE DETAIL TABLE
+           EMPLOYEE DETAIL TABLE - تظهر تحت الرسوم البيانية
            ============================================================ */
         .employee-detail-table {
             background: var(--white);
@@ -228,9 +215,7 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
             border: 1px solid #e8ecf0;
             overflow-x: auto;
-            display: none;
         }
-        .employee-detail-table.show { display: block; }
         .employee-detail-table h4 { font-size: 0.9rem; color: var(--cpc-blue); font-weight: 700; margin-bottom: 10px; }
         .employee-detail-table table { width: 100%; border-collapse: collapse; font-size: 0.75rem; }
         .employee-detail-table th { background: var(--cpc-blue); color: white; padding: 10px 12px; text-align: left; font-weight: 600; white-space: nowrap; }
@@ -240,9 +225,6 @@
         .employee-detail-table .badge-not-attend { background: rgba(239,68,68,0.15); color: var(--danger); padding: 2px 10px; border-radius: 20px; font-size: 0.6rem; font-weight: 600; }
         .employee-detail-table .badge-unknown { background: rgba(107,122,143,0.15); color: var(--text-muted); padding: 2px 10px; border-radius: 20px; font-size: 0.6rem; font-weight: 600; }
 
-        /* ============================================================
-           INSIGHTS
-           ============================================================ */
         .insights-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 16px 0 30px 0; }
         .insight-card { background: var(--white); padding: 16px 18px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border-left: 4px solid var(--koki-orange); transition: all 0.2s; }
         .insight-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); transform: translateX(4px); }
@@ -297,77 +279,72 @@
         }
 
         /* ============================================================
-           PRINT STYLES - مهم جداً عشان تظهر البيانات في الطباعة
+           PRINT STYLES - مهم: إظهار الجدول فقط
            ============================================================ */
         @media print {
-            /* إخفاء كل العناصر */
+            /* إخفاء كل العناصر في الصفحة */
             body * {
-                visibility: hidden;
+                visibility: hidden !important;
             }
             /* إظهار منطقة الطباعة فقط */
             #printArea, #printArea * {
-                visibility: visible;
+                visibility: visible !important;
             }
             #printArea {
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
-                padding: 20px;
-                background: white;
-                font-size: 12px;
+                position: absolute !important;
+                left: 0 !important;
+                top: 0 !important;
+                width: 100% !important;
+                padding: 30px !important;
+                background: white !important;
+                font-size: 12px !important;
             }
             #printArea table {
-                width: 100%;
-                border-collapse: collapse;
-                font-size: 11px;
+                width: 100% !important;
+                border-collapse: collapse !important;
+                font-size: 10px !important;
             }
             #printArea th {
                 background: #1e3d59 !important;
                 color: white !important;
-                padding: 8px 12px;
-                text-align: left;
-                border: 1px solid #1e3d59;
+                padding: 8px 10px !important;
+                text-align: left !important;
+                border: 1px solid #1e3d59 !important;
             }
             #printArea td {
-                padding: 6px 12px;
-                border: 1px solid #ddd;
+                padding: 6px 10px !important;
+                border: 1px solid #ddd !important;
             }
             #printArea tr:nth-child(even) {
-                background: #f9f9f9;
+                background: #f9f9f9 !important;
             }
-            #printArea .badge-attend { color: #10b981; font-weight: bold; }
-            #printArea .badge-not-attend { color: #ef4444; font-weight: bold; }
-            #printArea .badge-unknown { color: #6b7a8f; }
-            #printArea h2 {
-                color: #1e3d59;
-                margin-bottom: 15px;
-                font-size: 18px;
-            }
+            #printArea .badge-attend { color: #10b981 !important; font-weight: bold !important; }
+            #printArea .badge-not-attend { color: #ef4444 !important; font-weight: bold !important; }
+            #printArea .badge-unknown { color: #6b7a8f !important; }
             #printArea .print-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                border-bottom: 3px solid #1e3d59;
-                padding-bottom: 10px;
-                margin-bottom: 15px;
+                display: flex !important;
+                justify-content: space-between !important;
+                align-items: center !important;
+                border-bottom: 3px solid #1e3d59 !important;
+                padding-bottom: 10px !important;
+                margin-bottom: 15px !important;
             }
             #printArea .print-header h1 {
-                color: #1e3d59;
-                font-size: 20px;
-                margin: 0;
+                color: #1e3d59 !important;
+                font-size: 18px !important;
+                margin: 0 !important;
             }
             #printArea .print-header .sub {
-                color: #6b7a8f;
-                font-size: 12px;
+                color: #6b7a8f !important;
+                font-size: 11px !important;
             }
             #printArea .print-footer {
-                margin-top: 20px;
-                padding-top: 10px;
-                border-top: 1px solid #ddd;
-                text-align: center;
-                font-size: 11px;
-                color: #6b7a8f;
+                margin-top: 20px !important;
+                padding-top: 10px !important;
+                border-top: 1px solid #ddd !important;
+                text-align: center !important;
+                font-size: 10px !important;
+                color: #6b7a8f !important;
             }
             .no-print {
                 display: none !important;
@@ -406,9 +383,6 @@
             </p>
         </div>
 
-        <!-- ============================================================
-        SMART ALERTS
-        ============================================================ -->
         <div class="alerts-container no-print" id="alertsContainer">
             <h3><i class="fa-solid fa-bell"></i> Smart Alerts</h3>
             <div id="alertsList"></div>
@@ -487,7 +461,6 @@
                     <button class="filter-btn not-attend-btn" data-filter="attendance" data-value="not-attend">❌ Not Attend <span class="badge-count" id="attNotAttendCount">0</span></button>
                 </div>
 
-                <!-- أزرار الطباعة -->
                 <div class="action-buttons">
                     <button class="action-btn print-btn" onclick="printPage()">
                         <i class="fa-solid fa-print"></i> طباعة
@@ -600,15 +573,15 @@
         </div>
 
         <!-- ============================================================
-        EMPLOYEE DETAIL TABLE - منطقة الطباعة
+        EMPLOYEE DETAIL TABLE - تظهر دائماً تحت الرسوم البيانية
         ============================================================ -->
         <div class="employee-detail-table" id="employeeDetailTable">
             <h4><i class="fa-solid fa-users"></i> Employees Details <span id="detailCount" style="font-size:0.7rem;color:var(--text-muted);font-weight:400;"></span></h4>
-            <!-- هذه المنطقة سيتم طباعتها -->
+            <!-- منطقة الطباعة -->
             <div id="printArea">
                 <div class="print-header no-print" style="display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid #1e3d59;padding-bottom:10px;margin-bottom:15px;">
-                    <h1 style="color:#1e3d59;font-size:20px;margin:0;">📋 CBT Employees Report</h1>
-                    <span class="sub" style="color:#6b7a8f;font-size:12px;">Generated: <span id="printDate"></span></span>
+                    <h1 style="color:#1e3d59;font-size:18px;margin:0;">📋 CBT Employees Report</h1>
+                    <span class="sub" style="color:#6b7a8f;font-size:11px;">Generated: <span id="printDate"></span></span>
                 </div>
                 <div style="overflow-x:auto;">
                     <table id="employee-table">
@@ -627,7 +600,7 @@
                         <tbody id="detailTableBody"></tbody>
                     </table>
                 </div>
-                <div class="print-footer no-print" style="margin-top:20px;padding-top:10px;border-top:1px solid #ddd;text-align:center;font-size:11px;color:#6b7a8f;">
+                <div class="print-footer no-print" style="margin-top:20px;padding-top:10px;border-top:1px solid #ddd;text-align:center;font-size:10px;color:#6b7a8f;">
                     CBT Intelligence Hub 2026 • All Rights Reserved
                 </div>
             </div>
@@ -707,12 +680,7 @@
             Leadership: 'Leader Ship Program',
             DrivePerformance: 'Drive Performance Program',
             KickStart: 'Kick Start Program',
-            Accommodation: 'Accommodation',
-            CompletionDate: 'Completion Date',
-            TrainingScore: 'Training Score',
-            TrainerName: 'Trainer Name',
-            TrainingHours: 'Training Hours',
-            FeedbackRating: 'Feedback Rating'
+            Accommodation: 'Accommodation'
         };
 
         const PROGRAM_FIELDS = {
@@ -745,7 +713,6 @@
         // PRINT FUNCTIONS
         // ============================================================
         function printPage() {
-            // تحديث تاريخ الطباعة
             document.getElementById('printDate').textContent = new Date().toLocaleString();
             window.print();
         }
@@ -845,15 +812,6 @@
                     <span>${a.msg}</span>
                 </div>
             `).join('');
-        }
-
-        function showAlert(type, msg) {
-            const alerts = [{ type, icon: type === 'success' ? 'fa-check-circle' : type === 'warning' ? 'fa-circle-exclamation' : 'fa-triangle-exclamation', msg }];
-            renderAlerts(alerts);
-            setTimeout(() => {
-                const container = document.getElementById('alertsContainer');
-                container.classList.remove('show');
-            }, 5000);
         }
 
         // ============================================================
@@ -1191,22 +1149,21 @@
         }
 
         // ============================================================
-        // EMPLOYEE DETAIL TABLE - عرض جميع البيانات مع تفاصيل البرامج
+        // EMPLOYEE DETAIL TABLE - تعرض تحت الرسوم البيانية
         // ============================================================
         function updateEmployeeDetailTable(data) {
-            const tableContainer = document.getElementById('employeeDetailTable');
             const tbody = document.getElementById('detailTableBody');
             const countSpan = document.getElementById('detailCount');
             
             if (!data || data.length === 0) {
-                tableContainer.classList.remove('show');
+                tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;padding:20px;color:var(--text-muted);">No employees match the current filters.</td></tr>`;
+                countSpan.textContent = '(0 employees)';
                 return;
             }
 
-            tableContainer.classList.add('show');
             countSpan.textContent = `(${data.length} employees)`;
             
-            // عرض جميع البيانات (حد أقصى 100 صف)
+            // عرض أول 100 موظف
             const displayData = data.slice(0, 100);
             
             tbody.innerHTML = displayData.map(emp => {
@@ -1239,7 +1196,7 @@
             }).join('');
 
             if (data.length > 100) {
-                tbody.innerHTML += `<tr><td colspan="8" style="text-align:center;color:var(--text-muted);font-style:italic;">... and ${data.length - 100} more records</td></tr>`;
+                tbody.innerHTML += `<tr><td colspan="8" style="text-align:center;color:var(--text-muted);font-style:italic;padding:10px;">... and ${data.length - 100} more records</td></tr>`;
             }
         }
 
@@ -1716,127 +1673,128 @@
                     .prog-list { list-style: none; padding: 0; margin: 10px 0; }
                     .prog-list li { padding: 4px 0; border-bottom: 1px solid #f0f0f0; }
                     .footer { margin-top: 30px; padding-top: 15px; border-top: 1px solid #e8ecf0; font-size: 12px; color: #6b7a8f; text-align: center; }
-</style>
-</head>
-<body>
-    <div class="header">
-        <h1>👤 Employee Profile</h1>
-        <span class="sub">CBT Intelligence Hub</span>
-    </div>
-    
-    <div class="grid">
-        <div><div class="label">Employee ID</div><div class="value">${emp[COLUMNS.ID] || 'N/A'}</div></div>
-        <div><div class="label">Name</div><div class="value">${emp[COLUMNS.Name] || 'Unknown'}</div></div>
-        <div><div class="label">Title</div><div class="value">${emp[COLUMNS.Title] || 'Not recorded'}</div></div>
-        <div><div class="label">Level</div><div class="value">${emp['C-LVL'] || 'Not specified'}</div></div>
-        <div><div class="label">Sector / Department</div><div class="value">${(emp[COLUMNS.Sector] || '-')} / ${(emp[COLUMNS.Department] || '-')}</div></div>
-        <div><div class="label">Training Location</div><div class="value">${emp[COLUMNS.TrainingLocation] || 'Not specified'}</div></div>
-        <div><div class="label">Training Group</div><div class="value">${emp[COLUMNS.TrainingGroup] || 'N/A'}</div></div>
-        <div><div class="label">Training Phase</div><div class="value">${emp[COLUMNS.TrainingPhase] || 'Not specified'}</div></div>
-        <div><div class="label">Attendance (7 Sens)</div><div class="value"><span class="badge ${sevenSens === 'attend' || sevenSens === 'attended' || sevenSens.includes('attend') ? 'badge-attend' : 'badge-not-attend'}">${attendanceText}</span></div></div>
-        <div><div class="label">Status</div><div class="value">${statusMap[String(emp[COLUMNS.Status] || '').toLowerCase()] || emp[COLUMNS.Status] || 'Not specified'}</div></div>
-        <div><div class="label">Accommodation</div><div class="value">${String(emp[COLUMNS.Accommodation] || '').toLowerCase() === 'yes' ? '✅ Yes' : String(emp[COLUMNS.Accommodation] || '').toLowerCase() === 'no' ? '❌ No' : 'N/A'}</div></div>
-    </div>
+                </style>
+            </head>
+            <body>
+                <div class="header">
+                    <h1>👤 Employee Profile</h1>
+                    <span class="sub">CBT Intelligence Hub</span>
+                </div>
+                
+                <div class="grid">
+                    <div><div class="label">Employee ID</div><div class="value">${emp[COLUMNS.ID] || 'N/A'}</div></div>
+                    <div><div class="label">Name</div><div class="value">${emp[COLUMNS.Name] || 'Unknown'}</div></div>
+                    <div><div class="label">Title</div><div class="value">${emp[COLUMNS.Title] || 'Not recorded'}</div></div>
+                    <div><div class="label">Level</div><div class="value">${emp['C-LVL'] || 'Not specified'}</div></div>
+                    <div><div class="label">Sector / Department</div><div class="value">${(emp[COLUMNS.Sector] || '-')} / ${(emp[COLUMNS.Department] || '-')}</div></div>
+                    <div><div class="label">Training Location</div><div class="value">${emp[COLUMNS.TrainingLocation] || 'Not specified'}</div></div>
+                    <div><div class="label">Training Group</div><div class="value">${emp[COLUMNS.TrainingGroup] || 'N/A'}</div></div>
+                    <div><div class="label">Training Phase</div><div class="value">${emp[COLUMNS.TrainingPhase] || 'Not specified'}</div></div>
+                    <div><div class="label">Attendance (7 Sens)</div><div class="value"><span class="badge ${sevenSens === 'attend' || sevenSens === 'attended' || sevenSens.includes('attend') ? 'badge-attend' : 'badge-not-attend'}">${attendanceText}</span></div></div>
+                    <div><div class="label">Status</div><div class="value">${statusMap[String(emp[COLUMNS.Status] || '').toLowerCase()] || emp[COLUMNS.Status] || 'Not specified'}</div></div>
+                    <div><div class="label">Accommodation</div><div class="value">${String(emp[COLUMNS.Accommodation] || '').toLowerCase() === 'yes' ? '✅ Yes' : String(emp[COLUMNS.Accommodation] || '').toLowerCase() === 'no' ? '❌ No' : 'N/A'}</div></div>
+                </div>
 
-    <div class="section-title">📊 Training Summary</div>
-    <div class="stats">
-        <span>📚 Total Programs: <strong>${Object.values(PROGRAM_FIELDS).length}</strong></span>
-        <span>✅ Completed: <strong>${attendedCount}</strong></span>
-        <span>⏳ Pending: <strong>${Object.values(PROGRAM_FIELDS).length - attendedCount - notAttendedCount}</strong></span>
-        <span>❌ Not Attended: <strong>${notAttendedCount}</strong></span>
-    </div>
+                <div class="section-title">📊 Training Summary</div>
+                <div class="stats">
+                    <span>📚 Total Programs: <strong>${Object.values(PROGRAM_FIELDS).length}</strong></span>
+                    <span>✅ Completed: <strong>${attendedCount}</strong></span>
+                    <span>⏳ Pending: <strong>${Object.values(PROGRAM_FIELDS).length - attendedCount - notAttendedCount}</strong></span>
+                    <span>❌ Not Attended: <strong>${notAttendedCount}</strong></span>
+                </div>
 
-    <div class="section-title">📋 Program Enrollment</div>
-    <ul class="prog-list">
-        ${programs.map(p => `<li>${p}</li>`).join('')}
-    </ul>
+                <div class="section-title">📋 Program Enrollment</div>
+                <ul class="prog-list">
+                    ${programs.map(p => `<li>${p}</li>`).join('')}
+                </ul>
 
-    <div class="footer">
-        Generated from CBT Intelligence Hub • ${new Date().toLocaleString()}
-    </div>
-</body>
-</html>`;
+                <div class="footer">
+                    Generated from CBT Intelligence Hub • ${new Date().toLocaleString()}
+                </div>
+            </body>
+            </html>`;
 
-printWindow.document.write(html);
-printWindow.document.close();
-printWindow.focus();
-setTimeout(() => { printWindow.print(); }, 500);
-}
+            printWindow.document.write(html);
+            printWindow.document.close();
+            printWindow.focus();
+            setTimeout(() => { printWindow.print(); }, 500);
+        }
 
-// ============================================================
-// LOAD DATA مع تحديث تلقائي كل 30 ثانية
-// ============================================================
-async function loadData() {
-if (isLoading) return;
-isLoading = true;
-const msg = document.getElementById('loadingMsg');
-msg.className = 'loading-status';
-msg.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Loading data...';
-document.getElementById('refreshBtn').disabled = true;
+        // ============================================================
+        // LOAD DATA مع تحديث تلقائي كل 30 ثانية
+        // ============================================================
+        async function loadData() {
+            if (isLoading) return;
+            isLoading = true;
+            const msg = document.getElementById('loadingMsg');
+            msg.className = 'loading-status';
+            msg.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Loading data...';
+            document.getElementById('refreshBtn').disabled = true;
 
-try {
-const response = await fetch(SHEET_URL);
-if (!response.ok) throw new Error(`HTTP ${response.status}`);
-const csv = await response.text();
-const jsonData = csvToJSON(csv);
-if (jsonData.length === 0) throw new Error('No data found in sheet');
+            try {
+                const response = await fetch(SHEET_URL);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const csv = await response.text();
+                const jsonData = csvToJSON(csv);
+                if (jsonData.length === 0) throw new Error('No data found in sheet');
 
-allData = jsonData;
-console.log('✅ Data loaded:', allData.length, 'records');
-loadError = false;
+                allData = jsonData;
+                console.log('✅ Data loaded:', allData.length, 'records');
+                loadError = false;
 
-// تحديث التاريخ في الطباعة
-document.getElementById('printDate').textContent = new Date().toLocaleString();
+                document.getElementById('printDate').textContent = new Date().toLocaleString();
 
-applyFilters();
-showAlert('success', `✅ Data refreshed! ${allData.length} employees loaded.`);
-} catch (err) {
-console.error('❌ Error loading data:', err);
-loadError = true;
-msg.className = 'loading-status error';
-msg.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Error loading data. Please try again.';
-document.getElementById('statusText').textContent = 'Error';
-document.getElementById('statusIcon').className = 'fa-solid fa-cloud-arrow-up';
-showAlert('danger', '❌ Failed to load data: ' + err.message);
-} finally {
-isLoading = false;
-document.getElementById('refreshBtn').disabled = false;
-}
-}
+                applyFilters();
+                
+                // تحديث رسالة الحالة
+                const alertMsg = `✅ Data refreshed! ${allData.length} employees loaded.`;
+                showAlert('success', alertMsg);
+                
+            } catch (err) {
+                console.error('❌ Error loading data:', err);
+                loadError = true;
+                msg.className = 'loading-status error';
+                msg.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Error loading data. Please try again.';
+                document.getElementById('statusText').textContent = 'Error';
+                document.getElementById('statusIcon').className = 'fa-solid fa-cloud-arrow-up';
+                showAlert('danger', '❌ Failed to load data: ' + err.message);
+            } finally {
+                isLoading = false;
+                document.getElementById('refreshBtn').disabled = false;
+            }
+        }
 
-// ============================================================
-// INIT
-// ============================================================
-document.addEventListener('DOMContentLoaded', function() {
-setupFilterButtons();
-loadData();
+        // ============================================================
+        // INIT
+        // ============================================================
+        document.addEventListener('DOMContentLoaded', function() {
+            setupFilterButtons();
+            loadData();
 
-// تحديث تلقائي كل 30 ثانية
-refreshInterval = setInterval(() => {
-console.log('🔄 Auto-refreshing data...');
-loadData();
-}, 30000);
+            // تحديث تلقائي كل 30 ثانية
+            refreshInterval = setInterval(() => {
+                console.log('🔄 Auto-refreshing data...');
+                loadData();
+            }, 30000);
 
-document.getElementById('refreshBtn').addEventListener('click', function() {
-loadData();
-});
+            document.getElementById('refreshBtn').addEventListener('click', function() {
+                loadData();
+            });
 
-document.getElementById('empIdInput').addEventListener('keypress', function(e) {
-if (e.key === 'Enter') searchEmployee();
-});
+            document.getElementById('empIdInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') searchEmployee();
+            });
 
-// تحديث تاريخ الطباعة عند فتح نافذة الطباعة
-window.addEventListener('beforeprint', function() {
-document.getElementById('printDate').textContent = new Date().toLocaleString();
-});
-});
+            window.addEventListener('beforeprint', function() {
+                document.getElementById('printDate').textContent = new Date().toLocaleString();
+            });
+        });
 
-// تنظيف الـ Interval عند إغلاق الصفحة
-window.addEventListener('beforeunload', function() {
-if (refreshInterval) {
-clearInterval(refreshInterval);
-}
-});
-</script>
+        window.addEventListener('beforeunload', function() {
+            if (refreshInterval) {
+                clearInterval(refreshInterval);
+            }
+        });
+    </script>
 </body>
 </html>
