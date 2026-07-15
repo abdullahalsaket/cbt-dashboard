@@ -151,28 +151,28 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
             border: 1px solid #e8ecf0;
         }
-        .filter-bar .filter-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px; padding: 8px 0; border-bottom: 1px solid rgba(0,0,0,0.04); }
+        .filter-bar .filter-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 15px; padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.04); }
         .filter-bar .filter-row:last-child { border-bottom: none; padding-bottom: 0; }
         .filter-bar .filter-row:first-child { padding-top: 0; }
-        .filter-bar .filter-label { font-size: 0.65rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; min-width: 65px; flex-shrink: 0; }
-        .filter-bar .filter-group { display: flex; flex-wrap: wrap; gap: 4px 8px; flex: 1; align-items: center; }
+        .filter-bar .filter-label { font-size: 0.6rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; min-width: 60px; flex-shrink: 0; }
+        .filter-bar .filter-group { display: flex; flex-wrap: wrap; gap: 3px 6px; flex: 1; align-items: center; }
 
-        .filter-select { padding: 5px 30px 5px 12px; border-radius: 30px; border: 2px solid #e2e8f0; background: var(--white); font-family: 'Cairo', sans-serif; font-size: 0.6rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.2s; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7a8f' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; min-width: 120px; max-width: 250px; }
+        .filter-select { padding: 4px 24px 4px 10px; border-radius: 30px; border: 2px solid #e2e8f0; background: var(--white); font-family: 'Cairo', sans-serif; font-size: 0.55rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.2s; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7a8f' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 8px center; min-width: 100px; max-width: 200px; }
         .filter-select:hover { border-color: var(--cpc-blue); }
         .filter-select:focus { outline: none; border-color: var(--koki-orange); box-shadow: 0 0 0 3px rgba(255,110,64,0.15); }
         .filter-select option { padding: 4px 8px; font-family: 'Cairo', sans-serif; }
 
-        .filter-btn { padding: 4px 14px; border-radius: 30px; border: 2px solid #e2e8f0; background: transparent; font-family: 'Cairo', sans-serif; font-size: 0.6rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+        .filter-btn { padding: 3px 12px; border-radius: 30px; border: 2px solid #e2e8f0; background: transparent; font-family: 'Cairo', sans-serif; font-size: 0.55rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.2s; white-space: nowrap; }
         .filter-btn:hover { border-color: var(--cpc-blue); color: var(--cpc-blue); background: rgba(30,61,89,0.04); }
         .filter-btn.active { border-color: var(--koki-orange); background: var(--koki-orange); color: white; box-shadow: 0 4px 12px rgba(255,110,64,0.3); }
-        .filter-btn .badge-count { background: rgba(255,255,255,0.2); border-radius: 20px; padding: 0 6px; font-size: 0.5rem; margin-left: 3px; }
+        .filter-btn .badge-count { background: rgba(255,255,255,0.2); border-radius: 20px; padding: 0 6px; font-size: 0.45rem; margin-left: 3px; }
         .filter-btn.active .badge-count { background: rgba(255,255,255,0.25); }
         .filter-btn.attend-btn { border-color: var(--success); color: var(--success); }
         .filter-btn.attend-btn.active { background: var(--success); border-color: var(--success); color: white; }
         .filter-btn.not-attend-btn { border-color: var(--danger); color: var(--danger); }
         .filter-btn.not-attend-btn.active { background: var(--danger); border-color: var(--danger); color: white; }
 
-        .clear-filters-btn { padding: 4px 16px; border-radius: 30px; border: 2px solid #e2e8f0; background: transparent; font-family: 'Cairo', sans-serif; font-size: 0.6rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.2s; margin-left: auto; flex-shrink: 0; }
+        .clear-filters-btn { padding: 3px 14px; border-radius: 30px; border: 2px solid #e2e8f0; background: transparent; font-family: 'Cairo', sans-serif; font-size: 0.55rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.2s; }
         .clear-filters-btn:hover { border-color: var(--danger); color: var(--danger); background: rgba(239,68,68,0.05); }
 
         .container { max-width: 1440px; margin: 0 auto; padding: 0 12px; }
@@ -189,117 +189,49 @@
         .kpi-info h4 { font-size: 0.55rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 2px; }
         .kpi-info .num { font-size: 1.1rem; font-weight: 800; color: var(--cpc-blue); }
 
-        .search-charts-grid { display: grid; grid-template-columns: 280px 1fr; gap: 16px; margin: 12px 0; }
-        .search-wrapper { background: var(--white); padding: 16px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid #e8ecf0; }
-        .search-wrapper h3 { font-size: 0.85rem; color: var(--cpc-blue); font-weight: 700; margin-bottom: 4px; }
-        .search-wrapper p { font-size: 0.65rem; color: var(--text-muted); margin-bottom: 8px; }
-        .search-box { display: flex; gap: 6px; flex-wrap: wrap; }
-        .search-box input { flex: 1; padding: 6px 12px; border: 2px solid #e2e8f0; border-radius: 10px; font-family: 'Cairo', sans-serif; font-size: 0.75rem; outline: none; min-width: 80px; }
-        .search-box input:focus { border-color: var(--cpc-blue); }
-        .search-box button { padding: 6px 14px; background: var(--koki-orange); color: white; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; font-size: 0.75rem; }
-        .search-box button:hover { background: var(--koki-orange-hover); }
-        .loading-status { font-size: 0.65rem; color: var(--text-muted); margin-top: 6px; }
-        .loading-status.error { color: var(--danger); }
-        .loading-status.success { color: var(--success); }
-
-        .result-card { margin-top: 10px; background: #f8fafc; border-radius: 12px; padding: 12px; display: none; border-right: 4px solid var(--success); }
-        .employee-profile { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 10px; }
-        .info-group h4 { font-size: 0.5rem; color: var(--text-muted); text-transform: uppercase; }
-        .info-group p { font-weight: 700; font-size: 0.75rem; }
-        .employee-stats { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; padding: 6px 10px; background: rgba(30,61,89,0.05); border-radius: 8px; }
-        .stat-badge { font-size: 0.6rem; font-weight: 700; padding: 2px 10px; border-radius: 20px; }
-        .stat-badge.attend { background: rgba(16,185,129,0.15); color: var(--success); }
-        .stat-badge.not-attend { background: rgba(239,68,68,0.15); color: var(--danger); }
-        .stat-badge.group { background: rgba(59,130,246,0.15); color: var(--info); }
-        .stat-badge.location { background: rgba(255,110,64,0.15); color: var(--koki-orange); }
-        .stat-badge.accommodation { background: rgba(139,92,246,0.15); color: var(--purple); }
-        
-        .perf-stats { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
-        .perf-stat { background: var(--white); padding: 4px 12px; border-radius: 8px; font-size: 0.65rem; font-weight: 600; border: 1px solid #e8ecf0; }
-        .perf-stat .num { font-size: 1rem; font-weight: 800; color: var(--cpc-blue); }
-        
-        .training-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
-        .tag { background: #e2e8f0; color: var(--cpc-blue); padding: 2px 8px; border-radius: 20px; font-size: 0.55rem; font-weight: 600; }
-
-        .print-btn { background: var(--cpc-blue); color: white; border: none; padding: 6px 16px; border-radius: 8px; font-family: 'Cairo', sans-serif; font-size: 0.7rem; font-weight: 600; cursor: pointer; transition: all 0.2s; margin-top: 8px; display: inline-flex; align-items: center; gap: 6px; }
-        .print-btn:hover { background: var(--cpc-blue-dark); }
-
-        .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 14px 0; }
-        .charts-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 14px 0; }
-        .chart-box { background: var(--white); padding: 20px 22px; border-radius: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid #e8ecf0; cursor: pointer; transition: all 0.2s; }
-        .chart-box:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); border-color: var(--cpc-blue); }
-        .chart-box h4 { font-size: 0.95rem; color: var(--cpc-blue); font-weight: 700; margin-bottom: 12px; }
-        .chart-box canvas { width: 100% !important; height: 280px !important; max-height: 280px; }
-        .chart-box .chart-container { position: relative; width: 100%; height: 280px; }
-        .charts-grid-2 .chart-box canvas { height: 260px !important; max-height: 260px; }
-        .charts-grid-2 .chart-box .chart-container { height: 260px; }
-
         /* ============================================================
-           EMPLOYEE DETAIL TABLE - تنسيق محسن
-           ============================================================ */
-        .employee-detail-table {
-            background: var(--white);
-            border-radius: 14px;
-            padding: 16px 18px;
-            margin-top: 14px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-            border: 1px solid #e8ecf0;
-            overflow-x: auto;
-        }
-        .employee-detail-table h4 { font-size: 0.9rem; color: var(--cpc-blue); font-weight: 700; margin-bottom: 10px; }
-        .employee-detail-table table { width: 100%; border-collapse: collapse; font-size: 0.75rem; }
-        .employee-detail-table th { background: var(--cpc-blue); color: white; padding: 10px 12px; text-align: left; font-weight: 600; white-space: nowrap; }
-        .employee-detail-table td { padding: 8px 12px; border-bottom: 1px solid #e8ecf0; vertical-align: middle; }
-        .employee-detail-table tr:hover td { background: #f8fafc; }
-        .employee-detail-table .badge-attend { background: rgba(16,185,129,0.15); color: var(--success); padding: 2px 10px; border-radius: 20px; font-size: 0.6rem; font-weight: 600; }
-        .employee-detail-table .badge-not-attend { background: rgba(239,68,68,0.15); color: var(--danger); padding: 2px 10px; border-radius: 20px; font-size: 0.6rem; font-weight: 600; }
-        .employee-detail-table .badge-unknown { background: rgba(107,122,143,0.15); color: var(--text-muted); padding: 2px 10px; border-radius: 20px; font-size: 0.6rem; font-weight: 600; }
-
-        /* ============================================================
-           FILTERS - توزيع 3 يمين و 3 يسار
+           FILTER GRID - توزيع متساوٍ ومنتظم
            ============================================================ */
         .filter-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px 30px;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+            gap: 6px 12px;
             width: 100%;
+            align-items: center;
         }
         .filter-grid .filter-item {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 5px;
             flex-wrap: wrap;
-            padding: 4px 0;
+            padding: 2px 0;
         }
         .filter-grid .filter-item .filter-label {
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             font-weight: 700;
             color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            min-width: 55px;
+            letter-spacing: 0.3px;
+            min-width: 50px;
             flex-shrink: 0;
-            text-align: left;
         }
         .filter-grid .filter-item .filter-group {
             display: flex;
             flex-wrap: wrap;
-            gap: 3px 6px;
+            gap: 2px 4px;
             align-items: center;
         }
         .filter-grid .filter-item .filter-btn {
-            font-size: 0.55rem;
-            padding: 2px 10px;
+            font-size: 0.5rem;
+            padding: 2px 8px;
             white-space: nowrap;
         }
         .filter-grid .filter-item .filter-select {
-            font-size: 0.55rem;
-            padding: 3px 24px 3px 10px;
-            min-width: 100px;
-            max-width: 180px;
+            font-size: 0.5rem;
+            padding: 2px 20px 2px 8px;
+            min-width: 80px;
+            max-width: 140px;
         }
-        /* محاذاة العناصر في اليمين */
         .filter-grid .filter-item-right {
             justify-content: flex-end;
         }
@@ -311,7 +243,7 @@
         }
 
         /* ============================================================
-           FILTERED EMPLOYEES DISPLAY - عرض المتدربين المفلترين
+           EMPLOYEE CARDS
            ============================================================ */
         .filtered-employees {
             background: var(--white);
@@ -330,7 +262,7 @@
         }
         .filtered-employees .employee-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 10px;
         }
         .filtered-employees .emp-card {
@@ -382,7 +314,6 @@
             background: rgba(107,122,143,0.15);
             color: var(--text-muted);
         }
-
         .filtered-employees .no-results {
             text-align: center;
             padding: 30px 20px;
@@ -396,9 +327,70 @@
             opacity: 0.4;
         }
 
-        /* ============================================================
-           INSIGHTS
-           ============================================================ */
+        .search-charts-grid { display: grid; grid-template-columns: 280px 1fr; gap: 16px; margin: 12px 0; }
+        .search-wrapper { background: var(--white); padding: 16px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid #e8ecf0; }
+        .search-wrapper h3 { font-size: 0.85rem; color: var(--cpc-blue); font-weight: 700; margin-bottom: 4px; }
+        .search-wrapper p { font-size: 0.65rem; color: var(--text-muted); margin-bottom: 8px; }
+        .search-box { display: flex; gap: 6px; flex-wrap: wrap; }
+        .search-box input { flex: 1; padding: 6px 12px; border: 2px solid #e2e8f0; border-radius: 10px; font-family: 'Cairo', sans-serif; font-size: 0.75rem; outline: none; min-width: 80px; }
+        .search-box input:focus { border-color: var(--cpc-blue); }
+        .search-box button { padding: 6px 14px; background: var(--koki-orange); color: white; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; font-size: 0.75rem; }
+        .search-box button:hover { background: var(--koki-orange-hover); }
+        .loading-status { font-size: 0.65rem; color: var(--text-muted); margin-top: 6px; }
+        .loading-status.error { color: var(--danger); }
+        .loading-status.success { color: var(--success); }
+
+        .result-card { margin-top: 10px; background: #f8fafc; border-radius: 12px; padding: 12px; display: none; border-right: 4px solid var(--success); }
+        .employee-profile { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 10px; }
+        .info-group h4 { font-size: 0.5rem; color: var(--text-muted); text-transform: uppercase; }
+        .info-group p { font-weight: 700; font-size: 0.75rem; }
+        .employee-stats { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; padding: 6px 10px; background: rgba(30,61,89,0.05); border-radius: 8px; }
+        .stat-badge { font-size: 0.6rem; font-weight: 700; padding: 2px 10px; border-radius: 20px; }
+        .stat-badge.attend { background: rgba(16,185,129,0.15); color: var(--success); }
+        .stat-badge.not-attend { background: rgba(239,68,68,0.15); color: var(--danger); }
+        .stat-badge.group { background: rgba(59,130,246,0.15); color: var(--info); }
+        .stat-badge.location { background: rgba(255,110,64,0.15); color: var(--koki-orange); }
+        .stat-badge.accommodation { background: rgba(139,92,246,0.15); color: var(--purple); }
+        
+        .perf-stats { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+        .perf-stat { background: var(--white); padding: 4px 12px; border-radius: 8px; font-size: 0.65rem; font-weight: 600; border: 1px solid #e8ecf0; }
+        .perf-stat .num { font-size: 1rem; font-weight: 800; color: var(--cpc-blue); }
+        
+        .training-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+        .tag { background: #e2e8f0; color: var(--cpc-blue); padding: 2px 8px; border-radius: 20px; font-size: 0.55rem; font-weight: 600; }
+
+        .print-btn { background: var(--cpc-blue); color: white; border: none; padding: 6px 16px; border-radius: 8px; font-family: 'Cairo', sans-serif; font-size: 0.7rem; font-weight: 600; cursor: pointer; transition: all 0.2s; margin-top: 8px; display: inline-flex; align-items: center; gap: 6px; }
+        .print-btn:hover { background: var(--cpc-blue-dark); }
+
+        .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 14px 0; }
+        .charts-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 14px 0; }
+        .chart-box { background: var(--white); padding: 20px 22px; border-radius: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid #e8ecf0; cursor: pointer; transition: all 0.2s; }
+        .chart-box:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); border-color: var(--cpc-blue); }
+        .chart-box h4 { font-size: 0.95rem; color: var(--cpc-blue); font-weight: 700; margin-bottom: 12px; }
+        .chart-box canvas { width: 100% !important; height: 280px !important; max-height: 280px; }
+        .chart-box .chart-container { position: relative; width: 100%; height: 280px; }
+        .charts-grid-2 .chart-box canvas { height: 260px !important; max-height: 260px; }
+        .charts-grid-2 .chart-box .chart-container { height: 260px; }
+
+        .employee-detail-table {
+            background: var(--white);
+            border-radius: 14px;
+            padding: 16px 18px;
+            margin-top: 14px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border: 1px solid #e8ecf0;
+            overflow-x: auto;
+        }
+        .employee-detail-table h4 { font-size: 0.9rem; color: var(--cpc-blue); font-weight: 700; margin-bottom: 10px; }
+        .employee-detail-table table { width: 100%; border-collapse: collapse; font-size: 0.75rem; }
+        .employee-detail-table th { background: var(--cpc-blue); color: white; padding: 10px 12px; text-align: left; font-weight: 600; white-space: nowrap; }
+        .employee-detail-table td { padding: 8px 12px; border-bottom: 1px solid #e8ecf0; vertical-align: middle; }
+        .employee-detail-table tr:hover td { background: #f8fafc; }
+        .employee-detail-table .badge-attend { background: rgba(16,185,129,0.15); color: var(--success); padding: 2px 10px; border-radius: 20px; font-size: 0.6rem; font-weight: 600; }
+        .employee-detail-table .badge-not-attend { background: rgba(239,68,68,0.15); color: var(--danger); padding: 2px 10px; border-radius: 20px; font-size: 0.6rem; font-weight: 600; }
+        .employee-detail-table .badge-unknown { background: rgba(107,122,143,0.15); color: var(--text-muted); padding: 2px 10px; border-radius: 20px; font-size: 0.6rem; font-weight: 600; }
+
         .insights-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 16px 0 30px 0; }
         .insight-card { background: var(--white); padding: 16px 18px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border-left: 4px solid var(--koki-orange); transition: all 0.2s; }
         .insight-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); transform: translateX(4px); }
@@ -412,9 +404,12 @@
         .insight-tag.danger { background: rgba(239,68,68,0.15); color: var(--danger); }
         .insight-tag.info { background: rgba(59,130,246,0.15); color: var(--info); }
 
-        /* ============================================================
-           RESPONSIVE
-           ============================================================ */
+        @media (max-width: 1200px) {
+            .filter-grid { grid-template-columns: 1fr 1fr 1fr; gap: 8px 15px; }
+            .filter-grid .filter-item-right { justify-content: flex-start; }
+            .filter-grid .filter-item-right .filter-label { text-align: left; }
+            .filter-grid .filter-item-right .filter-group { justify-content: flex-start; }
+        }
         @media (max-width: 992px) {
             .search-charts-grid { grid-template-columns: 1fr; }
             .charts-grid { grid-template-columns: 1fr 1fr; }
@@ -426,18 +421,13 @@
             .charts-grid-2 .chart-box .chart-container { height: 200px; }
             .top-bar { flex-direction: column; align-items: stretch; }
             .top-bar .action-buttons { justify-content: flex-start; }
-            .filter-grid { grid-template-columns: 1fr; gap: 4px; }
-            .filter-grid .filter-item-right { justify-content: flex-start; }
-            .filter-grid .filter-item-right .filter-label { text-align: left; }
-            .filter-grid .filter-item-right .filter-group { justify-content: flex-start; }
-            .filtered-employees .employee-cards { grid-template-columns: 1fr 1fr; }
+            .filter-grid { grid-template-columns: 1fr 1fr; gap: 6px 12px; }
         }
         @media (max-width: 768px) {
             .navbar { flex-direction: column; text-align: center; }
             .filter-bar .filter-row { flex-direction: column; align-items: stretch; gap: 6px; }
             .filter-bar .filter-label { min-width: auto; }
             .filter-select { max-width: 100%; }
-            .clear-filters-btn { margin-left: 0; width: 100%; text-align: center; }
             .charts-grid { grid-template-columns: 1fr; }
             .charts-grid-2 { grid-template-columns: 1fr; }
             .kpi-grid { grid-template-columns: repeat(2, 1fr); }
@@ -448,28 +438,29 @@
             .employee-detail-table table { font-size: 0.65rem; }
             .employee-detail-table th, .employee-detail-table td { padding: 4px 8px; }
             .alerts-container .alert-item { font-size: 0.65rem; }
-            .filtered-employees .employee-cards { grid-template-columns: 1fr; }
-            .top-bar .slicer-section { flex-direction: column; align-items: stretch; }
+            .filter-grid { grid-template-columns: 1fr; gap: 4px; }
             .filter-grid .filter-item { flex-wrap: wrap; }
             .filter-grid .filter-item .filter-label { min-width: 100%; }
+            .filtered-employees .employee-cards { grid-template-columns: 1fr; }
+            .top-bar .slicer-section { flex-direction: column; align-items: stretch; }
         }
         @media (max-width: 480px) {
             .kpi-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
             .kpi-card { padding: 6px 8px; }
-            .filter-btn { font-size: 0.5rem; padding: 2px 8px; }
-            .filter-select { font-size: 0.5rem; padding: 4px 24px 4px 8px; min-width: 80px; }
+            .filter-btn { font-size: 0.45rem; padding: 2px 6px; }
+            .filter-select { font-size: 0.45rem; padding: 2px 16px 2px 6px; min-width: 70px; }
             .chart-box canvas { height: 170px !important; max-height: 170px; }
             .chart-box .chart-container { height: 170px; }
             .chart-box { padding: 12px 14px; }
             .top-bar .action-btn { font-size: 0.5rem; padding: 3px 10px; }
-            .top-bar .slicer-section .slicer-btn { font-size: 0.55rem; padding: 4px 12px; }
+            .top-bar .slicer-section .slicer-btn { font-size: 0.5rem; padding: 3px 10px; }
             .filtered-employees .employee-cards { grid-template-columns: 1fr; }
         }
 
         @media print {
             body, body * { visibility: visible !important; }
             .no-print, .no-print * { display: none !important; }
-            .action-btn, .refresh-btn, .print-btn, .preset-btn, .clear-filters-btn,
+            .action-btn, .refresh-btn, .print-btn, .clear-filters-btn,
             .search-box button, .filter-btn, .filter-select, .slicer-btn { display: none !important; }
             body { background: white !important; padding: 20px !important; font-size: 11px !important; color: #1a2332 !important; }
             .container { max-width: 100% !important; padding: 0 !important; }
@@ -579,7 +570,7 @@
         </div>
 
         <!-- ============================================================
-        FILTER BAR - توزيع 3 يمين و 3 يسار
+        FILTER BAR - توزيع 6 أعمدة متساوية
         ============================================================ -->
         <div class="filter-bar no-print" id="filterBar">
             
@@ -597,23 +588,24 @@
                 </div>
             </div>
 
-            <!-- الصف الثاني: 3 يمين و 3 يسار -->
+            <!-- الصف الثاني: 6 أعمدة متساوية -->
             <div class="filter-row" style="border-bottom: none; padding-bottom: 0;">
                 <div class="filter-grid">
-                    <!-- الجهة اليسرى: Location + Level + Attend -->
+                    <!-- 1. Location -->
                     <div class="filter-item">
-                        <span class="filter-label"><i class="fa-solid fa-location-dot"></i> Location</span>
+                        <span class="filter-label"><i class="fa-solid fa-location-dot"></i> Loc</span>
                         <div class="filter-group" id="locationFilters">
                             <button class="filter-btn active" data-filter="location" data-value="all">All <span class="badge-count" id="locAllCount">0</span></button>
                             <button class="filter-btn" data-filter="location" data-value="Nob">Nob <span class="badge-count" id="locNobCount">0</span></button>
                             <button class="filter-btn" data-filter="location" data-value="Online">Online <span class="badge-count" id="locOnlineCount">0</span></button>
-                            <button class="filter-btn" data-filter="location" data-value="Steigenberger">Steigenberger <span class="badge-count" id="locSteigenbergerCount">0</span></button>
+                            <button class="filter-btn" data-filter="location" data-value="Steigenberger">Stei <span class="badge-count" id="locSteigenbergerCount">0</span></button>
                             <button class="filter-btn" data-filter="location" data-value="TOR">TOR <span class="badge-count" id="locTORCount">0</span></button>
                         </div>
                     </div>
 
-                    <div class="filter-item filter-item-right">
-                        <span class="filter-label"><i class="fa-solid fa-layer-group"></i> Level</span>
+                    <!-- 2. Level -->
+                    <div class="filter-item">
+                        <span class="filter-label"><i class="fa-solid fa-layer-group"></i> Lvl</span>
                         <div class="filter-group" id="levelFilters">
                             <button class="filter-btn active" data-filter="level" data-value="all">All <span class="badge-count" id="lvlAllCount">0</span></button>
                             <button class="filter-btn" data-filter="level" data-value="L4">L4 <span class="badge-count" id="lvlL4Count">0</span></button>
@@ -623,42 +615,46 @@
                         </div>
                     </div>
 
+                    <!-- 3. Attend -->
                     <div class="filter-item">
-                        <span class="filter-label"><i class="fa-solid fa-user-check"></i> Attend</span>
+                        <span class="filter-label"><i class="fa-solid fa-user-check"></i> Att</span>
                         <div class="filter-group" id="attendanceFilters">
                             <button class="filter-btn active attend-btn" data-filter="attendance" data-value="all">All <span class="badge-count" id="attAllCount">0</span></button>
-                            <button class="filter-btn attend-btn" data-filter="attendance" data-value="attend">✅ Attend <span class="badge-count" id="attAttendCount">0</span></button>
-                            <button class="filter-btn not-attend-btn" data-filter="attendance" data-value="not-attend">❌ Not Attend <span class="badge-count" id="attNotAttendCount">0</span></button>
+                            <button class="filter-btn attend-btn" data-filter="attendance" data-value="attend">✅ <span class="badge-count" id="attAttendCount">0</span></button>
+                            <button class="filter-btn not-attend-btn" data-filter="attendance" data-value="not-attend">❌ <span class="badge-count" id="attNotAttendCount">0</span></button>
                         </div>
                     </div>
 
-                    <div class="filter-item filter-item-right">
-                        <span class="filter-label"><i class="fa-solid fa-layer-group"></i> Group</span>
+                    <!-- 4. Group -->
+                    <div class="filter-item">
+                        <span class="filter-label"><i class="fa-solid fa-users"></i> Grp</span>
                         <div class="filter-group">
                             <select class="filter-select" id="groupSelect">
-                                <option value="all">All Groups</option>
+                                <option value="all">All</option>
                             </select>
                         </div>
                     </div>
 
+                    <!-- 5. Phase -->
                     <div class="filter-item">
-                        <span class="filter-label"><i class="fa-solid fa-clock"></i> Phase</span>
+                        <span class="filter-label"><i class="fa-solid fa-clock"></i> Phs</span>
                         <div class="filter-group">
                             <select class="filter-select" id="phaseSelect">
-                                <option value="all">All Phases</option>
-                                <option value="Phase1">Phase 1</option>
-                                <option value="Phase2">Phase 2</option>
-                                <option value="Phase3">Phase 3</option>
-                                <option value="Phase4">Phase 4</option>
-                                <option value="Online-Phase4">Online Phase 4</option>
+                                <option value="all">All</option>
+                                <option value="Phase1">Ph1</option>
+                                <option value="Phase2">Ph2</option>
+                                <option value="Phase3">Ph3</option>
+                                <option value="Phase4">Ph4</option>
+                                <option value="Online-Phase4">Online</option>
                             </select>
                         </div>
                     </div>
 
+                    <!-- 6. Reset -->
                     <div class="filter-item filter-item-right">
-                        <span class="filter-label"><i class="fa-solid fa-undo"></i> Reset</span>
+                        <span class="filter-label"><i class="fa-solid fa-undo"></i></span>
                         <div class="filter-group">
-                            <button class="clear-filters-btn" onclick="clearAllFilters()" style="margin:0;padding:4px 16px;border-radius:30px;border:2px solid #e2e8f0;background:transparent;font-family:'Cairo',sans-serif;font-size:0.6rem;font-weight:600;color:var(--text-muted);cursor:pointer;transition:all 0.2s;">
+                            <button class="clear-filters-btn" onclick="clearAllFilters()">
                                 <i class="fa-solid fa-undo"></i> Reset
                             </button>
                         </div>
@@ -689,7 +685,7 @@
                 <h3><i class="fa-solid fa-magnifying-glass"></i> Employee Query</h3>
                 <p>Enter Employee ID for full profile</p>
                 <div class="search-box">
-                    <input type="number" id="empIdInput" placeholder="e.g., 5908">
+                    <input type="text" id="empIdInput" placeholder="e.g., 5908">
                     <button onclick="searchEmployee()"><i class="fa-solid fa-search"></i> Search</button>
                 </div>
                 <div id="loadingMsg" class="loading-status"><i class="fa-solid fa-spinner fa-spin"></i> Loading data...</div>
@@ -768,12 +764,15 @@
         </div>
 
         <!-- ============================================================
-        FILTERED EMPLOYEES - عرض المتدربين المفلترين (بنفس شكل Employee Query)
+        FILTERED EMPLOYEES
         ============================================================ -->
         <div class="filtered-employees" id="filteredEmployees">
             <h4><i class="fa-solid fa-users"></i> Filtered Employees <span id="filteredCount" style="font-size:0.7rem;color:var(--text-muted);font-weight:400;"></span></h4>
             <div class="employee-cards" id="filteredCards">
-                <!-- سيتم ملؤها بواسطة JavaScript -->
+                <div class="no-results">
+                    <i class="fa-solid fa-spinner fa-spin"></i>
+                    Loading employees...
+                </div>
             </div>
         </div>
 
@@ -858,10 +857,12 @@
 
     <script>
         // ============================================================
-        // CONFIG
+        // CONFIG - استخدام رابط CSV الصحيح
         // ============================================================
+        // استخدام رابط CSV من Google Sheets
         const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRu0vhUS8c-hbFznxR_F9K9LNueNeabXiLwMjMzppgpIjJCSNCadsHDVVGxwiKYYHve9-Qtb37ALs8P/pub?gid=1032977671&single=true&output=csv";
 
+        // أسماء الأعمدة - تأكد من تطابقها مع الشيت
         const COLUMNS = {
             ID: 'ID',
             Name: 'Name',
@@ -911,6 +912,8 @@
         let loadError = false;
         let lastSearchedEmployee = null;
         let refreshInterval = null;
+        let dataLoadAttempts = 0;
+        const MAX_ATTEMPTS = 3;
 
         // ============================================================
         // PRINT FUNCTIONS
@@ -923,28 +926,52 @@
         }
 
         // ============================================================
-        // UTILITY
+        // CSV TO JSON - محسّن للتعامل مع البيانات بشكل أفضل
         // ============================================================
         function csvToJSON(csv) {
-            const lines = csv.split("\n");
-            if (lines.length < 2) return [];
+            if (!csv || csv.trim() === '') {
+                console.error('❌ CSV is empty');
+                return [];
+            }
+            
+            const lines = csv.split("\n").filter(line => line.trim() !== '');
+            if (lines.length < 2) {
+                console.error('❌ CSV has less than 2 lines');
+                return [];
+            }
+            
+            // استخراج العناوين
             const headers = lines[0].split(",").map(h => h.trim().replace(/^"|"$/g, ''));
             console.log('📋 Headers from sheet:', headers);
             
             const seenIds = new Set();
             const result = [];
+            
             for (let i = 1; i < lines.length; i++) {
-                if (!lines[i].trim()) continue;
-                const row = lines[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(item => item.trim().replace(/^"|"$/g, ''));
-                const obj = {};
-                headers.forEach((h, idx) => { obj[h] = row[idx] || ''; });
-                const id = String(obj['ID'] || '').trim();
-                if (id && !seenIds.has(id)) { seenIds.add(id); result.push(obj); }
-                else if (!id) { obj['_tempId'] = 'temp_' + i; result.push(obj); }
+                try {
+                    const row = lines[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(item => item.trim().replace(/^"|"$/g, ''));
+                    const obj = {};
+                    headers.forEach((h, idx) => { 
+                        obj[h] = row[idx] || ''; 
+                    });
+                    
+                    const id = String(obj['ID'] || '').trim();
+                    if (id && !seenIds.has(id)) { 
+                        seenIds.add(id); 
+                        result.push(obj); 
+                    } else if (!id) { 
+                        obj['_tempId'] = 'temp_' + i; 
+                        result.push(obj); 
+                    }
+                } catch (e) {
+                    console.warn('⚠️ Error parsing row', i, e);
+                }
             }
+            
             console.log('📊 Total unique records loaded:', result.length);
             if (result.length > 0) {
                 console.log('📝 Sample record:', result[0]);
+                console.log('📝 Available keys:', Object.keys(result[0]));
             }
             return result;
         }
@@ -994,12 +1021,6 @@
             });
             if (programsWithLowCompletion > 0) {
                 alerts.push({ type: 'warning', icon: 'fa-book', msg: `📚 ${programsWithLowCompletion} program(s) have low completion rate (<50%).` });
-            }
-
-            const ids = data.map(r => r['ID']).filter(Boolean);
-            const uniqueIds = new Set(ids);
-            if (ids.length > uniqueIds.size) {
-                alerts.push({ type: 'danger', icon: 'fa-copy', msg: `🔄 ${ids.length - uniqueIds.size} duplicate IDs detected.` });
             }
 
             if (alerts.length === 0) {
@@ -1076,7 +1097,6 @@
             const progAll = data.length;
             document.getElementById('progAllCount').textContent = progAll;
             
-            // تحديث أعداد البرامج
             Object.keys(PROGRAM_FIELDS).forEach(progName => {
                 const field = PROGRAM_FIELDS[progName];
                 const attendCount = data.filter(r => {
@@ -1090,16 +1110,15 @@
                 const id = 'prog' + progName.replace(/ /g, '') + 'Count';
                 const el = document.getElementById(id);
                 if (el) {
-                    // عرض الحضور وعدم الحضور للبرنامج المحدد
                     if (activeFilters.program === progName || activeFilters.program === 'all') {
-                        el.textContent = `${attendCount} ✓ / ${notAttendCount} ✗`;
+                        el.textContent = `${attendCount}✓/${notAttendCount}✗`;
                     } else {
                         el.textContent = attendCount;
                     }
                 }
             });
 
-            // تحديث الـ Groups
+            // Groups
             const groupCounts = {};
             data.forEach(r => {
                 const group = r[COLUMNS.TrainingGroup] || '';
@@ -1110,7 +1129,7 @@
             const sortedGroups = Object.entries(groupCounts).sort((a, b) => b[1] - a[1]);
             const groupSelect = document.getElementById('groupSelect');
             const currentValue = groupSelect.value;
-            groupSelect.innerHTML = '<option value="all">All Groups (' + data.length + ')</option>';
+            groupSelect.innerHTML = '<option value="all">All (' + data.length + ')</option>';
             sortedGroups.forEach(([group, count]) => {
                 const opt = document.createElement('option');
                 opt.value = group;
@@ -1124,7 +1143,7 @@
             }
             activeFilters.group = groupSelect.value;
 
-            // تحديث الـ Locations
+            // Locations
             document.getElementById('locAllCount').textContent = data.length;
             LOCATIONS.forEach(loc => {
                 const count = data.filter(r => String(r[COLUMNS.TrainingLocation] || '').includes(loc)).length;
@@ -1133,7 +1152,7 @@
                 if (el) el.textContent = count;
             });
 
-            // تحديث الـ Levels
+            // Levels
             document.getElementById('lvlAllCount').textContent = data.length;
             ['L4', 'L3', 'L2', 'L1'].forEach(lvl => {
                 const count = data.filter(r => String(r['C-LVL'] || '').includes(lvl)).length;
@@ -1142,17 +1161,17 @@
                 if (el) el.textContent = count;
             });
 
-            // تحديث الـ Phases
+            // Phases
             const phaseSelect = document.getElementById('phaseSelect');
             const currentPhase = phaseSelect.value;
             phaseSelect.innerHTML = '';
             const phaseOptions = [
-                { value: 'all', label: 'All Phases' },
-                { value: 'Phase1', label: 'Phase 1' },
-                { value: 'Phase2', label: 'Phase 2' },
-                { value: 'Phase3', label: 'Phase 3' },
-                { value: 'Phase4', label: 'Phase 4' },
-                { value: 'Online-Phase4', label: 'Online Phase 4' }
+                { value: 'all', label: 'All' },
+                { value: 'Phase1', label: 'Ph1' },
+                { value: 'Phase2', label: 'Ph2' },
+                { value: 'Phase3', label: 'Ph3' },
+                { value: 'Phase4', label: 'Ph4' },
+                { value: 'Online-Phase4', label: 'Online' }
             ];
             phaseOptions.forEach(po => {
                 const opt = document.createElement('option');
@@ -1173,7 +1192,7 @@
             }
             activeFilters.phase = phaseSelect.value;
 
-            // تحديث الـ Attendance
+            // Attendance
             const attAll = data.length;
             const attAttend = data.filter(r => {
                 const val = String(r[COLUMNS.SevenSens] || '').toLowerCase();
@@ -1277,15 +1296,15 @@
             
             if (!allData || allData.length === 0) {
                 console.warn('⚠️ No data to filter');
-                updateEmployeeDetailTable([]);
                 updateFilteredEmployees([]);
+                updateEmployeeDetailTable([]);
                 updateActivitySlicer([]);
                 return;
             }
             
             filteredData = [...allData];
 
-            // فلتر النشاط من السلايسر
+            // Activity filter
             if (activeFilters.activity && activeFilters.activity !== 'all') {
                 const filterValue = activeFilters.activity;
                 filteredData = filteredData.filter(r => {
@@ -1295,7 +1314,7 @@
                 console.log(`🔍 After activity slicer (${filterValue}):`, filteredData.length);
             }
 
-            // فلتر البرنامج
+            // Program filter
             if (activeFilters.program !== 'all') {
                 const field = PROGRAM_FIELDS[activeFilters.program];
                 if (field) {
@@ -1306,29 +1325,29 @@
                 }
             }
 
-            // فلتر المجموعة
+            // Group filter
             if (activeFilters.group !== 'all') {
                 filteredData = filteredData.filter(r => 
                     String(r[COLUMNS.TrainingGroup] || '').includes(activeFilters.group)
                 );
             }
 
-            // فلتر الموقع
+            // Location filter
             if (activeFilters.location !== 'all') {
                 filteredData = filteredData.filter(r => String(r[COLUMNS.TrainingLocation] || '').includes(activeFilters.location));
             }
 
-            // فلتر المستوى
+            // Level filter
             if (activeFilters.level !== 'all') {
                 filteredData = filteredData.filter(r => String(r['C-LVL'] || '').includes(activeFilters.level));
             }
 
-            // فلتر المرحلة
+            // Phase filter
             if (activeFilters.phase !== 'all') {
                 filteredData = filteredData.filter(r => String(r[COLUMNS.TrainingPhase] || '').includes(activeFilters.phase));
             }
 
-            // فلتر الحضور
+            // Attendance filter
             if (activeFilters.attendance === 'attend') {
                 filteredData = filteredData.filter(r => {
                     const val = String(r[COLUMNS.SevenSens] || '').toLowerCase();
@@ -1345,8 +1364,8 @@
             
             updateActivitySlicer(filteredData);
             renderDashboard(filteredData);
-            updateEmployeeDetailTable(filteredData);
             updateFilteredEmployees(filteredData);
+            updateEmployeeDetailTable(filteredData);
             checkSmartAlerts(filteredData);
         }
 
@@ -1436,7 +1455,7 @@
         }
 
         // ============================================================
-        // FILTERED EMPLOYEES - عرض المتدربين المفلترين (بنفس شكل Employee Query)
+        // FILTERED EMPLOYEES
         // ============================================================
         function updateFilteredEmployees(data) {
             const container = document.getElementById('filteredCards');
@@ -1455,7 +1474,6 @@
                 return;
             }
 
-            // حساب العدد الفريد للموظفين
             const uniqueIds = new Set();
             data.forEach(emp => {
                 const id = String(emp[COLUMNS.ID] || '').trim();
@@ -1464,7 +1482,6 @@
             const uniqueCount = uniqueIds.size;
             countSpan.textContent = `(${uniqueCount} unique employees)`;
             
-            // عرض أول 100 موظف
             const displayData = data.slice(0, 100);
             
             container.innerHTML = displayData.map(emp => {
@@ -1531,7 +1548,6 @@
                 return;
             }
 
-            // حساب العدد الفريد للموظفين
             const uniqueIds = new Set();
             data.forEach(emp => {
                 const id = String(emp[COLUMNS.ID] || '').trim();
@@ -2105,7 +2121,7 @@
         }
 
         // ============================================================
-        // LOAD DATA
+        // LOAD DATA - محسّن مع إعادة المحاولة
         // ============================================================
         async function loadData() {
             if (isLoading) return;
@@ -2116,15 +2132,19 @@
             document.getElementById('refreshBtn').disabled = true;
 
             try {
+                console.log('🔄 Fetching data from:', SHEET_URL);
                 const response = await fetch(SHEET_URL);
-                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                if (!response.ok) throw new Error(`HTTP ${response.status} - ${response.statusText}`);
                 const csv = await response.text();
+                console.log('📄 CSV length:', csv.length, 'characters');
+                
                 const jsonData = csvToJSON(csv);
                 if (jsonData.length === 0) throw new Error('No data found in sheet');
 
                 allData = jsonData;
-                console.log('✅ Data loaded:', allData.length, 'records');
+                console.log('✅ Data loaded successfully:', allData.length, 'records');
                 loadError = false;
+                dataLoadAttempts = 0;
 
                 const now = new Date().toLocaleString();
                 document.getElementById('printDateHeader').textContent = now;
@@ -2141,13 +2161,22 @@
             } catch (err) {
                 console.error('❌ Error loading data:', err);
                 loadError = true;
-                msg.className = 'loading-status';
-                msg.innerHTML = '';
-                document.getElementById('statusText').textContent = 'Error';
-                document.getElementById('statusIcon').className = 'fa-solid fa-cloud-arrow-up';
+                dataLoadAttempts++;
+                
+                if (dataLoadAttempts < MAX_ATTEMPTS) {
+                    msg.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> Retrying... (${dataLoadAttempts}/${MAX_ATTEMPTS})`;
+                    setTimeout(() => loadData(), 2000);
+                } else {
+                    msg.className = 'loading-status error';
+                    msg.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Could not load data. Please refresh the page.';
+                    document.getElementById('statusText').textContent = 'Error';
+                    document.getElementById('statusIcon').className = 'fa-solid fa-cloud-arrow-up';
+                }
             } finally {
-                isLoading = false;
-                document.getElementById('refreshBtn').disabled = false;
+                if (!loadError || dataLoadAttempts >= MAX_ATTEMPTS) {
+                    isLoading = false;
+                    document.getElementById('refreshBtn').disabled = false;
+                }
             }
         }
 
@@ -2162,7 +2191,7 @@
             refreshInterval = setInterval(() => {
                 console.log('🔄 Auto-refreshing data...');
                 loadData();
-            }, 30000);
+            }, 60000); // كل دقيقة
 
             document.getElementById('refreshBtn').addEventListener('click', function() {
                 loadData();
