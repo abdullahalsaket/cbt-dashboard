@@ -50,22 +50,29 @@
         .refresh-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
         /* ============================================================
-           SECTOR SLICER
+           TOP BAR - سلايسر النشاط + أزرار الطباعة
            ============================================================ */
-        .sector-slicer {
+        .top-bar {
             background: var(--white);
             border-radius: 12px;
-            padding: 10px 18px;
+            padding: 8px 18px;
             margin: 12px auto;
             max-width: 1440px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
             border: 1px solid #e8ecf0;
             display: flex;
             align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .top-bar .slicer-section {
+            display: flex;
+            align-items: center;
             gap: 15px;
             flex-wrap: wrap;
         }
-        .sector-slicer .slicer-label {
+        .top-bar .slicer-section .slicer-label {
             font-size: 0.7rem;
             font-weight: 700;
             color: var(--cpc-blue);
@@ -75,24 +82,66 @@
             align-items: center;
             gap: 6px;
         }
-        .sector-slicer .slicer-label i { color: var(--koki-orange); }
-        .sector-slicer .slicer-buttons { display: flex; gap: 6px; flex-wrap: wrap; }
-        .sector-slicer .slicer-btn {
-            padding: 5px 20px;
+        .top-bar .slicer-section .slicer-label i { color: var(--koki-orange); }
+        .top-bar .slicer-section .slicer-buttons { display: flex; gap: 6px; flex-wrap: wrap; }
+        .top-bar .slicer-section .slicer-btn {
+            padding: 4px 16px;
             border-radius: 30px;
             border: 2px solid #e2e8f0;
             background: transparent;
             font-family: 'Cairo', sans-serif;
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             font-weight: 600;
             color: var(--text-muted);
             cursor: pointer;
             transition: all 0.2s;
         }
-        .sector-slicer .slicer-btn:hover { border-color: var(--cpc-blue); color: var(--cpc-blue); background: rgba(30,61,89,0.04); }
-        .sector-slicer .slicer-btn.active { border-color: var(--koki-orange); background: var(--koki-orange); color: white; box-shadow: 0 4px 12px rgba(255,110,64,0.3); }
-        .sector-slicer .slicer-btn .badge { background: rgba(255,255,255,0.2); border-radius: 20px; padding: 0 8px; font-size: 0.5rem; margin-left: 4px; }
-        .sector-slicer .slicer-btn.active .badge { background: rgba(255,255,255,0.25); }
+        .top-bar .slicer-section .slicer-btn:hover { border-color: var(--cpc-blue); color: var(--cpc-blue); background: rgba(30,61,89,0.04); }
+        .top-bar .slicer-section .slicer-btn.active { border-color: var(--koki-orange); background: var(--koki-orange); color: white; box-shadow: 0 4px 12px rgba(255,110,64,0.3); }
+        .top-bar .slicer-section .slicer-btn .badge { background: rgba(255,255,255,0.2); border-radius: 20px; padding: 0 8px; font-size: 0.5rem; margin-left: 4px; }
+        .top-bar .slicer-section .slicer-btn.active .badge { background: rgba(255,255,255,0.25); }
+
+        .top-bar .action-buttons {
+            display: flex;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+        .top-bar .action-btn {
+            padding: 4px 16px;
+            border-radius: 30px;
+            border: 2px solid var(--cpc-blue);
+            background: var(--cpc-blue);
+            color: white;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .top-bar .action-btn:hover {
+            background: var(--cpc-blue-dark);
+            border-color: var(--cpc-blue-dark);
+            transform: translateY(-1px);
+        }
+        .top-bar .action-btn.print-btn {
+            background: var(--cpc-blue);
+            border-color: var(--cpc-blue);
+        }
+        .top-bar .action-btn.print-btn:hover {
+            background: var(--cpc-blue-dark);
+            border-color: var(--cpc-blue-dark);
+        }
+        .top-bar .action-btn.pdf-btn {
+            background: var(--danger);
+            border-color: var(--danger);
+        }
+        .top-bar .action-btn.pdf-btn:hover {
+            background: #dc2626;
+            border-color: #dc2626;
+        }
 
         .alerts-container {
             background: var(--white);
@@ -145,28 +194,6 @@
 
         .clear-filters-btn { padding: 4px 16px; border-radius: 30px; border: 2px solid #e2e8f0; background: transparent; font-family: 'Cairo', sans-serif; font-size: 0.6rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.2s; margin-left: auto; flex-shrink: 0; }
         .clear-filters-btn:hover { border-color: var(--danger); color: var(--danger); background: rgba(239,68,68,0.05); }
-
-        .action-buttons { display: flex; gap: 6px; margin-left: 10px; flex-shrink: 0; }
-        .action-btn {
-            padding: 4px 16px;
-            border-radius: 30px;
-            border: 2px solid var(--cpc-blue);
-            background: var(--cpc-blue);
-            color: white;
-            font-family: 'Cairo', sans-serif;
-            font-size: 0.6rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .action-btn:hover { background: var(--cpc-blue-dark); border-color: var(--cpc-blue-dark); transform: translateY(-1px); }
-        .action-btn.print-btn { background: var(--cpc-blue); border-color: var(--cpc-blue); }
-        .action-btn.print-btn:hover { background: var(--cpc-blue-dark); border-color: var(--cpc-blue-dark); }
-        .action-btn.pdf-btn { background: var(--danger); border-color: var(--danger); }
-        .action-btn.pdf-btn:hover { background: #dc2626; border-color: #dc2626; }
 
         .container { max-width: 1440px; margin: 0 auto; padding: 0 12px; }
 
@@ -314,8 +341,8 @@
             .chart-box .chart-container { height: 220px; }
             .charts-grid-2 .chart-box canvas { height: 200px !important; max-height: 200px; }
             .charts-grid-2 .chart-box .chart-container { height: 200px; }
-            .action-buttons { margin-left: 0; width: 100%; justify-content: flex-start; }
-            .sector-slicer { flex-direction: column; align-items: stretch; }
+            .top-bar { flex-direction: column; align-items: stretch; }
+            .top-bar .action-buttons { justify-content: flex-start; }
             .filter-group-horizontal { flex-direction: column; align-items: stretch; gap: 10px; }
             .filter-group-horizontal .filter-item { flex-wrap: wrap; }
         }
@@ -335,8 +362,8 @@
             .employee-detail-table table { font-size: 0.65rem; }
             .employee-detail-table th, .employee-detail-table td { padding: 4px 8px; }
             .alerts-container .alert-item { font-size: 0.65rem; }
-            .action-buttons { flex-wrap: wrap; }
             .filter-group-horizontal .filter-item .filter-label { min-width: 100%; }
+            .top-bar .slicer-section { flex-direction: column; align-items: stretch; }
         }
         @media (max-width: 480px) {
             .kpi-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
@@ -346,8 +373,8 @@
             .chart-box canvas { height: 170px !important; max-height: 170px; }
             .chart-box .chart-container { height: 170px; }
             .chart-box { padding: 12px 14px; }
-            .action-btn { font-size: 0.5rem; padding: 3px 10px; }
-            .sector-slicer .slicer-btn { font-size: 0.55rem; padding: 4px 12px; }
+            .top-bar .action-btn { font-size: 0.5rem; padding: 3px 10px; }
+            .top-bar .slicer-section .slicer-btn { font-size: 0.55rem; padding: 4px 12px; }
         }
 
         @media print {
@@ -358,7 +385,7 @@
             body { background: white !important; padding: 20px !important; font-size: 11px !important; color: #1a2332 !important; }
             .container { max-width: 100% !important; padding: 0 !important; }
             .kpi-card, .chart-box, .insight-card, .employee-detail-table,
-            .search-wrapper, .filter-bar, .brief-section, .alerts-container, .sector-slicer {
+            .search-wrapper, .filter-bar, .brief-section, .alerts-container, .top-bar {
                 box-shadow: none !important;
                 border: 1px solid #ddd !important;
                 page-break-inside: avoid !important;
@@ -414,21 +441,31 @@
     <div class="container" id="printContainer">
 
         <!-- ============================================================
-        SECTOR SLICER
+        TOP BAR - سلايسر النشاط + أزرار الطباعة
         ============================================================ -->
-        <div class="sector-slicer no-print" id="sectorSlicer">
-            <div class="slicer-label">
-                <i class="fa-solid fa-industry"></i> النشاط:
+        <div class="top-bar no-print" id="topBar">
+            <div class="slicer-section">
+                <span class="slicer-label">
+                    <i class="fa-solid fa-industry"></i> النشاط:
+                </span>
+                <div class="slicer-buttons" id="sectorSlicerButtons">
+                    <button class="slicer-btn active" data-activity="all">
+                        الكل <span class="badge" id="activityAllCount">0</span>
+                    </button>
+                    <button class="slicer-btn" data-activity="أعلاف">
+                        🌾 أعلاف <span class="badge" id="activityFeedCount">0</span>
+                    </button>
+                    <button class="slicer-btn" data-activity="مجازر">
+                        🥩 مجازر <span class="badge" id="activitySlaughterCount">0</span>
+                    </button>
+                </div>
             </div>
-            <div class="slicer-buttons" id="sectorSlicerButtons">
-                <button class="slicer-btn active" data-activity="all">
-                    الكل <span class="badge" id="activityAllCount">0</span>
+            <div class="action-buttons">
+                <button class="action-btn print-btn" onclick="printPage()">
+                    <i class="fa-solid fa-print"></i> طباعة الكل
                 </button>
-                <button class="slicer-btn" data-activity="أعلاف">
-                    🌾 أعلاف <span class="badge" id="activityFeedCount">0</span>
-                </button>
-                <button class="slicer-btn" data-activity="مجازر">
-                    🥩 مجازر <span class="badge" id="activitySlaughterCount">0</span>
+                <button class="action-btn pdf-btn" onclick="printPage()">
+                    <i class="fa-solid fa-file-pdf"></i> حفظ PDF
                 </button>
             </div>
         </div>
@@ -537,17 +574,9 @@
                 </div>
             </div>
 
-            <!-- الصف الرابع: الأزرار -->
+            <!-- الصف الرابع: Reset Button فقط (أزرار الطباعة نقلت للأعلى) -->
             <div class="filter-row" style="padding-top: 8px; border-top: 1px solid rgba(0,0,0,0.04);">
-                <div class="action-buttons">
-                    <button class="action-btn print-btn" onclick="printPage()">
-                        <i class="fa-solid fa-print"></i> طباعة الكل
-                    </button>
-                    <button class="action-btn pdf-btn" onclick="printPage()">
-                        <i class="fa-solid fa-file-pdf"></i> حفظ PDF
-                    </button>
-                </div>
-                <button class="clear-filters-btn" onclick="clearAllFilters()"><i class="fa-solid fa-undo"></i> Reset</button>
+                <button class="clear-filters-btn" onclick="clearAllFilters()"><i class="fa-solid fa-undo"></i> Reset All Filters</button>
             </div>
         </div>
 
@@ -652,7 +681,7 @@
         </div>
 
         <!-- ============================================================
-        EMPLOYEE DETAIL TABLE
+        EMPLOYEE DETAIL TABLE - إصلاح الجدول
         ============================================================ -->
         <div class="employee-detail-table" id="employeeDetailTable">
             <h4><i class="fa-solid fa-users"></i> Employees Details <span id="detailCount" style="font-size:0.7rem;color:var(--text-muted);font-weight:400;"></span></h4>
@@ -734,9 +763,10 @@
         // ============================================================
         // CONFIG
         // ============================================================
+        // استخدام رابط CSV الصحيح
         const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRu0vhUS8c-hbFznxR_F9K9LNueNeabXiLwMjMzppgpIjJCSNCadsHDVVGxwiKYYHve9-Qtb37ALs8P/pub?gid=1032977671&single=true&output=csv";
 
-        // أسماء الأعمدة
+        // أسماء الأعمدة - يجب أن تتطابق مع الشيت
         const COLUMNS = {
             ID: 'ID',
             Name: 'Name',
@@ -1298,7 +1328,7 @@
         }
 
         // ============================================================
-        // EMPLOYEE DETAIL TABLE - محسّن مع حساب العدد الصحيح
+        // EMPLOYEE DETAIL TABLE - إصلاح الجدول
         // ============================================================
         function updateEmployeeDetailTable(data) {
             const tbody = document.getElementById('detailTableBody');
@@ -1307,7 +1337,7 @@
             console.log('📋 Updating employee table with', data ? data.length : 0, 'records');
             
             if (!data || data.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;padding:20px;color:var(--text-muted);">No employees match the current filters.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;padding:20px;color:var(--text-muted);">⚠️ No employees match the current filters.</td></tr>`;
                 countSpan.textContent = '(0 employees)';
                 return;
             }
@@ -1322,7 +1352,7 @@
             
             countSpan.textContent = `(${uniqueCount} unique employees)`;
             
-            // عرض أول 100 موظف فريد
+            // عرض أول 100 موظف
             const displayData = data.slice(0, 100);
             
             tbody.innerHTML = displayData.map(emp => {
