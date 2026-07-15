@@ -50,7 +50,7 @@
         .refresh-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
         /* ============================================================
-           SECTOR SLICER - السلايسر الوحيد للنشاط
+           SECTOR SLICER - يسحب من عمود Activity
            ============================================================ */
         .sector-slicer {
             background: var(--white);
@@ -260,46 +260,46 @@
         .insight-tag.info { background: rgba(59,130,246,0.15); color: var(--info); }
 
         /* ============================================================
-           الفلاتر تحت بعض - محاذاة يسار
+           الفلاتر - توزيع جديد
            ============================================================ */
-        .filter-vertical {
+        .filter-group-horizontal {
             display: flex;
-            flex-direction: column;
-            gap: 4px;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px 20px;
             width: 100%;
         }
-        .filter-vertical .filter-item {
+        .filter-group-horizontal .filter-item {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 3px 0;
+            gap: 6px;
+            flex-wrap: wrap;
         }
-        .filter-vertical .filter-item .filter-label {
+        .filter-group-horizontal .filter-item .filter-label {
             font-size: 0.6rem;
             font-weight: 700;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            min-width: 70px;
+            min-width: 60px;
             flex-shrink: 0;
-            text-align: left;
         }
-        .filter-vertical .filter-item .filter-group {
+        .filter-group-horizontal .filter-item .filter-group {
             display: flex;
             flex-wrap: wrap;
             gap: 3px 5px;
             align-items: center;
         }
-        .filter-vertical .filter-item .filter-btn {
+        .filter-group-horizontal .filter-item .filter-btn {
             font-size: 0.55rem;
             padding: 2px 10px;
             white-space: nowrap;
         }
-        .filter-vertical .filter-item .filter-select {
+        .filter-group-horizontal .filter-item .filter-select {
             font-size: 0.55rem;
             padding: 3px 24px 3px 10px;
             min-width: 100px;
-            max-width: 200px;
+            max-width: 180px;
         }
 
         /* ============================================================
@@ -316,6 +316,8 @@
             .charts-grid-2 .chart-box .chart-container { height: 200px; }
             .action-buttons { margin-left: 0; width: 100%; justify-content: flex-start; }
             .sector-slicer { flex-direction: column; align-items: stretch; }
+            .filter-group-horizontal { flex-direction: column; align-items: stretch; gap: 8px; }
+            .filter-group-horizontal .filter-item { flex-wrap: wrap; }
         }
         @media (max-width: 768px) {
             .navbar { flex-direction: column; text-align: center; }
@@ -334,8 +336,7 @@
             .employee-detail-table th, .employee-detail-table td { padding: 4px 8px; }
             .alerts-container .alert-item { font-size: 0.65rem; }
             .action-buttons { flex-wrap: wrap; }
-            .filter-vertical .filter-item { flex-wrap: wrap; }
-            .filter-vertical .filter-item .filter-label { min-width: 100%; }
+            .filter-group-horizontal .filter-item .filter-label { min-width: 100%; }
         }
         @media (max-width: 480px) {
             .kpi-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
@@ -413,21 +414,21 @@
     <div class="container" id="printContainer">
 
         <!-- ============================================================
-        SECTOR SLICER - السلايسر الوحيد للنشاط
+        SECTOR SLICER - يسحب من عمود Activity
         ============================================================ -->
         <div class="sector-slicer no-print" id="sectorSlicer">
             <div class="slicer-label">
                 <i class="fa-solid fa-industry"></i> النشاط:
             </div>
             <div class="slicer-buttons" id="sectorSlicerButtons">
-                <button class="slicer-btn active" data-sector="all">
-                    الكل <span class="badge" id="sectorAllCount">0</span>
+                <button class="slicer-btn active" data-activity="all">
+                    الكل <span class="badge" id="activityAllCount">0</span>
                 </button>
-                <button class="slicer-btn" data-sector="أعلاف">
-                    🌾 أعلاف <span class="badge" id="sectorFeedCount">0</span>
+                <button class="slicer-btn" data-activity="أعلاف">
+                    🌾 أعلاف <span class="badge" id="activityFeedCount">0</span>
                 </button>
-                <button class="slicer-btn" data-sector="مجازر">
-                    🥩 مجازر <span class="badge" id="sectorSlaughterCount">0</span>
+                <button class="slicer-btn" data-activity="مجازر">
+                    🥩 مجازر <span class="badge" id="activitySlaughterCount">0</span>
                 </button>
             </div>
         </div>
@@ -449,10 +450,11 @@
         </div>
 
         <!-- ============================================================
-        FILTER BAR
+        FILTER BAR - توزيع جديد
         ============================================================ -->
         <div class="filter-bar no-print" id="filterBar">
-            <!-- صف البرامج -->
+            
+            <!-- الصف الأول: Programs -->
             <div class="filter-row">
                 <span class="filter-label"><i class="fa-solid fa-book"></i> Programs:</span>
                 <div class="filter-group" id="programFilters">
@@ -466,10 +468,9 @@
                 </div>
             </div>
 
-            <!-- الفلاتر تحت بعض (Location, Level, Attend) -->
+            <!-- الصف الثاني: Location + Level في سطر واحد -->
             <div class="filter-row" style="border-bottom: none; padding-bottom: 0;">
-                <div class="filter-vertical" style="width:100%;">
-                    
+                <div class="filter-group-horizontal">
                     <!-- Location -->
                     <div class="filter-item">
                         <span class="filter-label"><i class="fa-solid fa-location-dot"></i> Location</span>
@@ -493,7 +494,12 @@
                             <button class="filter-btn" data-filter="level" data-value="L1">L1 <span class="badge-count" id="lvlL1Count">0</span></button>
                         </div>
                     </div>
+                </div>
+            </div>
 
+            <!-- الصف الثالث: Attend + Group + Phase في سطر واحد -->
+            <div class="filter-row" style="border-bottom: none; padding-top: 0; padding-bottom: 0;">
+                <div class="filter-group-horizontal">
                     <!-- Attend -->
                     <div class="filter-item">
                         <span class="filter-label"><i class="fa-solid fa-user-check"></i> Attend</span>
@@ -504,42 +510,35 @@
                         </div>
                     </div>
 
-                    <!-- Sector Dropdown (اختياري إضافي) -->
+                    <!-- Group -->
                     <div class="filter-item">
-                        <span class="filter-label"><i class="fa-solid fa-industry"></i> Sector</span>
+                        <span class="filter-label"><i class="fa-solid fa-layer-group"></i> Group</span>
                         <div class="filter-group">
-                            <select class="filter-select" id="sectorSelect">
-                                <option value="all">All Sectors</option>
-                                <option value="أعلاف">أعلاف</option>
-                                <option value="مجازر">مجازر</option>
+                            <select class="filter-select" id="groupSelect">
+                                <option value="all">All Groups</option>
                             </select>
                         </div>
                     </div>
 
+                    <!-- Phase -->
+                    <div class="filter-item">
+                        <span class="filter-label"><i class="fa-solid fa-clock"></i> Phase</span>
+                        <div class="filter-group">
+                            <select class="filter-select" id="phaseSelect">
+                                <option value="all">All Phases</option>
+                                <option value="Phase1">Phase 1</option>
+                                <option value="Phase2">Phase 2</option>
+                                <option value="Phase3">Phase 3</option>
+                                <option value="Phase4">Phase 4</option>
+                                <option value="Online-Phase4">Online Phase 4</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- صف Group و Phase والأزرار -->
-            <div class="filter-row">
-                <span class="filter-label"><i class="fa-solid fa-layer-group"></i> Group:</span>
-                <div class="filter-group">
-                    <select class="filter-select" id="groupSelect">
-                        <option value="all">All Groups</option>
-                    </select>
-                </div>
-
-                <span class="filter-label" style="margin-left:6px;"><i class="fa-solid fa-clock"></i> Phase:</span>
-                <div class="filter-group">
-                    <select class="filter-select" id="phaseSelect">
-                        <option value="all">All Phases</option>
-                        <option value="Phase1">Phase 1</option>
-                        <option value="Phase2">Phase 2</option>
-                        <option value="Phase3">Phase 3</option>
-                        <option value="Phase4">Phase 4</option>
-                        <option value="Online-Phase4">Online Phase 4</option>
-                    </select>
-                </div>
-
+            <!-- الصف الرابع: الأزرار -->
+            <div class="filter-row" style="padding-top: 6px;">
                 <div class="action-buttons">
                     <button class="action-btn print-btn" onclick="printPage()">
                         <i class="fa-solid fa-print"></i> طباعة الكل
@@ -548,7 +547,6 @@
                         <i class="fa-solid fa-file-pdf"></i> حفظ PDF
                     </button>
                 </div>
-
                 <button class="clear-filters-btn" onclick="clearAllFilters()"><i class="fa-solid fa-undo"></i> Reset</button>
             </div>
         </div>
@@ -738,7 +736,7 @@
         // ============================================================
         const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRu0vhUS8c-hbFznxR_F9K9LNueNeabXiLwMjMzppgpIjJCSNCadsHDVVGxwiKYYHve9-Qtb37ALs8P/pub?gid=1032977671&single=true&output=csv";
 
-        // أسماء الأعمدة - متطابقة مع الشيت
+        // أسماء الأعمدة - يجب أن تتطابق مع الشيت
         const COLUMNS = {
             ID: 'ID',
             Name: 'Name',
@@ -757,7 +755,9 @@
             Leadership: 'Leader Ship Program',
             DrivePerformance: 'Drive Performance Program',
             KickStart: 'Kick Start Program',
-            Accommodation: 'Accommodation'
+            Accommodation: 'Accommodation',
+            // عمود النشاط - المهم للسلايسر
+            Activity: 'Activity'
         };
 
         const PROGRAM_FIELDS = {
@@ -779,8 +779,7 @@
             level: 'all', 
             phase: 'all', 
             attendance: 'all',
-            sector: 'all',
-            sectorSlicer: 'all'
+            activity: 'all'
         };
         let isLoading = false;
         let loadError = false;
@@ -911,35 +910,36 @@
         }
 
         // ============================================================
-        // SECTOR SLICER
+        // ACTIVITY SLICER - يسحب من عمود Activity
         // ============================================================
-        function updateSectorSlicer(data) {
+        function updateActivitySlicer(data) {
             const total = data.length;
-            document.getElementById('sectorAllCount').textContent = total;
+            document.getElementById('activityAllCount').textContent = total;
             
+            // البحث في عمود Activity
             const feedCount = data.filter(r => {
-                const sector = String(r[COLUMNS.Sector] || '');
-                return sector.includes('أعلاف') || sector.includes('اعلاف');
+                const activity = String(r[COLUMNS.Activity] || '');
+                return activity.includes('أعلاف') || activity.includes('اعلاف');
             }).length;
-            document.getElementById('sectorFeedCount').textContent = feedCount;
+            document.getElementById('activityFeedCount').textContent = feedCount;
             
             const slaughterCount = data.filter(r => {
-                const sector = String(r[COLUMNS.Sector] || '');
-                return sector.includes('مجازر');
+                const activity = String(r[COLUMNS.Activity] || '');
+                return activity.includes('مجازر');
             }).length;
-            document.getElementById('sectorSlaughterCount').textContent = slaughterCount;
+            document.getElementById('activitySlaughterCount').textContent = slaughterCount;
             
-            console.log('📊 Sector counts - Total:', total, 'Feed:', feedCount, 'Slaughter:', slaughterCount);
+            console.log('📊 Activity counts - Total:', total, 'Feed:', feedCount, 'Slaughter:', slaughterCount);
         }
 
         function setupSlicerButtons() {
             document.querySelectorAll('#sectorSlicerButtons .slicer-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
-                    const sector = this.dataset.sector;
+                    const activity = this.dataset.activity;
                     document.querySelectorAll('#sectorSlicerButtons .slicer-btn').forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
-                    activeFilters.sectorSlicer = sector;
-                    console.log('🔍 Sector slicer changed to:', sector);
+                    activeFilters.activity = activity;
+                    console.log('🔍 Activity slicer changed to:', activity);
                     applyFilters();
                 });
             });
@@ -1001,29 +1001,6 @@
                 const el = document.getElementById(id);
                 if (el) el.textContent = count;
             });
-
-            const sectorSelect = document.getElementById('sectorSelect');
-            const currentSector = sectorSelect.value;
-            sectorSelect.innerHTML = '<option value="all">All Sectors (' + data.length + ')</option>';
-            const sectorCounts = {};
-            data.forEach(r => {
-                const s = r[COLUMNS.Sector] || '';
-                if (s.trim() !== '') {
-                    sectorCounts[s] = (sectorCounts[s] || 0) + 1;
-                }
-            });
-            Object.entries(sectorCounts).sort((a, b) => b[1] - a[1]).forEach(([sector, count]) => {
-                const opt = document.createElement('option');
-                opt.value = sector;
-                opt.textContent = sector + ' (' + count + ')';
-                sectorSelect.appendChild(opt);
-            });
-            if (currentSector && Array.from(sectorSelect.options).some(o => o.value === currentSector)) {
-                sectorSelect.value = currentSector;
-            } else {
-                sectorSelect.value = 'all';
-            }
-            activeFilters.sector = sectorSelect.value;
 
             const phaseSelect = document.getElementById('phaseSelect');
             const currentPhase = phaseSelect.value;
@@ -1159,20 +1136,20 @@
             if (!allData || allData.length === 0) {
                 console.warn('⚠️ No data to filter');
                 updateEmployeeDetailTable([]);
-                updateSectorSlicer([]);
+                updateActivitySlicer([]);
                 return;
             }
             
             filteredData = [...allData];
 
-            // فلتر القطاع من السلايسر
-            if (activeFilters.sectorSlicer && activeFilters.sectorSlicer !== 'all') {
-                const filterValue = activeFilters.sectorSlicer;
+            // فلتر النشاط من السلايسر (من عمود Activity)
+            if (activeFilters.activity && activeFilters.activity !== 'all') {
+                const filterValue = activeFilters.activity;
                 filteredData = filteredData.filter(r => {
-                    const sector = String(r[COLUMNS.Sector] || '');
-                    return sector.includes(filterValue);
+                    const activity = String(r[COLUMNS.Activity] || '');
+                    return activity.includes(filterValue);
                 });
-                console.log(`🔍 After sector slicer (${filterValue}):`, filteredData.length);
+                console.log(`🔍 After activity slicer (${filterValue}):`, filteredData.length);
             }
 
             // فلتر البرنامج
@@ -1203,11 +1180,6 @@
                 filteredData = filteredData.filter(r => String(r['C-LVL'] || '').includes(activeFilters.level));
             }
 
-            // فلتر القطاع من dropdown
-            if (activeFilters.sector !== 'all') {
-                filteredData = filteredData.filter(r => String(r[COLUMNS.Sector] || '').includes(activeFilters.sector));
-            }
-
             // فلتر المرحلة
             if (activeFilters.phase !== 'all') {
                 filteredData = filteredData.filter(r => String(r[COLUMNS.TrainingPhase] || '').includes(activeFilters.phase));
@@ -1228,7 +1200,7 @@
             
             console.log('📊 Filtered data count:', filteredData.length);
             
-            updateSectorSlicer(filteredData);
+            updateActivitySlicer(filteredData);
             renderDashboard(filteredData);
             updateEmployeeDetailTable(filteredData);
             checkSmartAlerts(filteredData);
@@ -1291,10 +1263,6 @@
                 activeFilters.phase = this.value;
                 applyFilters();
             });
-            document.getElementById('sectorSelect').addEventListener('change', function() {
-                activeFilters.sector = this.value;
-                applyFilters();
-            });
         }
 
         function clearAllFilters() {
@@ -1304,9 +1272,8 @@
                 location: 'all', 
                 level: 'all', 
                 phase: 'all', 
-                attendance: 'all', 
-                sector: 'all',
-                sectorSlicer: 'all'
+                attendance: 'all',
+                activity: 'all'
             };
             
             document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -1316,12 +1283,11 @@
             
             document.querySelectorAll('#sectorSlicerButtons .slicer-btn').forEach(btn => {
                 btn.classList.remove('active');
-                if (btn.dataset.sector === 'all') btn.classList.add('active');
+                if (btn.dataset.activity === 'all') btn.classList.add('active');
             });
             
             document.getElementById('groupSelect').value = 'all';
             document.getElementById('phaseSelect').value = 'all';
-            document.getElementById('sectorSelect').value = 'all';
             applyFilters();
         }
 
@@ -1933,8 +1899,8 @@
                 document.getElementById('printDateHeader').textContent = now;
                 document.getElementById('printDateFooter').textContent = now;
 
-                if (!activeFilters.sectorSlicer) {
-                    activeFilters.sectorSlicer = 'all';
+                if (!activeFilters.activity) {
+                    activeFilters.activity = 'all';
                 }
 
                 applyFilters();
