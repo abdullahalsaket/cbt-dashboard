@@ -50,7 +50,7 @@
         .refresh-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
         /* ============================================================
-           SECTOR SLICER - يسحب من عمود Activity
+           SECTOR SLICER
            ============================================================ */
         .sector-slicer {
             background: var(--white);
@@ -122,11 +122,11 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
             border: 1px solid #e8ecf0;
         }
-        .filter-bar .filter-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.04); }
+        .filter-bar .filter-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px; padding: 8px 0; border-bottom: 1px solid rgba(0,0,0,0.04); }
         .filter-bar .filter-row:last-child { border-bottom: none; padding-bottom: 0; }
         .filter-bar .filter-row:first-child { padding-top: 0; }
-        .filter-bar .filter-label { font-size: 0.65rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; min-width: 55px; flex-shrink: 0; }
-        .filter-bar .filter-group { display: flex; flex-wrap: wrap; gap: 4px 6px; flex: 1; align-items: center; }
+        .filter-bar .filter-label { font-size: 0.65rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; min-width: 65px; flex-shrink: 0; }
+        .filter-bar .filter-group { display: flex; flex-wrap: wrap; gap: 4px 8px; flex: 1; align-items: center; }
 
         .filter-select { padding: 5px 30px 5px 12px; border-radius: 30px; border: 2px solid #e2e8f0; background: var(--white); font-family: 'Cairo', sans-serif; font-size: 0.6rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.2s; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7a8f' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; min-width: 120px; max-width: 250px; }
         .filter-select:hover { border-color: var(--cpc-blue); }
@@ -260,19 +260,19 @@
         .insight-tag.info { background: rgba(59,130,246,0.15); color: var(--info); }
 
         /* ============================================================
-           الفلاتر - توزيع جديد
+           الفلاتر - توزيع جديد مع مسافات مناسبة
            ============================================================ */
         .filter-group-horizontal {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            gap: 12px 20px;
+            gap: 15px 30px;
             width: 100%;
         }
         .filter-group-horizontal .filter-item {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             flex-wrap: wrap;
         }
         .filter-group-horizontal .filter-item .filter-label {
@@ -287,12 +287,12 @@
         .filter-group-horizontal .filter-item .filter-group {
             display: flex;
             flex-wrap: wrap;
-            gap: 3px 5px;
+            gap: 4px 6px;
             align-items: center;
         }
         .filter-group-horizontal .filter-item .filter-btn {
             font-size: 0.55rem;
-            padding: 2px 10px;
+            padding: 3px 12px;
             white-space: nowrap;
         }
         .filter-group-horizontal .filter-item .filter-select {
@@ -316,12 +316,12 @@
             .charts-grid-2 .chart-box .chart-container { height: 200px; }
             .action-buttons { margin-left: 0; width: 100%; justify-content: flex-start; }
             .sector-slicer { flex-direction: column; align-items: stretch; }
-            .filter-group-horizontal { flex-direction: column; align-items: stretch; gap: 8px; }
+            .filter-group-horizontal { flex-direction: column; align-items: stretch; gap: 10px; }
             .filter-group-horizontal .filter-item { flex-wrap: wrap; }
         }
         @media (max-width: 768px) {
             .navbar { flex-direction: column; text-align: center; }
-            .filter-bar .filter-row { flex-direction: column; align-items: stretch; }
+            .filter-bar .filter-row { flex-direction: column; align-items: stretch; gap: 6px; }
             .filter-bar .filter-label { min-width: auto; }
             .filter-select { max-width: 100%; }
             .clear-filters-btn { margin-left: 0; width: 100%; text-align: center; }
@@ -414,7 +414,7 @@
     <div class="container" id="printContainer">
 
         <!-- ============================================================
-        SECTOR SLICER - يسحب من عمود Activity
+        SECTOR SLICER
         ============================================================ -->
         <div class="sector-slicer no-print" id="sectorSlicer">
             <div class="slicer-label">
@@ -450,7 +450,7 @@
         </div>
 
         <!-- ============================================================
-        FILTER BAR - توزيع جديد
+        FILTER BAR
         ============================================================ -->
         <div class="filter-bar no-print" id="filterBar">
             
@@ -468,18 +468,18 @@
                 </div>
             </div>
 
-            <!-- الصف الثاني: Location + Level في سطر واحد -->
-            <div class="filter-row" style="border-bottom: none; padding-bottom: 0;">
+            <!-- الصف الثاني: Location + Level -->
+            <div class="filter-row">
                 <div class="filter-group-horizontal">
                     <!-- Location -->
                     <div class="filter-item">
                         <span class="filter-label"><i class="fa-solid fa-location-dot"></i> Location</span>
                         <div class="filter-group" id="locationFilters">
                             <button class="filter-btn active" data-filter="location" data-value="all">All <span class="badge-count" id="locAllCount">0</span></button>
+                            <button class="filter-btn" data-filter="location" data-value="Nob">Nob <span class="badge-count" id="locNobCount">0</span></button>
+                            <button class="filter-btn" data-filter="location" data-value="Online">Online <span class="badge-count" id="locOnlineCount">0</span></button>
                             <button class="filter-btn" data-filter="location" data-value="Steigenberger">Steigenberger <span class="badge-count" id="locSteigenbergerCount">0</span></button>
                             <button class="filter-btn" data-filter="location" data-value="TOR">TOR <span class="badge-count" id="locTORCount">0</span></button>
-                            <button class="filter-btn" data-filter="location" data-value="Nob">Nob <span class="badge-count" id="locNobCount">0</span></button>
-                            <button class="filter-btn" data-filter="location" data-value="Alsaff">Alsaff <span class="badge-count" id="locAlsaffCount">0</span></button>
                         </div>
                     </div>
 
@@ -497,8 +497,8 @@
                 </div>
             </div>
 
-            <!-- الصف الثالث: Attend + Group + Phase في سطر واحد -->
-            <div class="filter-row" style="border-bottom: none; padding-top: 0; padding-bottom: 0;">
+            <!-- الصف الثالث: Attend + Group + Phase -->
+            <div class="filter-row" style="border-bottom: none; padding-bottom: 0;">
                 <div class="filter-group-horizontal">
                     <!-- Attend -->
                     <div class="filter-item">
@@ -538,7 +538,7 @@
             </div>
 
             <!-- الصف الرابع: الأزرار -->
-            <div class="filter-row" style="padding-top: 6px;">
+            <div class="filter-row" style="padding-top: 8px; border-top: 1px solid rgba(0,0,0,0.04);">
                 <div class="action-buttons">
                     <button class="action-btn print-btn" onclick="printPage()">
                         <i class="fa-solid fa-print"></i> طباعة الكل
@@ -736,7 +736,7 @@
         // ============================================================
         const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRu0vhUS8c-hbFznxR_F9K9LNueNeabXiLwMjMzppgpIjJCSNCadsHDVVGxwiKYYHve9-Qtb37ALs8P/pub?gid=1032977671&single=true&output=csv";
 
-        // أسماء الأعمدة - يجب أن تتطابق مع الشيت
+        // أسماء الأعمدة
         const COLUMNS = {
             ID: 'ID',
             Name: 'Name',
@@ -756,7 +756,6 @@
             DrivePerformance: 'Drive Performance Program',
             KickStart: 'Kick Start Program',
             Accommodation: 'Accommodation',
-            // عمود النشاط - المهم للسلايسر
             Activity: 'Activity'
         };
 
@@ -768,6 +767,9 @@
             'Drive Performance Program': COLUMNS.DrivePerformance,
             'Kick Start Program': COLUMNS.KickStart
         };
+
+        // مواقع التدريب المتوقعة
+        const LOCATIONS = ['Nob', 'Online', 'Steigenberger', 'TOR'];
 
         let allData = [];
         let filteredData = [];
@@ -816,7 +818,7 @@
                 if (id && !seenIds.has(id)) { seenIds.add(id); result.push(obj); }
                 else if (!id) { obj['_tempId'] = 'temp_' + i; result.push(obj); }
             }
-            console.log('📊 Total records loaded:', result.length);
+            console.log('📊 Total unique records loaded:', result.length);
             if (result.length > 0) {
                 console.log('📝 Sample record:', result[0]);
                 console.log('📝 Sample keys:', Object.keys(result[0]));
@@ -910,13 +912,12 @@
         }
 
         // ============================================================
-        // ACTIVITY SLICER - يسحب من عمود Activity
+        // ACTIVITY SLICER
         // ============================================================
         function updateActivitySlicer(data) {
             const total = data.length;
             document.getElementById('activityAllCount').textContent = total;
             
-            // البحث في عمود Activity
             const feedCount = data.filter(r => {
                 const activity = String(r[COLUMNS.Activity] || '');
                 return activity.includes('أعلاف') || activity.includes('اعلاف');
@@ -962,6 +963,7 @@
                 if (el) el.textContent = count;
             });
 
+            // تحديث الـ Groups
             const groupCounts = {};
             data.forEach(r => {
                 const group = r[COLUMNS.TrainingGroup] || '';
@@ -986,14 +988,16 @@
             }
             activeFilters.group = groupSelect.value;
 
+            // تحديث الـ Locations
             document.getElementById('locAllCount').textContent = data.length;
-            ['Steigenberger', 'TOR', 'Nob', 'Alsaff'].forEach(loc => {
+            LOCATIONS.forEach(loc => {
                 const count = data.filter(r => String(r[COLUMNS.TrainingLocation] || '').includes(loc)).length;
                 const id = 'loc' + loc + 'Count';
                 const el = document.getElementById(id);
                 if (el) el.textContent = count;
             });
 
+            // تحديث الـ Levels
             document.getElementById('lvlAllCount').textContent = data.length;
             ['L4', 'L3', 'L2', 'L1'].forEach(lvl => {
                 const count = data.filter(r => String(r['C-LVL'] || '').includes(lvl)).length;
@@ -1002,6 +1006,7 @@
                 if (el) el.textContent = count;
             });
 
+            // تحديث الـ Phases
             const phaseSelect = document.getElementById('phaseSelect');
             const currentPhase = phaseSelect.value;
             phaseSelect.innerHTML = '';
@@ -1032,6 +1037,7 @@
             }
             activeFilters.phase = phaseSelect.value;
 
+            // تحديث الـ Attendance
             const attAll = data.length;
             const attAttend = data.filter(r => {
                 const val = String(r[COLUMNS.SevenSens] || '').toLowerCase();
@@ -1142,7 +1148,7 @@
             
             filteredData = [...allData];
 
-            // فلتر النشاط من السلايسر (من عمود Activity)
+            // فلتر النشاط من السلايسر
             if (activeFilters.activity && activeFilters.activity !== 'all') {
                 const filterValue = activeFilters.activity;
                 filteredData = filteredData.filter(r => {
@@ -1292,7 +1298,7 @@
         }
 
         // ============================================================
-        // EMPLOYEE DETAIL TABLE
+        // EMPLOYEE DETAIL TABLE - محسّن مع حساب العدد الصحيح
         // ============================================================
         function updateEmployeeDetailTable(data) {
             const tbody = document.getElementById('detailTableBody');
@@ -1306,8 +1312,17 @@
                 return;
             }
 
-            countSpan.textContent = `(${data.length} employees)`;
+            // حساب العدد الفريد للموظفين (حسب ID)
+            const uniqueIds = new Set();
+            data.forEach(emp => {
+                const id = String(emp[COLUMNS.ID] || '').trim();
+                if (id) uniqueIds.add(id);
+            });
+            const uniqueCount = uniqueIds.size;
             
+            countSpan.textContent = `(${uniqueCount} unique employees)`;
+            
+            // عرض أول 100 موظف فريد
             const displayData = data.slice(0, 100);
             
             tbody.innerHTML = displayData.map(emp => {
@@ -1364,8 +1379,7 @@
                         const label = chart.data.labels[e.dataIndex];
                         let filterValue = label;
                         if (filterType === 'location') {
-                            const locations = ['Steigenberger', 'TOR', 'Nob', 'Alsaff'];
-                            for (let loc of locations) {
+                            for (let loc of LOCATIONS) {
                                 if (label.includes(loc)) { filterValue = loc; break; }
                             }
                         }
