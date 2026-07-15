@@ -49,6 +49,31 @@
         .refresh-btn:hover { background: rgba(255,255,255,0.25); }
         .refresh-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
+        /* ============================================================
+           SMART ALERTS - لوحة التنبيهات الذكية
+           ============================================================ */
+        .alerts-container {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 12px 18px;
+            margin: 12px auto;
+            max-width: 1440px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border: 1px solid #e8ecf0;
+            display: none;
+        }
+        .alerts-container.show { display: block; }
+        .alerts-container h3 { font-size: 0.8rem; color: var(--cpc-blue); font-weight: 700; margin-bottom: 6px; }
+        .alerts-container .alert-item { display: flex; align-items: center; gap: 10px; padding: 6px 12px; border-radius: 8px; margin-bottom: 4px; font-size: 0.75rem; }
+        .alerts-container .alert-item i { font-size: 1rem; }
+        .alert-danger { background: rgba(239,68,68,0.08); color: var(--danger); border-left: 3px solid var(--danger); }
+        .alert-warning { background: rgba(245,158,11,0.08); color: var(--warning); border-left: 3px solid var(--warning); }
+        .alert-info { background: rgba(59,130,246,0.08); color: var(--info); border-left: 3px solid var(--info); }
+        .alert-success { background: rgba(16,185,129,0.08); color: var(--success); border-left: 3px solid var(--success); }
+
+        /* ============================================================
+           FILTER BAR
+           ============================================================ */
         .filter-bar {
             background: var(--white);
             padding: 14px 18px;
@@ -69,6 +94,14 @@
         .filter-select:focus { outline: none; border-color: var(--koki-orange); box-shadow: 0 0 0 3px rgba(255,110,64,0.15); }
         .filter-select option { padding: 4px 8px; font-family: 'Cairo', sans-serif; }
 
+        /* أزرار حفظ وتحميل الفلاتر */
+        .preset-btn { padding: 4px 14px; border-radius: 30px; border: 2px solid var(--purple); background: transparent; font-family: 'Cairo', sans-serif; font-size: 0.6rem; font-weight: 600; color: var(--purple); cursor: pointer; transition: all 0.2s; }
+        .preset-btn:hover { background: var(--purple); color: white; border-color: var(--purple); }
+        .preset-btn.save { border-color: var(--success); color: var(--success); }
+        .preset-btn.save:hover { background: var(--success); color: white; }
+        .preset-btn.load { border-color: var(--info); color: var(--info); }
+        .preset-btn.load:hover { background: var(--info); color: white; }
+
         .filter-btn { padding: 4px 14px; border-radius: 30px; border: 2px solid #e2e8f0; background: transparent; font-family: 'Cairo', sans-serif; font-size: 0.6rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.2s; white-space: nowrap; }
         .filter-btn:hover { border-color: var(--cpc-blue); color: var(--cpc-blue); background: rgba(30,61,89,0.04); }
         .filter-btn.active { border-color: var(--koki-orange); background: var(--koki-orange); color: white; box-shadow: 0 4px 12px rgba(255,110,64,0.3); }
@@ -82,6 +115,50 @@
         .clear-filters-btn { padding: 4px 16px; border-radius: 30px; border: 2px solid #e2e8f0; background: transparent; font-family: 'Cairo', sans-serif; font-size: 0.6rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.2s; margin-left: auto; flex-shrink: 0; }
         .clear-filters-btn:hover { border-color: var(--danger); color: var(--danger); background: rgba(239,68,68,0.05); }
 
+        /* أزرار الطباعة والحفظ */
+        .action-buttons {
+            display: flex;
+            gap: 6px;
+            margin-left: 10px;
+            flex-shrink: 0;
+        }
+        .action-btn {
+            padding: 4px 16px;
+            border-radius: 30px;
+            border: 2px solid var(--cpc-blue);
+            background: var(--cpc-blue);
+            color: white;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .action-btn:hover {
+            background: var(--cpc-blue-dark);
+            border-color: var(--cpc-blue-dark);
+            transform: translateY(-1px);
+        }
+        .action-btn.print-btn {
+            background: var(--cpc-blue);
+            border-color: var(--cpc-blue);
+        }
+        .action-btn.print-btn:hover {
+            background: var(--cpc-blue-dark);
+            border-color: var(--cpc-blue-dark);
+        }
+        .action-btn.pdf-btn {
+            background: var(--danger);
+            border-color: var(--danger);
+        }
+        .action-btn.pdf-btn:hover {
+            background: #dc2626;
+            border-color: #dc2626;
+        }
+
         .container { max-width: 1440px; margin: 0 auto; padding: 0 12px; }
 
         .brief-section { background: linear-gradient(135deg, var(--cpc-blue-dark) 0%, #17b890 100%); color: white; padding: 12px 18px; border-radius: 12px; margin: 12px 0; }
@@ -89,9 +166,6 @@
         .brief-section p { font-size: 0.8rem; opacity: 0.92; line-height: 1.6; }
         .brief-section .highlight { color: var(--koki-orange); font-weight: 700; }
 
-        /* ============================================================
-           KPI GRID - 8 بطاقات (تم إزالة L4 و Completion Rate)
-           ============================================================ */
         .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin: 12px 0; }
         .kpi-card { background: var(--white); padding: 10px 14px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); display: flex; align-items: center; justify-content: space-between; border-bottom: 3px solid var(--cpc-blue); transition: all 0.2s; cursor: pointer; }
         .kpi-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
@@ -113,7 +187,7 @@
         .loading-status.success { color: var(--success); }
 
         /* ============================================================
-           RESULT CARD - مع زر طباعة
+           RESULT CARD - مع Quick View
            ============================================================ */
         .result-card { margin-top: 10px; background: #f8fafc; border-radius: 12px; padding: 12px; display: none; border-right: 4px solid var(--success); }
         .employee-profile { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 10px; }
@@ -126,12 +200,41 @@
         .stat-badge.group { background: rgba(59,130,246,0.15); color: var(--info); }
         .stat-badge.location { background: rgba(255,110,64,0.15); color: var(--koki-orange); }
         .stat-badge.accommodation { background: rgba(139,92,246,0.15); color: var(--purple); }
+        
+        /* Performance Stats */
+        .perf-stats { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+        .perf-stat { background: var(--white); padding: 4px 12px; border-radius: 8px; font-size: 0.65rem; font-weight: 600; border: 1px solid #e8ecf0; }
+        .perf-stat .num { font-size: 1rem; font-weight: 800; color: var(--cpc-blue); }
+        
         .training-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
         .tag { background: #e2e8f0; color: var(--cpc-blue); padding: 2px 8px; border-radius: 20px; font-size: 0.55rem; font-weight: 600; }
 
-        /* زر الطباعة */
         .print-btn { background: var(--cpc-blue); color: white; border: none; padding: 6px 16px; border-radius: 8px; font-family: 'Cairo', sans-serif; font-size: 0.7rem; font-weight: 600; cursor: pointer; transition: all 0.2s; margin-top: 8px; display: inline-flex; align-items: center; gap: 6px; }
         .print-btn:hover { background: var(--cpc-blue-dark); }
+
+        /* ============================================================
+           QUICK VIEW TOOLTIP
+           ============================================================ */
+        .quick-view-tooltip {
+            display: none;
+            position: fixed;
+            background: var(--white);
+            border-radius: 12px;
+            padding: 14px 18px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            border: 1px solid #e8ecf0;
+            z-index: 999;
+            min-width: 200px;
+            max-width: 280px;
+            pointer-events: none;
+            font-size: 0.7rem;
+        }
+        .quick-view-tooltip.show { display: block; }
+        .quick-view-tooltip .qv-name { font-size: 0.9rem; font-weight: 700; color: var(--cpc-blue); }
+        .quick-view-tooltip .qv-detail { display: flex; justify-content: space-between; padding: 2px 0; border-bottom: 1px solid #f0f0f0; }
+        .quick-view-tooltip .qv-detail:last-child { border-bottom: none; }
+        .quick-view-tooltip .qv-label { color: var(--text-muted); }
+        .quick-view-tooltip .qv-value { font-weight: 600; }
 
         /* ============================================================
            CHARTS
@@ -147,13 +250,14 @@
         .charts-grid-2 .chart-box .chart-container { height: 260px; }
 
         /* ============================================================
-           EMPLOYEE TABLE - جدول تفصيلي تحت الرسوم
+           EMPLOYEE DETAIL TABLE
            ============================================================ */
         .employee-detail-table {
             background: var(--white);
             border-radius: 14px;
             padding: 16px 18px;
             margin-top: 14px;
+            margin-bottom: 20px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
             border: 1px solid #e8ecf0;
             overflow-x: auto;
@@ -162,8 +266,8 @@
         .employee-detail-table.show { display: block; }
         .employee-detail-table h4 { font-size: 0.9rem; color: var(--cpc-blue); font-weight: 700; margin-bottom: 10px; }
         .employee-detail-table table { width: 100%; border-collapse: collapse; font-size: 0.75rem; }
-        .employee-detail-table th { background: var(--cpc-blue); color: white; padding: 8px 12px; text-align: left; font-weight: 600; }
-        .employee-detail-table td { padding: 6px 12px; border-bottom: 1px solid #e8ecf0; }
+        .employee-detail-table th { background: var(--cpc-blue); color: white; padding: 10px 12px; text-align: left; font-weight: 600; white-space: nowrap; }
+        .employee-detail-table td { padding: 8px 12px; border-bottom: 1px solid #e8ecf0; vertical-align: middle; }
         .employee-detail-table tr:hover td { background: #f8fafc; }
         .employee-detail-table .badge-attend { background: rgba(16,185,129,0.15); color: var(--success); padding: 2px 10px; border-radius: 20px; font-size: 0.6rem; font-weight: 600; }
         .employee-detail-table .badge-not-attend { background: rgba(239,68,68,0.15); color: var(--danger); padding: 2px 10px; border-radius: 20px; font-size: 0.6rem; font-weight: 600; }
@@ -194,6 +298,7 @@
             .chart-box .chart-container { height: 220px; }
             .charts-grid-2 .chart-box canvas { height: 200px !important; max-height: 200px; }
             .charts-grid-2 .chart-box .chart-container { height: 200px; }
+            .action-buttons { margin-left: 0; width: 100%; justify-content: flex-start; }
         }
         @media (max-width: 768px) {
             .navbar { flex-direction: column; text-align: center; }
@@ -210,6 +315,8 @@
             .insights-section { grid-template-columns: 1fr; }
             .employee-detail-table table { font-size: 0.65rem; }
             .employee-detail-table th, .employee-detail-table td { padding: 4px 8px; }
+            .alerts-container .alert-item { font-size: 0.65rem; }
+            .action-buttons { flex-wrap: wrap; }
         }
         @media (max-width: 480px) {
             .kpi-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
@@ -219,12 +326,59 @@
             .chart-box canvas { height: 170px !important; max-height: 170px; }
             .chart-box .chart-container { height: 170px; }
             .chart-box { padding: 12px 14px; }
+            .action-btn { font-size: 0.5rem; padding: 3px 10px; }
+        }
+
+        /* ============================================================
+           PRINT STYLES
+           ============================================================ */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #printArea, #printArea * {
+                visibility: visible;
+            }
+            #printArea {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                padding: 20px;
+                background: white;
+                font-size: 12px;
+            }
+            #printArea table {
+                width: 100%;
+                border-collapse: collapse;
+                font-size: 11px;
+            }
+            #printArea th {
+                background: #1e3d59 !important;
+                color: white !important;
+                padding: 6px 10px;
+                text-align: left;
+            }
+            #printArea td {
+                padding: 5px 10px;
+                border-bottom: 1px solid #e8ecf0;
+            }
+            #printArea .badge-attend { color: #10b981; font-weight: bold; }
+            #printArea .badge-not-attend { color: #ef4444; font-weight: bold; }
+            #printArea .badge-unknown { color: #6b7a8f; }
+            #printArea h2 {
+                color: #1e3d59;
+                margin-bottom: 15px;
+            }
+            .no-print {
+                display: none !important;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="navbar">
+    <div class="navbar no-print">
         <div class="logo-left"><img src="CPC.png" alt="CPC Logo"></div>
         <div class="title-center">
             <h1>CBT</h1>
@@ -242,7 +396,7 @@
 
     <div class="container">
 
-        <div class="brief-section">
+        <div class="brief-section no-print">
             <h2><i class="fa-solid fa-bullseye"></i> Program Overview</h2>
             <p>
                 This dashboard provides <span class="highlight">real-time intelligence</span> for the
@@ -254,9 +408,17 @@
         </div>
 
         <!-- ============================================================
+        SMART ALERTS
+        ============================================================ -->
+        <div class="alerts-container no-print" id="alertsContainer">
+            <h3><i class="fa-solid fa-bell"></i> Smart Alerts</h3>
+            <div id="alertsList"></div>
+        </div>
+
+        <!-- ============================================================
         FILTER BAR
         ============================================================ -->
-        <div class="filter-bar" id="filterBar">
+        <div class="filter-bar no-print" id="filterBar">
             <div class="filter-row">
                 <span class="filter-label"><i class="fa-solid fa-book"></i> Programs:</span>
                 <div class="filter-group" id="programFilters">
@@ -326,19 +488,32 @@
                     <button class="filter-btn not-attend-btn" data-filter="attendance" data-value="not-attend">❌ Not Attend <span class="badge-count" id="attNotAttendCount">0</span></button>
                 </div>
 
+                <!-- أزرار الطباعة والحفظ -->
+                <div class="action-buttons">
+                    <button class="action-btn print-btn" onclick="printPage()">
+                        <i class="fa-solid fa-print"></i> طباعة
+                    </button>
+                    <button class="action-btn pdf-btn" onclick="printPage()">
+                        <i class="fa-solid fa-file-pdf"></i> حفظ PDF
+                    </button>
+                </div>
+
+                <!-- Preset Buttons -->
+                <button class="preset-btn save" onclick="saveFilterPreset()"><i class="fa-solid fa-floppy-disk"></i> Save</button>
+                <button class="preset-btn load" onclick="loadFilterPreset()"><i class="fa-solid fa-upload"></i> Load</button>
                 <button class="clear-filters-btn" onclick="clearAllFilters()"><i class="fa-solid fa-undo"></i> Reset</button>
             </div>
         </div>
 
         <!-- ============================================================
-        KPI GRID - 8 بطاقات (تم إزالة L4 و Completion Rate)
+        KPI GRID
         ============================================================ -->
-        <div class="kpi-grid" id="kpiGrid">
+        <div class="kpi-grid no-print" id="kpiGrid">
             <div class="kpi-card"><div class="kpi-info"><h4>Total Workforce</h4><div class="num" id="kpiTotal">...</div></div><i class="fa-solid fa-users"></i></div>
             <div class="kpi-card"><div class="kpi-info"><h4>Active Sectors</h4><div class="num" id="kpiSectors">...</div></div><i class="fa-solid fa-building"></i></div>
             <div class="kpi-card"><div class="kpi-info"><h4>Departments</h4><div class="num" id="kpiDepartments">...</div></div><i class="fa-solid fa-sitemap"></i></div>
             <div class="kpi-card"><div class="kpi-info"><h4>Attendance Rate</h4><div class="num" id="kpiAttendance">...</div></div><i class="fa-solid fa-user-check"></i></div>
-            <div class="kpi-card"><div class="kpi-info"><h4>Completed Training Programs</h4><div class="num" id="kpiPrograms">...</div></div><i class="fa-solid fa-book-open"></i></div>
+            <div class="kpi-card"><div class="kpi-info"><h4>Completed Training</h4><div class="num" id="kpiPrograms">...</div></div><i class="fa-solid fa-book-open"></i></div>
             <div class="kpi-card"><div class="kpi-info"><h4>Training Locations</h4><div class="num" id="kpiLocations">...</div></div><i class="fa-solid fa-location-dot"></i></div>
             <div class="kpi-card"><div class="kpi-info"><h4>Data Quality</h4><div class="num" id="kpiQuality">...</div></div><i class="fa-solid fa-shield-halved"></i></div>
             <div class="kpi-card"><div class="kpi-info"><h4>Active Phases</h4><div class="num" id="kpiPhases">...</div></div><i class="fa-solid fa-clock"></i></div>
@@ -347,7 +522,7 @@
         <!-- ============================================================
         SEARCH + CHARTS
         ============================================================ -->
-        <div class="search-charts-grid">
+        <div class="search-charts-grid no-print">
             <div class="search-wrapper">
                 <h3><i class="fa-solid fa-magnifying-glass"></i> Employee Query</h3>
                 <p>Enter Employee ID for full profile</p>
@@ -374,8 +549,12 @@
                         <span class="stat-badge location" id="statLocation">📍 Location: -</span>
                         <span class="stat-badge accommodation" id="statAccommodation">🏠 Accommodation: -</span>
                     </div>
+                    <div class="perf-stats" id="perfStats">
+                        <div class="perf-stat">📊 Total Programs: <span class="num" id="perfTotal">0</span></div>
+                        <div class="perf-stat">✅ Completed: <span class="num" id="perfCompleted">0</span></div>
+                        <div class="perf-stat">⏳ Pending: <span class="num" id="perfPending">0</span></div>
+                    </div>
                     <div class="training-tags" id="resPrograms"></div>
-                    <!-- زر الطباعة -->
                     <button class="print-btn" onclick="printEmployeeProfile()"><i class="fa-solid fa-print"></i> Print Profile</button>
                 </div>
             </div>
@@ -394,9 +573,9 @@
         <!-- ============================================================
         CHARTS
         ============================================================ -->
-        <div class="charts-grid-2">
+        <div class="charts-grid-2 no-print">
             <div class="chart-box" id="chartBoxDept">
-                <h4><i class="fa-solid fa-users-between-lines" style="color:var(--success);"></i> Department Size (All Departments)</h4>
+                <h4><i class="fa-solid fa-users-between-lines" style="color:var(--success);"></i> Department Size</h4>
                 <div class="chart-container"><canvas id="chartDepartment"></canvas></div>
             </div>
             <div class="chart-box" id="chartBoxAttendance">
@@ -413,7 +592,7 @@
             </div>
         </div>
 
-        <div class="charts-grid-2" style="margin-top:14px;">
+        <div class="charts-grid-2 no-print" style="margin-top:14px;">
             <div class="chart-box" id="chartBoxQuality">
                 <h4><i class="fa-solid fa-gauge-high" style="color:var(--cpc-blue);"></i> Data Quality Overview</h4>
                 <div class="chart-container"><canvas id="chartQuality"></canvas></div>
@@ -425,12 +604,12 @@
         </div>
 
         <!-- ============================================================
-        EMPLOYEE DETAIL TABLE - يظهر عند اختيار جروب أو مرحلة
+        EMPLOYEE DETAIL TABLE (مع ID للطباعة)
         ============================================================ -->
         <div class="employee-detail-table" id="employeeDetailTable">
-            <h4><i class="fa-solid fa-users"></i> Employees Details</h4>
-            <div style="overflow-x:auto;">
-                <table>
+            <h4><i class="fa-solid fa-users"></i> Employees Details <span id="detailCount" style="font-size:0.7rem;color:var(--text-muted);font-weight:400;"></span></h4>
+            <div id="printArea" style="overflow-x:auto;">
+                <table id="employee-table">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -441,9 +620,7 @@
                             <th>Status</th>
                         </tr>
                     </thead>
-                    <tbody id="detailTableBody">
-                        <!-- يتم تعبئته من جافاسكريبت -->
-                    </tbody>
+                    <tbody id="detailTableBody"></tbody>
                 </table>
             </div>
         </div>
@@ -451,7 +628,7 @@
         <!-- ============================================================
         INSIGHTS
         ============================================================ -->
-        <div class="insights-section" id="insightsSection">
+        <div class="insights-section no-print" id="insightsSection">
             <div class="insight-card">
                 <div class="insight-icon"><i class="fa-solid fa-users"></i></div>
                 <h4>Largest Department</h4>
@@ -498,6 +675,18 @@
 
     </div>
 
+    <!-- ============================================================
+    QUICK VIEW TOOLTIP
+    ============================================================ -->
+    <div class="quick-view-tooltip no-print" id="quickViewTooltip">
+        <div class="qv-name" id="qvName">-</div>
+        <div class="qv-detail"><span class="qv-label">ID</span><span class="qv-value" id="qvId">-</span></div>
+        <div class="qv-detail"><span class="qv-label">Department</span><span class="qv-value" id="qvDept">-</span></div>
+        <div class="qv-detail"><span class="qv-label">Title</span><span class="qv-value" id="qvTitle">-</span></div>
+        <div class="qv-detail"><span class="qv-label">Attendance</span><span class="qv-value" id="qvAttendance">-</span></div>
+        <div class="qv-detail"><span class="qv-label">Status</span><span class="qv-value" id="qvStatus">-</span></div>
+    </div>
+
     <script>
         // ============================================================
         // CONFIG
@@ -522,7 +711,12 @@
             Leadership: 'Leader Ship Program',
             DrivePerformance: 'Drive Performance Program',
             KickStart: 'Kick Start Program',
-            Accommodation: 'Accommodation'
+            Accommodation: 'Accommodation',
+            CompletionDate: 'Completion Date',
+            TrainingScore: 'Training Score',
+            TrainerName: 'Trainer Name',
+            TrainingHours: 'Training Hours',
+            FeedbackRating: 'Feedback Rating'
         };
 
         const PROGRAM_FIELDS = {
@@ -549,6 +743,13 @@
         let isLoading = false;
         let loadError = false;
         let lastSearchedEmployee = null;
+
+        // ============================================================
+        // PRINT FUNCTIONS
+        // ============================================================
+        function printPage() {
+            window.print();
+        }
 
         // ============================================================
         // UTILITY
@@ -578,10 +779,132 @@
         }
 
         // ============================================================
+        // FILTER PRESETS
+        // ============================================================
+        function saveFilterPreset() {
+            const name = prompt('Enter a name for this filter preset:', 'My Filter');
+            if (!name) return;
+            const presets = JSON.parse(localStorage.getItem('ctih_filter_presets') || '{}');
+            presets[name] = { ...activeFilters };
+            localStorage.setItem('ctih_filter_presets', JSON.stringify(presets));
+            showAlert('success', `✅ Filter "${name}" saved successfully!`);
+        }
+
+        function loadFilterPreset() {
+            const presets = JSON.parse(localStorage.getItem('ctih_filter_presets') || '{}');
+            const names = Object.keys(presets);
+            if (names.length === 0) {
+                showAlert('warning', '⚠️ No saved filters found.');
+                return;
+            }
+            const name = prompt('Enter the name of the filter to load:\n\nAvailable: ' + names.join(', '));
+            if (!name || !presets[name]) {
+                showAlert('error', '❌ Filter not found.');
+                return;
+            }
+            const preset = presets[name];
+            Object.keys(preset).forEach(key => {
+                activeFilters[key] = preset[key];
+            });
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.value === preset[btn.dataset.filter]) {
+                    btn.classList.add('active');
+                }
+                if (btn.dataset.value === 'all' && !preset[btn.dataset.filter]) {
+                    btn.classList.add('active');
+                }
+            });
+            document.getElementById('groupSelect').value = preset.group || 'all';
+            document.getElementById('phaseSelect').value = preset.phase || 'all';
+            document.getElementById('sectorSelect').value = preset.sector || 'all';
+            applyFilters();
+            showAlert('success', `✅ Filter "${name}" loaded successfully!`);
+        }
+
+        // ============================================================
+        // SMART ALERTS
+        // ============================================================
+        function checkSmartAlerts(data) {
+            if (!data || data.length === 0) return;
+            const alerts = [];
+            const total = data.length;
+
+            const attended = data.filter(r => {
+                const val = String(r[COLUMNS.SevenSens] || '').toLowerCase();
+                return val === 'attend' || val === 'attended' || val.includes('attend');
+            }).length;
+            const attendanceRate = total > 0 ? (attended / total) * 100 : 0;
+            if (attendanceRate < 60) {
+                alerts.push({ type: 'danger', icon: 'fa-triangle-exclamation', msg: `⚠️ Attendance rate is ${Math.round(attendanceRate)}% - Below 60% threshold!` });
+            }
+
+            const hasId = data.filter(r => r['ID'] && r['ID'].trim()).length;
+            const hasName = data.filter(r => r['Name'] && r['Name'].trim()).length;
+            const missingData = total - Math.min(hasId, hasName);
+            if (missingData > total * 0.05) {
+                alerts.push({ type: 'warning', icon: 'fa-circle-exclamation', msg: `📊 ${missingData} records have missing data (ID or Name).` });
+            }
+
+            let programsWithLowCompletion = 0;
+            Object.keys(PROGRAM_FIELDS).forEach(progName => {
+                const field = PROGRAM_FIELDS[progName];
+                const totalProgram = data.filter(r => r[field] && r[field].trim() !== '').length;
+                const attendedProgram = data.filter(r => {
+                    const val = String(r[field] || '').toLowerCase();
+                    return val === 'attend' || val === 'attended' || val.includes('attend');
+                }).length;
+                const rate = totalProgram > 0 ? (attendedProgram / totalProgram) * 100 : 0;
+                if (rate < 50 && totalProgram > 5) {
+                    programsWithLowCompletion++;
+                }
+            });
+            if (programsWithLowCompletion > 0) {
+                alerts.push({ type: 'warning', icon: 'fa-book', msg: `📚 ${programsWithLowCompletion} program(s) have low completion rate (<50%).` });
+            }
+
+            const ids = data.map(r => r['ID']).filter(Boolean);
+            const uniqueIds = new Set(ids);
+            if (ids.length > uniqueIds.size) {
+                alerts.push({ type: 'danger', icon: 'fa-copy', msg: `🔄 ${ids.length - uniqueIds.size} duplicate IDs detected.` });
+            }
+
+            if (alerts.length === 0) {
+                alerts.push({ type: 'success', icon: 'fa-check-circle', msg: `✅ All systems healthy! ${total} employees tracked.` });
+            }
+
+            renderAlerts(alerts);
+        }
+
+        function renderAlerts(alerts) {
+            const container = document.getElementById('alertsContainer');
+            const list = document.getElementById('alertsList');
+            if (!alerts || alerts.length === 0) {
+                container.classList.remove('show');
+                return;
+            }
+            container.classList.add('show');
+            list.innerHTML = alerts.map(a => `
+                <div class="alert-item alert-${a.type}">
+                    <i class="fa-solid ${a.icon}"></i>
+                    <span>${a.msg}</span>
+                </div>
+            `).join('');
+        }
+
+        function showAlert(type, msg) {
+            const alerts = [{ type, icon: type === 'success' ? 'fa-check-circle' : type === 'warning' ? 'fa-circle-exclamation' : 'fa-triangle-exclamation', msg }];
+            renderAlerts(alerts);
+            setTimeout(() => {
+                const container = document.getElementById('alertsContainer');
+                container.classList.remove('show');
+            }, 5000);
+        }
+
+        // ============================================================
         // UPDATE FILTER BADGES
         // ============================================================
         function updateFilterBadges(data) {
-            // Program Counts
             const progAll = data.length;
             document.getElementById('progAllCount').textContent = progAll;
             Object.keys(PROGRAM_FIELDS).forEach(progName => {
@@ -595,7 +918,6 @@
                 if (el) el.textContent = count;
             });
 
-            // Group Dropdown
             const groupCounts = {};
             data.forEach(r => {
                 const group = r[COLUMNS.TrainingGroup] || '';
@@ -620,7 +942,6 @@
             }
             activeFilters.group = groupSelect.value;
 
-            // Location Counts
             document.getElementById('locAllCount').textContent = data.length;
             ['Steigenberger', 'TOR', 'Nob', 'Alsaff'].forEach(loc => {
                 const count = data.filter(r => String(r[COLUMNS.TrainingLocation] || '').includes(loc)).length;
@@ -629,7 +950,6 @@
                 if (el) el.textContent = count;
             });
 
-            // Level Counts
             document.getElementById('lvlAllCount').textContent = data.length;
             ['L4', 'L3', 'L2', 'L1'].forEach(lvl => {
                 const count = data.filter(r => String(r['C-LVL'] || '').includes(lvl)).length;
@@ -638,7 +958,6 @@
                 if (el) el.textContent = count;
             });
 
-            // Sector Dropdown
             const sectorSelect = document.getElementById('sectorSelect');
             const currentSector = sectorSelect.value;
             sectorSelect.innerHTML = '<option value="all">All Sectors (' + data.length + ')</option>';
@@ -662,7 +981,6 @@
             }
             activeFilters.sector = sectorSelect.value;
 
-            // Phase Dropdown
             const phaseSelect = document.getElementById('phaseSelect');
             const currentPhase = phaseSelect.value;
             phaseSelect.innerHTML = '';
@@ -693,7 +1011,6 @@
             }
             activeFilters.phase = phaseSelect.value;
 
-            // Attendance Counts
             const attAll = data.length;
             const attAttend = data.filter(r => {
                 const val = String(r[COLUMNS.SevenSens] || '').toLowerCase();
@@ -795,7 +1112,6 @@
             if (!allData || allData.length === 0) return;
             filteredData = [...allData];
 
-            // Program filter
             if (activeFilters.program !== 'all') {
                 const field = PROGRAM_FIELDS[activeFilters.program];
                 if (field) {
@@ -806,34 +1122,28 @@
                 }
             }
 
-            // Group filter
             if (activeFilters.group !== 'all') {
                 filteredData = filteredData.filter(r => 
                     String(r[COLUMNS.TrainingGroup] || '').includes(activeFilters.group)
                 );
             }
 
-            // Location filter
             if (activeFilters.location !== 'all') {
                 filteredData = filteredData.filter(r => String(r[COLUMNS.TrainingLocation] || '').includes(activeFilters.location));
             }
 
-            // Level filter
             if (activeFilters.level !== 'all') {
                 filteredData = filteredData.filter(r => String(r['C-LVL'] || '').includes(activeFilters.level));
             }
 
-            // Sector filter
             if (activeFilters.sector !== 'all') {
                 filteredData = filteredData.filter(r => String(r[COLUMNS.Sector] || '').includes(activeFilters.sector));
             }
 
-            // Phase filter
             if (activeFilters.phase !== 'all') {
                 filteredData = filteredData.filter(r => String(r[COLUMNS.TrainingPhase] || '').includes(activeFilters.phase));
             }
 
-            // Attendance filter
             if (activeFilters.attendance === 'attend') {
                 filteredData = filteredData.filter(r => {
                     const val = String(r[COLUMNS.SevenSens] || '').toLowerCase();
@@ -847,10 +1157,10 @@
             }
             renderDashboard(filteredData);
             updateEmployeeDetailTable(filteredData);
+            checkSmartAlerts(filteredData);
         }
 
         function setupFilterButtons() {
-            // Program buttons
             document.querySelectorAll('#programFilters .filter-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const type = this.dataset.filter;
@@ -863,7 +1173,6 @@
                 });
             });
 
-            // Location buttons
             document.querySelectorAll('#locationFilters .filter-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const type = this.dataset.filter;
@@ -876,7 +1185,6 @@
                 });
             });
 
-            // Level buttons
             document.querySelectorAll('#levelFilters .filter-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const type = this.dataset.filter;
@@ -889,7 +1197,6 @@
                 });
             });
 
-            // Attendance buttons
             document.querySelectorAll('#attendanceFilters .filter-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const type = this.dataset.filter;
@@ -902,7 +1209,6 @@
                 });
             });
 
-            // Dropdowns
             document.getElementById('groupSelect').addEventListener('change', function() {
                 activeFilters.group = this.value;
                 applyFilters();
@@ -930,24 +1236,24 @@
         }
 
         // ============================================================
-        // EMPLOYEE DETAIL TABLE
+        // EMPLOYEE DETAIL TABLE - المعدلة لعرض البيانات بناءً على الفلاتر
         // ============================================================
         function updateEmployeeDetailTable(data) {
             const tableContainer = document.getElementById('employeeDetailTable');
             const tbody = document.getElementById('detailTableBody');
+            const countSpan = document.getElementById('detailCount');
             
-            // Show table only if group or phase filter is active (not 'all')
-            const showTable = activeFilters.group !== 'all' || activeFilters.phase !== 'all';
-            
-            if (!showTable || !data || data.length === 0) {
+            // نعرض الجدول طالما فيه بيانات (دائماً)
+            if (!data || data.length === 0) {
                 tableContainer.classList.remove('show');
                 return;
             }
 
             tableContainer.classList.add('show');
+            countSpan.textContent = `(${data.length} employees)`;
             
-            // Limit to first 50 records for performance
-            const displayData = data.slice(0, 50);
+            // عرض جميع البيانات (أو حد أقصى 100 صف للسرعة)
+            const displayData = data.slice(0, 100);
             
             tbody.innerHTML = displayData.map(emp => {
                 const sevenSens = String(emp[COLUMNS.SevenSens] || '').toLowerCase();
@@ -964,16 +1270,83 @@
                     'legal': 'Legal',
                     'inactive': 'Inactive'
                 };
+                const status = statusMap[String(emp[COLUMNS.Status] || '').toLowerCase()] || emp[COLUMNS.Status] || 'N/A';
                 
                 return `<tr>
-                    <td>${emp[COLUMNS.ID] || 'N/A'}</td>
+                    <td><strong>${emp[COLUMNS.ID] || 'N/A'}</strong></td>
                     <td>${emp[COLUMNS.Name] || 'Unknown'}</td>
                     <td>${emp[COLUMNS.Department] || 'N/A'}</td>
                     <td>${emp[COLUMNS.Title] || 'N/A'}</td>
                     <td>${attendanceBadge}</td>
-                    <td>${statusMap[emp[COLUMNS.Status]] || emp[COLUMNS.Status] || 'N/A'}</td>
+                    <td>${status}</td>
                 </tr>`;
             }).join('');
+
+            // إذا كان عدد البيانات أكثر من 100، أضف رسالة
+            if (data.length > 100) {
+                tbody.innerHTML += `<tr><td colspan="6" style="text-align:center;color:var(--text-muted);font-style:italic;">... and ${data.length - 100} more records</td></tr>`;
+            }
+        }
+
+        // ============================================================
+        // QUICK VIEW
+        // ============================================================
+        function setupQuickView() {
+            const tooltip = document.getElementById('quickViewTooltip');
+            let timeout = null;
+
+            document.addEventListener('mouseover', function(e) {
+                const cell = e.target.closest('td');
+                if (!cell) return;
+                const row = cell.closest('tr');
+                if (!row) return;
+                const table = row.closest('#employee-table');
+                if (!table) return;
+
+                const cells = row.querySelectorAll('td');
+                if (cells.length < 6) return;
+
+                const id = cells[0]?.textContent?.trim() || '';
+                const name = cells[1]?.textContent?.trim() || '';
+                const dept = cells[2]?.textContent?.trim() || '';
+                const title = cells[3]?.textContent?.trim() || '';
+                const attendance = cells[4]?.textContent?.trim() || 'N/A';
+                const status = cells[5]?.textContent?.trim() || 'N/A';
+
+                if (e.target.closest('td') === cells[1] || e.target.closest('td') === cells[0]) {
+                    clearTimeout(timeout);
+                    tooltip.querySelector('#qvName').textContent = name || 'Unknown';
+                    tooltip.querySelector('#qvId').textContent = id || 'N/A';
+                    tooltip.querySelector('#qvDept').textContent = dept || 'N/A';
+                    tooltip.querySelector('#qvTitle').textContent = title || 'N/A';
+                    tooltip.querySelector('#qvAttendance').textContent = attendance || 'N/A';
+                    tooltip.querySelector('#qvStatus').textContent = status || 'N/A';
+                    
+                    const rect = e.target.getBoundingClientRect();
+                    let top = rect.bottom + 10;
+                    let left = rect.left;
+                    if (top + 300 > window.innerHeight) top = rect.top - 300;
+                    if (left + 280 > window.innerWidth) left = window.innerWidth - 290;
+                    tooltip.style.top = top + 'px';
+                    tooltip.style.left = left + 'px';
+                    tooltip.classList.add('show');
+                }
+            });
+
+            document.addEventListener('mouseout', function(e) {
+                const cell = e.target.closest('td');
+                if (cell) {
+                    const row = cell.closest('tr');
+                    if (row) {
+                        const cells = row.querySelectorAll('td');
+                        if (cells.length >= 6 && (e.target.closest('td') === cells[1] || e.target.closest('td') === cells[0])) {
+                            timeout = setTimeout(() => {
+                                tooltip.classList.remove('show');
+                            }, 300);
+                        }
+                    }
+                }
+            });
         }
 
         // ============================================================
@@ -981,7 +1354,7 @@
         // ============================================================
         function setupChartInteractivity() {
             const charts = [
-                { chart: chartInstances.sector, filterType: 'location', id: 'chartBoxSector' },
+                { chart: chartInstances.sector, filterType: 'sector', id: 'chartBoxSector' },
                 { chart: chartInstances.level, filterType: 'level', id: 'chartBoxLevel' },
                 { chart: chartInstances.department, filterType: 'department', id: 'chartBoxDept' },
                 { chart: chartInstances.location, filterType: 'location', id: 'chartBoxLocation' },
@@ -1036,7 +1409,6 @@
             }
             const total = data.length;
 
-            // --- KPIs ---
             const sectors = new Set(data.map(r => r[COLUMNS.Sector]).filter(Boolean));
             const departments = new Set(data.map(r => r[COLUMNS.Department]).filter(Boolean));
 
@@ -1046,7 +1418,6 @@
             }).length;
             const attendanceRate = total > 0 ? Math.round((attended / total) * 100) : 0;
 
-            // Completed Training Programs (عدد البرامج المكتملة)
             let programCount = 0;
             Object.keys(PROGRAM_FIELDS).forEach(progName => {
                 const field = PROGRAM_FIELDS[progName];
@@ -1193,7 +1564,7 @@
                 plugins: [ChartDataLabels]
             });
 
-            // 3. Department - كل الإدارات
+            // 3. Department
             const ctx3 = document.getElementById('chartDepartment').getContext('2d');
             chartInstances.department = new Chart(ctx3, {
                 type: 'bar',
@@ -1305,6 +1676,7 @@
             });
 
             setupChartInteractivity();
+            setupQuickView();
 
             document.getElementById('statusText').textContent = 'Live';
             document.getElementById('statusIcon').className = 'fa-solid fa-cloud';
@@ -1354,10 +1726,16 @@
             const accom = String(emp[COLUMNS.Accommodation] || '').toLowerCase();
             document.getElementById('statAccommodation').textContent = '🏠 Accommodation: ' + (accom === 'yes' ? '✅ Yes' : accom === 'no' ? '❌ No' : 'N/A');
 
+            const totalPrograms = fields.length;
+            document.getElementById('perfTotal').textContent = totalPrograms;
+            document.getElementById('perfCompleted').textContent = attendedCount;
+            document.getElementById('perfPending').textContent = totalPrograms - attendedCount - notAttendedCount;
+
             const progContainer = document.getElementById('resPrograms');
             progContainer.innerHTML = '';
             const programs = [
-                emp[COLUMNS.TrainingGroup], emp[COLUMNS.TrainingPhase],
+                emp[COLUMNS.TrainingGroup] ? 'Group: ' + emp[COLUMNS.TrainingGroup] : '',
+                emp[COLUMNS.TrainingPhase] ? 'Phase: ' + emp[COLUMNS.TrainingPhase] : '',
                 emp[COLUMNS.SevenSens] ? '7 Sens: ' + emp[COLUMNS.SevenSens] : '',
                 emp[COLUMNS.Analytical] ? 'Analytical: ' + emp[COLUMNS.Analytical] : '',
                 emp[COLUMNS.MindField] ? 'Mind Field: ' + emp[COLUMNS.MindField] : '',
@@ -1433,126 +1811,116 @@
                     .header { border-bottom: 3px solid #1e3d59; padding-bottom: 15px; margin-bottom: 20px; display: flex; align-items: center; gap: 15px; }
                     .header h1 { margin: 0; font-size: 22px; color: #1e3d59; }
                     .header .sub { color: #6b7a8f; font-size: 14px; }
-                    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
-                    .field { background: #f5f7fa; padding: 10px 14px; border-radius: 8px; }
-                    .field .label { font-size: 11px; color: #6b7a8f; text-transform: uppercase; letter-spacing: 0.5px; }
-                    .field .value { font-size: 15px; font-weight: 600; color: #1a2332; margin-top: 2px; }
-                    .stats { display: flex; flex-wrap: wrap; gap: 10px; margin: 15px 0; padding: 15px; background: #f0f4f8; border-radius: 8px; }
-                    .stats span { font-size: 13px; font-weight: 600; }
-                    .stats .attend { color: #10b981; }
-                    .stats .not-attend { color: #ef4444; }
-                    .stats .info { color: #3b82f6; }
-                    .stats .orange { color: #ff6e40; }
-                    .stats .purple { color: #8b5cf6; }
-                    .programs { border-top: 1px solid #e2e8f0; padding-top: 15px; margin-top: 10px; }
-                    .programs h3 { font-size: 14px; color: #1e3d59; margin-bottom: 10px; }
-                    .programs .tag { display: inline-block; background: #e2e8f0; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; color: #1e3d59; margin: 3px; }
-                    .footer { margin-top: 30px; border-top: 1px solid #e2e8f0; padding-top: 15px; font-size: 11px; color: #6b7a8f; text-align: center; }
-                    @media print { body { padding: 20px; } .field { background: #f5f7fa; } }
-                </style>
-            </head>
-            <body>
-                <div class="header">
-                    <div style="width:60px;height:60px;border-radius:50%;background:#1e3d59;color:white;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;flex-shrink:0;">
-                        ${(emp[COLUMNS.Name] || '?').charAt(0).toUpperCase()}
-                    </div>
-                    <div>
-                        <h1>${emp[COLUMNS.Name] || 'Unknown'}</h1>
-                        <div class="sub">${emp[COLUMNS.Title] || 'No Title'} · ID: ${emp[COLUMNS.ID] || 'N/A'}</div>
-                    </div>
-                </div>
+                    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 20px; margin: 15px 0; }
+                    .grid .label { font-weight: 300; color: #6b7a8f; font-size: 12px; text-transform: uppercase; }
+                    .grid .value { font-weight: 700; font-size: 16px; }
+                    .section-title { font-size: 16px; font-weight: 700; color: #1e3d59; margin-top: 20px; margin-bottom: 10px; border-bottom: 2px solid #e8ecf0; padding-bottom: 5px; }
+                    .badge { display: inline-block; padding: 2px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+                    .badge-attend { background: rgba(16,185,129,0.15); color: #10b981; }
+                    .badge-not-attend { background: rgba(239,68,68,0.15); color: #ef4444; }
+                    .stats { display: flex; gap: 20px; flex-wrap: wrap; background: #f8fafc; padding: 12px 16px; border-radius: 8px; margin: 10px 0; }
+                    .stats span { font-size: 14px; }
+                    .prog-list { list-style: none; padding: 0; margin: 10px 0; }
+                    .prog-list li { padding: 4px 0; border-bottom: 1px solid #f0f0f0; }
+                    .footer { margin-top: 30px; padding-top: 15px; border-top: 1px solid #e8ecf0; font-size: 12px; color: #6b7a8f; text-align: center; }
+</style>
+</head>
+<body>
+    <div class="header">
+        <h1>👤 Employee Profile</h1>
+        <span class="sub">CBT Intelligence Hub</span>
+    </div>
+    
+    <div class="grid">
+        <div><div class="label">Employee ID</div><div class="value">${emp[COLUMNS.ID] || 'N/A'}</div></div>
+        <div><div class="label">Name</div><div class="value">${emp[COLUMNS.Name] || 'Unknown'}</div></div>
+        <div><div class="label">Title</div><div class="value">${emp[COLUMNS.Title] || 'Not recorded'}</div></div>
+        <div><div class="label">Level</div><div class="value">${emp['C-LVL'] || 'Not specified'}</div></div>
+        <div><div class="label">Sector / Department</div><div class="value">${(emp[COLUMNS.Sector] || '-')} / ${(emp[COLUMNS.Department] || '-')}</div></div>
+        <div><div class="label">Training Location</div><div class="value">${emp[COLUMNS.TrainingLocation] || 'Not specified'}</div></div>
+        <div><div class="label">Training Group</div><div class="value">${emp[COLUMNS.TrainingGroup] || 'N/A'}</div></div>
+        <div><div class="label">Training Phase</div><div class="value">${emp[COLUMNS.TrainingPhase] || 'Not specified'}</div></div>
+        <div><div class="label">Attendance (7 Sens)</div><div class="value"><span class="badge ${sevenSens === 'attend' || sevenSens === 'attended' || sevenSens.includes('attend') ? 'badge-attend' : 'badge-not-attend'}">${attendanceText}</span></div></div>
+        <div><div class="label">Status</div><div class="value">${statusMap[String(emp[COLUMNS.Status] || '').toLowerCase()] || emp[COLUMNS.Status] || 'Not specified'}</div></div>
+        <div><div class="label">Accommodation</div><div class="value">${String(emp[COLUMNS.Accommodation] || '').toLowerCase() === 'yes' ? '✅ Yes' : String(emp[COLUMNS.Accommodation] || '').toLowerCase() === 'no' ? '❌ No' : 'N/A'}</div></div>
+    </div>
 
-                <div class="grid">
-                    <div class="field"><div class="label">Department</div><div class="value">${emp[COLUMNS.Department] || 'N/A'}</div></div>
-                    <div class="field"><div class="label">Sector</div><div class="value">${emp[COLUMNS.Sector] || 'N/A'}</div></div>
-                    <div class="field"><div class="label">Competency Level</div><div class="value">${emp['C-LVL'] || 'N/A'}</div></div>
-                    <div class="field"><div class="label">Status</div><div class="value">${statusMap[emp[COLUMNS.Status]] || emp[COLUMNS.Status] || 'N/A'}</div></div>
-                    <div class="field"><div class="label">Training Location</div><div class="value">${emp[COLUMNS.TrainingLocation] || 'N/A'}</div></div>
-                    <div class="field"><div class="label">Training Phase</div><div class="value">${emp[COLUMNS.TrainingPhase] || 'N/A'}</div></div>
-                    <div class="field"><div class="label">Attendance</div><div class="value">${attendanceText}</div></div>
-                    <div class="field"><div class="label">Accommodation</div><div class="value">${accom === 'yes' ? '✅ Yes' : accom === 'no' ? '❌ No' : 'N/A'}</div></div>
-                </div>
+    <div class="section-title">📊 Training Summary</div>
+    <div class="stats">
+        <span>📚 Total Programs: <strong>${Object.values(PROGRAM_FIELDS).length}</strong></span>
+        <span>✅ Completed: <strong>${attendedCount}</strong></span>
+        <span>⏳ Pending: <strong>${Object.values(PROGRAM_FIELDS).length - attendedCount - notAttendedCount}</strong></span>
+        <span>❌ Not Attended: <strong>${notAttendedCount}</strong></span>
+    </div>
 
-                <div class="stats">
-                    <span class="attend">✅ Attended: ${attendedCount}</span>
-                    <span class="not-attend">❌ Not Attended: ${notAttendedCount}</span>
-                    <span class="info">📋 Group: ${emp[COLUMNS.TrainingGroup] || 'N/A'}</span>
-                    <span class="orange">📍 Location: ${emp[COLUMNS.TrainingLocation] || 'N/A'}</span>
-                    <span class="purple">🏠 Accommodation: ${accom === 'yes' ? '✅ Yes' : accom === 'no' ? '❌ No' : 'N/A'}</span>
-                </div>
+    <div class="section-title">📋 Program Enrollment</div>
+    <ul class="prog-list">
+        ${programs.map(p => `<li>${p}</li>`).join('')}
+    </ul>
 
-                <div class="programs">
-                    <h3>📚 Training Programs</h3>
-                    ${programs.length > 0 ? programs.map(p => `<span class="tag">${p}</span>`).join('') : '<span style="color:#6b7a8f;font-style:italic;">No training records found.</span>'}
-                </div>
+    <div class="footer">
+        Generated from CBT Intelligence Hub • ${new Date().toLocaleString()}
+    </div>
+</body>
+</html>`;
 
-                <div class="footer">
-                    Generated by CBT Intelligence Hub · ${new Date().toLocaleString()}
-                </div>
-            </body>
-            </html>
-            `;
+printWindow.document.write(html);
+printWindow.document.close();
+printWindow.focus();
+setTimeout(() => { printWindow.print(); }, 500);
+}
 
-            printWindow.document.write(html);
-            printWindow.document.close();
-            setTimeout(() => { printWindow.print(); }, 500);
-        }
+// ============================================================
+// LOAD DATA
+// ============================================================
+async function loadData() {
+if (isLoading) return;
+isLoading = true;
+const msg = document.getElementById('loadingMsg');
+msg.className = 'loading-status';
+msg.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Loading data...';
+document.getElementById('refreshBtn').disabled = true;
 
-        // ============================================================
-        // LOAD DATA
-        // ============================================================
-        function loadData() {
-            if (isLoading) return;
-            isLoading = true;
-            loadError = false;
+try {
+const response = await fetch(SHEET_URL);
+if (!response.ok) throw new Error(`HTTP ${response.status}`);
+const csv = await response.text();
+const jsonData = csvToJSON(csv);
+if (jsonData.length === 0) throw new Error('No data found in sheet');
 
-            const msg = document.getElementById('loadingMsg');
-            msg.className = 'loading-status';
-            msg.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Loading data...';
+allData = jsonData;
+console.log('✅ Data loaded:', allData.length, 'records');
+loadError = false;
+applyFilters();
+} catch (err) {
+console.error('❌ Error loading data:', err);
+loadError = true;
+msg.className = 'loading-status error';
+msg.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Error loading data. Please try again.';
+document.getElementById('statusText').textContent = 'Error';
+document.getElementById('statusIcon').className = 'fa-solid fa-cloud-arrow-up';
+} finally {
+isLoading = false;
+document.getElementById('refreshBtn').disabled = false;
+}
+}
 
-            document.getElementById('statusText').textContent = 'Loading...';
-            document.getElementById('statusIcon').className = 'fa-solid fa-spinner';
-            document.getElementById('refreshBtn').disabled = true;
+// ============================================================
+// INIT
+// ============================================================
+document.addEventListener('DOMContentLoaded', function() {
+setupFilterButtons();
+loadData();
 
-            fetch(SHEET_URL)
-                .then(res => {
-                    if (!res.ok) throw new Error('Network error: ' + res.status);
-                    return res.text();
-                })
-                .then(csv => {
-                    allData = csvToJSON(csv);
-                    isLoading = false;
-                    document.getElementById('statusText').textContent = 'Live';
-                    document.getElementById('statusIcon').className = 'fa-solid fa-cloud';
-                    document.getElementById('refreshBtn').disabled = false;
-                    msg.className = 'loading-status success';
-                    msg.innerHTML = '<i class="fa-solid fa-check-circle"></i> Loaded: ' + allData.length + ' records';
-                    setupFilterButtons();
-                    applyFilters();
-                })
-                .catch(err => {
-                    console.error('Load error:', err);
-                    isLoading = false;
-                    loadError = true;
-                    document.getElementById('statusText').textContent = 'Error';
-                    document.getElementById('statusIcon').className = 'fa-solid fa-triangle-exclamation';
-                    document.getElementById('refreshBtn').disabled = false;
-                    msg.className = 'loading-status error';
-                    msg.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Failed to load data. Click Refresh to retry.';
-                });
-        }
+document.getElementById('refreshBtn').addEventListener('click', function() {
+loadData();
+});
 
-        // ============================================================
-        // INIT
-        // ============================================================
-        document.addEventListener('DOMContentLoaded', function() {
-            loadData();
-            document.getElementById('refreshBtn').addEventListener('click', function() { loadData(); });
-            document.getElementById('empIdInput').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') searchEmployee();
-            });
-        });
-    </script>
+document.getElementById('empIdInput').addEventListener('keypress', function(e) {
+if (e.key === 'Enter') searchEmployee();
+});
+});
 
+</script>
 </body>
 </html>
