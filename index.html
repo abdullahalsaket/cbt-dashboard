@@ -49,7 +49,6 @@
         .refresh-btn:hover { background: rgba(255,255,255,0.25); }
         .refresh-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-        /* TOP BAR */
         .top-bar {
             background: var(--white);
             border-radius: 12px;
@@ -94,7 +93,6 @@
 
         .container { max-width: 1440px; margin: 0 auto; padding: 0 10px; }
 
-        /* FILTER BAR */
         .filter-bar {
             background: var(--white);
             border-radius: 12px;
@@ -178,7 +176,6 @@
 
         .filter-full-width { grid-column: 1 / -1; }
 
-        /* PROGRAM CARDS */
         .program-cards { display: flex; flex-wrap: wrap; gap: 5px 8px; padding: 2px 0; }
         .program-card {
             display: inline-flex;
@@ -326,9 +323,6 @@
         }
         .clear-filters-btn:hover { border-color: var(--danger); color: var(--danger); background: rgba(239,68,68,0.05); }
 
-        /* ============================================================
-           LOADING OVERLAY - عند تحميل البيانات
-           ============================================================ */
         .loading-overlay {
             position: fixed;
             top: 0;
@@ -359,17 +353,8 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
-        .loading-overlay .loading-text {
-            margin-top: 15px;
-            font-size: 0.9rem;
-            color: var(--cpc-blue);
-            font-weight: 600;
-        }
-        .loading-overlay .loading-sub {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            margin-top: 5px;
-        }
+        .loading-overlay .loading-text { margin-top: 15px; font-size: 0.9rem; color: var(--cpc-blue); font-weight: 600; }
+        .loading-overlay .loading-sub { font-size: 0.7rem; color: var(--text-muted); margin-top: 5px; }
 
         @media (max-width: 992px) {
             .filter-grid { grid-template-columns: repeat(3, 1fr); }
@@ -456,9 +441,6 @@
 </head>
 <body>
 
-    <!-- ============================================================
-    LOADING OVERLAY
-    ============================================================ -->
     <div class="loading-overlay" id="loadingOverlay">
         <div class="spinner"></div>
         <div class="loading-text">📊 Loading CBT Data...</div>
@@ -539,6 +521,14 @@
                     </div>
                 </div>
 
+                <!-- Department - إصلاح الفلتر -->
+                <div class="filter-group-item">
+                    <span class="filter-label"><i class="fa-solid fa-building"></i> Department</span>
+                    <div class="filter-options" id="departmentFilters">
+                        <button class="filter-btn active" data-filter="department" data-value="all">All <span class="badge-count" id="deptAllCount">0</span></button>
+                    </div>
+                </div>
+
                 <!-- Activity -->
                 <div class="filter-group-item">
                     <span class="filter-label"><i class="fa-solid fa-bolt"></i> Activity</span>
@@ -551,7 +541,7 @@
 
                 <!-- Sector -->
                 <div class="filter-group-item">
-                    <span class="filter-label"><i class="fa-solid fa-building"></i> Sector</span>
+                    <span class="filter-label"><i class="fa-solid fa-industry"></i> Sector</span>
                     <div class="filter-options">
                         <select class="filter-select" id="sectorSelect">
                             <option value="all">All Sectors</option>
@@ -724,10 +714,10 @@
                             <th>Title</th>
                             <th>C-LVL</th>
                             <th>Grade</th>
+                            <th>Department</th>
                             <th>Activity</th>
                             <th>Sector</th>
                             <th>Area</th>
-                            <th>Department</th>
                             <th>Training Group</th>
                             <th>Training Phase</th>
                             <th>Location</th>
@@ -763,22 +753,21 @@
 
     <script>
         // ============================================================
-        // CONFIG
+        // CONFIG - الرابط الصحيح
         // ============================================================
-        // استخدام رابط CSV مع gid الصحيح
-        const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRu0vhUS8c-hbFznxR_F9K9LNueNeabXiLwMjMzppgpIjJCSNCadsHDVVGxwiKYYHve9-Qtb37ALs8P/pub?gid=1032977671&single=true&output=csv";
+        const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6hwJjzyqBNQXDt774yBBqBnOiMW4AsLvdbJCFUl-v_SyFkgjsVSMM4bznY11o0g/pub?gid=901829913&single=true&output=csv";
 
-        // أسماء الأعمدة - يجب أن تتطابق مع الشيت
+        // أسماء الأعمدة - متطابقة مع الشيت
         const COLUMNS = {
             ID: 'ID',
             Name: 'Name',
             Title: 'Title',
             CLevel: 'C-LVL',
             Grade: 'Grade',
+            Department: 'Department',
             Activity: 'Activity',
             Sector: 'Sector',
             Area: 'Area',
-            Department: 'Department',
             TrainingGroup: 'CPT Training Group',
             TrainingPhase: 'CPT Training Phase',
             Location: 'Location',
@@ -818,20 +807,29 @@
             'Kick Start Program': 'Kick Start'
         };
 
-        // المفاتيح التي ستكون على شكل قائمة منسدلة (أكثر من 4 خيارات)
-        const DROPDOWN_KEYS = ['Activity', 'Sector', 'Area', 'TrainingGroup', 'TrainingPhase', 'Location'];
-
         let allData = [];
         let filteredData = [];
         let chartInstances = {};
         let activeFilters = {
-            program: 'all', clevel: 'all', grade: 'all',
-            activity: 'all', sector: 'all', area: 'all',
-            group: 'all', phase: 'all', location: 'all',
-            attendance: 'all', accommodation: 'all', activitySlicer: 'all'
+            program: 'all',
+            clevel: 'all',
+            grade: 'all',
+            department: 'all',
+            activity: 'all',
+            sector: 'all',
+            area: 'all',
+            group: 'all',
+            phase: 'all',
+            location: 'all',
+            attendance: 'all',
+            accommodation: 'all',
+            activitySlicer: 'all'
         };
-        let isLoading = false, loadError = false, lastSearchedEmployee = null;
-        let refreshInterval = null, dataLoadAttempts = 0;
+        let isLoading = false,
+            loadError = false,
+            lastSearchedEmployee = null;
+        let refreshInterval = null,
+            dataLoadAttempts = 0;
         const MAX_ATTEMPTS = 5;
 
         function printPage() {
@@ -842,44 +840,41 @@
         }
 
         // ============================================================
-        // CSV TO JSON - محسّن مع معالجة أفضل
+        // CSV TO JSON
         // ============================================================
         function csvToJSON(csv) {
             if (!csv || csv.trim() === '') {
                 console.error('❌ CSV is empty');
                 return [];
             }
-            
+
             const lines = csv.split("\n").filter(l => l.trim() !== '');
             if (lines.length < 2) {
                 console.error('❌ CSV has less than 2 lines');
                 return [];
             }
-            
-            // استخراج العناوين
+
             const headers = lines[0].split(",").map(h => h.trim().replace(/^"|"$/g, ''));
             console.log('📋 Headers from sheet:', headers);
-            
-            // التحقق من وجود الأعمدة المطلوبة
-            const requiredColumns = ['ID', 'Name', 'Sector', 'Department'];
+
+            const requiredColumns = ['ID', 'Name'];
             const missingColumns = requiredColumns.filter(col => !headers.includes(col));
             if (missingColumns.length > 0) {
                 console.warn('⚠️ Missing columns:', missingColumns);
                 console.warn('⚠️ Available columns:', headers);
             }
-            
+
             const seenIds = new Set();
             const result = [];
-            
+
             for (let i = 1; i < lines.length; i++) {
                 try {
-                    // معالجة CSV مع وجود فواصل داخل النص
                     const row = lines[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(item => item.trim().replace(/^"|"$/g, ''));
                     const obj = {};
                     headers.forEach((h, idx) => {
                         obj[h] = row[idx] || '';
                     });
-                    
+
                     const id = String(obj['ID'] || '').trim();
                     if (id && !seenIds.has(id)) {
                         seenIds.add(id);
@@ -892,7 +887,7 @@
                     console.warn('⚠️ Error parsing row', i, e);
                 }
             }
-            
+
             console.log('📊 Total unique records loaded:', result.length);
             if (result.length > 0) {
                 console.log('📝 Sample record:', result[0]);
@@ -988,7 +983,8 @@
         function updateActivitySlicer(data) {
             const total = data.length;
             document.getElementById('activityAllCount').textContent = total;
-            const feed = data.filter(r => String(r[COLUMNS.Activity] || '').includes('أعلاف') || String(r[COLUMNS.Activity] || '').includes('اعلاف')).length;
+            const feed = data.filter(r => String(r[COLUMNS.Activity] || '').includes('أعلاف') || String(r[COLUMNS.Activity] || '').includes(
+                'اعلاف')).length;
             document.getElementById('activityFeedCount').textContent = feed;
             const slaughter = data.filter(r => String(r[COLUMNS.Activity] || '').includes('مجازر')).length;
             document.getElementById('activitySlaughterCount').textContent = slaughter;
@@ -1127,13 +1123,15 @@
         }
 
         // ============================================================
-        // POPULATE FILTER BUTTONS (C-LVL, Grade)
+        // POPULATE FILTER BUTTONS (C-LVL, Grade, Department)
         // ============================================================
         function populateFilterButtons() {
             const filterConfigs = [
                 { id: 'clevel', key: COLUMNS.CLevel, container: 'clevelFilters' },
-                { id: 'grade', key: COLUMNS.Grade, container: 'gradeFilters' }
+                { id: 'grade', key: COLUMNS.Grade, container: 'gradeFilters' },
+                { id: 'department', key: COLUMNS.Department, container: 'departmentFilters' }
             ];
+
             filterConfigs.forEach(({ id, key, container }) => {
                 const containerEl = document.getElementById(container);
                 if (!containerEl) return;
@@ -1179,6 +1177,15 @@
                 if (badge) badge.textContent = count;
             });
 
+            // Department
+            document.getElementById('deptAllCount').textContent = data.length;
+            document.querySelectorAll('#departmentFilters .filter-btn:not([data-value="all"])').forEach(btn => {
+                const val = btn.dataset.value;
+                const count = data.filter(r => String(r[COLUMNS.Department] || '').includes(val)).length;
+                const badge = btn.querySelector('.badge-count');
+                if (badge) badge.textContent = count;
+            });
+
             // Attendance
             const { attend, notAttend } = getProgramAttendance(data, COLUMNS.SevenSens);
             document.getElementById('attAllCount').textContent = data.length;
@@ -1207,7 +1214,6 @@
                 const d = r[COLUMNS.Department] || 'Unknown';
                 if (d.trim()) deptCounts[d] = (deptCounts[d] || 0) + 1;
             });
-            // إزالة Unknown
             if (deptCounts['Unknown']) delete deptCounts['Unknown'];
             const sortedDepts = Object.entries(deptCounts).sort((a, b) => b[1] - a[1]);
             if (sortedDepts.length > 0) {
@@ -1390,7 +1396,8 @@
                     return v === 'attend' || v === 'attended' || v.includes('attend');
                 }).length;
             });
-            const progEnrollLabels = Object.keys(progEnroll).map(n => PROGRAM_SHORT[n] || n.replace(' Program', '').substring(0, 10));
+            const progEnrollLabels = Object.keys(progEnroll).map(n => PROGRAM_SHORT[n] || n.replace(' Program', '').substring(0,
+            10));
             const progEnrollValues = Object.values(progEnroll);
 
             destroyCharts();
@@ -1404,11 +1411,13 @@
             const ctx1 = document.getElementById('chartSector').getContext('2d');
             chartInstances.sector = new Chart(ctx1, {
                 type: 'bar',
-                data: { labels: sectorLabels, datasets: [{ label: 'Employees', data: sectorValues, backgroundColor: '#1e3d59', borderRadius: 6, barPercentage: 0.6 }] },
+                data: { labels: sectorLabels, datasets: [{ label: 'Employees', data: sectorValues, backgroundColor: '#1e3d59',
+                        borderRadius: 6, barPercentage: 0.6 }] },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: { legend: { display: false }, datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 9 } } },
+                    plugins: { legend: { display: false }, datalabels: { color: '#1a2332', anchor: 'end', align: 'top',
+                            font: { weight: 'bold', size: 9 } } },
                     scales: { y: { ticks: { font: { size: 8 } } }, x: { ticks: { font: { size: 8 } } } }
                 },
                 plugins: [ChartDataLabels]
@@ -1424,7 +1433,9 @@
                     maintainAspectRatio: false,
                     plugins: {
                         legend: { position: 'bottom', labels: { boxWidth: 8, font: { size: 8 } } },
-                        datalabels: { color: '#1a2332', font: { weight: 'bold', size: 9 }, formatter: (v, ctx) => { const total = ctx.dataset.data.reduce((a, b) => a + b, 0); return total > 0 ? Math.round((v / total) * 100) + '%' : ''; } }
+                        datalabels: { color: '#1a2332', font: { weight: 'bold', size: 9 }, formatter: (v, ctx) => { const total =
+                                ctx.dataset.data.reduce((a, b) => a + b, 0); return total > 0 ? Math.round((v / total) *
+                                    100) + '%' : ''; } }
                     }
                 },
                 plugins: [ChartDataLabels]
@@ -1434,11 +1445,13 @@
             const ctx3 = document.getElementById('chartDepartment').getContext('2d');
             chartInstances.department = new Chart(ctx3, {
                 type: 'bar',
-                data: { labels: deptLabels, datasets: [{ label: 'Employees', data: deptValues, backgroundColor: '#17b890', borderRadius: 6, barPercentage: 0.6 }] },
+                data: { labels: deptLabels, datasets: [{ label: 'Employees', data: deptValues, backgroundColor: '#17b890',
+                        borderRadius: 6, barPercentage: 0.6 }] },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: { legend: { display: false }, datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 8 } } },
+                    plugins: { legend: { display: false }, datalabels: { color: '#1a2332', anchor: 'end', align: 'top',
+                            font: { weight: 'bold', size: 8 } } },
                     indexAxis: 'y',
                     scales: { y: { ticks: { font: { size: 7 } } }, x: { ticks: { font: { size: 7 } } } }
                 },
@@ -1452,8 +1465,10 @@
                 data: {
                     labels: attSectors,
                     datasets: [
-                        { label: 'Attendance %', data: attValues, backgroundColor: '#3b82f6', borderRadius: 4, barPercentage: 0.4 },
-                        { label: 'Completion %', data: compValues, backgroundColor: '#10b981', borderRadius: 4, barPercentage: 0.4 }
+                        { label: 'Attendance %', data: attValues, backgroundColor: '#3b82f6', borderRadius: 4,
+                            barPercentage: 0.4 },
+                        { label: 'Completion %', data: compValues, backgroundColor: '#10b981', borderRadius: 4,
+                            barPercentage: 0.4 }
                     ]
                 },
                 options: {
@@ -1461,9 +1476,11 @@
                     maintainAspectRatio: false,
                     plugins: {
                         legend: { position: 'top', labels: { boxWidth: 8, font: { size: 8 } } },
-                        datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 8 }, formatter: v => v + '%' }
+                        datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 8 },
+                            formatter: v => v + '%' }
                     },
-                    scales: { y: { beginAtZero: true, max: 100, ticks: { callback: v => v + '%', font: { size: 8 } } }, x: { ticks: { font: { size: 8 } } } }
+                    scales: { y: { beginAtZero: true, max: 100, ticks: { callback: v => v + '%', font: { size: 8 } } },
+                        x: { ticks: { font: { size: 8 } } } }
                 },
                 plugins: [ChartDataLabels]
             });
@@ -1472,13 +1489,16 @@
             const ctx5 = document.getElementById('chartPhase').getContext('2d');
             chartInstances.phase = new Chart(ctx5, {
                 type: 'pie',
-                data: { labels: phaseLabels, datasets: [{ data: phaseValues, backgroundColor: colors.slice(0, phaseLabels.length) }] },
+                data: { labels: phaseLabels, datasets: [{ data: phaseValues, backgroundColor: colors.slice(0, phaseLabels
+                            .length) }] },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
                         legend: { position: 'bottom', labels: { boxWidth: 8, font: { size: 8 } } },
-                        datalabels: { color: '#1a2332', font: { weight: 'bold', size: 9 }, formatter: (v, ctx) => { const total = ctx.dataset.data.reduce((a, b) => a + b, 0); return total > 0 ? Math.round((v / total) * 100) + '%' : ''; } }
+                        datalabels: { color: '#1a2332', font: { weight: 'bold', size: 9 }, formatter: (v, ctx) => { const total =
+                                ctx.dataset.data.reduce((a, b) => a + b, 0); return total > 0 ? Math.round((v / total) *
+                                    100) + '%' : ''; } }
                     }
                 },
                 plugins: [ChartDataLabels]
@@ -1488,11 +1508,13 @@
             const ctx6 = document.getElementById('chartLocation').getContext('2d');
             chartInstances.location = new Chart(ctx6, {
                 type: 'bar',
-                data: { labels: locLabels, datasets: [{ label: 'Employees', data: locValues, backgroundColor: '#ff6e40', borderRadius: 6, barPercentage: 0.6 }] },
+                data: { labels: locLabels, datasets: [{ label: 'Employees', data: locValues, backgroundColor: '#ff6e40',
+                        borderRadius: 6, barPercentage: 0.6 }] },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: { legend: { display: false }, datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 8 } } },
+                    plugins: { legend: { display: false }, datalabels: { color: '#1a2332', anchor: 'end', align: 'top',
+                            font: { weight: 'bold', size: 8 } } },
                     scales: { y: { ticks: { font: { size: 8 } } }, x: { ticks: { font: { size: 8 } } } }
                 },
                 plugins: [ChartDataLabels]
@@ -1502,11 +1524,13 @@
             const ctx7 = document.getElementById('chartQuality').getContext('2d');
             chartInstances.quality = new Chart(ctx7, {
                 type: 'bar',
-                data: { labels: qualityLabels, datasets: [{ label: 'Records', data: qualityValues, backgroundColor: '#3b82f6', borderRadius: 6, barPercentage: 0.6 }] },
+                data: { labels: qualityLabels, datasets: [{ label: 'Records', data: qualityValues, backgroundColor: '#3b82f6',
+                        borderRadius: 6, barPercentage: 0.6 }] },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: { legend: { display: false }, datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 8 } } },
+                    plugins: { legend: { display: false }, datalabels: { color: '#1a2332', anchor: 'end', align: 'top',
+                            font: { weight: 'bold', size: 8 } } },
                     scales: { y: { ticks: { font: { size: 8 } } }, x: { ticks: { font: { size: 7 } } } }
                 },
                 plugins: [ChartDataLabels]
@@ -1529,7 +1553,8 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: { legend: { display: false }, datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 8 } } },
+                    plugins: { legend: { display: false }, datalabels: { color: '#1a2332', anchor: 'end', align: 'top',
+                            font: { weight: 'bold', size: 8 } } },
                     scales: { y: { ticks: { font: { size: 8 } } }, x: { ticks: { font: { size: 7 } } } }
                 },
                 plugins: [ChartDataLabels]
@@ -1540,10 +1565,10 @@
             document.getElementById('statusText').textContent = 'Live';
             document.getElementById('statusIcon').className = 'fa-solid fa-cloud';
             document.getElementById('loadingMsg').className = 'loading-status success';
-            document.getElementById('loadingMsg').innerHTML = '<i class="fa-solid fa-check-circle"></i> Data loaded: ' + data.length + ' records';
+            document.getElementById('loadingMsg').innerHTML = '<i class="fa-solid fa-check-circle"></i> Data loaded: ' + data
+                .length + ' records';
             document.getElementById('refreshBtn').disabled = false;
 
-            // إخفاء overlay التحميل
             document.getElementById('loadingOverlay').classList.add('hidden');
         }
 
@@ -1554,7 +1579,7 @@
             const charts = [
                 { chart: chartInstances.sector, filterType: 'sector', selectId: 'sectorSelect' },
                 { chart: chartInstances.level, filterType: 'clevel', selectId: 'clevelFilters' },
-                { chart: chartInstances.department, filterType: 'department', selectId: 'deptFilters' },
+                { chart: chartInstances.department, filterType: 'department', selectId: 'departmentFilters' },
                 { chart: chartInstances.location, filterType: 'location', selectId: 'locationSelect' },
                 { chart: chartInstances.phase, filterType: 'phase', selectId: 'phaseSelect' },
                 { chart: chartInstances.programs, filterType: 'program', selectId: 'programFilters' }
@@ -1571,14 +1596,16 @@
                         if (filterType === 'program') {
                             document.querySelectorAll('.program-card').forEach(c => c.classList.remove('active'));
                             if (activeFilters.program !== 'all') {
-                                document.querySelector(`.program-card[data-value="${filterValue}"]`)?.classList.add('active');
+                                document.querySelector(`.program-card[data-value="${filterValue}"]`)?.classList.add(
+                                'active');
                             } else {
                                 document.querySelector('.program-card[data-value="all"]')?.classList.add('active');
                             }
                         } else {
                             const select = document.getElementById(selectId);
                             if (select && select.tagName === 'SELECT') {
-                                if (activeFilters[filterType] !== 'all' && Array.from(select.options).some(o => o.value === filterValue)) {
+                                if (activeFilters[filterType] !== 'all' && Array.from(select.options).some(o => o
+                                        .value === filterValue)) {
                                     select.value = filterValue;
                                 } else {
                                     select.value = 'all';
@@ -1600,7 +1627,8 @@
                         applyFilters();
                     }
                 });
-                chart.on('mouseover', function(e) { if (e.dataIndex !== undefined) document.body.style.cursor = 'pointer'; });
+                chart.on('mouseover', function(e) { if (e.dataIndex !== undefined) document.body.style.cursor =
+                    'pointer'; });
                 chart.on('mouseout', function() { document.body.style.cursor = 'default'; });
             });
         }
@@ -1620,7 +1648,8 @@
 
             // Activity slicer
             if (activeFilters.activitySlicer && activeFilters.activitySlicer !== 'all') {
-                filteredData = filteredData.filter(r => String(r[COLUMNS.Activity] || '').includes(activeFilters.activitySlicer));
+                filteredData = filteredData.filter(r => String(r[COLUMNS.Activity] || '').includes(activeFilters
+                .activitySlicer));
             }
 
             // Program filter
@@ -1635,14 +1664,24 @@
             }
 
             // Other filters
-            if (activeFilters.clevel !== 'all') filteredData = filteredData.filter(r => String(r[COLUMNS.CLevel] || '').includes(activeFilters.clevel));
-            if (activeFilters.grade !== 'all') filteredData = filteredData.filter(r => String(r[COLUMNS.Grade] || '').includes(activeFilters.grade));
-            if (activeFilters.activity !== 'all') filteredData = filteredData.filter(r => String(r[COLUMNS.Activity] || '').includes(activeFilters.activity));
-            if (activeFilters.sector !== 'all') filteredData = filteredData.filter(r => String(r[COLUMNS.Sector] || '').includes(activeFilters.sector));
-            if (activeFilters.area !== 'all') filteredData = filteredData.filter(r => String(r[COLUMNS.Area] || '').includes(activeFilters.area));
-            if (activeFilters.group !== 'all') filteredData = filteredData.filter(r => String(r[COLUMNS.TrainingGroup] || '').includes(activeFilters.group));
-            if (activeFilters.phase !== 'all') filteredData = filteredData.filter(r => String(r[COLUMNS.TrainingPhase] || '').includes(activeFilters.phase));
-            if (activeFilters.location !== 'all') filteredData = filteredData.filter(r => String(r[COLUMNS.Location] || '').includes(activeFilters.location));
+            if (activeFilters.clevel !== 'all') filteredData = filteredData.filter(r => String(r[COLUMNS.CLevel] || '')
+                .includes(activeFilters.clevel));
+            if (activeFilters.grade !== 'all') filteredData = filteredData.filter(r => String(r[COLUMNS.Grade] || '')
+                .includes(activeFilters.grade));
+            if (activeFilters.department !== 'all') filteredData = filteredData.filter(r => String(r[COLUMNS.Department] ||
+                    '').includes(activeFilters.department));
+            if (activeFilters.activity !== 'all') filteredData = filteredData.filter(r => String(r[COLUMNS.Activity] || '')
+                .includes(activeFilters.activity));
+            if (activeFilters.sector !== 'all') filteredData = filteredData.filter(r => String(r[COLUMNS.Sector] || '')
+                .includes(activeFilters.sector));
+            if (activeFilters.area !== 'all') filteredData = filteredData.filter(r => String(r[COLUMNS.Area] || '')
+                .includes(activeFilters.area));
+            if (activeFilters.group !== 'all') filteredData = filteredData.filter(r => String(r[COLUMNS.TrainingGroup] ||
+                    '').includes(activeFilters.group));
+            if (activeFilters.phase !== 'all') filteredData = filteredData.filter(r => String(r[COLUMNS.TrainingPhase] ||
+                    '').includes(activeFilters.phase));
+            if (activeFilters.location !== 'all') filteredData = filteredData.filter(r => String(r[COLUMNS.Location] || '')
+                .includes(activeFilters.location));
 
             if (activeFilters.attendance === 'attend') {
                 filteredData = filteredData.filter(r => {
@@ -1703,6 +1742,7 @@
                 program: 'all',
                 clevel: 'all',
                 grade: 'all',
+                department: 'all',
                 activity: 'all',
                 sector: 'all',
                 area: 'all',
@@ -1780,10 +1820,10 @@
                     <td>${emp[COLUMNS.Title] || 'N/A'}</td>
                     <td>${emp[COLUMNS.CLevel] || 'N/A'}</td>
                     <td>${emp[COLUMNS.Grade] || 'N/A'}</td>
+                    <td>${emp[COLUMNS.Department] || 'N/A'}</td>
                     <td>${emp[COLUMNS.Activity] || 'N/A'}</td>
                     <td>${emp[COLUMNS.Sector] || 'N/A'}</td>
                     <td>${emp[COLUMNS.Area] || 'N/A'}</td>
-                    <td>${emp[COLUMNS.Department] || 'N/A'}</td>
                     <td>${emp[COLUMNS.TrainingGroup] || 'N/A'}</td>
                     <td>${emp[COLUMNS.TrainingPhase] || 'N/A'}</td>
                     <td>${emp[COLUMNS.Location] || 'N/A'}</td>
@@ -1814,11 +1854,14 @@
 
             document.getElementById('resName').textContent = emp[COLUMNS.Name] || 'Not recorded';
             document.getElementById('resTitle').textContent = emp[COLUMNS.Title] || 'Not recorded';
-            document.getElementById('resSector').textContent = (emp[COLUMNS.Sector] || '-') + ' / ' + (emp[COLUMNS.Department] || '-');
+            document.getElementById('resSector').textContent = (emp[COLUMNS.Sector] || '-') + ' / ' + (emp[COLUMNS.Department] ||
+                '-');
             document.getElementById('resLevel').textContent = (emp[COLUMNS.CLevel] || '-') + ' / ' + (emp[COLUMNS.Grade] || '-');
-            document.getElementById('resActivityArea').textContent = (emp[COLUMNS.Activity] || '-') + ' / ' + (emp[COLUMNS.Area] || '-');
+            document.getElementById('resActivityArea').textContent = (emp[COLUMNS.Activity] || '-') + ' / ' + (emp[COLUMNS.Area] ||
+                '-');
             document.getElementById('resLocation').textContent = emp[COLUMNS.Location] || 'Not specified';
-            document.getElementById('resGroupPhase').textContent = (emp[COLUMNS.TrainingGroup] || '-') + ' / ' + (emp[COLUMNS.TrainingPhase] || '-');
+            document.getElementById('resGroupPhase').textContent = (emp[COLUMNS.TrainingGroup] || '-') + ' / ' + (emp[COLUMNS
+                .TrainingPhase] || '-');
             const v = String(emp[COLUMNS.SevenSens] || '').toLowerCase();
             const attText = (v === 'attend' || v === 'attended' || v.includes('attend')) ? '✅ Attended' : '❌ Not Attended';
             const accom = String(emp[COLUMNS.Accommodation] || '').toLowerCase();
@@ -1837,7 +1880,8 @@
             document.getElementById('statNotAttended').textContent = '❌ Not Attended: ' + notAttendedCount;
             document.getElementById('statGroup').textContent = '📋 Group: ' + (emp[COLUMNS.TrainingGroup] || 'N/A');
             document.getElementById('statLocation').textContent = '📍 Location: ' + (emp[COLUMNS.Location] || 'N/A');
-            document.getElementById('statAccommodation').textContent = '🏠 Accommodation: ' + (accom === 'yes' ? '✅ Yes' : accom === 'no' ? '❌ No' : 'N/A');
+            document.getElementById('statAccommodation').textContent = '🏠 Accommodation: ' + (accom === 'yes' ? '✅ Yes' :
+                accom === 'no' ? '❌ No' : 'N/A');
             document.getElementById('perfTotal').textContent = fields.length;
             document.getElementById('perfCompleted').textContent = attendedCount;
             document.getElementById('perfPending').textContent = fields.length - attendedCount - notAttendedCount;
@@ -1876,7 +1920,8 @@
             const printWindow = window.open('', '_blank', 'width=800,height=600');
             if (!printWindow) { alert('Please allow popups for printing.'); return; }
             const sevenSens = String(emp[COLUMNS.SevenSens] || '').toLowerCase();
-            const attendanceText = (sevenSens === 'attend' || sevenSens === 'attended' || sevenSens.includes('attend')) ? '✅ Attended' :
+            const attendanceText = (sevenSens === 'attend' || sevenSens === 'attended' || sevenSens.includes('attend')) ?
+                '✅ Attended' :
                 '❌ Not Attended';
             const accom = String(emp[COLUMNS.Accommodation] || '').toLowerCase();
             const accomText = accom === 'yes' ? '✅ Yes' : accom === 'no' ? '❌ No' : 'N/A';
@@ -1940,7 +1985,7 @@
         }
 
         // ============================================================
-        // LOAD DATA - محسّن مع تأكيد تحميل البيانات
+        // LOAD DATA
         // ============================================================
         async function loadData() {
             if (isLoading) return;
@@ -1949,8 +1994,7 @@
             msg.className = 'loading-status';
             msg.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Loading data...';
             document.getElementById('refreshBtn').disabled = true;
-            
-            // إظهار Overlay التحميل
+
             document.getElementById('loadingOverlay').classList.remove('hidden');
 
             try {
@@ -1959,11 +2003,11 @@
                 if (!response.ok) throw new Error(`HTTP ${response.status} - ${response.statusText}`);
                 const csv = await response.text();
                 console.log('📄 CSV length:', csv.length, 'characters');
-                
+
                 if (csv.length < 100) {
                     throw new Error('CSV data is too short - possibly empty or wrong format');
                 }
-                
+
                 const jsonData = csvToJSON(csv);
                 if (jsonData.length === 0) {
                     throw new Error('No data found in sheet - check the sheet URL and permissions');
@@ -1978,32 +2022,35 @@
                 document.getElementById('printDateHeader').textContent = now;
                 document.getElementById('printDateFooter').textContent = now;
 
-                // تجهيز الفلاتر
                 populateFilterButtons();
                 populateDropdowns();
                 setupFilterButtons();
                 applyFilters();
-                
+
                 showAlert('success', `✅ Data refreshed! ${allData.length} employees loaded.`);
-                
+
             } catch (err) {
                 console.error('❌ Error loading data:', err);
                 loadError = true;
                 dataLoadAttempts++;
-                
+
                 if (dataLoadAttempts < MAX_ATTEMPTS) {
-                    msg.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> Retrying... (${dataLoadAttempts}/${MAX_ATTEMPTS})`;
-                    document.getElementById('loadingOverlay').querySelector('.loading-text').textContent = `🔄 Retrying... (${dataLoadAttempts}/${MAX_ATTEMPTS})`;
+                    msg.innerHTML =
+                        `<i class="fa-solid fa-circle-exclamation"></i> Retrying... (${dataLoadAttempts}/${MAX_ATTEMPTS})`;
+                    document.getElementById('loadingOverlay').querySelector('.loading-text').textContent =
+                        `🔄 Retrying... (${dataLoadAttempts}/${MAX_ATTEMPTS})`;
                     setTimeout(() => loadData(), 3000);
                 } else {
                     msg.className = 'loading-status error';
-                    msg.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Could not load data. Please refresh the page.';
+                    msg.innerHTML =
+                    '<i class="fa-solid fa-circle-exclamation"></i> Could not load data. Please refresh the page.';
                     document.getElementById('statusText').textContent = 'Error';
                     document.getElementById('statusIcon').className = 'fa-solid fa-cloud-arrow-up';
-                    document.getElementById('loadingOverlay').querySelector('.loading-text').textContent = '❌ Failed to load data';
-                    document.getElementById('loadingOverlay').querySelector('.loading-sub').textContent = 'Please refresh the page or check the data source';
-                    
-                    // عرض رسالة في الجدول
+                    document.getElementById('loadingOverlay').querySelector('.loading-text').textContent =
+                        '❌ Failed to load data';
+                    document.getElementById('loadingOverlay').querySelector('.loading-sub').textContent =
+                        'Please refresh the page or check the data source';
+
                     document.getElementById('detailTableBody').innerHTML = `
                         <tr><td colspan="14" style="text-align:center;padding:30px;color:var(--danger);">
                             <i class="fa-solid fa-circle-exclamation" style="font-size:2rem;display:block;margin-bottom:10px;"></i>
@@ -2030,7 +2077,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             setupSlicerButtons();
             loadData();
-            
+
             refreshInterval = setInterval(() => {
                 console.log('🔄 Auto-refreshing...');
                 loadData();
