@@ -32,31 +32,31 @@
         .navbar {
             background: linear-gradient(135deg, var(--cpc-blue-dark) 0%, var(--cpc-blue) 100%);
             color: white;
-            padding: 10px 20px;
+            padding: 8px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 6px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
-        .navbar .logo-left img, .navbar .logo-right img { height: 40px; width: auto; background: rgba(255,255,255,0.95); padding: 2px 6px; border-radius: 8px; }
+        .navbar .logo-left img, .navbar .logo-right img { height: 35px; width: auto; background: rgba(255,255,255,0.95); padding: 2px 6px; border-radius: 8px; }
         .navbar .title-center { flex: 1; text-align: center; }
-        .navbar .title-center h1 { font-size: 1.3rem; font-weight: 800; background: linear-gradient(135deg, #ffffff 0%, var(--koki-orange) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .navbar .title-center .subtitle { font-size: 0.6rem; opacity: 0.7; letter-spacing: 1px; text-transform: uppercase; -webkit-text-fill-color: rgba(255,255,255,0.6); }
-        .navbar .status-badge { font-size: 0.6rem; background: rgba(255,255,255,0.1); padding: 4px 12px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 6px; }
-        .refresh-btn { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 4px 12px; border-radius: 30px; font-size: 0.6rem; cursor: pointer; transition: all 0.2s; font-family: 'Cairo', sans-serif; }
+        .navbar .title-center h1 { font-size: 1.2rem; font-weight: 800; background: linear-gradient(135deg, #ffffff 0%, var(--koki-orange) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .navbar .title-center .subtitle { font-size: 0.55rem; opacity: 0.7; letter-spacing: 1px; text-transform: uppercase; -webkit-text-fill-color: rgba(255,255,255,0.6); }
+        .navbar .status-badge { font-size: 0.55rem; background: rgba(255,255,255,0.1); padding: 3px 10px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 5px; }
+        .refresh-btn { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 3px 10px; border-radius: 30px; font-size: 0.55rem; cursor: pointer; transition: all 0.2s; font-family: 'Cairo', sans-serif; }
         .refresh-btn:hover { background: rgba(255,255,255,0.25); }
         .refresh-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
         /* ============================================================
-           TOP BAR - سلايسر النشاط + أزرار الطباعة (تحت بعض)
+           TOP BAR - سلايسر النشاط + أزرار الطباعة
            ============================================================ */
         .top-bar {
             background: var(--white);
             border-radius: 12px;
-            padding: 8px 18px;
-            margin: 12px auto;
+            padding: 8px 16px;
+            margin: 10px auto;
             max-width: 1440px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
             border: 1px solid #e8ecf0;
@@ -64,33 +64,33 @@
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
         }
         .top-bar .slicer-section {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
             flex-wrap: wrap;
         }
         .top-bar .slicer-section .slicer-label {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 700;
             color: var(--cpc-blue);
             text-transform: uppercase;
             letter-spacing: 0.5px;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
         }
         .top-bar .slicer-section .slicer-label i { color: var(--koki-orange); }
-        .top-bar .slicer-section .slicer-buttons { display: flex; gap: 6px; flex-wrap: wrap; }
+        .top-bar .slicer-section .slicer-buttons { display: flex; gap: 5px; flex-wrap: wrap; }
         .top-bar .slicer-section .slicer-btn {
-            padding: 4px 16px;
+            padding: 4px 14px;
             border-radius: 30px;
             border: 2px solid #e2e8f0;
             background: transparent;
             font-family: 'Cairo', sans-serif;
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             font-weight: 600;
             color: var(--text-muted);
             cursor: pointer;
@@ -98,36 +98,31 @@
         }
         .top-bar .slicer-section .slicer-btn:hover { border-color: var(--cpc-blue); color: var(--cpc-blue); background: rgba(30,61,89,0.04); }
         .top-bar .slicer-section .slicer-btn.active { border-color: var(--koki-orange); background: var(--koki-orange); color: white; box-shadow: 0 4px 12px rgba(255,110,64,0.3); }
-        .top-bar .slicer-section .slicer-btn .badge { background: rgba(255,255,255,0.2); border-radius: 20px; padding: 0 8px; font-size: 0.5rem; margin-left: 4px; }
+        .top-bar .slicer-section .slicer-btn .badge { background: rgba(255,255,255,0.2); border-radius: 20px; padding: 0 6px; font-size: 0.45rem; margin-left: 3px; }
         .top-bar .slicer-section .slicer-btn.active .badge { background: rgba(255,255,255,0.25); }
 
-        /* أزرار الطباعة - تحت بعض */
         .top-bar .action-buttons {
             display: flex;
-            flex-direction: column;
             gap: 6px;
             flex-shrink: 0;
-            align-items: stretch;
-            min-width: 110px;
         }
         .top-bar .action-btn {
-            padding: 6px 14px;
+            padding: 5px 16px;
             border-radius: 30px;
             border: 2px solid var(--cpc-blue);
             background: var(--cpc-blue);
             color: white;
             font-family: 'Cairo', sans-serif;
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
             display: inline-flex;
             align-items: center;
+            gap: 5px;
+            height: 28px;
+            min-width: 80px;
             justify-content: center;
-            gap: 6px;
-            height: 30px;
-            width: 100%;
-            min-width: 100px;
         }
         .top-bar .action-btn:hover {
             background: var(--cpc-blue-dark);
@@ -154,56 +149,149 @@
         .alerts-container {
             background: var(--white);
             border-radius: 12px;
-            padding: 12px 18px;
-            margin: 12px auto;
+            padding: 10px 16px;
+            margin: 10px auto;
             max-width: 1440px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
             border: 1px solid #e8ecf0;
             display: none;
         }
         .alerts-container.show { display: block; }
-        .alerts-container h3 { font-size: 0.8rem; color: var(--cpc-blue); font-weight: 700; margin-bottom: 6px; }
-        .alerts-container .alert-item { display: flex; align-items: center; gap: 10px; padding: 6px 12px; border-radius: 8px; margin-bottom: 4px; font-size: 0.75rem; }
-        .alerts-container .alert-item i { font-size: 1rem; }
+        .alerts-container h3 { font-size: 0.75rem; color: var(--cpc-blue); font-weight: 700; margin-bottom: 5px; }
+        .alerts-container .alert-item { display: flex; align-items: center; gap: 8px; padding: 5px 10px; border-radius: 8px; margin-bottom: 3px; font-size: 0.7rem; }
+        .alerts-container .alert-item i { font-size: 0.9rem; }
         .alert-danger { background: rgba(239,68,68,0.08); color: var(--danger); border-left: 3px solid var(--danger); }
         .alert-warning { background: rgba(245,158,11,0.08); color: var(--warning); border-left: 3px solid var(--warning); }
         .alert-info { background: rgba(59,130,246,0.08); color: var(--info); border-left: 3px solid var(--info); }
         .alert-success { background: rgba(16,185,129,0.08); color: var(--success); border-left: 3px solid var(--success); }
 
+        .container { max-width: 1440px; margin: 0 auto; padding: 0 10px; }
+
+        /* ============================================================
+           FILTER BAR - كل المفاتيح في سطور
+           ============================================================ */
         .filter-bar {
             background: var(--white);
-            padding: 14px 18px;
             border-radius: 12px;
-            margin: 12px auto;
+            padding: 12px 16px;
+            margin: 10px auto;
             max-width: 1440px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
             border: 1px solid #e8ecf0;
         }
-        .filter-bar .filter-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 15px; padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.04); }
-        .filter-bar .filter-row:last-child { border-bottom: none; padding-bottom: 0; }
-        .filter-bar .filter-row:first-child { padding-top: 0; }
-        .filter-bar .filter-label { font-size: 0.6rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; min-width: 60px; flex-shrink: 0; }
-
-        /* ============================================================
-           PROGRAM CARDS - شكل البطاقات الجديد
-           ============================================================ */
-        .program-cards {
+        .filter-row {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px 10px;
+            align-items: center;
+            gap: 6px 12px;
             padding: 4px 0;
-            width: 100%;
+            border-bottom: 1px solid rgba(0,0,0,0.04);
         }
-        .program-card {
+        .filter-row:last-child { border-bottom: none; padding-bottom: 0; }
+        .filter-row:first-child { padding-top: 0; }
+        .filter-label {
+            font-size: 0.6rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            min-width: 50px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .filter-label i { font-size: 0.7rem; }
+        .filter-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3px 5px;
+            flex: 1;
+            align-items: center;
+        }
+        .filter-btn {
+            padding: 2px 10px;
+            border-radius: 30px;
+            border: 2px solid #e2e8f0;
+            background: transparent;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.5rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            padding: 5px 14px;
+            gap: 3px;
+        }
+        .filter-btn:hover { border-color: var(--cpc-blue); color: var(--cpc-blue); background: rgba(30,61,89,0.04); }
+        .filter-btn.active { border-color: var(--koki-orange); background: var(--koki-orange); color: white; box-shadow: 0 4px 12px rgba(255,110,64,0.3); }
+        .filter-btn .badge-count { background: rgba(255,255,255,0.2); border-radius: 20px; padding: 0 5px; font-size: 0.4rem; margin-left: 2px; }
+        .filter-btn.active .badge-count { background: rgba(255,255,255,0.25); }
+        .filter-btn .badge-attend { color: var(--success); }
+        .filter-btn .badge-not-attend { color: var(--danger); }
+        .filter-btn.active .badge-attend,
+        .filter-btn.active .badge-not-attend { color: rgba(255,255,255,0.9); }
+
+        .filter-select {
+            padding: 2px 20px 2px 8px;
             border-radius: 30px;
             border: 2px solid #e2e8f0;
             background: var(--white);
             font-family: 'Cairo', sans-serif;
-            font-size: 0.6rem;
+            font-size: 0.5rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath fill='%236b7a8f' d='M5 7L1 3h8z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 6px center;
+            min-width: 80px;
+            max-width: 160px;
+        }
+        .filter-select:hover { border-color: var(--cpc-blue); }
+        .filter-select:focus { outline: none; border-color: var(--koki-orange); box-shadow: 0 0 0 3px rgba(255,110,64,0.15); }
+
+        .clear-filters-btn {
+            padding: 3px 12px;
+            border-radius: 30px;
+            border: 2px solid #e2e8f0;
+            background: transparent;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.5rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+        }
+        .clear-filters-btn:hover { border-color: var(--danger); color: var(--danger); background: rgba(239,68,68,0.05); }
+
+        /* ============================================================
+           PROGRAM CARDS
+           ============================================================ */
+        .program-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px 8px;
+            padding: 2px 0;
+        }
+        .program-card {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px 10px;
+            border-radius: 30px;
+            border: 2px solid #e2e8f0;
+            background: var(--white);
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.5rem;
             font-weight: 600;
             color: var(--text-muted);
             cursor: pointer;
@@ -211,277 +299,102 @@
             white-space: nowrap;
             box-shadow: 0 2px 4px rgba(0,0,0,0.03);
         }
-        .program-card:hover {
-            border-color: var(--cpc-blue);
-            color: var(--cpc-blue);
-            background: rgba(30,61,89,0.04);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        }
-        .program-card.active {
-            border-color: var(--koki-orange);
-            background: var(--koki-orange);
-            color: white;
-            box-shadow: 0 4px 12px rgba(255,110,64,0.3);
-        }
-        .program-card .prog-icon {
-            font-size: 0.7rem;
-            opacity: 0.7;
-        }
-        .program-card.active .prog-icon {
-            opacity: 1;
-        }
-        .program-card .prog-name {
-            font-weight: 700;
-        }
-        .program-card .prog-count {
-            background: rgba(0,0,0,0.06);
-            border-radius: 20px;
-            padding: 0 8px;
-            font-size: 0.5rem;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 3px;
-        }
-        .program-card.active .prog-count {
-            background: rgba(255,255,255,0.2);
-            color: rgba(255,255,255,0.95);
-        }
-        .program-card .prog-count .attend-count {
-            color: var(--success);
-        }
-        .program-card .prog-count .not-attend-count {
-            color: var(--danger);
-        }
-        .program-card.active .prog-count .attend-count {
-            color: rgba(255,255,255,0.9);
-        }
-        .program-card.active .prog-count .not-attend-count {
-            color: rgba(255,255,255,0.9);
-        }
+        .program-card:hover { border-color: var(--cpc-blue); color: var(--cpc-blue); background: rgba(30,61,89,0.04); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        .program-card.active { border-color: var(--koki-orange); background: var(--koki-orange); color: white; box-shadow: 0 4px 12px rgba(255,110,64,0.3); }
+        .program-card .prog-icon { font-size: 0.6rem; opacity: 0.7; }
+        .program-card.active .prog-icon { opacity: 1; }
+        .program-card .prog-name { font-weight: 700; }
+        .program-card .prog-count { background: rgba(0,0,0,0.06); border-radius: 20px; padding: 0 5px; font-size: 0.45rem; font-weight: 700; display: inline-flex; align-items: center; gap: 2px; }
+        .program-card.active .prog-count { background: rgba(255,255,255,0.2); color: rgba(255,255,255,0.95); }
+        .program-card .prog-count .attend-count { color: var(--success); }
+        .program-card .prog-count .not-attend-count { color: var(--danger); }
+        .program-card.active .prog-count .attend-count,
+        .program-card.active .prog-count .not-attend-count { color: rgba(255,255,255,0.9); }
 
-        /* ============================================================
-           FILTER ITEMS - كل مفتاح في سطر مع أيقونة
-           ============================================================ */
-        .filter-items-container {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            width: 100%;
-            padding: 4px 0;
-        }
-        .filter-item-row {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-            padding: 3px 0;
-        }
-        .filter-item-row .filter-icon-label {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            min-width: 100px;
-            flex-shrink: 0;
-        }
-        .filter-item-row .filter-icon-label i {
-            font-size: 0.85rem;
-            color: var(--cpc-blue);
-            width: 20px;
-            text-align: center;
-        }
-        .filter-item-row .filter-icon-label span {
-            font-size: 0.65rem;
-            font-weight: 700;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-        .filter-item-row .filter-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px 6px;
-            flex: 1;
-            align-items: center;
-        }
-        .filter-item-row .filter-btn {
-            padding: 3px 12px;
-            border-radius: 30px;
-            border: 2px solid #e2e8f0;
-            background: transparent;
-            font-family: 'Cairo', sans-serif;
-            font-size: 0.55rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: all 0.2s;
-            white-space: nowrap;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-        }
-        .filter-item-row .filter-btn:hover {
-            border-color: var(--cpc-blue);
-            color: var(--cpc-blue);
-            background: rgba(30,61,89,0.04);
-        }
-        .filter-item-row .filter-btn.active {
-            border-color: var(--koki-orange);
-            background: var(--koki-orange);
-            color: white;
-            box-shadow: 0 4px 12px rgba(255,110,64,0.3);
-        }
-        .filter-item-row .filter-btn .badge-count {
-            background: rgba(255,255,255,0.2);
-            border-radius: 20px;
-            padding: 0 6px;
-            font-size: 0.45rem;
-            margin-left: 2px;
-        }
-        .filter-item-row .filter-btn.active .badge-count {
-            background: rgba(255,255,255,0.25);
-        }
-        .filter-item-row .filter-btn .badge-attend {
-            color: var(--success);
-        }
-        .filter-item-row .filter-btn .badge-not-attend {
-            color: var(--danger);
-        }
-        .filter-item-row .filter-btn.active .badge-attend {
-            color: rgba(255,255,255,0.9);
-        }
-        .filter-item-row .filter-btn.active .badge-not-attend {
-            color: rgba(255,255,255,0.9);
-        }
-        .filter-item-row .filter-select {
-            padding: 3px 24px 3px 10px;
-            border-radius: 30px;
-            border: 2px solid #e2e8f0;
-            background: var(--white);
-            font-family: 'Cairo', sans-serif;
-            font-size: 0.55rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: all 0.2s;
-            appearance: none;
-            -webkit-appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7a8f' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 8px center;
-            min-width: 100px;
-            max-width: 200px;
-        }
-        .filter-item-row .filter-select:hover { border-color: var(--cpc-blue); }
-        .filter-item-row .filter-select:focus { outline: none; border-color: var(--koki-orange); box-shadow: 0 0 0 3px rgba(255,110,64,0.15); }
-
-        .clear-filters-btn {
-            padding: 4px 16px;
-            border-radius: 30px;
-            border: 2px solid #e2e8f0;
-            background: transparent;
-            font-family: 'Cairo', sans-serif;
-            font-size: 0.55rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-        }
-        .clear-filters-btn:hover { border-color: var(--danger); color: var(--danger); background: rgba(239,68,68,0.05); }
-
-        .container { max-width: 1440px; margin: 0 auto; padding: 0 12px; }
-
-        .brief-section { background: linear-gradient(135deg, var(--cpc-blue-dark) 0%, #17b890 100%); color: white; padding: 12px 18px; border-radius: 12px; margin: 12px 0; }
-        .brief-section h2 { font-size: 0.95rem; font-weight: 700; }
-        .brief-section p { font-size: 0.8rem; opacity: 0.92; line-height: 1.6; }
+        .brief-section { background: linear-gradient(135deg, var(--cpc-blue-dark) 0%, #17b890 100%); color: white; padding: 10px 16px; border-radius: 12px; margin: 10px 0; }
+        .brief-section h2 { font-size: 0.85rem; font-weight: 700; }
+        .brief-section p { font-size: 0.75rem; opacity: 0.92; line-height: 1.5; }
         .brief-section .highlight { color: var(--koki-orange); font-weight: 700; }
 
-        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin: 12px 0; }
-        .kpi-card { background: var(--white); padding: 10px 14px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); display: flex; align-items: center; justify-content: space-between; border-bottom: 3px solid var(--cpc-blue); transition: all 0.2s; cursor: pointer; }
+        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; margin: 10px 0; }
+        .kpi-card { background: var(--white); padding: 8px 12px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); display: flex; align-items: center; justify-content: space-between; border-bottom: 3px solid var(--cpc-blue); transition: all 0.2s; cursor: pointer; }
         .kpi-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
-        .kpi-card i { font-size: 1.2rem; color: var(--koki-orange); opacity: 0.8; }
-        .kpi-info h4 { font-size: 0.55rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 2px; }
-        .kpi-info .num { font-size: 1.1rem; font-weight: 800; color: var(--cpc-blue); }
+        .kpi-card i { font-size: 1rem; color: var(--koki-orange); opacity: 0.8; }
+        .kpi-info h4 { font-size: 0.5rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 1px; }
+        .kpi-info .num { font-size: 1rem; font-weight: 800; color: var(--cpc-blue); }
 
-        .search-charts-grid { display: grid; grid-template-columns: 280px 1fr; gap: 16px; margin: 12px 0; }
-        .search-wrapper { background: var(--white); padding: 16px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid #e8ecf0; }
-        .search-wrapper h3 { font-size: 0.85rem; color: var(--cpc-blue); font-weight: 700; margin-bottom: 4px; }
-        .search-wrapper p { font-size: 0.65rem; color: var(--text-muted); margin-bottom: 8px; }
-        .search-box { display: flex; gap: 6px; flex-wrap: wrap; }
-        .search-box input { flex: 1; padding: 6px 12px; border: 2px solid #e2e8f0; border-radius: 10px; font-family: 'Cairo', sans-serif; font-size: 0.75rem; outline: none; min-width: 80px; }
+        .search-charts-grid { display: grid; grid-template-columns: 280px 1fr; gap: 12px; margin: 10px 0; }
+        .search-wrapper { background: var(--white); padding: 14px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid #e8ecf0; }
+        .search-wrapper h3 { font-size: 0.8rem; color: var(--cpc-blue); font-weight: 700; margin-bottom: 3px; }
+        .search-wrapper p { font-size: 0.6rem; color: var(--text-muted); margin-bottom: 6px; }
+        .search-box { display: flex; gap: 5px; flex-wrap: wrap; }
+        .search-box input { flex: 1; padding: 5px 10px; border: 2px solid #e2e8f0; border-radius: 10px; font-family: 'Cairo', sans-serif; font-size: 0.7rem; outline: none; min-width: 60px; }
         .search-box input:focus { border-color: var(--cpc-blue); }
-        .search-box button { padding: 6px 14px; background: var(--koki-orange); color: white; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; font-size: 0.75rem; }
+        .search-box button { padding: 5px 12px; background: var(--koki-orange); color: white; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; font-size: 0.7rem; }
         .search-box button:hover { background: var(--koki-orange-hover); }
-        .loading-status { font-size: 0.65rem; color: var(--text-muted); margin-top: 6px; }
+        .loading-status { font-size: 0.6rem; color: var(--text-muted); margin-top: 5px; }
         .loading-status.error { color: var(--danger); }
         .loading-status.success { color: var(--success); }
 
-        .result-card { margin-top: 10px; background: #f8fafc; border-radius: 12px; padding: 12px; display: none; border-right: 4px solid var(--success); }
-        .employee-profile { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 10px; }
-        .info-group h4 { font-size: 0.5rem; color: var(--text-muted); text-transform: uppercase; }
-        .info-group p { font-weight: 700; font-size: 0.75rem; }
-        .employee-stats { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; padding: 6px 10px; background: rgba(30,61,89,0.05); border-radius: 8px; }
-        .stat-badge { font-size: 0.6rem; font-weight: 700; padding: 2px 10px; border-radius: 20px; }
+        .result-card { margin-top: 8px; background: #f8fafc; border-radius: 12px; padding: 10px; display: none; border-right: 4px solid var(--success); }
+        .employee-profile { display: grid; grid-template-columns: 1fr 1fr; gap: 3px 8px; }
+        .info-group h4 { font-size: 0.45rem; color: var(--text-muted); text-transform: uppercase; }
+        .info-group p { font-weight: 700; font-size: 0.7rem; }
+        .employee-stats { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; padding: 4px 8px; background: rgba(30,61,89,0.05); border-radius: 8px; }
+        .stat-badge { font-size: 0.55rem; font-weight: 700; padding: 2px 8px; border-radius: 20px; }
         .stat-badge.attend { background: rgba(16,185,129,0.15); color: var(--success); }
         .stat-badge.not-attend { background: rgba(239,68,68,0.15); color: var(--danger); }
         .stat-badge.group { background: rgba(59,130,246,0.15); color: var(--info); }
         .stat-badge.location { background: rgba(255,110,64,0.15); color: var(--koki-orange); }
         .stat-badge.accommodation { background: rgba(139,92,246,0.15); color: var(--purple); }
         
-        .perf-stats { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
-        .perf-stat { background: var(--white); padding: 4px 12px; border-radius: 8px; font-size: 0.65rem; font-weight: 600; border: 1px solid #e8ecf0; }
-        .perf-stat .num { font-size: 1rem; font-weight: 800; color: var(--cpc-blue); }
+        .perf-stats { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+        .perf-stat { background: var(--white); padding: 3px 10px; border-radius: 8px; font-size: 0.6rem; font-weight: 600; border: 1px solid #e8ecf0; }
+        .perf-stat .num { font-size: 0.9rem; font-weight: 800; color: var(--cpc-blue); }
         
-        .training-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
-        .tag { background: #e2e8f0; color: var(--cpc-blue); padding: 2px 8px; border-radius: 20px; font-size: 0.55rem; font-weight: 600; }
+        .training-tags { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 4px; }
+        .tag { background: #e2e8f0; color: var(--cpc-blue); padding: 2px 6px; border-radius: 20px; font-size: 0.5rem; font-weight: 600; }
 
-        .print-btn { background: var(--cpc-blue); color: white; border: none; padding: 6px 16px; border-radius: 8px; font-family: 'Cairo', sans-serif; font-size: 0.7rem; font-weight: 600; cursor: pointer; transition: all 0.2s; margin-top: 8px; display: inline-flex; align-items: center; gap: 6px; }
+        .print-btn { background: var(--cpc-blue); color: white; border: none; padding: 4px 12px; border-radius: 8px; font-family: 'Cairo', sans-serif; font-size: 0.65rem; font-weight: 600; cursor: pointer; transition: all 0.2s; margin-top: 6px; display: inline-flex; align-items: center; gap: 4px; }
         .print-btn:hover { background: var(--cpc-blue-dark); }
 
-        .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 14px 0; }
-        .charts-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 14px 0; }
-        .chart-box { background: var(--white); padding: 20px 22px; border-radius: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid #e8ecf0; cursor: pointer; transition: all 0.2s; }
+        .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 12px 0; }
+        .charts-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 12px 0; }
+        .chart-box { background: var(--white); padding: 16px 18px; border-radius: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid #e8ecf0; cursor: pointer; transition: all 0.2s; }
         .chart-box:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); border-color: var(--cpc-blue); }
-        .chart-box h4 { font-size: 0.95rem; color: var(--cpc-blue); font-weight: 700; margin-bottom: 12px; }
-        .chart-box canvas { width: 100% !important; height: 280px !important; max-height: 280px; }
-        .chart-box .chart-container { position: relative; width: 100%; height: 280px; }
-        .charts-grid-2 .chart-box canvas { height: 260px !important; max-height: 260px; }
-        .charts-grid-2 .chart-box .chart-container { height: 260px; }
+        .chart-box h4 { font-size: 0.85rem; color: var(--cpc-blue); font-weight: 700; margin-bottom: 10px; }
+        .chart-box canvas { width: 100% !important; height: 250px !important; max-height: 250px; }
+        .chart-box .chart-container { position: relative; width: 100%; height: 250px; }
+        .charts-grid-2 .chart-box canvas { height: 230px !important; max-height: 230px; }
+        .charts-grid-2 .chart-box .chart-container { height: 230px; }
 
-        /* ============================================================
-           EMPLOYEE DETAIL TABLE
-           ============================================================ */
         .employee-detail-table {
             background: var(--white);
             border-radius: 14px;
-            padding: 16px 18px;
-            margin-top: 14px;
-            margin-bottom: 20px;
+            padding: 14px 16px;
+            margin-top: 12px;
+            margin-bottom: 16px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
             border: 1px solid #e8ecf0;
             overflow-x: auto;
         }
-        .employee-detail-table h4 { font-size: 0.9rem; color: var(--cpc-blue); font-weight: 700; margin-bottom: 10px; }
-        .employee-detail-table table { width: 100%; border-collapse: collapse; font-size: 0.75rem; }
-        .employee-detail-table th { background: var(--cpc-blue); color: white; padding: 10px 12px; text-align: left; font-weight: 600; white-space: nowrap; }
-        .employee-detail-table td { padding: 8px 12px; border-bottom: 1px solid #e8ecf0; vertical-align: middle; }
+        .employee-detail-table h4 { font-size: 0.85rem; color: var(--cpc-blue); font-weight: 700; margin-bottom: 8px; }
+        .employee-detail-table table { width: 100%; border-collapse: collapse; font-size: 0.7rem; }
+        .employee-detail-table th { background: var(--cpc-blue); color: white; padding: 6px 10px; text-align: left; font-weight: 600; white-space: nowrap; }
+        .employee-detail-table td { padding: 6px 10px; border-bottom: 1px solid #e8ecf0; vertical-align: middle; }
         .employee-detail-table tr:hover td { background: #f8fafc; }
-        .employee-detail-table .badge-attend { background: rgba(16,185,129,0.15); color: var(--success); padding: 2px 10px; border-radius: 20px; font-size: 0.6rem; font-weight: 600; }
-        .employee-detail-table .badge-not-attend { background: rgba(239,68,68,0.15); color: var(--danger); padding: 2px 10px; border-radius: 20px; font-size: 0.6rem; font-weight: 600; }
-        .employee-detail-table .badge-unknown { background: rgba(107,122,143,0.15); color: var(--text-muted); padding: 2px 10px; border-radius: 20px; font-size: 0.6rem; font-weight: 600; }
+        .employee-detail-table .badge-attend { background: rgba(16,185,129,0.15); color: var(--success); padding: 2px 8px; border-radius: 20px; font-size: 0.55rem; font-weight: 600; }
+        .employee-detail-table .badge-not-attend { background: rgba(239,68,68,0.15); color: var(--danger); padding: 2px 8px; border-radius: 20px; font-size: 0.55rem; font-weight: 600; }
+        .employee-detail-table .badge-unknown { background: rgba(107,122,143,0.15); color: var(--text-muted); padding: 2px 8px; border-radius: 20px; font-size: 0.55rem; font-weight: 600; }
 
-        .insights-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 16px 0 30px 0; }
-        .insight-card { background: var(--white); padding: 16px 18px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border-left: 4px solid var(--koki-orange); transition: all 0.2s; }
+        .insights-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 12px 0 20px 0; }
+        .insight-card { background: var(--white); padding: 12px 14px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border-left: 4px solid var(--koki-orange); transition: all 0.2s; }
         .insight-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); transform: translateX(4px); }
-        .insight-card .insight-icon { font-size: 1.2rem; color: var(--koki-orange); margin-right: 8px; }
-        .insight-card h4 { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
-        .insight-card .insight-value { font-size: 1.4rem; font-weight: 800; color: var(--cpc-blue); }
-        .insight-card .insight-desc { font-size: 0.75rem; color: var(--text-muted); margin-top: 4px; }
-        .insight-card .insight-tag { display: inline-block; font-size: 0.55rem; font-weight: 700; padding: 2px 10px; border-radius: 20px; margin-top: 6px; }
+        .insight-card .insight-icon { font-size: 1rem; color: var(--koki-orange); margin-right: 6px; }
+        .insight-card h4 { font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 2px; }
+        .insight-card .insight-value { font-size: 1.2rem; font-weight: 800; color: var(--cpc-blue); }
+        .insight-card .insight-desc { font-size: 0.7rem; color: var(--text-muted); margin-top: 2px; }
+        .insight-card .insight-tag { display: inline-block; font-size: 0.5rem; font-weight: 700; padding: 2px 8px; border-radius: 20px; margin-top: 4px; }
         .insight-tag.good { background: rgba(16,185,129,0.15); color: var(--success); }
         .insight-tag.warning { background: rgba(245,158,11,0.15); color: var(--warning); }
         .insight-tag.danger { background: rgba(239,68,68,0.15); color: var(--danger); }
@@ -492,53 +405,48 @@
             .charts-grid { grid-template-columns: 1fr 1fr; }
             .charts-grid-2 { grid-template-columns: 1fr 1fr; }
             .insights-section { grid-template-columns: 1fr 1fr; }
-            .chart-box canvas { height: 220px !important; max-height: 220px; }
-            .chart-box .chart-container { height: 220px; }
-            .charts-grid-2 .chart-box canvas { height: 200px !important; max-height: 200px; }
-            .charts-grid-2 .chart-box .chart-container { height: 200px; }
+            .chart-box canvas { height: 200px !important; max-height: 200px; }
+            .chart-box .chart-container { height: 200px; }
+            .charts-grid-2 .chart-box canvas { height: 180px !important; max-height: 180px; }
+            .charts-grid-2 .chart-box .chart-container { height: 180px; }
             .top-bar { flex-direction: column; align-items: stretch; }
-            .top-bar .action-buttons { flex-direction: row; justify-content: flex-start; }
-            .top-bar .action-btn { width: auto; min-width: 80px; }
-            .filter-item-row { flex-direction: column; align-items: stretch; gap: 4px; }
-            .filter-item-row .filter-icon-label { min-width: auto; }
-            .filter-item-row .filter-buttons { flex-wrap: wrap; }
-            .program-cards { gap: 6px; }
-            .program-card { font-size: 0.55rem; padding: 4px 10px; }
+            .top-bar .action-buttons { justify-content: flex-start; }
+            .top-bar .action-btn { min-width: 60px; height: 24px; font-size: 0.5rem; padding: 3px 10px; }
         }
         @media (max-width: 768px) {
-            .navbar { flex-direction: column; text-align: center; }
-            .filter-bar .filter-row { flex-direction: column; align-items: stretch; gap: 6px; }
-            .filter-bar .filter-label { min-width: auto; }
+            .navbar { flex-direction: column; text-align: center; padding: 6px 12px; }
+            .filter-row { flex-direction: column; align-items: stretch; gap: 4px; }
+            .filter-label { min-width: auto; }
             .filter-select { max-width: 100%; }
             .charts-grid { grid-template-columns: 1fr; }
             .charts-grid-2 { grid-template-columns: 1fr; }
             .kpi-grid { grid-template-columns: repeat(2, 1fr); }
             .employee-profile { grid-template-columns: 1fr; }
-            .chart-box canvas { height: 200px !important; max-height: 200px; }
-            .chart-box .chart-container { height: 200px; }
+            .chart-box canvas { height: 180px !important; max-height: 180px; }
+            .chart-box .chart-container { height: 180px; }
             .insights-section { grid-template-columns: 1fr; }
-            .employee-detail-table table { font-size: 0.65rem; }
-            .employee-detail-table th, .employee-detail-table td { padding: 4px 8px; }
-            .alerts-container .alert-item { font-size: 0.65rem; }
+            .employee-detail-table table { font-size: 0.6rem; }
+            .employee-detail-table th, .employee-detail-table td { padding: 4px 6px; }
+            .alerts-container .alert-item { font-size: 0.6rem; }
             .top-bar .slicer-section { flex-direction: column; align-items: stretch; }
-            .top-bar .action-btn { min-width: 60px; font-size: 0.55rem; padding: 4px 10px; height: 26px; }
-            .program-cards { gap: 4px; }
-            .program-card { font-size: 0.5rem; padding: 3px 8px; gap: 4px; }
-            .program-card .prog-count { font-size: 0.45rem; padding: 0 5px; }
+            .top-bar .action-btn { min-width: 50px; height: 22px; font-size: 0.45rem; padding: 2px 8px; }
+            .program-card { font-size: 0.45rem; padding: 2px 8px; }
+            .program-card .prog-count { font-size: 0.4rem; padding: 0 4px; }
         }
         @media (max-width: 480px) {
-            .kpi-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
-            .kpi-card { padding: 6px 8px; }
-            .filter-btn { font-size: 0.45rem; padding: 2px 8px; }
-            .filter-select { font-size: 0.45rem; padding: 2px 16px 2px 6px; min-width: 70px; }
-            .chart-box canvas { height: 170px !important; max-height: 170px; }
-            .chart-box .chart-container { height: 170px; }
-            .chart-box { padding: 12px 14px; }
-            .top-bar .action-btn { min-width: 50px; font-size: 0.5rem; padding: 3px 8px; height: 24px; }
-            .top-bar .slicer-section .slicer-btn { font-size: 0.5rem; padding: 3px 10px; }
-            .filter-item-row .filter-btn { font-size: 0.45rem; padding: 2px 8px; }
-            .program-card { font-size: 0.45rem; padding: 2px 6px; gap: 3px; }
-            .program-card .prog-count { font-size: 0.4rem; padding: 0 4px; }
+            .kpi-grid { grid-template-columns: 1fr 1fr; gap: 4px; }
+            .kpi-card { padding: 5px 8px; }
+            .kpi-info .num { font-size: 0.85rem; }
+            .filter-btn { font-size: 0.4rem; padding: 2px 6px; }
+            .filter-select { font-size: 0.4rem; padding: 2px 14px 2px 6px; min-width: 60px; }
+            .chart-box canvas { height: 150px !important; max-height: 150px; }
+            .chart-box .chart-container { height: 150px; }
+            .chart-box { padding: 10px 12px; }
+            .top-bar .action-btn { min-width: 40px; height: 20px; font-size: 0.4rem; padding: 2px 6px; }
+            .top-bar .slicer-section .slicer-btn { font-size: 0.45rem; padding: 3px 8px; }
+            .program-card { font-size: 0.4rem; padding: 2px 6px; gap: 2px; }
+            .program-card .prog-count { font-size: 0.35rem; padding: 0 3px; }
+            .insights-section { grid-template-columns: 1fr; }
         }
 
         @media print {
@@ -547,34 +455,34 @@
             .action-btn, .refresh-btn, .print-btn, .clear-filters-btn,
             .search-box button, .filter-btn, .filter-select, .slicer-btn,
             .program-card { display: none !important; }
-            body { background: white !important; padding: 20px !important; font-size: 11px !important; color: #1a2332 !important; }
+            body { background: white !important; padding: 15px !important; font-size: 10px !important; color: #1a2332 !important; }
             .container { max-width: 100% !important; padding: 0 !important; }
             .kpi-card, .chart-box, .insight-card, .employee-detail-table,
             .search-wrapper, .filter-bar, .brief-section, .alerts-container, .top-bar {
                 box-shadow: none !important;
                 border: 1px solid #ddd !important;
                 page-break-inside: avoid !important;
-                margin: 8px 0 !important;
-                padding: 10px 12px !important;
+                margin: 6px 0 !important;
+                padding: 8px 10px !important;
                 background: white !important;
             }
-            .kpi-grid { display: grid !important; grid-template-columns: repeat(4, 1fr) !important; gap: 8px !important; }
-            .charts-grid, .charts-grid-2 { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 12px !important; }
-            .search-charts-grid { display: grid !important; grid-template-columns: 1fr 2fr !important; gap: 12px !important; }
-            .insights-section { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 12px !important; }
-            .chart-box canvas { height: 180px !important; max-height: 180px !important; }
-            .chart-box .chart-container { height: 180px !important; }
-            .employee-detail-table table { font-size: 9px !important; }
-            .employee-detail-table th { background: #1e3d59 !important; color: white !important; padding: 4px 8px !important; }
-            .employee-detail-table td { padding: 3px 8px !important; border-bottom: 1px solid #eee !important; }
+            .kpi-grid { display: grid !important; grid-template-columns: repeat(4, 1fr) !important; gap: 6px !important; }
+            .charts-grid, .charts-grid-2 { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
+            .search-charts-grid { display: grid !important; grid-template-columns: 1fr 2fr !important; gap: 10px !important; }
+            .insights-section { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 10px !important; }
+            .chart-box canvas { height: 150px !important; max-height: 150px !important; }
+            .chart-box .chart-container { height: 150px !important; }
+            .employee-detail-table table { font-size: 8px !important; }
+            .employee-detail-table th { background: #1e3d59 !important; color: white !important; padding: 3px 6px !important; }
+            .employee-detail-table td { padding: 3px 6px !important; border-bottom: 1px solid #eee !important; }
             .brief-section { background: #1e3d59 !important; color: white !important; }
             .brief-section .highlight { color: #ff6e40 !important; }
-            .kpi-card .num { font-size: 1rem !important; }
-            .insight-value { font-size: 1.1rem !important; }
-            .print-header { display: flex !important; justify-content: space-between !important; align-items: center !important; border-bottom: 3px solid #1e3d59 !important; padding-bottom: 10px !important; margin-bottom: 15px !important; }
-            .print-header h1 { color: #1e3d59 !important; font-size: 20px !important; margin: 0 !important; }
-            .print-header .sub { color: #6b7a8f !important; font-size: 12px !important; }
-            .print-footer { margin-top: 20px !important; padding-top: 10px !important; border-top: 1px solid #ddd !important; text-align: center !important; font-size: 10px !important; color: #6b7a8f !important; }
+            .kpi-card .num { font-size: 0.9rem !important; }
+            .insight-value { font-size: 1rem !important; }
+            .print-header { display: flex !important; justify-content: space-between !important; align-items: center !important; border-bottom: 3px solid #1e3d59 !important; padding-bottom: 8px !important; margin-bottom: 12px !important; }
+            .print-header h1 { color: #1e3d59 !important; font-size: 18px !important; margin: 0 !important; }
+            .print-header .sub { color: #6b7a8f !important; font-size: 10px !important; }
+            .print-footer { margin-top: 15px !important; padding-top: 8px !important; border-top: 1px solid #ddd !important; text-align: center !important; font-size: 9px !important; color: #6b7a8f !important; }
             .result-card { display: block !important; border-right: 4px solid var(--success) !important; background: #f8fafc !important; }
         }
     </style>
@@ -588,12 +496,12 @@
     </div>
 
     <div class="navbar no-print">
-        <div class="logo-left"><img src="CPC.png" alt="CPC Logo"></div>
+        <div class="logo-left"><img src="CPC.png" alt="CPC Logo" onerror="this.style.display='none'"></div>
         <div class="title-center">
             <h1>CBT</h1>
             <div class="subtitle">Competency Based Training Intelligence Hub 2026</div>
         </div>
-        <div class="logo-right"><img src="new koki.png" alt="Koki Logo"></div>
+        <div class="logo-right"><img src="new koki.png" alt="Koki Logo" onerror="this.style.display='none'"></div>
         <div class="status-badge">
             <i class="fa-solid fa-cloud" id="statusIcon"></i>
             <span id="statusText">Live</span>
@@ -641,8 +549,7 @@
                 This dashboard provides <span class="highlight">real-time intelligence</span> for the
                 <strong>Competency Based Training (CBT)</strong> initiative. Powered by live Google Sheets data,
                 it enables <span class="highlight">instant visibility</span> into workforce capabilities,
-                training progression, and competency gaps — empowering data-driven decisions for
-                <span class="highlight">sustainable talent development</span>.
+                training progression, and competency gaps.
             </p>
         </div>
 
@@ -656,7 +563,7 @@
         ============================================================ -->
         <div class="filter-bar no-print" id="filterBar">
             
-            <!-- الصف الأول: Programs - على شكل بطاقات أفقية -->
+            <!-- Programs - على شكل بطاقات -->
             <div class="filter-row">
                 <span class="filter-label"><i class="fa-solid fa-book"></i> Programs</span>
                 <div class="program-cards" id="programFilters">
@@ -664,96 +571,109 @@
                 </div>
             </div>
 
-            <!-- باقي المفاتيح - كل واحد في سطر -->
-            <div class="filter-items-container">
-
-                <!-- Location -->
-                <div class="filter-item-row">
-                    <div class="filter-icon-label">
-                        <i class="fa-solid fa-location-dot"></i>
-                        <span>Location</span>
-                    </div>
-                    <div class="filter-buttons" id="locationFilters">
-                        <button class="filter-btn active" data-filter="location" data-value="all">All <span class="badge-count" id="locAllCount">0</span></button>
-                        <button class="filter-btn" data-filter="location" data-value="Nob">Nob <span class="badge-count" id="locNobCount">0</span></button>
-                        <button class="filter-btn" data-filter="location" data-value="Online">Online <span class="badge-count" id="locOnlineCount">0</span></button>
-                        <button class="filter-btn" data-filter="location" data-value="Steigenberger">Steigenberger <span class="badge-count" id="locSteigenbergerCount">0</span></button>
-                        <button class="filter-btn" data-filter="location" data-value="TOR">TOR <span class="badge-count" id="locTORCount">0</span></button>
-                    </div>
+            <!-- C-LVL -->
+            <div class="filter-row">
+                <span class="filter-label"><i class="fa-solid fa-layer-group"></i> C-LVL</span>
+                <div class="filter-group" id="clevelFilters">
+                    <button class="filter-btn active" data-filter="clevel" data-value="all">All <span class="badge-count" id="clAllCount">0</span></button>
                 </div>
+            </div>
 
-                <!-- Level -->
-                <div class="filter-item-row">
-                    <div class="filter-icon-label">
-                        <i class="fa-solid fa-layer-group"></i>
-                        <span>Level</span>
-                    </div>
-                    <div class="filter-buttons" id="levelFilters">
-                        <button class="filter-btn active" data-filter="level" data-value="all">All <span class="badge-count" id="lvlAllCount">0</span></button>
-                        <button class="filter-btn" data-filter="level" data-value="L4">L4 <span class="badge-count" id="lvlL4Count">0</span></button>
-                        <button class="filter-btn" data-filter="level" data-value="L3">L3 <span class="badge-count" id="lvlL3Count">0</span></button>
-                        <button class="filter-btn" data-filter="level" data-value="L2">L2 <span class="badge-count" id="lvlL2Count">0</span></button>
-                        <button class="filter-btn" data-filter="level" data-value="L1">L1 <span class="badge-count" id="lvlL1Count">0</span></button>
-                    </div>
+            <!-- Level -->
+            <div class="filter-row">
+                <span class="filter-label"><i class="fa-solid fa-level-up"></i> Level</span>
+                <div class="filter-group" id="levelFilters">
+                    <button class="filter-btn active" data-filter="level" data-value="all">All <span class="badge-count" id="lvlAllCount">0</span></button>
                 </div>
+            </div>
 
-                <!-- Attend -->
-                <div class="filter-item-row">
-                    <div class="filter-icon-label">
-                        <i class="fa-solid fa-user-check"></i>
-                        <span>Attendance</span>
-                    </div>
-                    <div class="filter-buttons" id="attendanceFilters">
-                        <button class="filter-btn active attend-btn" data-filter="attendance" data-value="all">All <span class="badge-count" id="attAllCount">0</span></button>
-                        <button class="filter-btn attend-btn" data-filter="attendance" data-value="attend">✅ Attend <span class="badge-count" id="attAttendCount">0</span></button>
-                        <button class="filter-btn not-attend-btn" data-filter="attendance" data-value="not-attend">❌ Not Attend <span class="badge-count" id="attNotAttendCount">0</span></button>
-                    </div>
+            <!-- Grade -->
+            <div class="filter-row">
+                <span class="filter-label"><i class="fa-solid fa-graduation-cap"></i> Grade</span>
+                <div class="filter-group" id="gradeFilters">
+                    <button class="filter-btn active" data-filter="grade" data-value="all">All <span class="badge-count" id="gradeAllCount">0</span></button>
                 </div>
+            </div>
 
-                <!-- Group -->
-                <div class="filter-item-row">
-                    <div class="filter-icon-label">
-                        <i class="fa-solid fa-users"></i>
-                        <span>Group</span>
-                    </div>
-                    <div class="filter-buttons">
-                        <select class="filter-select" id="groupSelect">
-                            <option value="all">All Groups</option>
-                        </select>
-                    </div>
+            <!-- Activity -->
+            <div class="filter-row">
+                <span class="filter-label"><i class="fa-solid fa-bolt"></i> Activity</span>
+                <div class="filter-group" id="activityFilters">
+                    <button class="filter-btn active" data-filter="activity" data-value="all">All <span class="badge-count" id="actAllCount">0</span></button>
                 </div>
+            </div>
 
-                <!-- Phase -->
-                <div class="filter-item-row">
-                    <div class="filter-icon-label">
-                        <i class="fa-solid fa-clock"></i>
-                        <span>Phase</span>
-                    </div>
-                    <div class="filter-buttons">
-                        <select class="filter-select" id="phaseSelect">
-                            <option value="all">All Phases</option>
-                            <option value="Phase1">Phase 1</option>
-                            <option value="Phase2">Phase 2</option>
-                            <option value="Phase3">Phase 3</option>
-                            <option value="Phase4">Phase 4</option>
-                            <option value="Online-Phase4">Online Phase 4</option>
-                        </select>
-                    </div>
+            <!-- Sector -->
+            <div class="filter-row">
+                <span class="filter-label"><i class="fa-solid fa-building"></i> Sector</span>
+                <div class="filter-group" id="sectorFilters">
+                    <button class="filter-btn active" data-filter="sector" data-value="all">All <span class="badge-count" id="sectorAllCount">0</span></button>
                 </div>
+            </div>
 
-                <!-- Reset -->
-                <div class="filter-item-row" style="border-top: 1px solid #e8ecf0; padding-top: 8px; margin-top: 4px;">
-                    <div class="filter-icon-label">
-                        <i class="fa-solid fa-undo" style="color:var(--koki-orange);"></i>
-                        <span>Actions</span>
-                    </div>
-                    <div class="filter-buttons">
-                        <button class="clear-filters-btn" onclick="clearAllFilters()">
-                            <i class="fa-solid fa-undo"></i> Reset All Filters
-                        </button>
-                    </div>
+            <!-- Area -->
+            <div class="filter-row">
+                <span class="filter-label"><i class="fa-solid fa-map-pin"></i> Area</span>
+                <div class="filter-group" id="areaFilters">
+                    <button class="filter-btn active" data-filter="area" data-value="all">All <span class="badge-count" id="areaAllCount">0</span></button>
                 </div>
+            </div>
 
+            <!-- CPT Training Group -->
+            <div class="filter-row">
+                <span class="filter-label"><i class="fa-solid fa-users"></i> Group</span>
+                <div class="filter-group">
+                    <select class="filter-select" id="groupSelect">
+                        <option value="all">All Groups</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- CPT Training Phase -->
+            <div class="filter-row">
+                <span class="filter-label"><i class="fa-solid fa-clock"></i> Phase</span>
+                <div class="filter-group">
+                    <select class="filter-select" id="phaseSelect">
+                        <option value="all">All Phases</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Location -->
+            <div class="filter-row">
+                <span class="filter-label"><i class="fa-solid fa-location-dot"></i> Location</span>
+                <div class="filter-group" id="locationFilters">
+                    <button class="filter-btn active" data-filter="location" data-value="all">All <span class="badge-count" id="locAllCount">0</span></button>
+                </div>
+            </div>
+
+            <!-- Attendance -->
+            <div class="filter-row">
+                <span class="filter-label"><i class="fa-solid fa-user-check"></i> Attendance</span>
+                <div class="filter-group" id="attendanceFilters">
+                    <button class="filter-btn active" data-filter="attendance" data-value="all">All <span class="badge-count" id="attAllCount">0</span></button>
+                    <button class="filter-btn" data-filter="attendance" data-value="attend">✅ Attend <span class="badge-count" id="attAttendCount">0</span></button>
+                    <button class="filter-btn" data-filter="attendance" data-value="not-attend">❌ Not Attend <span class="badge-count" id="attNotAttendCount">0</span></button>
+                </div>
+            </div>
+
+            <!-- Accommodation -->
+            <div class="filter-row">
+                <span class="filter-label"><i class="fa-solid fa-bed"></i> Accommodation</span>
+                <div class="filter-group" id="accommodationFilters">
+                    <button class="filter-btn active" data-filter="accommodation" data-value="all">All <span class="badge-count" id="accAllCount">0</span></button>
+                    <button class="filter-btn" data-filter="accommodation" data-value="yes">✅ Yes <span class="badge-count" id="accYesCount">0</span></button>
+                    <button class="filter-btn" data-filter="accommodation" data-value="no">❌ No <span class="badge-count" id="accNoCount">0</span></button>
+                </div>
+            </div>
+
+            <!-- Reset -->
+            <div class="filter-row" style="border-bottom: none; padding-bottom: 0;">
+                <div class="filter-group" style="justify-content: flex-end;">
+                    <button class="clear-filters-btn" onclick="clearAllFilters()">
+                        <i class="fa-solid fa-undo"></i> Reset All Filters
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -762,13 +682,13 @@
         ============================================================ -->
         <div class="kpi-grid" id="kpiGrid">
             <div class="kpi-card"><div class="kpi-info"><h4>Total Workforce</h4><div class="num" id="kpiTotal">...</div></div><i class="fa-solid fa-users"></i></div>
+            <div class="kpi-card"><div class="kpi-info"><h4>Project Progress</h4><div class="num" id="kpiProgress">...</div></div><i class="fa-solid fa-chart-line"></i></div>
+            <div class="kpi-card"><div class="kpi-info"><h4>Completed Training</h4><div class="num" id="kpiCompleted">...</div></div><i class="fa-solid fa-check-circle"></i></div>
+            <div class="kpi-card"><div class="kpi-info"><h4>Training Locations</h4><div class="num" id="kpiLocations">...</div></div><i class="fa-solid fa-location-dot"></i></div>
+            <div class="kpi-card"><div class="kpi-info"><h4>Total Attendees</h4><div class="num" id="kpiAttendees">...</div></div><i class="fa-solid fa-user-check"></i></div>
             <div class="kpi-card"><div class="kpi-info"><h4>Active Sectors</h4><div class="num" id="kpiSectors">...</div></div><i class="fa-solid fa-building"></i></div>
             <div class="kpi-card"><div class="kpi-info"><h4>Departments</h4><div class="num" id="kpiDepartments">...</div></div><i class="fa-solid fa-sitemap"></i></div>
-            <div class="kpi-card"><div class="kpi-info"><h4>Project Progress</h4><div class="num" id="kpiAttendance">...</div></div><i class="fa-solid fa-chart-line"></i></div>
-            <div class="kpi-card"><div class="kpi-info"><h4>Completed Training</h4><div class="num" id="kpiPrograms">...</div></div><i class="fa-solid fa-book-open"></i></div>
-            <div class="kpi-card"><div class="kpi-info"><h4>Training Locations</h4><div class="num" id="kpiLocations">...</div></div><i class="fa-solid fa-location-dot"></i></div>
             <div class="kpi-card"><div class="kpi-info"><h4>Data Quality</h4><div class="num" id="kpiQuality">...</div></div><i class="fa-solid fa-shield-halved"></i></div>
-            <div class="kpi-card"><div class="kpi-info"><h4>Active Phases</h4><div class="num" id="kpiPhases">...</div></div><i class="fa-solid fa-clock"></i></div>
         </div>
 
         <!-- ============================================================
@@ -788,11 +708,11 @@
                         <div class="info-group"><h4>Name</h4><p id="resName">-</p></div>
                         <div class="info-group"><h4>Title</h4><p id="resTitle">-</p></div>
                         <div class="info-group"><h4>Sector / Dept</h4><p id="resSector">-</p></div>
-                        <div class="info-group"><h4>Level</h4><p id="resLevel">-</p></div>
+                        <div class="info-group"><h4>C-LVL / Level</h4><p id="resLevel">-</p></div>
+                        <div class="info-group"><h4>Grade</h4><p id="resGrade">-</p></div>
                         <div class="info-group"><h4>Location</h4><p id="resLocation">-</p></div>
-                        <div class="info-group"><h4>Phase</h4><p id="resPhase">-</p></div>
-                        <div class="info-group"><h4>Attendance</h4><p id="resAttendance">-</p></div>
-                        <div class="info-group"><h4>Accommodation</h4><p id="resAccommodation">-</p></div>
+                        <div class="info-group"><h4>Group / Phase</h4><p id="resGroupPhase">-</p></div>
+                        <div class="info-group"><h4>Attendance / Accommodation</h4><p id="resAttendAccom">-</p></div>
                     </div>
                     <div class="employee-stats">
                         <span class="stat-badge attend" id="statAttended">✅ Attended: 0</span>
@@ -846,7 +766,7 @@
             </div>
         </div>
 
-        <div class="charts-grid-2" style="margin-top:14px;">
+        <div class="charts-grid-2" style="margin-top:12px;">
             <div class="chart-box" id="chartBoxQuality">
                 <h4><i class="fa-solid fa-gauge-high" style="color:var(--cpc-blue);"></i> Data Quality Overview</h4>
                 <div class="chart-container"><canvas id="chartQuality"></canvas></div>
@@ -868,10 +788,15 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
-                            <th>Department</th>
-                            <th>Title</th>
-                            <th>Training Group</th>
+                            <th>C-LVL</th>
+                            <th>Level</th>
+                            <th>Grade</th>
+                            <th>Activity</th>
+                            <th>Sector</th>
+                            <th>Area</th>
+                            <th>Group</th>
                             <th>Phase</th>
+                            <th>Location</th>
                             <th>Attendance</th>
                             <th>Accommodation</th>
                         </tr>
@@ -890,42 +815,42 @@
                 <h4>Largest Department</h4>
                 <div class="insight-value" id="insightLargestDept">-</div>
                 <div class="insight-desc" id="insightLargestDeptDesc">Employees</div>
-                <span class="insight-tag info">🏆 Top Performer</span>
-            </div>
-            <div class="insight-card">
-                <div class="insight-icon"><i class="fa-solid fa-graduation-cap"></i></div>
-                <h4>Highest Completion Program</h4>
-                <div class="insight-value" id="insightBestProgram">-</div>
-                <div class="insight-desc" id="insightBestProgramDesc">Completion Rate</div>
-                <span class="insight-tag good">✅ Excellent</span>
-            </div>
-            <div class="insight-card">
-                <div class="insight-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
-                <h4>Lowest Completion Program</h4>
-                <div class="insight-value" id="insightWorstProgram">-</div>
-                <div class="insight-desc" id="insightWorstProgramDesc">Completion Rate</div>
-                <span class="insight-tag danger">⚠️ Needs Attention</span>
-            </div>
-            <div class="insight-card">
-                <div class="insight-icon"><i class="fa-solid fa-location-dot"></i></div>
-                <h4>Most Popular Location</h4>
-                <div class="insight-value" id="insightTopLocation">-</div>
-                <div class="insight-desc" id="insightTopLocationDesc">Employees</div>
-                <span class="insight-tag info">📍 Top Location</span>
+                <span class="insight-tag info">🏆 Top</span>
             </div>
             <div class="insight-card">
                 <div class="insight-icon"><i class="fa-solid fa-layer-group"></i></div>
                 <h4>Largest Competency Level</h4>
                 <div class="insight-value" id="insightTopLevel">-</div>
                 <div class="insight-desc" id="insightTopLevelDesc">Employees</div>
-                <span class="insight-tag info">📊 Key Segment</span>
+                <span class="insight-tag info">📊 Key</span>
             </div>
             <div class="insight-card">
-                <div class="insight-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                <h4>Data Quality Status</h4>
-                <div class="insight-value" id="insightQualityStatus">-</div>
-                <div class="insight-desc" id="insightQualityStatusDesc">Overall Quality</div>
-                <span class="insight-tag good" id="insightQualityTag">✅ Good</span>
+                <div class="insight-icon"><i class="fa-solid fa-building"></i></div>
+                <h4>Largest Sector</h4>
+                <div class="insight-value" id="insightTopSector">-</div>
+                <div class="insight-desc" id="insightTopSectorDesc">Employees</div>
+                <span class="insight-tag info">🏢 Top</span>
+            </div>
+            <div class="insight-card">
+                <div class="insight-icon"><i class="fa-solid fa-clock"></i></div>
+                <h4>Largest Phase</h4>
+                <div class="insight-value" id="insightTopPhase">-</div>
+                <div class="insight-desc" id="insightTopPhaseDesc">Employees</div>
+                <span class="insight-tag info">⏰ Top</span>
+            </div>
+            <div class="insight-card">
+                <div class="insight-icon"><i class="fa-solid fa-user-check"></i></div>
+                <h4>Highest Attendance</h4>
+                <div class="insight-value" id="insightTopAttendance">-</div>
+                <div class="insight-desc" id="insightTopAttendanceDesc">Rate</div>
+                <span class="insight-tag good">✅ Excellent</span>
+            </div>
+            <div class="insight-card">
+                <div class="insight-icon"><i class="fa-solid fa-location-dot"></i></div>
+                <h4>Most Popular Location</h4>
+                <div class="insight-value" id="insightTopLocation">-</div>
+                <div class="insight-desc" id="insightTopLocationDesc">Employees</div>
+                <span class="insight-tag info">📍 Top</span>
             </div>
         </div>
 
@@ -942,26 +867,27 @@
         // ============================================================
         const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRu0vhUS8c-hbFznxR_F9K9LNueNeabXiLwMjMzppgpIjJCSNCadsHDVVGxwiKYYHve9-Qtb37ALs8P/pub?gid=1032977671&single=true&output=csv";
 
+        // أسماء الأعمدة - تطابق الشيت
         const COLUMNS = {
             ID: 'ID',
             Name: 'Name',
             Title: 'Title',
             CLevel: 'C-LVL',
+            Level: 'Level',
             Grade: 'Grade',
-            Status: 'Status',
+            Activity: 'Activity',
             Sector: 'Sector',
-            Department: 'Department',
-            TrainingLocation: 'Training Location',
+            Area: 'Area',
             TrainingGroup: 'CPT Training Group',
-            TrainingPhase: 'CPT TrainingPhase',
+            TrainingPhase: 'CPT Training Phase',
+            Location: 'Location',
+            Accommodation: 'Accommodation',
             SevenSens: '7 Sens Program',
             Analytical: 'Analytical Thinking Program',
             MindField: 'Mind field Program',
             Leadership: 'Leader Ship Program',
             DrivePerformance: 'Drive Performance Program',
-            KickStart: 'Kick Start Program',
-            Accommodation: 'Accommodation',
-            Activity: 'Activity'
+            KickStart: 'Kick Start Program'
         };
 
         const PROGRAM_FIELDS = {
@@ -982,19 +908,23 @@
             'Kick Start Program': 'fa-solid fa-rocket'
         };
 
-        const LOCATIONS = ['Nob', 'Online', 'Steigenberger', 'TOR'];
-
         let allData = [];
         let filteredData = [];
         let chartInstances = {};
         let activeFilters = { 
-            program: 'all', 
+            program: 'all',
+            clevel: 'all',
+            level: 'all',
+            grade: 'all',
+            activity: 'all',
+            sector: 'all',
+            area: 'all',
             group: 'all',
-            location: 'all', 
-            level: 'all', 
-            phase: 'all', 
+            phase: 'all',
+            location: 'all',
             attendance: 'all',
-            activity: 'all'
+            accommodation: 'all',
+            activitySlicer: 'all'
         };
         let isLoading = false;
         let loadError = false;
@@ -1159,8 +1089,6 @@
                 return activity.includes('مجازر');
             }).length;
             document.getElementById('activitySlaughterCount').textContent = slaughterCount;
-            
-            console.log('📊 Activity counts - Total:', total, 'Feed:', feedCount, 'Slaughter:', slaughterCount);
         }
 
         function setupSlicerButtons() {
@@ -1169,8 +1097,7 @@
                     const activity = this.dataset.activity;
                     document.querySelectorAll('#sectorSlicerButtons .slicer-btn').forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
-                    activeFilters.activity = activity;
-                    console.log('🔍 Activity slicer changed to:', activity);
+                    activeFilters.activitySlicer = activity;
                     applyFilters();
                 });
             });
@@ -1194,54 +1121,81 @@
         }
 
         // ============================================================
-        // UPDATE PROGRAM CARDS
+        // UPDATE FILTER BUTTONS
         // ============================================================
-        function updateProgramCards(data) {
-            const container = document.getElementById('programFilters');
-            const total = data.length;
+        function populateFilterButtons(containerId, dataKey, labelMap) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
             
-            let html = `<div class="program-card active" data-program="all" data-value="all">
-                <span class="prog-icon">📋</span>
-                <span class="prog-name">All</span>
-                <span class="prog-count">${total}</span>
-            </div>`;
-            
-            Object.keys(PROGRAM_FIELDS).forEach(progName => {
-                const field = PROGRAM_FIELDS[progName];
-                const { attend, notAttend } = getProgramAttendance(data, field);
-                const icon = PROGRAM_ICONS[progName] || 'fa-solid fa-book';
-                const shortName = progName.replace(' Program', '').replace('Thinking', 'Think').replace('Performance', 'Perf');
-                
-                const isActive = activeFilters.program === progName ? 'active' : '';
-                
-                html += `<div class="program-card ${isActive}" data-program="${progName}" data-value="${progName}">
-                    <span class="prog-icon"><i class="${icon}"></i></span>
-                    <span class="prog-name">${shortName}</span>
-                    <span class="prog-count">
-                        <span class="attend-count">${attend}✓</span>
-                        <span class="not-attend-count">${notAttend}✗</span>
-                    </span>
-                </div>`;
+            const values = new Set();
+            allData.forEach(r => {
+                const val = String(r[dataKey] || '').trim();
+                if (val) values.add(val);
             });
             
-            container.innerHTML = html;
+            const sortedValues = Array.from(values).sort();
             
-            // إضافة حدث النقر للبطاقات
-            container.querySelectorAll('.program-card').forEach(card => {
-                card.addEventListener('click', function() {
+            // الاحتفاظ بزر All
+            const allBtn = container.querySelector('.filter-btn[data-value="all"]');
+            if (allBtn) {
+                allBtn.innerHTML = `All <span class="badge-count" id="${containerId.replace('Filters', '')}AllCount">${allData.length}</span>`;
+            }
+            
+            // إزالة الأزرار القديمة (ما عدا All)
+            container.querySelectorAll('.filter-btn:not([data-value="all"])').forEach(btn => btn.remove());
+            
+            // إضافة الأزرار الجديدة
+            sortedValues.forEach(val => {
+                const btn = document.createElement('button');
+                btn.className = 'filter-btn';
+                btn.dataset.filter = containerId.replace('Filters', '');
+                btn.dataset.value = val;
+                
+                const displayName = labelMap && labelMap[val] ? labelMap[val] : val;
+                btn.innerHTML = `${displayName} <span class="badge-count">0</span>`;
+                
+                btn.addEventListener('click', function() {
+                    const type = this.dataset.filter;
                     const value = this.dataset.value;
-                    container.querySelectorAll('.program-card').forEach(c => c.classList.remove('active'));
+                    const group = this.closest('.filter-group');
+                    group.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
-                    activeFilters.program = value;
+                    activeFilters[type] = value;
                     applyFilters();
                 });
+                
+                container.appendChild(btn);
             });
         }
 
-        // ============================================================
-        // UPDATE FILTER BADGES
-        // ============================================================
-        function updateFilterBadges(data) {
+        function updateFilterCounts(data) {
+            // تحديث أعداد كل الفلاتر
+            const filterConfigs = [
+                { id: 'clevel', key: COLUMNS.CLevel, container: 'clevelFilters' },
+                { id: 'level', key: COLUMNS.Level, container: 'levelFilters' },
+                { id: 'grade', key: COLUMNS.Grade, container: 'gradeFilters' },
+                { id: 'activity', key: COLUMNS.Activity, container: 'activityFilters' },
+                { id: 'sector', key: COLUMNS.Sector, container: 'sectorFilters' },
+                { id: 'area', key: COLUMNS.Area, container: 'areaFilters' },
+                { id: 'location', key: COLUMNS.Location, container: 'locationFilters' }
+            ];
+            
+            filterConfigs.forEach(({ id, key, container }) => {
+                const allCount = data.length;
+                const allEl = document.getElementById(id + 'AllCount');
+                if (allEl) allEl.textContent = allCount;
+                
+                const containerEl = document.getElementById(container);
+                if (!containerEl) return;
+                
+                containerEl.querySelectorAll('.filter-btn:not([data-value="all"])').forEach(btn => {
+                    const val = btn.dataset.value;
+                    const count = data.filter(r => String(r[key] || '').includes(val)).length;
+                    const badge = btn.querySelector('.badge-count');
+                    if (badge) badge.textContent = count;
+                });
+            });
+            
             // Groups
             const groupCounts = {};
             data.forEach(r => {
@@ -1267,46 +1221,22 @@
             }
             activeFilters.group = groupSelect.value;
 
-            // Locations
-            document.getElementById('locAllCount').textContent = data.length;
-            LOCATIONS.forEach(loc => {
-                const count = data.filter(r => String(r[COLUMNS.TrainingLocation] || '').includes(loc)).length;
-                const id = 'loc' + loc + 'Count';
-                const el = document.getElementById(id);
-                if (el) el.textContent = count;
-            });
-
-            // Levels
-            document.getElementById('lvlAllCount').textContent = data.length;
-            ['L4', 'L3', 'L2', 'L1'].forEach(lvl => {
-                const count = data.filter(r => String(r['C-LVL'] || '').includes(lvl)).length;
-                const id = 'lvl' + lvl + 'Count';
-                const el = document.getElementById(id);
-                if (el) el.textContent = count;
-            });
-
             // Phases
+            const phaseCounts = {};
+            data.forEach(r => {
+                const phase = r[COLUMNS.TrainingPhase] || '';
+                if (phase.trim() !== '') {
+                    phaseCounts[phase] = (phaseCounts[phase] || 0) + 1;
+                }
+            });
+            const sortedPhases = Object.entries(phaseCounts).sort((a, b) => b[1] - a[1]);
             const phaseSelect = document.getElementById('phaseSelect');
             const currentPhase = phaseSelect.value;
-            phaseSelect.innerHTML = '';
-            const phaseOptions = [
-                { value: 'all', label: 'All Phases' },
-                { value: 'Phase1', label: 'Phase 1' },
-                { value: 'Phase2', label: 'Phase 2' },
-                { value: 'Phase3', label: 'Phase 3' },
-                { value: 'Phase4', label: 'Phase 4' },
-                { value: 'Online-Phase4', label: 'Online Phase 4' }
-            ];
-            phaseOptions.forEach(po => {
+            phaseSelect.innerHTML = '<option value="all">All Phases (' + data.length + ')</option>';
+            sortedPhases.forEach(([phase, count]) => {
                 const opt = document.createElement('option');
-                opt.value = po.value;
-                let count = 0;
-                if (po.value === 'all') {
-                    count = data.length;
-                } else {
-                    count = data.filter(r => String(r[COLUMNS.TrainingPhase] || '').includes(po.value)).length;
-                }
-                opt.textContent = po.label + ' (' + count + ')';
+                opt.value = phase;
+                opt.textContent = phase + ' (' + count + ')';
                 phaseSelect.appendChild(opt);
             });
             if (currentPhase && Array.from(phaseSelect.options).some(o => o.value === currentPhase)) {
@@ -1317,11 +1247,62 @@
             activeFilters.phase = phaseSelect.value;
 
             // Attendance
-            const attAll = data.length;
-            const { attend: attAttend, notAttend: attNotAttend } = getProgramAttendance(data, COLUMNS.SevenSens);
-            document.getElementById('attAllCount').textContent = attAll;
-            document.getElementById('attAttendCount').textContent = attAttend;
-            document.getElementById('attNotAttendCount').textContent = attNotAttend;
+            const { attend, notAttend } = getProgramAttendance(data, COLUMNS.SevenSens);
+            document.getElementById('attAllCount').textContent = data.length;
+            document.getElementById('attAttendCount').textContent = attend;
+            document.getElementById('attNotAttendCount').textContent = notAttend;
+
+            // Accommodation
+            const accYes = data.filter(r => String(r[COLUMNS.Accommodation] || '').toLowerCase() === 'yes').length;
+            const accNo = data.filter(r => String(r[COLUMNS.Accommodation] || '').toLowerCase() === 'no').length;
+            document.getElementById('accAllCount').textContent = data.length;
+            document.getElementById('accYesCount').textContent = accYes;
+            document.getElementById('accNoCount').textContent = accNo;
+        }
+
+        // ============================================================
+        // UPDATE PROGRAM CARDS
+        // ============================================================
+        function updateProgramCards(data) {
+            const container = document.getElementById('programFilters');
+            const total = data.length;
+            
+            let html = `<div class="program-card active" data-program="all" data-value="all">
+                <span class="prog-icon">📋</span>
+                <span class="prog-name">All</span>
+                <span class="prog-count">${total}</span>
+            </div>`;
+            
+            Object.keys(PROGRAM_FIELDS).forEach(progName => {
+                const field = PROGRAM_FIELDS[progName];
+                const { attend, notAttend } = getProgramAttendance(data, field);
+                const icon = PROGRAM_ICONS[progName] || 'fa-solid fa-book';
+                const shortName = progName.replace(' Program', '').replace('Thinking', 'Think').replace('Performance', 'Perf');
+                const shortName2 = shortName.length > 15 ? shortName.substring(0, 12) + '..' : shortName;
+                
+                const isActive = activeFilters.program === progName ? 'active' : '';
+                
+                html += `<div class="program-card ${isActive}" data-program="${progName}" data-value="${progName}">
+                    <span class="prog-icon"><i class="${icon}"></i></span>
+                    <span class="prog-name">${shortName2}</span>
+                    <span class="prog-count">
+                        <span class="attend-count">${attend}✓</span>
+                        <span class="not-attend-count">${notAttend}✗</span>
+                    </span>
+                </div>`;
+            });
+            
+            container.innerHTML = html;
+            
+            container.querySelectorAll('.program-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const value = this.dataset.value;
+                    container.querySelectorAll('.program-card').forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                    activeFilters.program = value;
+                    applyFilters();
+                });
+            });
         }
 
         // ============================================================
@@ -1330,6 +1311,7 @@
         function updateInsights(data) {
             if (!data || data.length === 0) return;
 
+            // Largest Department
             const deptCounts = {};
             data.forEach(r => {
                 const d = r[COLUMNS.Department] || 'Unknown';
@@ -1341,40 +1323,10 @@
                 document.getElementById('insightLargestDeptDesc').textContent = sortedDepts[0][1] + ' employees';
             }
 
-            const progRates = {};
-            Object.keys(PROGRAM_FIELDS).forEach(progName => {
-                const field = PROGRAM_FIELDS[progName];
-                const total = data.filter(r => r[field] && r[field].trim() !== '').length;
-                const attended = data.filter(r => {
-                    const val = String(r[field] || '').toLowerCase();
-                    return val === 'attend' || val === 'attended' || val.includes('attend');
-                }).length;
-                progRates[progName] = total > 0 ? Math.round((attended / total) * 100) : 0;
-            });
-            const sortedProgs = Object.entries(progRates).sort((a, b) => b[1] - a[1]);
-            if (sortedProgs.length > 0) {
-                const best = sortedProgs[0];
-                document.getElementById('insightBestProgram').textContent = best[0].replace(' Program', '');
-                document.getElementById('insightBestProgramDesc').textContent = best[1] + '% completion';
-                const worst = sortedProgs[sortedProgs.length - 1];
-                document.getElementById('insightWorstProgram').textContent = worst[0].replace(' Program', '');
-                document.getElementById('insightWorstProgramDesc').textContent = worst[1] + '% completion';
-            }
-
-            const locCounts = {};
-            data.forEach(r => {
-                const l = r[COLUMNS.TrainingLocation] || 'Unknown';
-                locCounts[l] = (locCounts[l] || 0) + 1;
-            });
-            const sortedLocs = Object.entries(locCounts).sort((a, b) => b[1] - a[1]);
-            if (sortedLocs.length > 0) {
-                document.getElementById('insightTopLocation').textContent = sortedLocs[0][0];
-                document.getElementById('insightTopLocationDesc').textContent = sortedLocs[0][1] + ' employees';
-            }
-
+            // Largest Competency Level
             const levelCounts = {};
             data.forEach(r => {
-                const l = r['C-LVL'] || 'Unknown';
+                const l = r[COLUMNS.CLevel] || 'Unknown';
                 levelCounts[l] = (levelCounts[l] || 0) + 1;
             });
             const sortedLevels = Object.entries(levelCounts).sort((a, b) => b[1] - a[1]);
@@ -1383,300 +1335,50 @@
                 document.getElementById('insightTopLevelDesc').textContent = sortedLevels[0][1] + ' employees';
             }
 
-            const total = data.length;
-            const hasId = data.filter(r => r['ID'] && r['ID'].trim()).length;
-            const hasName = data.filter(r => r['Name'] && r['Name'].trim()).length;
-            const hasDept = data.filter(r => r[COLUMNS.Department] && r[COLUMNS.Department].trim()).length;
-            const qualityScore = total > 0 ? Math.round(((hasId + hasName + hasDept) / (total * 3)) * 100) : 0;
-
-            document.getElementById('insightQualityStatus').textContent = qualityScore + '%';
-            document.getElementById('insightQualityStatusDesc').textContent = total + ' records analyzed';
-            const tag = document.getElementById('insightQualityTag');
-            if (qualityScore >= 85) {
-                tag.textContent = '✅ Excellent';
-                tag.className = 'insight-tag good';
-            } else if (qualityScore >= 70) {
-                tag.textContent = '⚠️ Good';
-                tag.className = 'insight-tag warning';
-            } else {
-                tag.textContent = '❌ Needs Improvement';
-                tag.className = 'insight-tag danger';
-            }
-        }
-
-        // ============================================================
-        // FILTERS
-        // ============================================================
-        function applyFilters() {
-            console.log('🔄 Applying filters...');
-            console.log('📊 All data count:', allData.length);
-            
-            if (!allData || allData.length === 0) {
-                console.warn('⚠️ No data to filter');
-                updateEmployeeDetailTable([]);
-                updateActivitySlicer([]);
-                return;
-            }
-            
-            filteredData = [...allData];
-
-            // Activity filter
-            if (activeFilters.activity && activeFilters.activity !== 'all') {
-                const filterValue = activeFilters.activity;
-                filteredData = filteredData.filter(r => {
-                    const activity = String(r[COLUMNS.Activity] || '');
-                    return activity.includes(filterValue);
-                });
-                console.log(`🔍 After activity slicer (${filterValue}):`, filteredData.length);
-            }
-
-            // Program filter
-            if (activeFilters.program !== 'all') {
-                const field = PROGRAM_FIELDS[activeFilters.program];
-                if (field) {
-                    filteredData = filteredData.filter(r => {
-                        const val = String(r[field] || '').toLowerCase();
-                        return val === 'attend' || val === 'attended' || val.includes('attend');
-                    });
-                }
-            }
-
-            // Group filter
-            if (activeFilters.group !== 'all') {
-                filteredData = filteredData.filter(r => 
-                    String(r[COLUMNS.TrainingGroup] || '').includes(activeFilters.group)
-                );
-            }
-
-            // Location filter
-            if (activeFilters.location !== 'all') {
-                filteredData = filteredData.filter(r => String(r[COLUMNS.TrainingLocation] || '').includes(activeFilters.location));
-            }
-
-            // Level filter
-            if (activeFilters.level !== 'all') {
-                filteredData = filteredData.filter(r => String(r['C-LVL'] || '').includes(activeFilters.level));
-            }
-
-            // Phase filter
-            if (activeFilters.phase !== 'all') {
-                filteredData = filteredData.filter(r => String(r[COLUMNS.TrainingPhase] || '').includes(activeFilters.phase));
-            }
-
-            // Attendance filter
-            if (activeFilters.attendance === 'attend') {
-                filteredData = filteredData.filter(r => {
-                    const val = String(r[COLUMNS.SevenSens] || '').toLowerCase();
-                    return val === 'attend' || val === 'attended' || val.includes('attend');
-                });
-            } else if (activeFilters.attendance === 'not-attend') {
-                filteredData = filteredData.filter(r => {
-                    const val = String(r[COLUMNS.SevenSens] || '').toLowerCase();
-                    return val === 'not attend' || val.includes('not attend');
-                });
-            }
-            
-            console.log('📊 Filtered data count:', filteredData.length);
-            
-            updateActivitySlicer(filteredData);
-            renderDashboard(filteredData);
-            updateEmployeeDetailTable(filteredData);
-            checkSmartAlerts(filteredData);
-        }
-
-        function setupFilterButtons() {
-            // Location filters
-            document.querySelectorAll('#locationFilters .filter-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const type = this.dataset.filter;
-                    const value = this.dataset.value;
-                    const group = this.closest('.filter-buttons');
-                    group.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    activeFilters[type] = value;
-                    applyFilters();
-                });
+            // Largest Sector
+            const sectorCounts = {};
+            data.forEach(r => {
+                const s = r[COLUMNS.Sector] || 'Unknown';
+                sectorCounts[s] = (sectorCounts[s] || 0) + 1;
             });
-
-            // Level filters
-            document.querySelectorAll('#levelFilters .filter-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const type = this.dataset.filter;
-                    const value = this.dataset.value;
-                    const group = this.closest('.filter-buttons');
-                    group.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    activeFilters[type] = value;
-                    applyFilters();
-                });
-            });
-
-            // Attendance filters
-            document.querySelectorAll('#attendanceFilters .filter-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const type = this.dataset.filter;
-                    const value = this.dataset.value;
-                    const group = this.closest('.filter-buttons');
-                    group.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    activeFilters[type] = value;
-                    applyFilters();
-                });
-            });
-
-            // Group select
-            document.getElementById('groupSelect').addEventListener('change', function() {
-                activeFilters.group = this.value;
-                applyFilters();
-            });
-
-            // Phase select
-            document.getElementById('phaseSelect').addEventListener('change', function() {
-                activeFilters.phase = this.value;
-                applyFilters();
-            });
-        }
-
-        function clearAllFilters() {
-            activeFilters = { 
-                program: 'all', 
-                group: 'all', 
-                location: 'all', 
-                level: 'all', 
-                phase: 'all', 
-                attendance: 'all',
-                activity: 'all'
-            };
-            
-            // Clear filter buttons
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.dataset.value === 'all') btn.classList.add('active');
-            });
-            
-            // Clear slicer buttons
-            document.querySelectorAll('#sectorSlicerButtons .slicer-btn').forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.dataset.activity === 'all') btn.classList.add('active');
-            });
-            
-            // Clear program cards
-            document.querySelectorAll('.program-card').forEach(card => {
-                card.classList.remove('active');
-                if (card.dataset.value === 'all') card.classList.add('active');
-            });
-            
-            document.getElementById('groupSelect').value = 'all';
-            document.getElementById('phaseSelect').value = 'all';
-            applyFilters();
-        }
-
-        // ============================================================
-        // EMPLOYEE DETAIL TABLE
-        // ============================================================
-        function updateEmployeeDetailTable(data) {
-            const tbody = document.getElementById('detailTableBody');
-            const countSpan = document.getElementById('detailCount');
-            
-            console.log('📋 Updating employee table with', data ? data.length : 0, 'records');
-            
-            if (!data || data.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;padding:20px;color:var(--text-muted);">⚠️ No employees match the current filters.</td></tr>`;
-                countSpan.textContent = '(0 employees)';
-                return;
+            const sortedSectors = Object.entries(sectorCounts).sort((a, b) => b[1] - a[1]);
+            if (sortedSectors.length > 0) {
+                document.getElementById('insightTopSector').textContent = sortedSectors[0][0];
+                document.getElementById('insightTopSectorDesc').textContent = sortedSectors[0][1] + ' employees';
             }
 
-            const uniqueIds = new Set();
-            data.forEach(emp => {
-                const id = String(emp[COLUMNS.ID] || '').trim();
-                if (id) uniqueIds.add(id);
+            // Largest Phase
+            const phaseCounts = {};
+            data.forEach(r => {
+                const p = r[COLUMNS.TrainingPhase] || 'Unknown';
+                phaseCounts[p] = (phaseCounts[p] || 0) + 1;
             });
-            const uniqueCount = uniqueIds.size;
-            countSpan.textContent = `(${uniqueCount} unique employees)`;
-            
-            const displayData = data.slice(0, 100);
-            
-            tbody.innerHTML = displayData.map(emp => {
-                const sevenSens = String(emp[COLUMNS.SevenSens] || '').toLowerCase();
-                let attendanceBadge = '<span class="badge-unknown">Unknown</span>';
-                if (sevenSens === 'attend' || sevenSens === 'attended' || sevenSens.includes('attend')) {
-                    attendanceBadge = '<span class="badge-attend">✅ Attended</span>';
-                } else if (sevenSens === 'not attend' || sevenSens.includes('not attend')) {
-                    attendanceBadge = '<span class="badge-not-attend">❌ Not Attended</span>';
-                }
-                
-                const accommodation = String(emp[COLUMNS.Accommodation] || '').toLowerCase();
-                let accomBadge = '<span class="badge-unknown">N/A</span>';
-                if (accommodation === 'yes') {
-                    accomBadge = '<span class="badge-attend">✅ Yes</span>';
-                } else if (accommodation === 'no') {
-                    accomBadge = '<span class="badge-not-attend">❌ No</span>';
-                }
-                
-                return `<tr>
-                    <td><strong>${emp[COLUMNS.ID] || 'N/A'}</strong></td>
-                    <td><strong>${emp[COLUMNS.Name] || 'Unknown'}</strong></td>
-                    <td>${emp[COLUMNS.Department] || 'N/A'}</td>
-                    <td>${emp[COLUMNS.Title] || 'N/A'}</td>
-                    <td>${emp[COLUMNS.TrainingGroup] || 'N/A'}</td>
-                    <td>${emp[COLUMNS.TrainingPhase] || 'N/A'}</td>
-                    <td>${attendanceBadge}</td>
-                    <td>${accomBadge}</td>
-                </tr>`;
-            }).join('');
-
-            if (data.length > 100) {
-                tbody.innerHTML += `<tr><td colspan="8" style="text-align:center;color:var(--text-muted);font-style:italic;padding:10px;">... and ${data.length - 100} more records</td></tr>`;
+            const sortedPhases = Object.entries(phaseCounts).sort((a, b) => b[1] - a[1]);
+            if (sortedPhases.length > 0) {
+                document.getElementById('insightTopPhase').textContent = sortedPhases[0][0];
+                document.getElementById('insightTopPhaseDesc').textContent = sortedPhases[0][1] + ' employees';
             }
-        }
 
-        // ============================================================
-        // CHART INTERACTIVITY
-        // ============================================================
-        function setupChartInteractivity() {
-            const charts = [
-                { chart: chartInstances.sector, filterType: 'sector', id: 'chartBoxSector' },
-                { chart: chartInstances.level, filterType: 'level', id: 'chartBoxLevel' },
-                { chart: chartInstances.department, filterType: 'department', id: 'chartBoxDept' },
-                { chart: chartInstances.location, filterType: 'location', id: 'chartBoxLocation' },
-                { chart: chartInstances.phase, filterType: 'phase', id: 'chartBoxPhase' },
-                { chart: chartInstances.programs, filterType: 'program', id: 'chartBoxPrograms' }
-            ];
+            // Highest Attendance
+            const attended = data.filter(r => {
+                const val = String(r[COLUMNS.SevenSens] || '').toLowerCase();
+                return val === 'attend' || val === 'attended' || val.includes('attend');
+            }).length;
+            const attendanceRate = data.length > 0 ? Math.round((attended / data.length) * 100) : 0;
+            document.getElementById('insightTopAttendance').textContent = attendanceRate + '%';
+            document.getElementById('insightTopAttendanceDesc').textContent = data.length + ' employees';
 
-            charts.forEach(({ chart, filterType, id }) => {
-                if (!chart) return;
-                chart.on('click', function(e) {
-                    if (e.dataIndex !== undefined) {
-                        const label = chart.data.labels[e.dataIndex];
-                        let filterValue = label;
-                        if (filterType === 'location') {
-                            for (let loc of LOCATIONS) {
-                                if (label.includes(loc)) { filterValue = loc; break; }
-                            }
-                        }
-                        if (activeFilters[filterType] === filterValue) {
-                            activeFilters[filterType] = 'all';
-                        } else {
-                            activeFilters[filterType] = filterValue;
-                        }
-                        const groupId = filterType + 'Filters';
-                        const group = document.getElementById(groupId);
-                        if (group) {
-                            group.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                            if (activeFilters[filterType] !== 'all') {
-                                const btn = group.querySelector(`.filter-btn[data-value="${filterValue}"]`);
-                                if (btn) btn.classList.add('active');
-                            } else {
-                                const btn = group.querySelector('.filter-btn[data-value="all"]');
-                                if (btn) btn.classList.add('active');
-                            }
-                        }
-                        applyFilters();
-                    }
-                });
-                chart.on('mouseover', function(e) { if (e.dataIndex !== undefined) { document.body.style.cursor = 'pointer'; } });
-                chart.on('mouseout', function() { document.body.style.cursor = 'default'; });
+            // Most Popular Location
+            const locCounts = {};
+            data.forEach(r => {
+                const l = r[COLUMNS.Location] || 'Unknown';
+                locCounts[l] = (locCounts[l] || 0) + 1;
             });
+            const sortedLocs = Object.entries(locCounts).sort((a, b) => b[1] - a[1]);
+            if (sortedLocs.length > 0) {
+                document.getElementById('insightTopLocation').textContent = sortedLocs[0][0];
+                document.getElementById('insightTopLocationDesc').textContent = sortedLocs[0][1] + ' employees';
+            }
         }
 
         // ============================================================
@@ -1710,18 +1412,10 @@
 
             const locationSet = new Set();
             data.forEach(r => {
-                const loc = r[COLUMNS.TrainingLocation] || '';
+                const loc = r[COLUMNS.Location] || '';
                 if (loc.trim() !== '') locationSet.add(loc);
             });
             const locationCount = locationSet.size;
-
-            const phaseSet = new Set();
-            data.forEach(r => {
-                const phase = String(r[COLUMNS.TrainingPhase] || '');
-                const match = phase.match(/Phase[1-4]/);
-                if (match) phaseSet.add(match[0]);
-            });
-            const phaseCount = phaseSet.size;
 
             const hasId = data.filter(r => r['ID'] && r['ID'].trim()).length;
             const hasName = data.filter(r => r['Name'] && r['Name'].trim()).length;
@@ -1729,17 +1423,16 @@
             const qualityScore = total > 0 ? Math.round(((hasId + hasName + hasDept) / (total * 3)) * 100) : 0;
 
             document.getElementById('kpiTotal').textContent = total.toLocaleString();
+            document.getElementById('kpiProgress').textContent = attendanceRate + '%';
+            document.getElementById('kpiCompleted').textContent = programCount;
+            document.getElementById('kpiLocations').textContent = locationCount;
+            document.getElementById('kpiAttendees').textContent = attended;
             document.getElementById('kpiSectors').textContent = sectors.size.toLocaleString();
             document.getElementById('kpiDepartments').textContent = departments.size.toLocaleString();
-            document.getElementById('kpiAttendance').textContent = attendanceRate + '%';
-            document.getElementById('kpiPrograms').textContent = programCount;
-            document.getElementById('kpiLocations').textContent = locationCount;
             document.getElementById('kpiQuality').textContent = qualityScore + '%';
-            document.getElementById('kpiPhases').textContent = phaseCount;
 
-            // تحديث البرامج (بطاقات)
             updateProgramCards(data);
-            updateFilterBadges(data);
+            updateFilterCounts(data);
             updateInsights(data);
 
             // ============================================================
@@ -1751,7 +1444,7 @@
             const sectorValues = Object.values(sectorCounts);
 
             const levelCounts = {};
-            data.forEach(r => { const l = r['C-LVL'] || 'Unknown'; levelCounts[l] = (levelCounts[l] || 0) + 1; });
+            data.forEach(r => { const l = r[COLUMNS.CLevel] || 'Unknown'; levelCounts[l] = (levelCounts[l] || 0) + 1; });
             const levelLabels = Object.keys(levelCounts);
             const levelValues = Object.values(levelCounts);
 
@@ -1787,7 +1480,7 @@
             const phaseValues = Object.values(phaseCounts);
 
             const locCounts = {};
-            data.forEach(r => { const l = r[COLUMNS.TrainingLocation] || 'Unknown'; locCounts[l] = (locCounts[l] || 0) + 1; });
+            data.forEach(r => { const l = r[COLUMNS.Location] || 'Unknown'; locCounts[l] = (locCounts[l] || 0) + 1; });
             const locLabels = Object.keys(locCounts);
             const locValues = Object.values(locCounts);
 
@@ -1807,13 +1500,13 @@
                     return val === 'attend' || val === 'attended' || val.includes('attend');
                 }).length;
             });
-            const progEnrollLabels = Object.keys(progEnroll);
+            const progEnrollLabels = Object.keys(progEnroll).map(n => n.replace(' Program', '').substring(0, 12));
             const progEnrollValues = Object.values(progEnroll);
 
             destroyCharts();
 
             Chart.defaults.font.family = 'Cairo, sans-serif';
-            Chart.defaults.font.size = 13;
+            Chart.defaults.font.size = 11;
 
             // 1. Sector
             const ctx1 = document.getElementById('chartSector').getContext('2d');
@@ -1823,10 +1516,10 @@
                 options: {
                     responsive: true, maintainAspectRatio: false,
                     plugins: { 
-                        legend: { display: false, labels: { font: { size: 13 } } },
-                        datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 13 } }
+                        legend: { display: false },
+                        datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 11 } }
                     },
-                    scales: { y: { ticks: { font: { size: 12 } } }, x: { ticks: { font: { size: 12 } } } }
+                    scales: { y: { ticks: { font: { size: 10 } } }, x: { ticks: { font: { size: 10 } } } }
                 },
                 plugins: [ChartDataLabels]
             });
@@ -1839,8 +1532,8 @@
                 options: {
                     responsive: true, maintainAspectRatio: false,
                     plugins: {
-                        legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 12 } } },
-                        datalabels: { color: '#1a2332', font: { weight: 'bold', size: 13 }, formatter: (v, ctx) => { const total = ctx.dataset.data.reduce((a,b) => a+b, 0); return total > 0 ? Math.round((v/total)*100) + '%' : ''; } }
+                        legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } },
+                        datalabels: { color: '#1a2332', font: { weight: 'bold', size: 11 }, formatter: (v, ctx) => { const total = ctx.dataset.data.reduce((a,b) => a+b, 0); return total > 0 ? Math.round((v/total)*100) + '%' : ''; } }
                     }
                 },
                 plugins: [ChartDataLabels]
@@ -1854,11 +1547,11 @@
                 options: {
                     responsive: true, maintainAspectRatio: false,
                     plugins: { 
-                        legend: { display: false, labels: { font: { size: 13 } } },
-                        datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 11 } }
+                        legend: { display: false },
+                        datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 9 } }
                     },
                     indexAxis: 'y',
-                    scales: { y: { ticks: { font: { size: 10 } } }, x: { ticks: { font: { size: 10 } } } }
+                    scales: { y: { ticks: { font: { size: 9 } } }, x: { ticks: { font: { size: 9 } } } }
                 },
                 plugins: [ChartDataLabels]
             });
@@ -1877,10 +1570,10 @@
                 options: {
                     responsive: true, maintainAspectRatio: false,
                     plugins: {
-                        legend: { position: 'top', labels: { boxWidth: 12, font: { size: 12 } } },
-                        datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 11 }, formatter: v => v + '%' }
+                        legend: { position: 'top', labels: { boxWidth: 10, font: { size: 10 } } },
+                        datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 9 }, formatter: v => v + '%' }
                     },
-                    scales: { y: { beginAtZero: true, max: 100, ticks: { callback: v => v + '%', font: { size: 11 } } }, x: { ticks: { font: { size: 11 } } } }
+                    scales: { y: { beginAtZero: true, max: 100, ticks: { callback: v => v + '%', font: { size: 9 } } }, x: { ticks: { font: { size: 9 } } } }
                 },
                 plugins: [ChartDataLabels]
             });
@@ -1893,8 +1586,8 @@
                 options: {
                     responsive: true, maintainAspectRatio: false,
                     plugins: {
-                        legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 12 } } },
-                        datalabels: { color: '#1a2332', font: { weight: 'bold', size: 13 }, formatter: (v, ctx) => { const total = ctx.dataset.data.reduce((a,b) => a+b, 0); return total > 0 ? Math.round((v/total)*100) + '%' : ''; } }
+                        legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } },
+                        datalabels: { color: '#1a2332', font: { weight: 'bold', size: 11 }, formatter: (v, ctx) => { const total = ctx.dataset.data.reduce((a,b) => a+b, 0); return total > 0 ? Math.round((v/total)*100) + '%' : ''; } }
                     }
                 },
                 plugins: [ChartDataLabels]
@@ -1908,10 +1601,10 @@
                 options: {
                     responsive: true, maintainAspectRatio: false,
                     plugins: { 
-                        legend: { display: false, labels: { font: { size: 13 } } },
-                        datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 12 } }
+                        legend: { display: false },
+                        datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 10 } }
                     },
-                    scales: { y: { ticks: { font: { size: 11 } } }, x: { ticks: { font: { size: 11 } } } }
+                    scales: { y: { ticks: { font: { size: 9 } } }, x: { ticks: { font: { size: 9 } } } }
                 },
                 plugins: [ChartDataLabels]
             });
@@ -1924,10 +1617,10 @@
                 options: {
                     responsive: true, maintainAspectRatio: false,
                     plugins: { 
-                        legend: { display: false, labels: { font: { size: 13 } } },
-                        datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 12 } }
+                        legend: { display: false },
+                        datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 10 } }
                     },
-                    scales: { y: { ticks: { font: { size: 11 } } }, x: { ticks: { font: { size: 11 } } } }
+                    scales: { y: { ticks: { font: { size: 9 } } }, x: { ticks: { font: { size: 9 } } } }
                 },
                 plugins: [ChartDataLabels]
             });
@@ -1949,10 +1642,10 @@
                 options: {
                     responsive: true, maintainAspectRatio: false,
                     plugins: { 
-                        legend: { display: false, labels: { font: { size: 13 } } },
-                        datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 12 } }
+                        legend: { display: false },
+                        datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 10 } }
                     },
-                    scales: { y: { ticks: { font: { size: 11 } } }, x: { ticks: { font: { size: 11 } } } }
+                    scales: { y: { ticks: { font: { size: 9 } } }, x: { ticks: { font: { size: 8 } } } }
                 },
                 plugins: [ChartDataLabels]
             });
@@ -1967,6 +1660,359 @@
             document.getElementById('refreshBtn').disabled = false;
 
             console.log('📊 Dashboard rendered with', data.length, 'records');
+        }
+
+        // ============================================================
+        // CHART INTERACTIVITY
+        // ============================================================
+        function setupChartInteractivity() {
+            const charts = [
+                { chart: chartInstances.sector, filterType: 'sector', id: 'chartBoxSector' },
+                { chart: chartInstances.level, filterType: 'clevel', id: 'chartBoxLevel' },
+                { chart: chartInstances.department, filterType: 'department', id: 'chartBoxDept' },
+                { chart: chartInstances.location, filterType: 'location', id: 'chartBoxLocation' },
+                { chart: chartInstances.phase, filterType: 'phase', id: 'chartBoxPhase' },
+                { chart: chartInstances.programs, filterType: 'program', id: 'chartBoxPrograms' }
+            ];
+
+            charts.forEach(({ chart, filterType, id }) => {
+                if (!chart) return;
+                chart.on('click', function(e) {
+                    if (e.dataIndex !== undefined) {
+                        const label = chart.data.labels[e.dataIndex];
+                        let filterValue = label;
+                        
+                        if (activeFilters[filterType] === filterValue) {
+                            activeFilters[filterType] = 'all';
+                        } else {
+                            activeFilters[filterType] = filterValue;
+                        }
+                        
+                        const groupId = filterType + 'Filters';
+                        const group = document.getElementById(groupId);
+                        if (group) {
+                            group.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                            if (activeFilters[filterType] !== 'all') {
+                                const btn = group.querySelector(`.filter-btn[data-value="${filterValue}"]`);
+                                if (btn) btn.classList.add('active');
+                            } else {
+                                const btn = group.querySelector('.filter-btn[data-value="all"]');
+                                if (btn) btn.classList.add('active');
+                            }
+                        }
+                        
+                        // تحديث برنامج cards
+                        if (filterType === 'program') {
+                            document.querySelectorAll('.program-card').forEach(c => c.classList.remove('active'));
+                            if (activeFilters.program !== 'all') {
+                                document.querySelector(`.program-card[data-value="${filterValue}"]`)?.classList.add('active');
+                            } else {
+                                document.querySelector('.program-card[data-value="all"]')?.classList.add('active');
+                            }
+                        }
+                        
+                        applyFilters();
+                    }
+                });
+                chart.on('mouseover', function(e) { if (e.dataIndex !== undefined) { document.body.style.cursor = 'pointer'; } });
+                chart.on('mouseout', function() { document.body.style.cursor = 'default'; });
+            });
+        }
+
+        // ============================================================
+        // FILTERS
+        // ============================================================
+        function applyFilters() {
+            console.log('🔄 Applying filters...');
+            
+            if (!allData || allData.length === 0) {
+                console.warn('⚠️ No data to filter');
+                updateEmployeeDetailTable([]);
+                updateActivitySlicer([]);
+                return;
+            }
+            
+            filteredData = [...allData];
+
+            // Activity slicer
+            if (activeFilters.activitySlicer && activeFilters.activitySlicer !== 'all') {
+                filteredData = filteredData.filter(r => {
+                    const activity = String(r[COLUMNS.Activity] || '');
+                    return activity.includes(activeFilters.activitySlicer);
+                });
+            }
+
+            // Program filter
+            if (activeFilters.program !== 'all') {
+                const field = PROGRAM_FIELDS[activeFilters.program];
+                if (field) {
+                    filteredData = filteredData.filter(r => {
+                        const val = String(r[field] || '').toLowerCase();
+                        return val === 'attend' || val === 'attended' || val.includes('attend');
+                    });
+                }
+            }
+
+            // C-LVL
+            if (activeFilters.clevel !== 'all') {
+                filteredData = filteredData.filter(r => String(r[COLUMNS.CLevel] || '').includes(activeFilters.clevel));
+            }
+
+            // Level
+            if (activeFilters.level !== 'all') {
+                filteredData = filteredData.filter(r => String(r[COLUMNS.Level] || '').includes(activeFilters.level));
+            }
+
+            // Grade
+            if (activeFilters.grade !== 'all') {
+                filteredData = filteredData.filter(r => String(r[COLUMNS.Grade] || '').includes(activeFilters.grade));
+            }
+
+            // Activity
+            if (activeFilters.activity !== 'all') {
+                filteredData = filteredData.filter(r => String(r[COLUMNS.Activity] || '').includes(activeFilters.activity));
+            }
+
+            // Sector
+            if (activeFilters.sector !== 'all') {
+                filteredData = filteredData.filter(r => String(r[COLUMNS.Sector] || '').includes(activeFilters.sector));
+            }
+
+            // Area
+            if (activeFilters.area !== 'all') {
+                filteredData = filteredData.filter(r => String(r[COLUMNS.Area] || '').includes(activeFilters.area));
+            }
+
+            // Group
+            if (activeFilters.group !== 'all') {
+                filteredData = filteredData.filter(r => String(r[COLUMNS.TrainingGroup] || '').includes(activeFilters.group));
+            }
+
+            // Phase
+            if (activeFilters.phase !== 'all') {
+                filteredData = filteredData.filter(r => String(r[COLUMNS.TrainingPhase] || '').includes(activeFilters.phase));
+            }
+
+            // Location
+            if (activeFilters.location !== 'all') {
+                filteredData = filteredData.filter(r => String(r[COLUMNS.Location] || '').includes(activeFilters.location));
+            }
+
+            // Attendance
+            if (activeFilters.attendance === 'attend') {
+                filteredData = filteredData.filter(r => {
+                    const val = String(r[COLUMNS.SevenSens] || '').toLowerCase();
+                    return val === 'attend' || val === 'attended' || val.includes('attend');
+                });
+            } else if (activeFilters.attendance === 'not-attend') {
+                filteredData = filteredData.filter(r => {
+                    const val = String(r[COLUMNS.SevenSens] || '').toLowerCase();
+                    return val === 'not attend' || val.includes('not attend');
+                });
+            }
+
+            // Accommodation
+            if (activeFilters.accommodation === 'yes') {
+                filteredData = filteredData.filter(r => String(r[COLUMNS.Accommodation] || '').toLowerCase() === 'yes');
+            } else if (activeFilters.accommodation === 'no') {
+                filteredData = filteredData.filter(r => String(r[COLUMNS.Accommodation] || '').toLowerCase() === 'no');
+            }
+            
+            console.log('📊 Filtered data count:', filteredData.length);
+            
+            updateActivitySlicer(filteredData);
+            renderDashboard(filteredData);
+            updateEmployeeDetailTable(filteredData);
+            checkSmartAlerts(filteredData);
+        }
+
+        function setupFilterButtons() {
+            // تجهيز أزرار الفلاتر
+            const filterConfigs = [
+                { id: 'clevel', key: COLUMNS.CLevel, container: 'clevelFilters' },
+                { id: 'level', key: COLUMNS.Level, container: 'levelFilters' },
+                { id: 'grade', key: COLUMNS.Grade, container: 'gradeFilters' },
+                { id: 'activity', key: COLUMNS.Activity, container: 'activityFilters' },
+                { id: 'sector', key: COLUMNS.Sector, container: 'sectorFilters' },
+                { id: 'area', key: COLUMNS.Area, container: 'areaFilters' },
+                { id: 'location', key: COLUMNS.Location, container: 'locationFilters' }
+            ];
+            
+            filterConfigs.forEach(({ id, key, container }) => {
+                const containerEl = document.getElementById(container);
+                if (!containerEl) return;
+                
+                // إزالة الأزرار القديمة (ما عدا All)
+                containerEl.querySelectorAll('.filter-btn:not([data-value="all"])').forEach(btn => btn.remove());
+                
+                // جمع القيم الفريدة
+                const values = new Set();
+                allData.forEach(r => {
+                    const val = String(r[key] || '').trim();
+                    if (val) values.add(val);
+                });
+                
+                const sortedValues = Array.from(values).sort();
+                
+                sortedValues.forEach(val => {
+                    const btn = document.createElement('button');
+                    btn.className = 'filter-btn';
+                    btn.dataset.filter = id;
+                    btn.dataset.value = val;
+                    btn.innerHTML = `${val} <span class="badge-count">0</span>`;
+                    
+                    btn.addEventListener('click', function() {
+                        const type = this.dataset.filter;
+                        const value = this.dataset.value;
+                        const group = this.closest('.filter-group');
+                        group.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                        this.classList.add('active');
+                        activeFilters[type] = value;
+                        applyFilters();
+                    });
+                    
+                    containerEl.appendChild(btn);
+                });
+            });
+
+            // Attendance filters
+            document.querySelectorAll('#attendanceFilters .filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const type = this.dataset.filter;
+                    const value = this.dataset.value;
+                    const group = this.closest('.filter-group');
+                    group.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    activeFilters[type] = value;
+                    applyFilters();
+                });
+            });
+
+            // Accommodation filters
+            document.querySelectorAll('#accommodationFilters .filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const type = this.dataset.filter;
+                    const value = this.dataset.value;
+                    const group = this.closest('.filter-group');
+                    group.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    activeFilters[type] = value;
+                    applyFilters();
+                });
+            });
+
+            // Group select
+            document.getElementById('groupSelect').addEventListener('change', function() {
+                activeFilters.group = this.value;
+                applyFilters();
+            });
+
+            // Phase select
+            document.getElementById('phaseSelect').addEventListener('change', function() {
+                activeFilters.phase = this.value;
+                applyFilters();
+            });
+        }
+
+        function clearAllFilters() {
+            activeFilters = { 
+                program: 'all',
+                clevel: 'all',
+                level: 'all',
+                grade: 'all',
+                activity: 'all',
+                sector: 'all',
+                area: 'all',
+                group: 'all',
+                phase: 'all',
+                location: 'all',
+                attendance: 'all',
+                accommodation: 'all',
+                activitySlicer: 'all'
+            };
+            
+            // Clear filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.value === 'all') btn.classList.add('active');
+            });
+            
+            // Clear slicer buttons
+            document.querySelectorAll('#sectorSlicerButtons .slicer-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.activity === 'all') btn.classList.add('active');
+            });
+            
+            // Clear program cards
+            document.querySelectorAll('.program-card').forEach(card => {
+                card.classList.remove('active');
+                if (card.dataset.value === 'all') card.classList.add('active');
+            });
+            
+            document.getElementById('groupSelect').value = 'all';
+            document.getElementById('phaseSelect').value = 'all';
+            applyFilters();
+        }
+
+        // ============================================================
+        // EMPLOYEE DETAIL TABLE
+        // ============================================================
+        function updateEmployeeDetailTable(data) {
+            const tbody = document.getElementById('detailTableBody');
+            const countSpan = document.getElementById('detailCount');
+            
+            if (!data || data.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="13" style="text-align:center;padding:20px;color:var(--text-muted);">⚠️ No employees match the current filters.</td></tr>`;
+                countSpan.textContent = '(0 employees)';
+                return;
+            }
+
+            const uniqueIds = new Set();
+            data.forEach(emp => {
+                const id = String(emp[COLUMNS.ID] || '').trim();
+                if (id) uniqueIds.add(id);
+            });
+            countSpan.textContent = `(${uniqueIds.size} unique employees)`;
+            
+            const displayData = data.slice(0, 100);
+            
+            tbody.innerHTML = displayData.map(emp => {
+                const sevenSens = String(emp[COLUMNS.SevenSens] || '').toLowerCase();
+                let attendanceBadge = '<span class="badge-unknown">Unknown</span>';
+                if (sevenSens === 'attend' || sevenSens === 'attended' || sevenSens.includes('attend')) {
+                    attendanceBadge = '<span class="badge-attend">✅ Attended</span>';
+                } else if (sevenSens === 'not attend' || sevenSens.includes('not attend')) {
+                    attendanceBadge = '<span class="badge-not-attend">❌ Not Attended</span>';
+                }
+                
+                const accommodation = String(emp[COLUMNS.Accommodation] || '').toLowerCase();
+                let accomBadge = '<span class="badge-unknown">N/A</span>';
+                if (accommodation === 'yes') {
+                    accomBadge = '<span class="badge-attend">✅ Yes</span>';
+                } else if (accommodation === 'no') {
+                    accomBadge = '<span class="badge-not-attend">❌ No</span>';
+                }
+                
+                return `<tr>
+                    <td><strong>${emp[COLUMNS.ID] || 'N/A'}</strong></td>
+                    <td><strong>${emp[COLUMNS.Name] || 'Unknown'}</strong></td>
+                    <td>${emp[COLUMNS.CLevel] || 'N/A'}</td>
+                    <td>${emp[COLUMNS.Level] || 'N/A'}</td>
+                    <td>${emp[COLUMNS.Grade] || 'N/A'}</td>
+                    <td>${emp[COLUMNS.Activity] || 'N/A'}</td>
+                    <td>${emp[COLUMNS.Sector] || 'N/A'}</td>
+                    <td>${emp[COLUMNS.Area] || 'N/A'}</td>
+                    <td>${emp[COLUMNS.TrainingGroup] || 'N/A'}</td>
+                    <td>${emp[COLUMNS.TrainingPhase] || 'N/A'}</td>
+                    <td>${emp[COLUMNS.Location] || 'N/A'}</td>
+                    <td>${attendanceBadge}</td>
+                    <td>${accomBadge}</td>
+                </tr>`;
+            }).join('');
+
+            if (data.length > 100) {
+                tbody.innerHTML += `<tr><td colspan="13" style="text-align:center;color:var(--text-muted);font-style:italic;padding:8px;">... and ${data.length - 100} more records</td></tr>`;
+            }
         }
 
         // ============================================================
@@ -1999,14 +2045,16 @@
             document.getElementById('resName').textContent = emp[COLUMNS.Name] || 'Not recorded';
             document.getElementById('resTitle').textContent = emp[COLUMNS.Title] || 'Not recorded';
             document.getElementById('resSector').textContent = (emp[COLUMNS.Sector] || '-') + ' / ' + (emp[COLUMNS.Department] || '-');
-            document.getElementById('resLevel').textContent = emp['C-LVL'] || 'Not specified';
-            document.getElementById('resLocation').textContent = emp[COLUMNS.TrainingLocation] || 'Not specified';
-            document.getElementById('resPhase').textContent = emp[COLUMNS.TrainingPhase] || 'Not specified';
-            const v = String(emp[COLUMNS.SevenSens] || '').toLowerCase();
-            document.getElementById('resAttendance').textContent = (v === 'attend' || v === 'attended' || v.includes('attend')) ? '✅ Attended' : '❌ Not Attended';
+            document.getElementById('resLevel').textContent = (emp[COLUMNS.CLevel] || '-') + ' / ' + (emp[COLUMNS.Level] || '-');
+            document.getElementById('resGrade').textContent = emp[COLUMNS.Grade] || 'N/A';
+            document.getElementById('resLocation').textContent = emp[COLUMNS.Location] || 'Not specified';
+            document.getElementById('resGroupPhase').textContent = (emp[COLUMNS.TrainingGroup] || '-') + ' / ' + (emp[COLUMNS.TrainingPhase] || '-');
             
+            const v = String(emp[COLUMNS.SevenSens] || '').toLowerCase();
+            const attendanceText = (v === 'attend' || v === 'attended' || v.includes('attend')) ? '✅ Attended' : '❌ Not Attended';
             const accommodation = String(emp[COLUMNS.Accommodation] || '').toLowerCase();
-            document.getElementById('resAccommodation').textContent = accommodation === 'yes' ? '✅ Yes' : accommodation === 'no' ? '❌ No' : 'N/A';
+            const accomText = accommodation === 'yes' ? '✅ Yes' : accommodation === 'no' ? '❌ No' : 'N/A';
+            document.getElementById('resAttendAccom').textContent = attendanceText + ' / ' + accomText;
 
             const fields = Object.values(PROGRAM_FIELDS);
             let attendedCount = 0, notAttendedCount = 0;
@@ -2018,7 +2066,7 @@
             document.getElementById('statAttended').textContent = '✅ Attended: ' + attendedCount;
             document.getElementById('statNotAttended').textContent = '❌ Not Attended: ' + notAttendedCount;
             document.getElementById('statGroup').textContent = '📋 Group: ' + (emp[COLUMNS.TrainingGroup] || 'N/A');
-            document.getElementById('statLocation').textContent = '📍 Location: ' + (emp[COLUMNS.TrainingLocation] || 'N/A');
+            document.getElementById('statLocation').textContent = '📍 Location: ' + (emp[COLUMNS.Location] || 'N/A');
             document.getElementById('statAccommodation').textContent = '🏠 Accommodation: ' + (accommodation === 'yes' ? '✅ Yes' : accommodation === 'no' ? '❌ No' : 'N/A');
 
             const totalPrograms = fields.length;
@@ -2098,22 +2146,22 @@
             <head>
                 <title>Employee Profile - ${emp[COLUMNS.Name] || 'Employee'}</title>
                 <style>
-                    body { font-family: 'Cairo', Arial, sans-serif; padding: 40px; max-width: 800px; margin: 0 auto; color: #1a2332; direction: ltr; }
-                    .header { border-bottom: 3px solid #1e3d59; padding-bottom: 15px; margin-bottom: 20px; display: flex; align-items: center; gap: 15px; }
-                    .header h1 { margin: 0; font-size: 22px; color: #1e3d59; }
-                    .header .sub { color: #6b7a8f; font-size: 14px; }
-                    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 20px; margin: 15px 0; }
-                    .grid .label { font-weight: 300; color: #6b7a8f; font-size: 12px; text-transform: uppercase; }
-                    .grid .value { font-weight: 700; font-size: 16px; }
-                    .section-title { font-size: 16px; font-weight: 700; color: #1e3d59; margin-top: 20px; margin-bottom: 10px; border-bottom: 2px solid #e8ecf0; padding-bottom: 5px; }
-                    .badge { display: inline-block; padding: 2px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+                    body { font-family: 'Cairo', Arial, sans-serif; padding: 30px; max-width: 800px; margin: 0 auto; color: #1a2332; direction: ltr; }
+                    .header { border-bottom: 3px solid #1e3d59; padding-bottom: 12px; margin-bottom: 15px; display: flex; align-items: center; gap: 12px; }
+                    .header h1 { margin: 0; font-size: 20px; color: #1e3d59; }
+                    .header .sub { color: #6b7a8f; font-size: 12px; }
+                    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 15px; margin: 12px 0; }
+                    .grid .label { font-weight: 300; color: #6b7a8f; font-size: 10px; text-transform: uppercase; }
+                    .grid .value { font-weight: 700; font-size: 14px; }
+                    .section-title { font-size: 14px; font-weight: 700; color: #1e3d59; margin-top: 15px; margin-bottom: 8px; border-bottom: 2px solid #e8ecf0; padding-bottom: 4px; }
+                    .badge { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
                     .badge-attend { background: rgba(16,185,129,0.15); color: #10b981; }
                     .badge-not-attend { background: rgba(239,68,68,0.15); color: #ef4444; }
-                    .stats { display: flex; gap: 20px; flex-wrap: wrap; background: #f8fafc; padding: 12px 16px; border-radius: 8px; margin: 10px 0; }
-                    .stats span { font-size: 14px; }
-                    .prog-list { list-style: none; padding: 0; margin: 10px 0; }
-                    .prog-list li { padding: 4px 0; border-bottom: 1px solid #f0f0f0; }
-                    .footer { margin-top: 30px; padding-top: 15px; border-top: 1px solid #e8ecf0; font-size: 12px; color: #6b7a8f; text-align: center; }
+                    .stats { display: flex; gap: 15px; flex-wrap: wrap; background: #f8fafc; padding: 10px 14px; border-radius: 8px; margin: 8px 0; }
+                    .stats span { font-size: 13px; }
+                    .prog-list { list-style: none; padding: 0; margin: 8px 0; }
+                    .prog-list li { padding: 3px 0; border-bottom: 1px solid #f0f0f0; font-size: 13px; }
+                    .footer { margin-top: 25px; padding-top: 12px; border-top: 1px solid #e8ecf0; font-size: 11px; color: #6b7a8f; text-align: center; }
                 </style>
             </head>
             <body>
@@ -2126,20 +2174,20 @@
                     <div><div class="label">Employee ID</div><div class="value">${emp[COLUMNS.ID] || 'N/A'}</div></div>
                     <div><div class="label">Name</div><div class="value">${emp[COLUMNS.Name] || 'Unknown'}</div></div>
                     <div><div class="label">Title</div><div class="value">${emp[COLUMNS.Title] || 'Not recorded'}</div></div>
-                    <div><div class="label">Level</div><div class="value">${emp['C-LVL'] || 'Not specified'}</div></div>
-                    <div><div class="label">Sector / Department</div><div class="value">${(emp[COLUMNS.Sector] || '-')} / ${(emp[COLUMNS.Department] || '-')}</div></div>
-                    <div><div class="label">Training Location</div><div class="value">${emp[COLUMNS.TrainingLocation] || 'Not specified'}</div></div>
-                    <div><div class="label">Training Group</div><div class="value">${emp[COLUMNS.TrainingGroup] || 'N/A'}</div></div>
-                    <div><div class="label">Training Phase</div><div class="value">${emp[COLUMNS.TrainingPhase] || 'Not specified'}</div></div>
-                    <div><div class="label">Attendance (7 Sens)</div><div class="value"><span class="badge ${sevenSens === 'attend' || sevenSens === 'attended' || sevenSens.includes('attend') ? 'badge-attend' : 'badge-not-attend'}">${attendanceText}</span></div></div>
-                    <div><div class="label">Accommodation</div><div class="value">${accommodationText}</div></div>
+                    <div><div class="label">C-LVL / Level</div><div class="value">${(emp[COLUMNS.CLevel] || '-')} / ${(emp[COLUMNS.Level] || '-')}</div></div>
+                    <div><div class="label">Grade</div><div class="value">${emp[COLUMNS.Grade] || 'N/A'}</div></div>
+                    <div><div class="label">Activity / Sector</div><div class="value">${(emp[COLUMNS.Activity] || '-')} / ${(emp[COLUMNS.Sector] || '-')}</div></div>
+                    <div><div class="label">Area / Department</div><div class="value">${(emp[COLUMNS.Area] || '-')} / ${(emp[COLUMNS.Department] || '-')}</div></div>
+                    <div><div class="label">Location</div><div class="value">${emp[COLUMNS.Location] || 'Not specified'}</div></div>
+                    <div><div class="label">Group / Phase</div><div class="value">${(emp[COLUMNS.TrainingGroup] || '-')} / ${(emp[COLUMNS.TrainingPhase] || '-')}</div></div>
+                    <div><div class="label">Attendance / Accommodation</div><div class="value"><span class="badge ${sevenSens === 'attend' || sevenSens === 'attended' || sevenSens.includes('attend') ? 'badge-attend' : 'badge-not-attend'}">${attendanceText}</span> / ${accommodationText}</div></div>
                 </div>
 
                 <div class="section-title">📊 Training Summary</div>
                 <div class="stats">
-                    <span>📚 Total Programs: <strong>${Object.values(PROGRAM_FIELDS).length}</strong></span>
+                    <span>📚 Total Programs: <strong>${fields.length}</strong></span>
                     <span>✅ Completed: <strong>${attendedCount}</strong></span>
-                    <span>⏳ Pending: <strong>${Object.values(PROGRAM_FIELDS).length - attendedCount - notAttendedCount}</strong></span>
+                    <span>⏳ Pending: <strong>${fields.length - attendedCount - notAttendedCount}</strong></span>
                     <span>❌ Not Attended: <strong>${notAttendedCount}</strong></span>
                 </div>
 
@@ -2190,10 +2238,9 @@
                 document.getElementById('printDateHeader').textContent = now;
                 document.getElementById('printDateFooter').textContent = now;
 
-                if (!activeFilters.activity) {
-                    activeFilters.activity = 'all';
-                }
-
+                // تجهيز أزرار الفلاتر بعد تحميل البيانات
+                setupFilterButtons();
+                
                 applyFilters();
                 
                 showAlert('success', `✅ Data refreshed! ${allData.length} employees loaded.`);
@@ -2224,7 +2271,6 @@
         // INIT
         // ============================================================
         document.addEventListener('DOMContentLoaded', function() {
-            setupFilterButtons();
             setupSlicerButtons();
             loadData();
 
