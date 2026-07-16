@@ -94,7 +94,7 @@
 
         .container { max-width: 1440px; margin: 0 auto; padding: 0 10px; }
 
-        /* FILTER BAR - توزيع متناسق */
+        /* FILTER BAR */
         .filter-bar {
             background: var(--white);
             border-radius: 12px;
@@ -176,9 +176,7 @@
         .filter-group-item .filter-select:hover { border-color: var(--cpc-blue); }
         .filter-group-item .filter-select:focus { outline: none; border-color: var(--koki-orange); box-shadow: 0 0 0 3px rgba(255,110,64,0.15); }
 
-        .filter-full-width {
-            grid-column: 1 / -1;
-        }
+        .filter-full-width { grid-column: 1 / -1; }
 
         /* PROGRAM CARDS */
         .program-cards { display: flex; flex-wrap: wrap; gap: 5px 8px; padding: 2px 0; }
@@ -328,6 +326,51 @@
         }
         .clear-filters-btn:hover { border-color: var(--danger); color: var(--danger); background: rgba(239,68,68,0.05); }
 
+        /* ============================================================
+           LOADING OVERLAY - عند تحميل البيانات
+           ============================================================ */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.85);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            font-family: 'Cairo', sans-serif;
+            transition: opacity 0.5s ease;
+        }
+        .loading-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .loading-overlay .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #e8ecf0;
+            border-top-color: var(--koki-orange);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .loading-overlay .loading-text {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: var(--cpc-blue);
+            font-weight: 600;
+        }
+        .loading-overlay .loading-sub {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 5px;
+        }
+
         @media (max-width: 992px) {
             .filter-grid { grid-template-columns: repeat(3, 1fr); }
             .search-charts-grid { grid-template-columns: 1fr; }
@@ -384,7 +427,7 @@
             .no-print, .no-print * { display: none !important; }
             .action-btn, .refresh-btn, .print-btn, .clear-filters-btn,
             .search-box button, .filter-btn, .filter-select, .slicer-btn,
-            .program-card { display: none !important; }
+            .program-card, .loading-overlay { display: none !important; }
             body { background: white !important; padding: 15px !important; font-size: 10px !important; color: #1a2332 !important; }
             .container { max-width: 100% !important; padding: 0 !important; }
             .kpi-card, .chart-box, .insight-card, .employee-detail-table,
@@ -413,6 +456,15 @@
 </head>
 <body>
 
+    <!-- ============================================================
+    LOADING OVERLAY
+    ============================================================ -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+        <div class="loading-text">📊 Loading CBT Data...</div>
+        <div class="loading-sub">Fetching data from Google Sheets</div>
+    </div>
+
     <div class="print-header" style="display:none;">
         <h1>📊 CBT Intelligence Dashboard</h1>
         <span class="sub">Generated: <span id="printDateHeader"></span></span>
@@ -427,7 +479,7 @@
         <div class="logo-right"><img src="new koki.png" alt="Koki Logo" onerror="this.style.display='none'"></div>
         <div class="status-badge">
             <i class="fa-solid fa-cloud" id="statusIcon"></i>
-            <span id="statusText">Live</span>
+            <span id="statusText">Loading...</span>
             <button class="refresh-btn" id="refreshBtn" title="Refresh Data">
                 <i class="fa-solid fa-rotate"></i> Refresh
             </button>
@@ -462,16 +514,16 @@
             <div id="alertsList"></div>
         </div>
 
-        <!-- FILTER BAR - توزيع متناسق -->
+        <!-- FILTER BAR -->
         <div class="filter-bar no-print">
             <div class="filter-grid">
-                <!-- Programs - عرض كامل -->
+                <!-- Programs -->
                 <div class="filter-group-item filter-full-width">
                     <span class="filter-label"><i class="fa-solid fa-book"></i> Programs</span>
                     <div class="program-cards" id="programFilters"></div>
                 </div>
 
-                <!-- C-LVL - أقل من 4 خيارات => أزرار -->
+                <!-- C-LVL -->
                 <div class="filter-group-item">
                     <span class="filter-label"><i class="fa-solid fa-layer-group"></i> C-LVL</span>
                     <div class="filter-options" id="clevelFilters">
@@ -479,7 +531,7 @@
                     </div>
                 </div>
 
-                <!-- Grade - أقل من 4 خيارات => أزرار -->
+                <!-- Grade -->
                 <div class="filter-group-item">
                     <span class="filter-label"><i class="fa-solid fa-graduation-cap"></i> Grade</span>
                     <div class="filter-options" id="gradeFilters">
@@ -487,7 +539,7 @@
                     </div>
                 </div>
 
-                <!-- Activity - أكثر من 4 خيارات => قائمة منسدلة -->
+                <!-- Activity -->
                 <div class="filter-group-item">
                     <span class="filter-label"><i class="fa-solid fa-bolt"></i> Activity</span>
                     <div class="filter-options">
@@ -497,7 +549,7 @@
                     </div>
                 </div>
 
-                <!-- Sector - أكثر من 4 خيارات => قائمة منسدلة -->
+                <!-- Sector -->
                 <div class="filter-group-item">
                     <span class="filter-label"><i class="fa-solid fa-building"></i> Sector</span>
                     <div class="filter-options">
@@ -507,7 +559,7 @@
                     </div>
                 </div>
 
-                <!-- Area - أكثر من 4 خيارات => قائمة منسدلة -->
+                <!-- Area -->
                 <div class="filter-group-item">
                     <span class="filter-label"><i class="fa-solid fa-map-pin"></i> Area</span>
                     <div class="filter-options">
@@ -517,7 +569,7 @@
                     </div>
                 </div>
 
-                <!-- Group - أكثر من 4 خيارات => قائمة منسدلة -->
+                <!-- Group -->
                 <div class="filter-group-item">
                     <span class="filter-label"><i class="fa-solid fa-users"></i> Group</span>
                     <div class="filter-options">
@@ -527,7 +579,7 @@
                     </div>
                 </div>
 
-                <!-- Phase - أكثر من 4 خيارات => قائمة منسدلة -->
+                <!-- Phase -->
                 <div class="filter-group-item">
                     <span class="filter-label"><i class="fa-solid fa-clock"></i> Phase</span>
                     <div class="filter-options">
@@ -537,7 +589,7 @@
                     </div>
                 </div>
 
-                <!-- Location - أكثر من 4 خيارات => قائمة منسدلة -->
+                <!-- Location -->
                 <div class="filter-group-item">
                     <span class="filter-label"><i class="fa-solid fa-location-dot"></i> Location</span>
                     <div class="filter-options">
@@ -547,7 +599,7 @@
                     </div>
                 </div>
 
-                <!-- Attendance - أقل من 4 خيارات => أزرار -->
+                <!-- Attendance -->
                 <div class="filter-group-item">
                     <span class="filter-label"><i class="fa-solid fa-user-check"></i> Attendance</span>
                     <div class="filter-options" id="attendanceFilters">
@@ -557,7 +609,7 @@
                     </div>
                 </div>
 
-                <!-- Accommodation - أقل من 4 خيارات => أزرار -->
+                <!-- Accommodation -->
                 <div class="filter-group-item">
                     <span class="filter-label"><i class="fa-solid fa-bed"></i> Accommodation</span>
                     <div class="filter-options" id="accommodationFilters">
@@ -654,7 +706,7 @@
             <div class="chart-box" id="chartBoxPrograms"><h4><i class="fa-solid fa-book-open"></i> Program Enrollment</h4><div class="chart-container"><canvas id="chartPrograms"></canvas></div></div>
         </div>
 
-        <!-- EMPLOYEE DETAIL TABLE - عرض جميع البيانات مثل Excel -->
+        <!-- EMPLOYEE DETAIL TABLE -->
         <div class="employee-detail-table" id="employeeDetailTable">
             <h4>
                 <i class="fa-solid fa-table"></i> Employees Data
@@ -683,7 +735,14 @@
                             <th>Accommodation</th>
                         </tr>
                     </thead>
-                    <tbody id="detailTableBody"></tbody>
+                    <tbody id="detailTableBody">
+                        <tr>
+                            <td colspan="14" style="text-align:center;padding:30px;color:var(--text-muted);">
+                                <i class="fa-solid fa-spinner fa-spin" style="font-size:1.5rem;display:block;margin-bottom:10px;"></i>
+                                Loading employees data...
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -706,17 +765,30 @@
         // ============================================================
         // CONFIG
         // ============================================================
+        // استخدام رابط CSV مع gid الصحيح
         const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRu0vhUS8c-hbFznxR_F9K9LNueNeabXiLwMjMzppgpIjJCSNCadsHDVVGxwiKYYHve9-Qtb37ALs8P/pub?gid=1032977671&single=true&output=csv";
 
+        // أسماء الأعمدة - يجب أن تتطابق مع الشيت
         const COLUMNS = {
-            ID: 'ID', Name: 'Name', Title: 'Title', CLevel: 'C-LVL',
-            Grade: 'Grade', Activity: 'Activity', Sector: 'Sector', Area: 'Area',
+            ID: 'ID',
+            Name: 'Name',
+            Title: 'Title',
+            CLevel: 'C-LVL',
+            Grade: 'Grade',
+            Activity: 'Activity',
+            Sector: 'Sector',
+            Area: 'Area',
             Department: 'Department',
-            TrainingGroup: 'CPT Training Group', TrainingPhase: 'CPT Training Phase',
-            Location: 'Location', Accommodation: 'Accommodation',
-            SevenSens: '7 Sens Program', Analytical: 'Analytical Thinking Program',
-            MindField: 'Mind field Program', Leadership: 'Leader Ship Program',
-            DrivePerformance: 'Drive Performance Program', KickStart: 'Kick Start Program'
+            TrainingGroup: 'CPT Training Group',
+            TrainingPhase: 'CPT Training Phase',
+            Location: 'Location',
+            Accommodation: 'Accommodation',
+            SevenSens: '7 Sens Program',
+            Analytical: 'Analytical Thinking Program',
+            MindField: 'Mind field Program',
+            Leadership: 'Leader Ship Program',
+            DrivePerformance: 'Drive Performance Program',
+            KickStart: 'Kick Start Program'
         };
 
         const PROGRAM_FIELDS = {
@@ -760,7 +832,7 @@
         };
         let isLoading = false, loadError = false, lastSearchedEmployee = null;
         let refreshInterval = null, dataLoadAttempts = 0;
-        const MAX_ATTEMPTS = 3;
+        const MAX_ATTEMPTS = 5;
 
         function printPage() {
             const now = new Date().toLocaleString();
@@ -770,34 +842,71 @@
         }
 
         // ============================================================
-        // CSV TO JSON
+        // CSV TO JSON - محسّن مع معالجة أفضل
         // ============================================================
         function csvToJSON(csv) {
-            if (!csv || csv.trim() === '') return [];
+            if (!csv || csv.trim() === '') {
+                console.error('❌ CSV is empty');
+                return [];
+            }
+            
             const lines = csv.split("\n").filter(l => l.trim() !== '');
-            if (lines.length < 2) return [];
+            if (lines.length < 2) {
+                console.error('❌ CSV has less than 2 lines');
+                return [];
+            }
+            
+            // استخراج العناوين
             const headers = lines[0].split(",").map(h => h.trim().replace(/^"|"$/g, ''));
-            console.log('📋 Headers:', headers);
+            console.log('📋 Headers from sheet:', headers);
+            
+            // التحقق من وجود الأعمدة المطلوبة
+            const requiredColumns = ['ID', 'Name', 'Sector', 'Department'];
+            const missingColumns = requiredColumns.filter(col => !headers.includes(col));
+            if (missingColumns.length > 0) {
+                console.warn('⚠️ Missing columns:', missingColumns);
+                console.warn('⚠️ Available columns:', headers);
+            }
+            
             const seenIds = new Set();
             const result = [];
+            
             for (let i = 1; i < lines.length; i++) {
                 try {
+                    // معالجة CSV مع وجود فواصل داخل النص
                     const row = lines[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(item => item.trim().replace(/^"|"$/g, ''));
                     const obj = {};
-                    headers.forEach((h, idx) => { obj[h] = row[idx] || ''; });
+                    headers.forEach((h, idx) => {
+                        obj[h] = row[idx] || '';
+                    });
+                    
                     const id = String(obj['ID'] || '').trim();
-                    if (id && !seenIds.has(id)) { seenIds.add(id); result.push(obj); }
-                    else if (!id) { obj['_tempId'] = 'temp_' + i; result.push(obj); }
-                } catch (e) { console.warn('⚠️ Error parsing row', i); }
+                    if (id && !seenIds.has(id)) {
+                        seenIds.add(id);
+                        result.push(obj);
+                    } else if (!id) {
+                        obj['_tempId'] = 'temp_' + i;
+                        result.push(obj);
+                    }
+                } catch (e) {
+                    console.warn('⚠️ Error parsing row', i, e);
+                }
             }
-            console.log('📊 Total records:', result.length);
-            if (result.length > 0) console.log('📝 Sample:', result[0]);
+            
+            console.log('📊 Total unique records loaded:', result.length);
+            if (result.length > 0) {
+                console.log('📝 Sample record:', result[0]);
+                console.log('📝 Available keys:', Object.keys(result[0]));
+            }
             return result;
         }
 
         function destroyCharts() {
             Object.keys(chartInstances).forEach(key => {
-                if (chartInstances[key]) { chartInstances[key].destroy(); delete chartInstances[key]; }
+                if (chartInstances[key]) {
+                    chartInstances[key].destroy();
+                    delete chartInstances[key];
+                }
             });
         }
 
@@ -805,11 +914,15 @@
         // HELPERS
         // ============================================================
         function getProgramAttendance(data, field) {
-            let attend = 0, notAttend = 0;
+            let attend = 0,
+                notAttend = 0;
             data.forEach(r => {
                 const val = String(r[field] || '').toLowerCase().trim();
-                if (val === 'attend' || val === 'attended' || val.includes('attend')) attend++;
-                else notAttend++;
+                if (val === 'attend' || val === 'attended' || val.includes('attend')) {
+                    attend++;
+                } else {
+                    notAttend++;
+                }
             });
             return { attend, notAttend };
         }
@@ -835,21 +948,32 @@
                 return val === 'attend' || val === 'attended' || val.includes('attend');
             }).length;
             const rate = total > 0 ? (attended / total) * 100 : 0;
-            if (rate < 60) alerts.push({ type: 'danger', icon: 'fa-triangle-exclamation', msg: `⚠️ Attendance rate is ${Math.round(rate)}% - Below 60%!` });
+            if (rate < 60) {
+                alerts.push({ type: 'danger', icon: 'fa-triangle-exclamation', msg: `⚠️ Attendance rate is ${Math.round(rate)}% - Below 60%!` });
+            }
             const hasId = data.filter(r => r['ID'] && r['ID'].trim()).length;
             const hasName = data.filter(r => r['Name'] && r['Name'].trim()).length;
             const missing = total - Math.min(hasId, hasName);
-            if (missing > total * 0.05) alerts.push({ type: 'warning', icon: 'fa-circle-exclamation', msg: `📊 ${missing} records missing data.` });
-            if (alerts.length === 0) alerts.push({ type: 'success', icon: 'fa-check-circle', msg: `✅ All systems healthy! ${total} employees.` });
+            if (missing > total * 0.05) {
+                alerts.push({ type: 'warning', icon: 'fa-circle-exclamation', msg: `📊 ${missing} records missing data.` });
+            }
+            if (alerts.length === 0) {
+                alerts.push({ type: 'success', icon: 'fa-check-circle', msg: `✅ All systems healthy! ${total} employees.` });
+            }
             renderAlerts(alerts);
         }
 
         function renderAlerts(alerts) {
             const container = document.getElementById('alertsContainer');
             const list = document.getElementById('alertsList');
-            if (!alerts || alerts.length === 0) { container.classList.remove('show'); return; }
+            if (!alerts || alerts.length === 0) {
+                container.classList.remove('show');
+                return;
+            }
             container.classList.add('show');
-            list.innerHTML = alerts.map(a => `<div class="alert-item alert-${a.type}"><i class="fa-solid ${a.icon}"></i><span>${a.msg}</span></div>`).join('');
+            list.innerHTML = alerts.map(a =>
+                `<div class="alert-item alert-${a.type}"><i class="fa-solid ${a.icon}"></i><span>${a.msg}</span></div>`
+            ).join('');
         }
 
         function showAlert(type, msg) {
@@ -888,7 +1012,8 @@
         function updateProgramCards(data) {
             const container = document.getElementById('programFilters');
             const total = data.length;
-            let html = `<div class="program-card active" data-program="all" data-value="all">
+            let html =
+                `<div class="program-card active" data-program="all" data-value="all">
                 <span class="prog-icon">📋</span><span class="prog-name">All</span>
                 <span class="prog-count">${total}</span>
             </div>`;
@@ -982,7 +1107,6 @@
                 } else {
                     select.value = 'all';
                 }
-                // تحديث الـ activeFilters
                 const filterKey = selectId.replace('Select', '');
                 const filterMap = {
                     'activitySelect': 'activity',
@@ -1022,7 +1146,8 @@
                     btn.dataset.value = val;
                     btn.innerHTML = `${val} <span class="badge-count">0</span>`;
                     btn.addEventListener('click', function() {
-                        const type = this.dataset.filter, value = this.dataset.value;
+                        const type = this.dataset.filter,
+                            value = this.dataset.value;
                         const group = this.closest('.filter-options');
                         group.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                         this.classList.add('active');
@@ -1035,21 +1160,23 @@
         }
 
         function updateFilterCounts(data) {
-            // تحديث C-LVL
+            // C-LVL
             const clAll = data.length;
             document.getElementById('clAllCount').textContent = clAll;
             document.querySelectorAll('#clevelFilters .filter-btn:not([data-value="all"])').forEach(btn => {
                 const val = btn.dataset.value;
                 const count = data.filter(r => String(r[COLUMNS.CLevel] || '').includes(val)).length;
-                btn.querySelector('.badge-count').textContent = count;
+                const badge = btn.querySelector('.badge-count');
+                if (badge) badge.textContent = count;
             });
 
-            // تحديث Grade
+            // Grade
             document.getElementById('gradeAllCount').textContent = data.length;
             document.querySelectorAll('#gradeFilters .filter-btn:not([data-value="all"])').forEach(btn => {
                 const val = btn.dataset.value;
                 const count = data.filter(r => String(r[COLUMNS.Grade] || '').includes(val)).length;
-                btn.querySelector('.badge-count').textContent = count;
+                const badge = btn.querySelector('.badge-count');
+                if (badge) badge.textContent = count;
             });
 
             // Attendance
@@ -1065,7 +1192,7 @@
             document.getElementById('accYesCount').textContent = accYes;
             document.getElementById('accNoCount').textContent = accNo;
 
-            // تحديث عدد السجلات الكلي
+            // Total records
             document.getElementById('totalRecords').textContent = allData.length;
         }
 
@@ -1076,13 +1203,12 @@
             if (!data || data.length === 0) return;
 
             const deptCounts = {};
-            data.forEach(r => { const d = r[COLUMNS.Department] || 'Unknown'; if (d.trim()) deptCounts[d] = (deptCounts[d] || 0) + 1; });
-            // إزالة "Unknown" إذا وجدت
-            if (deptCounts['Unknown']) {
-                const unknownCount = deptCounts['Unknown'];
-                delete deptCounts['Unknown'];
-                // إعادة توزيع الـ Unknown على الأقسام الأخرى أو تجاهلها
-            }
+            data.forEach(r => {
+                const d = r[COLUMNS.Department] || 'Unknown';
+                if (d.trim()) deptCounts[d] = (deptCounts[d] || 0) + 1;
+            });
+            // إزالة Unknown
+            if (deptCounts['Unknown']) delete deptCounts['Unknown'];
             const sortedDepts = Object.entries(deptCounts).sort((a, b) => b[1] - a[1]);
             if (sortedDepts.length > 0) {
                 document.getElementById('insightLargestDept').textContent = sortedDepts[0][0] || 'N/A';
@@ -1093,7 +1219,10 @@
             }
 
             const levelCounts = {};
-            data.forEach(r => { const l = r[COLUMNS.CLevel] || 'Unknown'; levelCounts[l] = (levelCounts[l] || 0) + 1; });
+            data.forEach(r => {
+                const l = r[COLUMNS.CLevel] || 'Unknown';
+                levelCounts[l] = (levelCounts[l] || 0) + 1;
+            });
             const sortedLevels = Object.entries(levelCounts).sort((a, b) => b[1] - a[1]);
             if (sortedLevels.length > 0) {
                 document.getElementById('insightTopLevel').textContent = sortedLevels[0][0];
@@ -1101,7 +1230,10 @@
             }
 
             const sectorCounts = {};
-            data.forEach(r => { const s = r[COLUMNS.Sector] || 'Unknown'; sectorCounts[s] = (sectorCounts[s] || 0) + 1; });
+            data.forEach(r => {
+                const s = r[COLUMNS.Sector] || 'Unknown';
+                sectorCounts[s] = (sectorCounts[s] || 0) + 1;
+            });
             const sortedSectors = Object.entries(sectorCounts).sort((a, b) => b[1] - a[1]);
             if (sortedSectors.length > 0) {
                 document.getElementById('insightTopSector').textContent = sortedSectors[0][0];
@@ -1109,7 +1241,10 @@
             }
 
             const phaseCounts = {};
-            data.forEach(r => { const p = r[COLUMNS.TrainingPhase] || 'Unknown'; phaseCounts[p] = (phaseCounts[p] || 0) + 1; });
+            data.forEach(r => {
+                const p = r[COLUMNS.TrainingPhase] || 'Unknown';
+                phaseCounts[p] = (phaseCounts[p] || 0) + 1;
+            });
             const sortedPhases = Object.entries(phaseCounts).sort((a, b) => b[1] - a[1]);
             if (sortedPhases.length > 0) {
                 document.getElementById('insightTopPhase').textContent = sortedPhases[0][0];
@@ -1125,7 +1260,10 @@
             document.getElementById('insightTopAttendanceDesc').textContent = data.length + ' employees';
 
             const locCounts = {};
-            data.forEach(r => { const l = r[COLUMNS.Location] || 'Unknown'; locCounts[l] = (locCounts[l] || 0) + 1; });
+            data.forEach(r => {
+                const l = r[COLUMNS.Location] || 'Unknown';
+                locCounts[l] = (locCounts[l] || 0) + 1;
+            });
             const sortedLocs = Object.entries(locCounts).sort((a, b) => b[1] - a[1]);
             if (sortedLocs.length > 0) {
                 document.getElementById('insightTopLocation').textContent = sortedLocs[0][0];
@@ -1137,7 +1275,10 @@
         // RENDER DASHBOARD
         // ============================================================
         function renderDashboard(data) {
-            if (!data || data.length === 0) { console.warn("No data to render."); return; }
+            if (!data || data.length === 0) {
+                console.warn("No data to render.");
+                return;
+            }
             const total = data.length;
             const sectors = new Set(data.map(r => r[COLUMNS.Sector]).filter(Boolean));
             const departments = new Set(data.map(r => r[COLUMNS.Department]).filter(Boolean));
@@ -1150,9 +1291,9 @@
             Object.keys(PROGRAM_FIELDS).forEach(pn => {
                 const field = PROGRAM_FIELDS[pn];
                 if (data.some(r => {
-                    const v = String(r[field] || '').toLowerCase();
-                    return v === 'attend' || v === 'attended' || v.includes('attend');
-                })) programCount++;
+                        const v = String(r[field] || '').toLowerCase();
+                        return v === 'attend' || v === 'attended' || v.includes('attend');
+                    })) programCount++;
             });
             const locationSet = new Set();
             data.forEach(r => { const loc = r[COLUMNS.Location] || ''; if (loc.trim()) locationSet.add(loc); });
@@ -1182,7 +1323,6 @@
             data.forEach(r => { const s = r[COLUMNS.Sector] || 'Unknown'; sectorCounts[s] = (sectorCounts[s] || 0) + 1; });
             const sectorLabels = Object.keys(sectorCounts).filter(k => k !== 'Unknown');
             const sectorValues = sectorLabels.map(k => sectorCounts[k]);
-            // إضافة Unknown إذا وجدت
             if (sectorCounts['Unknown']) {
                 sectorLabels.push('Unknown');
                 sectorValues.push(sectorCounts['Unknown']);
@@ -1195,18 +1335,17 @@
 
             const deptCounts = {};
             data.forEach(r => { const d = r[COLUMNS.Department] || 'Unknown'; deptCounts[d] = (deptCounts[d] || 0) + 1; });
-            // إزالة Unknown من Department
-            if (deptCounts['Unknown']) {
-                delete deptCounts['Unknown'];
-            }
+            if (deptCounts['Unknown']) delete deptCounts['Unknown'];
             const sortedDepts = Object.entries(deptCounts).sort((a, b) => b[1] - a[1]);
             const deptLabels = sortedDepts.map(d => d[0]);
             const deptValues = sortedDepts.map(d => d[1]);
 
-            const sectorAtt = {}, sectorComp = {};
+            const sectorAtt = {},
+                sectorComp = {};
             data.forEach(r => {
                 const s = r[COLUMNS.Sector] || 'Unknown';
-                if (!sectorAtt[s]) { sectorAtt[s] = 0; sectorComp[s] = 0; }
+                if (!sectorAtt[s]) { sectorAtt[s] = 0;
+                    sectorComp[s] = 0; }
                 const v1 = String(r[COLUMNS.SevenSens] || '').toLowerCase();
                 const v2 = String(r[COLUMNS.Analytical] || '').toLowerCase();
                 if (v1 === 'attend' || v1 === 'attended' || v1.includes('attend')) sectorAtt[s]++;
@@ -1234,7 +1373,9 @@
             const locValues = Object.values(locCounts);
 
             const qualityData = {
-                'Valid IDs': hasId, 'Valid Names': hasName, 'Valid Departments': hasDept,
+                'Valid IDs': hasId,
+                'Valid Names': hasName,
+                'Valid Departments': hasDept,
                 'Has Grade': data.filter(r => r['Grade'] && r['Grade'].trim()).length,
                 'Has Status': data.filter(r => r['Status'] && r['Status'].trim()).length
             };
@@ -1257,7 +1398,7 @@
             Chart.defaults.font.family = 'Cairo, sans-serif';
             Chart.defaults.font.size = 10;
 
-            const colors = ['#1e3d59','#17b890','#ff6e40','#f6c23e','#8b5cf6','#e74a3b','#3b82f6','#10b981'];
+            const colors = ['#1e3d59', '#17b890', '#ff6e40', '#f6c23e', '#8b5cf6', '#e74a3b', '#3b82f6', '#10b981'];
 
             // 1. Sector
             const ctx1 = document.getElementById('chartSector').getContext('2d');
@@ -1265,7 +1406,8 @@
                 type: 'bar',
                 data: { labels: sectorLabels, datasets: [{ label: 'Employees', data: sectorValues, backgroundColor: '#1e3d59', borderRadius: 6, barPercentage: 0.6 }] },
                 options: {
-                    responsive: true, maintainAspectRatio: false,
+                    responsive: true,
+                    maintainAspectRatio: false,
                     plugins: { legend: { display: false }, datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 9 } } },
                     scales: { y: { ticks: { font: { size: 8 } } }, x: { ticks: { font: { size: 8 } } } }
                 },
@@ -1278,10 +1420,11 @@
                 type: 'doughnut',
                 data: { labels: levelLabels, datasets: [{ data: levelValues, backgroundColor: colors }] },
                 options: {
-                    responsive: true, maintainAspectRatio: false,
+                    responsive: true,
+                    maintainAspectRatio: false,
                     plugins: {
                         legend: { position: 'bottom', labels: { boxWidth: 8, font: { size: 8 } } },
-                        datalabels: { color: '#1a2332', font: { weight: 'bold', size: 9 }, formatter: (v, ctx) => { const total = ctx.dataset.data.reduce((a,b) => a+b, 0); return total > 0 ? Math.round((v/total)*100) + '%' : ''; } }
+                        datalabels: { color: '#1a2332', font: { weight: 'bold', size: 9 }, formatter: (v, ctx) => { const total = ctx.dataset.data.reduce((a, b) => a + b, 0); return total > 0 ? Math.round((v / total) * 100) + '%' : ''; } }
                     }
                 },
                 plugins: [ChartDataLabels]
@@ -1293,7 +1436,8 @@
                 type: 'bar',
                 data: { labels: deptLabels, datasets: [{ label: 'Employees', data: deptValues, backgroundColor: '#17b890', borderRadius: 6, barPercentage: 0.6 }] },
                 options: {
-                    responsive: true, maintainAspectRatio: false,
+                    responsive: true,
+                    maintainAspectRatio: false,
                     plugins: { legend: { display: false }, datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 8 } } },
                     indexAxis: 'y',
                     scales: { y: { ticks: { font: { size: 7 } } }, x: { ticks: { font: { size: 7 } } } }
@@ -1313,7 +1457,8 @@
                     ]
                 },
                 options: {
-                    responsive: true, maintainAspectRatio: false,
+                    responsive: true,
+                    maintainAspectRatio: false,
                     plugins: {
                         legend: { position: 'top', labels: { boxWidth: 8, font: { size: 8 } } },
                         datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 8 }, formatter: v => v + '%' }
@@ -1329,10 +1474,11 @@
                 type: 'pie',
                 data: { labels: phaseLabels, datasets: [{ data: phaseValues, backgroundColor: colors.slice(0, phaseLabels.length) }] },
                 options: {
-                    responsive: true, maintainAspectRatio: false,
+                    responsive: true,
+                    maintainAspectRatio: false,
                     plugins: {
                         legend: { position: 'bottom', labels: { boxWidth: 8, font: { size: 8 } } },
-                        datalabels: { color: '#1a2332', font: { weight: 'bold', size: 9 }, formatter: (v, ctx) => { const total = ctx.dataset.data.reduce((a,b) => a+b, 0); return total > 0 ? Math.round((v/total)*100) + '%' : ''; } }
+                        datalabels: { color: '#1a2332', font: { weight: 'bold', size: 9 }, formatter: (v, ctx) => { const total = ctx.dataset.data.reduce((a, b) => a + b, 0); return total > 0 ? Math.round((v / total) * 100) + '%' : ''; } }
                     }
                 },
                 plugins: [ChartDataLabels]
@@ -1344,7 +1490,8 @@
                 type: 'bar',
                 data: { labels: locLabels, datasets: [{ label: 'Employees', data: locValues, backgroundColor: '#ff6e40', borderRadius: 6, barPercentage: 0.6 }] },
                 options: {
-                    responsive: true, maintainAspectRatio: false,
+                    responsive: true,
+                    maintainAspectRatio: false,
                     plugins: { legend: { display: false }, datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 8 } } },
                     scales: { y: { ticks: { font: { size: 8 } } }, x: { ticks: { font: { size: 8 } } } }
                 },
@@ -1357,7 +1504,8 @@
                 type: 'bar',
                 data: { labels: qualityLabels, datasets: [{ label: 'Records', data: qualityValues, backgroundColor: '#3b82f6', borderRadius: 6, barPercentage: 0.6 }] },
                 options: {
-                    responsive: true, maintainAspectRatio: false,
+                    responsive: true,
+                    maintainAspectRatio: false,
                     plugins: { legend: { display: false }, datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 8 } } },
                     scales: { y: { ticks: { font: { size: 8 } } }, x: { ticks: { font: { size: 7 } } } }
                 },
@@ -1379,7 +1527,8 @@
                     }]
                 },
                 options: {
-                    responsive: true, maintainAspectRatio: false,
+                    responsive: true,
+                    maintainAspectRatio: false,
                     plugins: { legend: { display: false }, datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 8 } } },
                     scales: { y: { ticks: { font: { size: 8 } } }, x: { ticks: { font: { size: 7 } } } }
                 },
@@ -1393,6 +1542,9 @@
             document.getElementById('loadingMsg').className = 'loading-status success';
             document.getElementById('loadingMsg').innerHTML = '<i class="fa-solid fa-check-circle"></i> Data loaded: ' + data.length + ' records';
             document.getElementById('refreshBtn').disabled = false;
+
+            // إخفاء overlay التحميل
+            document.getElementById('loadingOverlay').classList.add('hidden');
         }
 
         // ============================================================
@@ -1424,7 +1576,6 @@
                                 document.querySelector('.program-card[data-value="all"]')?.classList.add('active');
                             }
                         } else {
-                            // تحديث dropdown أو الأزرار
                             const select = document.getElementById(selectId);
                             if (select && select.tagName === 'SELECT') {
                                 if (activeFilters[filterType] !== 'all' && Array.from(select.options).some(o => o.value === filterValue)) {
@@ -1524,7 +1675,8 @@
         function setupFilterButtons() {
             document.querySelectorAll('#attendanceFilters .filter-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
-                    const type = this.dataset.filter, value = this.dataset.value;
+                    const type = this.dataset.filter,
+                        value = this.dataset.value;
                     const group = this.closest('.filter-options');
                     group.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
@@ -1535,7 +1687,8 @@
 
             document.querySelectorAll('#accommodationFilters .filter-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
-                    const type = this.dataset.filter, value = this.dataset.value;
+                    const type = this.dataset.filter,
+                        value = this.dataset.value;
                     const group = this.closest('.filter-options');
                     group.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
@@ -1547,10 +1700,18 @@
 
         function clearAllFilters() {
             activeFilters = {
-                program: 'all', clevel: 'all', grade: 'all',
-                activity: 'all', sector: 'all', area: 'all',
-                group: 'all', phase: 'all', location: 'all',
-                attendance: 'all', accommodation: 'all', activitySlicer: 'all'
+                program: 'all',
+                clevel: 'all',
+                grade: 'all',
+                activity: 'all',
+                sector: 'all',
+                area: 'all',
+                group: 'all',
+                phase: 'all',
+                location: 'all',
+                attendance: 'all',
+                accommodation: 'all',
+                activitySlicer: 'all'
             };
 
             document.querySelectorAll('.filter-btn').forEach(b => {
@@ -1568,7 +1729,6 @@
                 if (c.dataset.value === 'all') c.classList.add('active');
             });
 
-            // Reset dropdowns
             ['activitySelect', 'sectorSelect', 'areaSelect', 'groupSelect', 'phaseSelect', 'locationSelect'].forEach(id => {
                 const select = document.getElementById(id);
                 if (select) select.value = 'all';
@@ -1578,14 +1738,15 @@
         }
 
         // ============================================================
-        // EMPLOYEE DETAIL TABLE - عرض جميع البيانات مثل Excel
+        // EMPLOYEE DETAIL TABLE
         // ============================================================
         function updateEmployeeDetailTable(data) {
             const tbody = document.getElementById('detailTableBody');
             const countSpan = document.getElementById('detailCount');
 
             if (!data || data.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="14" style="text-align:center;padding:15px;color:var(--text-muted);">⚠️ No employees match the current filters.</td></tr>`;
+                tbody.innerHTML =
+                    `<tr><td colspan="14" style="text-align:center;padding:15px;color:var(--text-muted);">⚠️ No employees match the current filters.</td></tr>`;
                 countSpan.textContent = '(0 employees)';
                 return;
             }
@@ -1632,7 +1793,8 @@
             }).join('');
 
             if (data.length > 200) {
-                tbody.innerHTML += `<tr><td colspan="14" style="text-align:center;color:var(--text-muted);font-style:italic;padding:6px;">... and ${data.length - 200} more</td></tr>`;
+                tbody.innerHTML +=
+                    `<tr><td colspan="14" style="text-align:center;color:var(--text-muted);font-style:italic;padding:6px;">... and ${data.length - 200} more</td></tr>`;
             }
         }
 
@@ -1664,7 +1826,8 @@
             document.getElementById('resAttendAccom').textContent = attText + ' / ' + accomText;
 
             const fields = Object.values(PROGRAM_FIELDS);
-            let attendedCount = 0, notAttendedCount = 0;
+            let attendedCount = 0,
+                notAttendedCount = 0;
             fields.forEach(f => {
                 const val = String(emp[f] || '').toLowerCase();
                 if (val === 'attend' || val === 'attended' || val.includes('attend')) attendedCount++;
@@ -1713,11 +1876,13 @@
             const printWindow = window.open('', '_blank', 'width=800,height=600');
             if (!printWindow) { alert('Please allow popups for printing.'); return; }
             const sevenSens = String(emp[COLUMNS.SevenSens] || '').toLowerCase();
-            const attendanceText = (sevenSens === 'attend' || sevenSens === 'attended' || sevenSens.includes('attend')) ? '✅ Attended' : '❌ Not Attended';
+            const attendanceText = (sevenSens === 'attend' || sevenSens === 'attended' || sevenSens.includes('attend')) ? '✅ Attended' :
+                '❌ Not Attended';
             const accom = String(emp[COLUMNS.Accommodation] || '').toLowerCase();
             const accomText = accom === 'yes' ? '✅ Yes' : accom === 'no' ? '❌ No' : 'N/A';
             const fields = Object.values(PROGRAM_FIELDS);
-            let attendedCount = 0, notAttendedCount = 0;
+            let attendedCount = 0,
+                notAttendedCount = 0;
             fields.forEach(f => {
                 const val = String(emp[f] || '').toLowerCase();
                 if (val === 'attend' || val === 'attended' || val.includes('attend')) attendedCount++;
@@ -1775,7 +1940,7 @@
         }
 
         // ============================================================
-        // LOAD DATA
+        // LOAD DATA - محسّن مع تأكيد تحميل البيانات
         // ============================================================
         async function loadData() {
             if (isLoading) return;
@@ -1784,16 +1949,31 @@
             msg.className = 'loading-status';
             msg.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Loading data...';
             document.getElementById('refreshBtn').disabled = true;
+            
+            // إظهار Overlay التحميل
+            document.getElementById('loadingOverlay').classList.remove('hidden');
+
             try {
+                console.log('🔄 Fetching data from:', SHEET_URL);
                 const response = await fetch(SHEET_URL);
-                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                if (!response.ok) throw new Error(`HTTP ${response.status} - ${response.statusText}`);
                 const csv = await response.text();
+                console.log('📄 CSV length:', csv.length, 'characters');
+                
+                if (csv.length < 100) {
+                    throw new Error('CSV data is too short - possibly empty or wrong format');
+                }
+                
                 const jsonData = csvToJSON(csv);
-                if (jsonData.length === 0) throw new Error('No data found');
+                if (jsonData.length === 0) {
+                    throw new Error('No data found in sheet - check the sheet URL and permissions');
+                }
+
                 allData = jsonData;
-                console.log('✅ Data loaded:', allData.length);
+                console.log('✅ Data loaded successfully:', allData.length, 'records');
                 loadError = false;
                 dataLoadAttempts = 0;
+
                 const now = new Date().toLocaleString();
                 document.getElementById('printDateHeader').textContent = now;
                 document.getElementById('printDateFooter').textContent = now;
@@ -1803,19 +1983,38 @@
                 populateDropdowns();
                 setupFilterButtons();
                 applyFilters();
+                
                 showAlert('success', `✅ Data refreshed! ${allData.length} employees loaded.`);
+                
             } catch (err) {
-                console.error('❌ Error:', err);
+                console.error('❌ Error loading data:', err);
                 loadError = true;
                 dataLoadAttempts++;
+                
                 if (dataLoadAttempts < MAX_ATTEMPTS) {
                     msg.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> Retrying... (${dataLoadAttempts}/${MAX_ATTEMPTS})`;
-                    setTimeout(() => loadData(), 2000);
+                    document.getElementById('loadingOverlay').querySelector('.loading-text').textContent = `🔄 Retrying... (${dataLoadAttempts}/${MAX_ATTEMPTS})`;
+                    setTimeout(() => loadData(), 3000);
                 } else {
                     msg.className = 'loading-status error';
-                    msg.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Could not load data. Please refresh.';
+                    msg.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Could not load data. Please refresh the page.';
                     document.getElementById('statusText').textContent = 'Error';
                     document.getElementById('statusIcon').className = 'fa-solid fa-cloud-arrow-up';
+                    document.getElementById('loadingOverlay').querySelector('.loading-text').textContent = '❌ Failed to load data';
+                    document.getElementById('loadingOverlay').querySelector('.loading-sub').textContent = 'Please refresh the page or check the data source';
+                    
+                    // عرض رسالة في الجدول
+                    document.getElementById('detailTableBody').innerHTML = `
+                        <tr><td colspan="14" style="text-align:center;padding:30px;color:var(--danger);">
+                            <i class="fa-solid fa-circle-exclamation" style="font-size:2rem;display:block;margin-bottom:10px;"></i>
+                            Failed to load data from Google Sheets.<br>
+                            <span style="font-size:0.8rem;color:var(--text-muted);">Error: ${err.message}</span>
+                            <br><br>
+                            <button onclick="loadData()" style="padding:8px 20px;background:var(--koki-orange);color:white;border:none;border-radius:8px;cursor:pointer;">
+                                <i class="fa-solid fa-rotate"></i> Retry
+                            </button>
+                        </td></tr>
+                    `;
                 }
             } finally {
                 if (!loadError || dataLoadAttempts >= MAX_ATTEMPTS) {
@@ -1831,18 +2030,30 @@
         document.addEventListener('DOMContentLoaded', function() {
             setupSlicerButtons();
             loadData();
-            refreshInterval = setInterval(() => { console.log('🔄 Auto-refreshing...'); loadData(); }, 60000);
-            document.getElementById('refreshBtn').addEventListener('click', function() { loadData(); });
+            
+            refreshInterval = setInterval(() => {
+                console.log('🔄 Auto-refreshing...');
+                loadData();
+            }, 60000);
+
+            document.getElementById('refreshBtn').addEventListener('click', function() {
+                loadData();
+            });
+
             document.getElementById('empIdInput').addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') searchEmployee();
             });
+
             window.addEventListener('beforeprint', function() {
                 const now = new Date().toLocaleString();
                 document.getElementById('printDateHeader').textContent = now;
                 document.getElementById('printDateFooter').textContent = now;
             });
         });
-        window.addEventListener('beforeunload', function() { if (refreshInterval) clearInterval(refreshInterval); });
+
+        window.addEventListener('beforeunload', function() {
+            if (refreshInterval) clearInterval(refreshInterval);
+        });
     </script>
 </body>
 </html>
