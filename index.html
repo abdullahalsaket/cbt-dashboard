@@ -1,21 +1,22 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CBT | Competency Based Training Intelligence Hub 2026</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
     <style>
         :root {
-            --cpc-blue-dark: #0f2b40;
-            --cpc-blue: #1e3d59;
-            --koki-orange: #ff6e40;
-            --koki-orange-hover: #e05326;
+            --primary-dark: #0f2b40;
+            --primary: #1e3d59;
+            --primary-light: #2d5a7a;
+            --accent: #ff6e40;
+            --accent-hover: #e05326;
             --white: #ffffff;
-            --bg-light: #f0f2f5;
+            --bg-light: #f0f4f8;
             --text-dark: #1a2332;
             --text-muted: #6b7a8f;
             --success: #10b981;
@@ -24,80 +25,206 @@
             --info: #3b82f6;
             --purple: #8b5cf6;
             --teal: #14b8a6;
+            --border: #e2e8f0;
+            --shadow: 0 2px 12px rgba(0,0,0,0.06);
+            --radius: 12px;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Cairo', sans-serif; background: var(--bg-light); color: var(--text-dark); min-height: 100vh; }
+        body { 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; 
+            background: var(--bg-light); 
+            color: var(--text-dark); 
+            min-height: 100vh;
+            padding: 0 16px;
+        }
 
+        /* ========== NAVBAR ========== */
         .navbar {
-            background: linear-gradient(135deg, var(--cpc-blue-dark) 0%, var(--cpc-blue) 100%);
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
             color: white;
-            padding: 6px 16px;
+            padding: 8px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 4px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            gap: 8px;
+            border-radius: 0 0 var(--radius) var(--radius);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            margin-bottom: 12px;
         }
-        .navbar .logo-left img, .navbar .logo-right img { height: 32px; width: auto; background: rgba(255,255,255,0.95); padding: 2px 6px; border-radius: 8px; }
+        .navbar .logo-left img, .navbar .logo-right img { 
+            height: 36px; 
+            width: auto; 
+            background: rgba(255,255,255,0.95); 
+            padding: 2px 8px; 
+            border-radius: 8px; 
+        }
         .navbar .title-center { flex: 1; text-align: center; }
-        .navbar .title-center h1 { font-size: 1.1rem; font-weight: 800; background: linear-gradient(135deg, #ffffff 0%, var(--koki-orange) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .navbar .title-center .subtitle { font-size: 0.5rem; opacity: 0.7; letter-spacing: 1px; text-transform: uppercase; -webkit-text-fill-color: rgba(255,255,255,0.6); }
-        .navbar .status-badge { font-size: 0.5rem; background: rgba(255,255,255,0.1); padding: 2px 8px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 4px; }
-        .refresh-btn { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 2px 8px; border-radius: 30px; font-size: 0.5rem; cursor: pointer; transition: all 0.2s; font-family: 'Cairo', sans-serif; }
-        .refresh-btn:hover { background: rgba(255,255,255,0.25); }
+        .navbar .title-center h1 { 
+            font-size: 1.2rem; 
+            font-weight: 900; 
+            background: linear-gradient(135deg, #ffffff 0%, var(--accent) 100%); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            letter-spacing: -0.5px;
+        }
+        .navbar .title-center .subtitle { 
+            font-size: 0.55rem; 
+            opacity: 0.7; 
+            letter-spacing: 2px; 
+            text-transform: uppercase; 
+            -webkit-text-fill-color: rgba(255,255,255,0.6);
+        }
+        .navbar .status-badge { 
+            font-size: 0.55rem; 
+            background: rgba(255,255,255,0.08); 
+            padding: 4px 12px; 
+            border-radius: 30px; 
+            border: 1px solid rgba(255,255,255,0.1); 
+            display: flex; 
+            align-items: center; 
+            gap: 6px; 
+        }
+        .refresh-btn { 
+            background: rgba(255,255,255,0.12); 
+            border: 1px solid rgba(255,255,255,0.15); 
+            color: white; 
+            padding: 3px 12px; 
+            border-radius: 30px; 
+            font-size: 0.5rem; 
+            cursor: pointer; 
+            transition: all 0.2s; 
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .refresh-btn:hover { background: rgba(255,255,255,0.2); }
         .refresh-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
+        /* ========== TOP BAR ========== */
         .top-bar {
             background: var(--white);
-            border-radius: 10px;
-            padding: 6px 14px;
-            margin: 8px auto;
-            max-width: 1440px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-            border: 1px solid #e8ecf0;
+            border-radius: var(--radius);
+            padding: 8px 16px;
+            margin-bottom: 12px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 6px;
+            gap: 8px;
         }
         .top-bar .slicer-section { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-        .top-bar .slicer-section .slicer-label { font-size: 0.6rem; font-weight: 700; color: var(--cpc-blue); text-transform: uppercase; letter-spacing: 0.3px; display: flex; align-items: center; gap: 4px; }
-        .top-bar .slicer-section .slicer-label i { color: var(--koki-orange); }
+        .top-bar .slicer-section .slicer-label { 
+            font-size: 0.6rem; 
+            font-weight: 700; 
+            color: var(--primary); 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px; 
+            display: flex; 
+            align-items: center; 
+            gap: 4px; 
+        }
+        .top-bar .slicer-section .slicer-label i { color: var(--accent); }
         .top-bar .slicer-section .slicer-buttons { display: flex; gap: 4px; flex-wrap: wrap; }
-        .top-bar .slicer-section .slicer-btn { padding: 3px 12px; border-radius: 30px; border: 2px solid #e2e8f0; background: transparent; font-family: 'Cairo', sans-serif; font-size: 0.5rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.2s; }
-        .top-bar .slicer-section .slicer-btn:hover { border-color: var(--cpc-blue); color: var(--cpc-blue); background: rgba(30,61,89,0.04); }
-        .top-bar .slicer-section .slicer-btn.active { border-color: var(--koki-orange); background: var(--koki-orange); color: white; box-shadow: 0 4px 12px rgba(255,110,64,0.3); }
-        .top-bar .slicer-section .slicer-btn .badge { background: rgba(255,255,255,0.2); border-radius: 20px; padding: 0 5px; font-size: 0.4rem; margin-left: 3px; }
-
+        .top-bar .slicer-section .slicer-btn { 
+            padding: 4px 14px; 
+            border-radius: 30px; 
+            border: 2px solid var(--border); 
+            background: transparent; 
+            font-family: 'Inter', sans-serif; 
+            font-size: 0.55rem; 
+            font-weight: 600; 
+            color: var(--text-muted); 
+            cursor: pointer; 
+            transition: all 0.2s; 
+        }
+        .top-bar .slicer-section .slicer-btn:hover { 
+            border-color: var(--primary); 
+            color: var(--primary); 
+            background: rgba(30,61,89,0.04); 
+        }
+        .top-bar .slicer-section .slicer-btn.active { 
+            border-color: var(--accent); 
+            background: var(--accent); 
+            color: white; 
+            box-shadow: 0 4px 12px rgba(255,110,64,0.3); 
+        }
+        .top-bar .slicer-section .slicer-btn .badge { 
+            background: rgba(255,255,255,0.2); 
+            border-radius: 20px; 
+            padding: 0 6px; 
+            font-size: 0.45rem; 
+            margin-left: 4px; 
+        }
         .top-bar .action-buttons { display: flex; gap: 4px; flex-shrink: 0; }
-        .top-bar .action-btn { padding: 4px 14px; border-radius: 30px; border: 2px solid var(--cpc-blue); background: var(--cpc-blue); color: white; font-family: 'Cairo', sans-serif; font-size: 0.5rem; font-weight: 600; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 4px; height: 26px; min-width: 70px; justify-content: center; }
-        .top-bar .action-btn:hover { background: var(--cpc-blue-dark); border-color: var(--cpc-blue-dark); }
-        .top-bar .action-btn.print-btn { background: var(--cpc-blue); border-color: var(--cpc-blue); }
-        .top-bar .action-btn.pdf-btn { background: var(--danger); border-color: var(--danger); }
-        .top-bar .action-btn.pdf-btn:hover { background: #dc2626; border-color: #dc2626; }
+        .top-bar .action-btn { 
+            padding: 4px 14px; 
+            border-radius: 30px; 
+            border: none; 
+            background: var(--primary); 
+            color: white; 
+            font-family: 'Inter', sans-serif; 
+            font-size: 0.55rem; 
+            font-weight: 600; 
+            cursor: pointer; 
+            transition: all 0.2s; 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 4px; 
+            height: 28px; 
+        }
+        .top-bar .action-btn:hover { background: var(--primary-dark); transform: translateY(-1px); }
+        .top-bar .action-btn.pdf-btn { background: var(--danger); }
+        .top-bar .action-btn.pdf-btn:hover { background: #dc2626; }
 
-        .alerts-container { background: var(--white); border-radius: 10px; padding: 8px 14px; margin: 8px auto; max-width: 1440px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid #e8ecf0; display: none; }
+        /* ========== OVERVIEW ========== */
+        .overview-section {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, #1a5a4a 100%);
+            color: white;
+            padding: 10px 18px;
+            border-radius: var(--radius);
+            margin-bottom: 12px;
+        }
+        .overview-section h2 { font-size: 0.85rem; font-weight: 700; }
+        .overview-section p { font-size: 0.7rem; opacity: 0.92; line-height: 1.5; }
+        .overview-section .highlight { color: var(--accent); font-weight: 700; }
+
+        /* ========== ALERTS ========== */
+        .alerts-container {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 8px 16px;
+            margin-bottom: 12px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            display: none;
+        }
         .alerts-container.show { display: block; }
-        .alerts-container h3 { font-size: 0.7rem; color: var(--cpc-blue); font-weight: 700; margin-bottom: 4px; }
-        .alerts-container .alert-item { display: flex; align-items: center; gap: 6px; padding: 4px 8px; border-radius: 6px; margin-bottom: 2px; font-size: 0.65rem; }
-        .alerts-container .alert-item i { font-size: 0.8rem; }
+        .alerts-container h3 { font-size: 0.7rem; color: var(--primary); font-weight: 700; margin-bottom: 4px; }
+        .alerts-container .alert-item { 
+            display: flex; 
+            align-items: center; 
+            gap: 6px; 
+            padding: 4px 10px; 
+            border-radius: 6px; 
+            margin-bottom: 2px; 
+            font-size: 0.65rem; 
+        }
         .alert-danger { background: rgba(239,68,68,0.08); color: var(--danger); border-left: 3px solid var(--danger); }
         .alert-warning { background: rgba(245,158,11,0.08); color: var(--warning); border-left: 3px solid var(--warning); }
-        .alert-info { background: rgba(59,130,246,0.08); color: var(--info); border-left: 3px solid var(--info); }
         .alert-success { background: rgba(16,185,129,0.08); color: var(--success); border-left: 3px solid var(--success); }
 
-        .container { max-width: 1440px; margin: 0 auto; padding: 0 8px; }
-
+        /* ========== FILTER BAR ========== */
         .filter-bar {
             background: var(--white);
-            border-radius: 10px;
+            border-radius: var(--radius);
             padding: 10px 14px;
-            margin: 8px auto;
-            max-width: 1440px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-            border: 1px solid #e8ecf0;
+            margin-bottom: 12px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
         }
         .filter-grid {
             display: grid;
@@ -116,12 +243,12 @@
             font-weight: 700;
             color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 0.2px;
+            letter-spacing: 0.3px;
             display: flex;
             align-items: center;
             gap: 3px;
         }
-        .filter-group-item .filter-label i { font-size: 0.6rem; color: var(--cpc-blue); }
+        .filter-group-item .filter-label i { font-size: 0.6rem; color: var(--primary); }
         .filter-group-item .filter-options {
             display: flex;
             flex-wrap: wrap;
@@ -129,306 +256,354 @@
             align-items: center;
         }
         .filter-group-item .filter-btn {
-            padding: 2px 8px;
+            padding: 2px 10px;
             border-radius: 30px;
-            border: 2px solid #e2e8f0;
+            border: 2px solid var(--border);
             background: transparent;
-            font-family: 'Cairo', sans-serif;
-            font-size: 0.45rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.5rem;
             font-weight: 600;
             color: var(--text-muted);
             cursor: pointer;
             transition: all 0.2s;
             white-space: nowrap;
-            display: inline-flex;
-            align-items: center;
-            gap: 2px;
         }
-        .filter-group-item .filter-btn:hover { border-color: var(--cpc-blue); color: var(--cpc-blue); background: rgba(30,61,89,0.04); }
-        .filter-group-item .filter-btn.active { border-color: var(--koki-orange); background: var(--koki-orange); color: white; box-shadow: 0 4px 12px rgba(255,110,64,0.3); }
-        .filter-group-item .filter-btn .badge-count { background: rgba(255,255,255,0.2); border-radius: 20px; padding: 0 4px; font-size: 0.35rem; margin-left: 2px; }
+        .filter-group-item .filter-btn:hover { border-color: var(--primary); color: var(--primary); }
+        .filter-group-item .filter-btn.active { 
+            border-color: var(--accent); 
+            background: var(--accent); 
+            color: white; 
+            box-shadow: 0 4px 12px rgba(255,110,64,0.3); 
+        }
+        .filter-group-item .filter-btn .badge-count { 
+            background: rgba(255,255,255,0.2); 
+            border-radius: 20px; 
+            padding: 0 4px; 
+            font-size: 0.4rem; 
+            margin-left: 2px; 
+        }
         .filter-group-item .filter-btn.active .badge-count { background: rgba(255,255,255,0.25); }
         .filter-group-item .filter-select {
-            padding: 2px 16px 2px 6px;
+            padding: 3px 18px 3px 8px;
             border-radius: 30px;
-            border: 2px solid #e2e8f0;
+            border: 2px solid var(--border);
             background: var(--white);
-            font-family: 'Cairo', sans-serif;
-            font-size: 0.45rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.5rem;
             font-weight: 600;
             color: var(--text-muted);
             cursor: pointer;
             transition: all 0.2s;
             appearance: none;
-            -webkit-appearance: none;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath fill='%236b7a8f' d='M5 7L1 3h8z'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
             background-position: right 6px center;
-            min-width: 80px;
-            max-width: 100%;
             width: 100%;
+            min-width: 60px;
         }
-        .filter-group-item .filter-select:hover { border-color: var(--cpc-blue); }
-        .filter-group-item .filter-select:focus { outline: none; border-color: var(--koki-orange); box-shadow: 0 0 0 3px rgba(255,110,64,0.15); }
-
+        .filter-group-item .filter-select:hover { border-color: var(--primary); }
+        .filter-group-item .filter-select:focus { outline: none; border-color: var(--accent); }
         .filter-full-width { grid-column: 1 / -1; }
 
+        /* ========== PROGRAM CARDS ========== */
         .program-cards { display: flex; flex-wrap: wrap; gap: 4px 6px; padding: 2px 0; }
         .program-card {
             display: inline-flex;
             align-items: center;
-            gap: 3px;
-            padding: 2px 8px;
+            gap: 4px;
+            padding: 3px 12px;
             border-radius: 30px;
-            border: 2px solid #e2e8f0;
+            border: 2px solid var(--border);
             background: var(--white);
-            font-family: 'Cairo', sans-serif;
-            font-size: 0.45rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.5rem;
             font-weight: 600;
             color: var(--text-muted);
             cursor: pointer;
             transition: all 0.2s;
             white-space: nowrap;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+            box-shadow: var(--shadow);
         }
-        .program-card:hover { border-color: var(--cpc-blue); color: var(--cpc-blue); background: rgba(30,61,89,0.04); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
-        .program-card.active { border-color: var(--koki-orange); background: var(--koki-orange); color: white; box-shadow: 0 4px 12px rgba(255,110,64,0.3); }
-        .program-card .prog-icon { font-size: 0.55rem; opacity: 0.7; }
-        .program-card.active .prog-icon { opacity: 1; }
-        .program-card .prog-name { font-weight: 700; }
-        .program-card .prog-count { background: rgba(0,0,0,0.06); border-radius: 20px; padding: 0 4px; font-size: 0.4rem; font-weight: 700; display: inline-flex; align-items: center; gap: 2px; }
-        .program-card.active .prog-count { background: rgba(255,255,255,0.2); color: rgba(255,255,255,0.95); }
+        .program-card:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-1px); }
+        .program-card.active { border-color: var(--accent); background: var(--accent); color: white; box-shadow: 0 4px 12px rgba(255,110,64,0.3); }
+        .program-card .prog-icon { font-size: 0.55rem; }
+        .program-card .prog-count { 
+            background: rgba(0,0,0,0.06); 
+            border-radius: 20px; 
+            padding: 0 4px; 
+            font-size: 0.45rem; 
+            font-weight: 700; 
+        }
+        .program-card.active .prog-count { background: rgba(255,255,255,0.2); }
         .program-card .prog-count .attend-count { color: var(--success); }
         .program-card .prog-count .not-attend-count { color: var(--danger); }
-        .program-card.active .prog-count .attend-count, .program-card.active .prog-count .not-attend-count { color: rgba(255,255,255,0.9); }
+        .program-card.active .prog-count .attend-count,
+        .program-card.active .prog-count .not-attend-count { color: rgba(255,255,255,0.9); }
 
+        /* ========== SELECTED PROGRAM ========== */
         .selected-program-info {
-            background: linear-gradient(135deg, var(--cpc-blue-dark) 0%, var(--cpc-blue) 100%);
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
             color: white;
-            padding: 8px 14px;
-            border-radius: 10px;
-            margin: 8px 0;
+            padding: 8px 16px;
+            border-radius: var(--radius);
+            margin-bottom: 12px;
             display: none;
         }
         .selected-program-info.show { display: block; }
         .selected-program-info .prog-title { font-size: 0.85rem; font-weight: 700; }
         .selected-program-info .prog-stats { display: flex; flex-wrap: wrap; gap: 10px 20px; margin-top: 4px; font-size: 0.7rem; }
-        .selected-program-info .prog-stats span { display: flex; align-items: center; gap: 4px; }
-        .selected-program-info .prog-stats .num { font-weight: 700; font-size: 0.9rem; color: var(--koki-orange); }
+        .selected-program-info .prog-stats .num { font-weight: 700; font-size: 0.9rem; color: var(--accent); }
 
-        .brief-section { background: linear-gradient(135deg, var(--cpc-blue-dark) 0%, #17b890 100%); color: white; padding: 8px 14px; border-radius: 10px; margin: 8px 0; }
-        .brief-section h2 { font-size: 0.8rem; font-weight: 700; }
-        .brief-section p { font-size: 0.7rem; opacity: 0.92; line-height: 1.4; }
-        .brief-section .highlight { color: var(--koki-orange); font-weight: 700; }
+        /* ========== KPI GRID ========== */
+        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 6px; margin-bottom: 12px; }
+        .kpi-card {
+            background: var(--white);
+            padding: 8px 12px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .kpi-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+        .kpi-card i { font-size: 0.9rem; color: var(--accent); opacity: 0.8; }
+        .kpi-info h4 { font-size: 0.45rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 1px; }
+        .kpi-info .num { font-size: 0.9rem; font-weight: 800; color: var(--primary); }
 
-        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 6px; margin: 8px 0; }
-        .kpi-card { background: var(--white); padding: 6px 10px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); display: flex; align-items: center; justify-content: space-between; border-bottom: 3px solid var(--cpc-blue); transition: all 0.2s; cursor: pointer; }
-        .kpi-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
-        .kpi-card i { font-size: 0.9rem; color: var(--koki-orange); opacity: 0.8; }
-        .kpi-info h4 { font-size: 0.45rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.2px; margin-bottom: 1px; }
-        .kpi-info .num { font-size: 0.9rem; font-weight: 800; color: var(--cpc-blue); }
-
-        .search-charts-grid { display: grid; grid-template-columns: 260px 1fr; gap: 10px; margin: 8px 0; }
-        .search-wrapper { background: var(--white); padding: 12px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid #e8ecf0; }
-        .search-wrapper h3 { font-size: 0.75rem; color: var(--cpc-blue); font-weight: 700; margin-bottom: 2px; }
+        /* ========== SEARCH + CHARTS ========== */
+        .search-charts-grid { display: grid; grid-template-columns: 260px 1fr; gap: 10px; margin-bottom: 12px; }
+        .search-wrapper {
+            background: var(--white);
+            padding: 12px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+        .search-wrapper h3 { font-size: 0.75rem; color: var(--primary); font-weight: 700; margin-bottom: 2px; }
         .search-wrapper p { font-size: 0.55rem; color: var(--text-muted); margin-bottom: 4px; }
         .search-box { display: flex; gap: 4px; flex-wrap: wrap; }
-        .search-box input { flex: 1; padding: 4px 8px; border: 2px solid #e2e8f0; border-radius: 8px; font-family: 'Cairo', sans-serif; font-size: 0.65rem; outline: none; min-width: 50px; }
-        .search-box input:focus { border-color: var(--cpc-blue); }
-        .search-box button { padding: 4px 10px; background: var(--koki-orange); color: white; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.65rem; }
-        .search-box button:hover { background: var(--koki-orange-hover); }
+        .search-box input { 
+            flex: 1; 
+            padding: 4px 8px; 
+            border: 2px solid var(--border); 
+            border-radius: 8px; 
+            font-family: 'Inter', sans-serif; 
+            font-size: 0.65rem; 
+            outline: none; 
+            min-width: 50px; 
+        }
+        .search-box input:focus { border-color: var(--primary); }
+        .search-box button { 
+            padding: 4px 12px; 
+            background: var(--accent); 
+            color: white; 
+            border: none; 
+            border-radius: 8px; 
+            font-weight: 700; 
+            cursor: pointer; 
+            font-size: 0.65rem; 
+        }
+        .search-box button:hover { background: var(--accent-hover); }
         .loading-status { font-size: 0.55rem; color: var(--text-muted); margin-top: 4px; }
         .loading-status.error { color: var(--danger); }
         .loading-status.success { color: var(--success); }
 
-        .result-card { margin-top: 6px; background: #f8fafc; border-radius: 10px; padding: 8px; display: none; border-right: 4px solid var(--success); }
+        .result-card {
+            margin-top: 6px;
+            background: #f8fafc;
+            border-radius: var(--radius);
+            padding: 8px 10px;
+            display: none;
+            border-right: 4px solid var(--success);
+        }
         .employee-profile { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 6px; }
-        .info-group h4 { font-size: 0.4rem; color: var(--text-muted); text-transform: uppercase; }
+        .info-group h4 { font-size: 0.4rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.3px; }
         .info-group p { font-weight: 700; font-size: 0.65rem; }
-        .employee-stats { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 4px; padding: 3px 6px; background: rgba(30,61,89,0.05); border-radius: 6px; }
-        .stat-badge { font-size: 0.5rem; font-weight: 700; padding: 2px 6px; border-radius: 20px; }
+        .employee-stats { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; padding: 3px 6px; background: rgba(30,61,89,0.04); border-radius: 6px; }
+        .stat-badge { font-size: 0.5rem; font-weight: 700; padding: 2px 8px; border-radius: 20px; }
         .stat-badge.attend { background: rgba(16,185,129,0.15); color: var(--success); }
         .stat-badge.not-attend { background: rgba(239,68,68,0.15); color: var(--danger); }
         .stat-badge.group { background: rgba(59,130,246,0.15); color: var(--info); }
-        .stat-badge.location { background: rgba(255,110,64,0.15); color: var(--koki-orange); }
+        .stat-badge.location { background: rgba(255,110,64,0.15); color: var(--accent); }
         .stat-badge.accommodation { background: rgba(139,92,246,0.15); color: var(--purple); }
         .perf-stats { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
-        .perf-stat { background: var(--white); padding: 2px 8px; border-radius: 6px; font-size: 0.55rem; font-weight: 600; border: 1px solid #e8ecf0; }
-        .perf-stat .num { font-size: 0.8rem; font-weight: 800; color: var(--cpc-blue); }
+        .perf-stat { background: var(--white); padding: 2px 8px; border-radius: 6px; font-size: 0.55rem; font-weight: 600; border: 1px solid var(--border); }
+        .perf-stat .num { font-size: 0.8rem; font-weight: 800; color: var(--primary); }
         .training-tags { display: flex; flex-wrap: wrap; gap: 2px; margin-top: 3px; }
-        .tag { background: #e2e8f0; color: var(--cpc-blue); padding: 2px 5px; border-radius: 20px; font-size: 0.45rem; font-weight: 600; }
+        .tag { background: var(--border); color: var(--primary); padding: 2px 6px; border-radius: 20px; font-size: 0.45rem; font-weight: 600; }
 
-        .print-btn { background: var(--cpc-blue); color: white; border: none; padding: 3px 10px; border-radius: 6px; font-family: 'Cairo', sans-serif; font-size: 0.6rem; font-weight: 600; cursor: pointer; transition: all 0.2s; margin-top: 4px; display: inline-flex; align-items: center; gap: 3px; }
-        .print-btn:hover { background: var(--cpc-blue-dark); }
+        /* ========== CHARTS ========== */
+        .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+        .charts-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+        .chart-box {
+            background: var(--white);
+            padding: 10px 12px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .chart-box:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); border-color: var(--primary); }
+        .chart-box h4 { font-size: 0.7rem; color: var(--primary); font-weight: 700; margin-bottom: 4px; }
+        .chart-box .chart-container { position: relative; width: 100%; height: 180px; }
+        .chart-box canvas { width: 100% !important; height: 180px !important; max-height: 180px; }
+        .charts-grid-2 .chart-box .chart-container { height: 160px; }
+        .charts-grid-2 .chart-box canvas { height: 160px !important; max-height: 160px; }
 
-        .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 8px 0; }
-        .charts-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 8px 0; }
-        .chart-box { background: var(--white); padding: 12px 14px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid #e8ecf0; cursor: pointer; transition: all 0.2s; }
-        .chart-box:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); border-color: var(--cpc-blue); }
-        .chart-box h4 { font-size: 0.75rem; color: var(--cpc-blue); font-weight: 700; margin-bottom: 6px; }
-        .chart-box canvas { width: 100% !important; height: 200px !important; max-height: 200px; }
-        .chart-box .chart-container { position: relative; width: 100%; height: 200px; }
-        .charts-grid-2 .chart-box canvas { height: 180px !important; max-height: 180px; }
-        .charts-grid-2 .chart-box .chart-container { height: 180px; }
-
+        /* ========== EMPLOYEE TABLE ========== */
         .employee-detail-table {
             background: var(--white);
-            border-radius: 12px;
+            border-radius: var(--radius);
             padding: 10px 12px;
-            margin-top: 8px;
+            margin-top: 12px;
             margin-bottom: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-            border: 1px solid #e8ecf0;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
             overflow-x: auto;
         }
-        .employee-detail-table h4 { font-size: 0.75rem; color: var(--cpc-blue); font-weight: 700; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+        .employee-detail-table h4 { 
+            font-size: 0.75rem; 
+            color: var(--primary); 
+            font-weight: 700; 
+            margin-bottom: 4px; 
+            display: flex; 
+            align-items: center; 
+            gap: 6px; 
+            flex-wrap: wrap; 
+        }
         .employee-detail-table h4 .count-badge { font-size: 0.6rem; color: var(--text-muted); font-weight: 400; }
         .employee-detail-table table { width: 100%; border-collapse: collapse; font-size: 0.55rem; }
-        .employee-detail-table th { background: var(--cpc-blue); color: white; padding: 3px 5px; text-align: right; font-weight: 600; white-space: nowrap; }
-        .employee-detail-table td { padding: 3px 5px; border-bottom: 1px solid #e8ecf0; vertical-align: middle; }
+        .employee-detail-table th { 
+            background: var(--primary); 
+            color: white; 
+            padding: 4px 6px; 
+            text-align: left; 
+            font-weight: 600; 
+            white-space: nowrap; 
+        }
+        .employee-detail-table td { padding: 4px 6px; border-bottom: 1px solid var(--border); vertical-align: middle; }
         .employee-detail-table tr:hover td { background: #f8fafc; }
-        .employee-detail-table .badge-attend { background: rgba(16,185,129,0.15); color: var(--success); padding: 1px 5px; border-radius: 20px; font-size: 0.45rem; font-weight: 600; }
-        .employee-detail-table .badge-not-attend { background: rgba(239,68,68,0.15); color: var(--danger); padding: 1px 5px; border-radius: 20px; font-size: 0.45rem; font-weight: 600; }
-        .employee-detail-table .badge-unknown { background: rgba(107,122,143,0.15); color: var(--text-muted); padding: 1px 5px; border-radius: 20px; font-size: 0.45rem; font-weight: 600; }
+        .employee-detail-table .badge-attend { background: rgba(16,185,129,0.15); color: var(--success); padding: 1px 6px; border-radius: 20px; font-size: 0.45rem; font-weight: 600; }
+        .employee-detail-table .badge-not-attend { background: rgba(239,68,68,0.15); color: var(--danger); padding: 1px 6px; border-radius: 20px; font-size: 0.45rem; font-weight: 600; }
+        .employee-detail-table .badge-unknown { background: rgba(107,122,143,0.15); color: var(--text-muted); padding: 1px 6px; border-radius: 20px; font-size: 0.45rem; font-weight: 600; }
 
-        .insights-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 8px; margin: 8px 0 14px 0; }
-        .insight-card { background: var(--white); padding: 8px 10px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border-left: 4px solid var(--koki-orange); transition: all 0.2s; }
+        /* ========== INSIGHTS ========== */
+        .insights-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        .insight-card {
+            background: var(--white);
+            padding: 8px 10px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--accent);
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+        }
         .insight-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); transform: translateX(4px); }
-        .insight-card .insight-icon { font-size: 0.8rem; color: var(--koki-orange); margin-right: 4px; }
-        .insight-card h4 { font-size: 0.55rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.2px; margin-bottom: 1px; }
-        .insight-card .insight-value { font-size: 1rem; font-weight: 800; color: var(--cpc-blue); }
-        .insight-card .insight-desc { font-size: 0.6rem; color: var(--text-muted); margin-top: 1px; }
-        .insight-card .insight-tag { display: inline-block; font-size: 0.4rem; font-weight: 700; padding: 1px 6px; border-radius: 20px; margin-top: 2px; }
+        .insight-card .insight-icon { font-size: 0.8rem; color: var(--accent); margin-right: 4px; }
+        .insight-card h4 { font-size: 0.5rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 1px; }
+        .insight-card .insight-value { font-size: 1rem; font-weight: 800; color: var(--primary); }
+        .insight-card .insight-desc { font-size: 0.55rem; color: var(--text-muted); }
+        .insight-tag { display: inline-block; font-size: 0.4rem; font-weight: 700; padding: 1px 6px; border-radius: 20px; margin-top: 2px; }
         .insight-tag.good { background: rgba(16,185,129,0.15); color: var(--success); }
         .insight-tag.warning { background: rgba(245,158,11,0.15); color: var(--warning); }
         .insight-tag.danger { background: rgba(239,68,68,0.15); color: var(--danger); }
         .insight-tag.info { background: rgba(59,130,246,0.15); color: var(--info); }
 
         .clear-filters-btn {
-            padding: 2px 10px;
+            padding: 3px 12px;
             border-radius: 30px;
-            border: 2px solid #e2e8f0;
+            border: 2px solid var(--border);
             background: transparent;
-            font-family: 'Cairo', sans-serif;
-            font-size: 0.45rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.5rem;
             font-weight: 600;
             color: var(--text-muted);
             cursor: pointer;
             transition: all 0.2s;
             display: inline-flex;
             align-items: center;
-            gap: 2px;
+            gap: 4px;
         }
-        .clear-filters-btn:hover { border-color: var(--danger); color: var(--danger); background: rgba(239,68,68,0.05); }
+        .clear-filters-btn:hover { border-color: var(--danger); color: var(--danger); background: rgba(239,68,68,0.04); }
 
+        /* ========== LOADING ========== */
         .loading-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255,255,255,0.92);
+            background: rgba(255,255,255,0.95);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             z-index: 9999;
-            font-family: 'Cairo', sans-serif;
             transition: opacity 0.5s ease;
         }
         .loading-overlay.hidden { opacity: 0; pointer-events: none; }
         .loading-overlay .spinner {
             width: 50px;
             height: 50px;
-            border: 5px solid #e8ecf0;
-            border-top-color: var(--koki-orange);
+            border: 5px solid var(--border);
+            border-top-color: var(--accent);
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
         }
         @keyframes spin { to { transform: rotate(360deg); } }
-        .loading-overlay .loading-text { margin-top: 15px; font-size: 1rem; color: var(--cpc-blue); font-weight: 700; }
+        .loading-overlay .loading-text { margin-top: 15px; font-size: 1rem; color: var(--primary); font-weight: 700; }
         .loading-overlay .loading-sub { font-size: 0.75rem; color: var(--text-muted); margin-top: 5px; }
 
+        /* ========== RESPONSIVE ========== */
         @media (max-width: 992px) {
             .filter-grid { grid-template-columns: repeat(3, 1fr); }
             .search-charts-grid { grid-template-columns: 1fr; }
             .charts-grid { grid-template-columns: 1fr 1fr; }
             .charts-grid-2 { grid-template-columns: 1fr 1fr; }
-            .insights-section { grid-template-columns: 1fr 1fr; }
-            .chart-box canvas { height: 180px !important; max-height: 180px; }
-            .chart-box .chart-container { height: 180px; }
-            .charts-grid-2 .chart-box canvas { height: 160px !important; max-height: 160px; }
-            .charts-grid-2 .chart-box .chart-container { height: 160px; }
-            .top-bar { flex-direction: column; align-items: stretch; }
-            .top-bar .action-buttons { justify-content: flex-start; }
-            .top-bar .action-btn { min-width: 50px; height: 22px; font-size: 0.45rem; padding: 2px 8px; }
+            .kpi-grid { grid-template-columns: repeat(4, 1fr); }
         }
         @media (max-width: 768px) {
-            .navbar { flex-direction: column; text-align: center; padding: 4px 10px; }
-            .filter-grid { grid-template-columns: repeat(2, 1fr); gap: 4px 8px; }
-            .filter-full-width { grid-column: 1 / -1; }
+            .navbar { flex-direction: column; text-align: center; }
+            .filter-grid { grid-template-columns: repeat(2, 1fr); }
             .charts-grid { grid-template-columns: 1fr; }
             .charts-grid-2 { grid-template-columns: 1fr; }
             .kpi-grid { grid-template-columns: repeat(2, 1fr); }
             .employee-profile { grid-template-columns: 1fr; }
-            .chart-box canvas { height: 160px !important; max-height: 160px; }
-            .chart-box .chart-container { height: 160px; }
-            .insights-section { grid-template-columns: 1fr; }
-            .employee-detail-table table { font-size: 0.45rem; }
-            .employee-detail-table th, .employee-detail-table td { padding: 2px 3px; }
-            .alerts-container .alert-item { font-size: 0.55rem; }
-            .top-bar .slicer-section { flex-direction: column; align-items: stretch; }
-            .top-bar .action-btn { min-width: 40px; height: 20px; font-size: 0.4rem; padding: 2px 6px; }
-            .program-card { font-size: 0.4rem; padding: 2px 6px; }
-            .program-card .prog-count { font-size: 0.35rem; padding: 0 3px; }
-            .selected-program-info .prog-stats { gap: 8px 14px; font-size: 0.65rem; }
+            .top-bar { flex-direction: column; align-items: stretch; }
+            .top-bar .action-buttons { justify-content: flex-start; }
         }
         @media (max-width: 480px) {
-            .filter-grid { grid-template-columns: 1fr; gap: 3px; }
-            .kpi-grid { grid-template-columns: 1fr 1fr; gap: 3px; }
-            .kpi-card { padding: 4px 6px; }
-            .kpi-info .num { font-size: 0.75rem; }
-            .filter-btn { font-size: 0.35rem; padding: 1px 5px; }
-            .filter-select { font-size: 0.35rem; padding: 2px 12px 2px 4px; min-width: 50px; }
-            .chart-box canvas { height: 130px !important; max-height: 130px; }
+            .filter-grid { grid-template-columns: 1fr; }
+            .kpi-grid { grid-template-columns: 1fr 1fr; }
             .chart-box .chart-container { height: 130px; }
-            .chart-box { padding: 8px 10px; }
-            .top-bar .action-btn { min-width: 30px; height: 18px; font-size: 0.35rem; padding: 1px 5px; }
-            .top-bar .slicer-section .slicer-btn { font-size: 0.4rem; padding: 2px 6px; }
-            .program-card { font-size: 0.35rem; padding: 1px 5px; gap: 2px; }
-            .program-card .prog-count { font-size: 0.3rem; padding: 0 2px; }
+            .chart-box canvas { height: 130px !important; max-height: 130px; }
             .insights-section { grid-template-columns: 1fr; }
         }
 
         @media print {
-            body, body * { visibility: visible !important; }
             .no-print, .no-print * { display: none !important; }
-            .action-btn, .refresh-btn, .print-btn, .clear-filters-btn,
+            .action-btn, .refresh-btn, .clear-filters-btn,
             .search-box button, .filter-btn, .filter-select, .slicer-btn,
             .program-card, .loading-overlay { display: none !important; }
-            body { background: white !important; padding: 10px !important; font-size: 9px !important; color: #1a2332 !important; }
-            .container { max-width: 100% !important; padding: 0 !important; }
+            body { background: white !important; padding: 10px !important; font-size: 9px !important; }
             .kpi-card, .chart-box, .insight-card, .employee-detail-table,
-            .search-wrapper, .filter-bar, .brief-section, .alerts-container, .top-bar,
+            .search-wrapper, .filter-bar, .overview-section, .alerts-container, .top-bar,
             .selected-program-info { box-shadow: none !important; border: 1px solid #ddd !important; page-break-inside: avoid !important; margin: 4px 0 !important; padding: 6px 8px !important; background: white !important; }
             .kpi-grid { display: grid !important; grid-template-columns: repeat(4, 1fr) !important; gap: 4px !important; }
             .charts-grid, .charts-grid-2 { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 8px !important; }
-            .search-charts-grid { display: grid !important; grid-template-columns: 1fr 2fr !important; gap: 8px !important; }
-            .insights-section { display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 8px !important; }
-            .chart-box canvas { height: 120px !important; max-height: 120px !important; }
-            .chart-box .chart-container { height: 120px !important; }
+            .chart-box .chart-container { height: 100px !important; }
+            .chart-box canvas { height: 100px !important; max-height: 100px !important; }
             .employee-detail-table table { font-size: 7px !important; }
-            .employee-detail-table th { background: #1e3d59 !important; color: white !important; padding: 2px 4px !important; }
-            .employee-detail-table td { padding: 2px 4px !important; border-bottom: 1px solid #eee !important; }
-            .brief-section { background: #1e3d59 !important; color: white !important; }
-            .brief-section .highlight { color: #ff6e40 !important; }
-            .kpi-card .num { font-size: 0.8rem !important; }
-            .insight-value { font-size: 0.9rem !important; }
-            .print-header { display: flex !important; justify-content: space-between !important; align-items: center !important; border-bottom: 3px solid #1e3d59 !important; padding-bottom: 6px !important; margin-bottom: 10px !important; }
-            .print-header h1 { color: #1e3d59 !important; font-size: 16px !important; margin: 0 !important; }
-            .print-header .sub { color: #6b7a8f !important; font-size: 9px !important; }
-            .print-footer { margin-top: 12px !important; padding-top: 6px !important; border-top: 1px solid #ddd !important; text-align: center !important; font-size: 8px !important; color: #6b7a8f !important; }
-            .result-card { display: block !important; border-right: 4px solid var(--success) !important; background: #f8fafc !important; }
+            .employee-detail-table th { background: #1e3d59 !important; color: white !important; }
         }
     </style>
 </head>
@@ -437,14 +612,10 @@
     <div class="loading-overlay" id="loadingOverlay">
         <div class="spinner"></div>
         <div class="loading-text">📊 Loading CBT Data...</div>
-        <div class="loading-sub">Fetching data from Google Sheets</div>
+        <div class="loading-sub">Fetching data from your CSV file</div>
     </div>
 
-    <div class="print-header" style="display:none;">
-        <h1>📊 CBT Intelligence Dashboard</h1>
-        <span class="sub">Generated: <span id="printDateHeader"></span></span>
-    </div>
-
+    <!-- NAVBAR -->
     <div class="navbar no-print">
         <div class="logo-left"><img src="CPC.png" alt="CPC Logo" onerror="this.style.display='none'"></div>
         <div class="title-center">
@@ -459,290 +630,288 @@
         </div>
     </div>
 
-    <div class="container" id="printContainer">
-
-        <!-- TOP BAR -->
-        <div class="top-bar no-print">
-            <div class="slicer-section">
-                <span class="slicer-label"><i class="fa-solid fa-industry"></i> النشاط:</span>
-                <div class="slicer-buttons" id="sectorSlicerButtons">
-                    <button class="slicer-btn active" data-activity="all">الكل <span class="badge" id="activityAllCount">0</span></button>
-                    <button class="slicer-btn" data-activity="أعلاف">🌾 أعلاف <span class="badge" id="activityFeedCount">0</span></button>
-                    <button class="slicer-btn" data-activity="مجازر">🥩 مجازر <span class="badge" id="activitySlaughterCount">0</span></button>
-                </div>
-            </div>
-            <div class="action-buttons">
-                <button class="action-btn print-btn" onclick="printPage()"><i class="fa-solid fa-print"></i> طباعة</button>
-                <button class="action-btn pdf-btn" onclick="printPage()"><i class="fa-solid fa-file-pdf"></i> حفظ PDF</button>
+    <!-- TOP BAR -->
+    <div class="top-bar no-print">
+        <div class="slicer-section">
+            <span class="slicer-label"><i class="fa-solid fa-industry"></i> Activity:</span>
+            <div class="slicer-buttons" id="activitySlicerButtons">
+                <button class="slicer-btn active" data-activity="all">All <span class="badge" id="activityAllCount">0</span></button>
+                <button class="slicer-btn" data-activity="أعلاف">🌾 Feed <span class="badge" id="activityFeedCount">0</span></button>
+                <button class="slicer-btn" data-activity="مجازر">🥩 Slaughter <span class="badge" id="activitySlaughterCount">0</span></button>
             </div>
         </div>
-
-        <div class="brief-section">
-            <h2><i class="fa-solid fa-bullseye"></i> نظرة عامة</h2>
-            <p>لوحة التحكم توفر <span class="highlight">ذكاءً فورياً</span> لمبادرة <strong>التدريب القائم على الكفاءات (CBT)</strong>، مدعومة ببيانات مباشرة من Google Sheets، لتوفير <span class="highlight">رؤية فورية</span> لقدرات القوى العاملة والتقدم التدريبي والفجوات المهارية.</p>
+        <div class="action-buttons">
+            <button class="action-btn" onclick="window.print()"><i class="fa-solid fa-print"></i> Print</button>
+            <button class="action-btn pdf-btn" onclick="window.print()"><i class="fa-solid fa-file-pdf"></i> Save PDF</button>
         </div>
+    </div>
 
-        <div class="alerts-container" id="alertsContainer">
-            <h3><i class="fa-solid fa-bell"></i> التنبيهات الذكية</h3>
-            <div id="alertsList"></div>
-        </div>
+    <!-- OVERVIEW -->
+    <div class="overview-section">
+        <h2><i class="fa-solid fa-bullseye"></i> Overview</h2>
+        <p>This dashboard provides <span class="highlight">real-time intelligence</span> for the <strong>Competency Based Training (CBT)</strong> initiative, powered directly by your HR data.</p>
+    </div>
 
-        <!-- FILTER BAR -->
-        <div class="filter-bar no-print">
-            <div class="filter-grid">
-                <!-- Programs -->
-                <div class="filter-group-item filter-full-width">
-                    <span class="filter-label"><i class="fa-solid fa-book"></i> البرامج</span>
-                    <div class="program-cards" id="programFilters"></div>
-                </div>
+    <!-- ALERTS -->
+    <div class="alerts-container" id="alertsContainer">
+        <h3><i class="fa-solid fa-bell"></i> Smart Alerts</h3>
+        <div id="alertsList"></div>
+    </div>
 
-                <!-- C-LVL -->
-                <div class="filter-group-item">
-                    <span class="filter-label"><i class="fa-solid fa-layer-group"></i> C-LVL</span>
-                    <div class="filter-options" id="clevelFilters">
-                        <button class="filter-btn active" data-filter="clevel" data-value="all">الكل <span class="badge-count" id="clAllCount">0</span></button>
-                    </div>
-                </div>
+    <!-- FILTER BAR -->
+    <div class="filter-bar no-print">
+        <div class="filter-grid">
+            <!-- Programs -->
+            <div class="filter-group-item filter-full-width">
+                <span class="filter-label"><i class="fa-solid fa-book"></i> Programs</span>
+                <div class="program-cards" id="programFilters"></div>
+            </div>
 
-                <!-- Level -->
-                <div class="filter-group-item">
-                    <span class="filter-label"><i class="fa-solid fa-level-up"></i> المستوى</span>
-                    <div class="filter-options" id="levelFilters">
-                        <button class="filter-btn active" data-filter="level" data-value="all">الكل <span class="badge-count" id="lvlAllCount">0</span></button>
-                    </div>
-                </div>
-
-                <!-- Grade -->
-                <div class="filter-group-item">
-                    <span class="filter-label"><i class="fa-solid fa-graduation-cap"></i> الدرجة</span>
-                    <div class="filter-options" id="gradeFilters">
-                        <button class="filter-btn active" data-filter="grade" data-value="all">الكل <span class="badge-count" id="gradeAllCount">0</span></button>
-                    </div>
-                </div>
-
-                <!-- Activity -->
-                <div class="filter-group-item">
-                    <span class="filter-label"><i class="fa-solid fa-bolt"></i> النشاط</span>
-                    <div class="filter-options">
-                        <select class="filter-select" id="activitySelect">
-                            <option value="all">كل الأنشطة</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Sector -->
-                <div class="filter-group-item">
-                    <span class="filter-label"><i class="fa-solid fa-building"></i> القطاع</span>
-                    <div class="filter-options">
-                        <select class="filter-select" id="sectorSelect">
-                            <option value="all">كل القطاعات</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Area -->
-                <div class="filter-group-item">
-                    <span class="filter-label"><i class="fa-solid fa-map-pin"></i> المنطقة</span>
-                    <div class="filter-options">
-                        <select class="filter-select" id="areaSelect">
-                            <option value="all">كل المناطق</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Group -->
-                <div class="filter-group-item">
-                    <span class="filter-label"><i class="fa-solid fa-users"></i> المجموعة</span>
-                    <div class="filter-options">
-                        <select class="filter-select" id="groupSelect">
-                            <option value="all">كل المجموعات</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Phase -->
-                <div class="filter-group-item">
-                    <span class="filter-label"><i class="fa-solid fa-clock"></i> المرحلة</span>
-                    <div class="filter-options">
-                        <select class="filter-select" id="phaseSelect">
-                            <option value="all">كل المراحل</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Location -->
-                <div class="filter-group-item">
-                    <span class="filter-label"><i class="fa-solid fa-location-dot"></i> الموقع</span>
-                    <div class="filter-options">
-                        <select class="filter-select" id="locationSelect">
-                            <option value="all">كل المواقع</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Attendance -->
-                <div class="filter-group-item">
-                    <span class="filter-label"><i class="fa-solid fa-user-check"></i> الحضور</span>
-                    <div class="filter-options" id="attendanceFilters">
-                        <button class="filter-btn active" data-filter="attendance" data-value="all">الكل <span class="badge-count" id="attAllCount">0</span></button>
-                        <button class="filter-btn" data-filter="attendance" data-value="attend">✅ حاضر <span class="badge-count" id="attAttendCount">0</span></button>
-                        <button class="filter-btn" data-filter="attendance" data-value="not-attend">❌ غائب <span class="badge-count" id="attNotAttendCount">0</span></button>
-                    </div>
-                </div>
-
-                <!-- Accommodation -->
-                <div class="filter-group-item">
-                    <span class="filter-label"><i class="fa-solid fa-bed"></i> الإقامة</span>
-                    <div class="filter-options" id="accommodationFilters">
-                        <button class="filter-btn active" data-filter="accommodation" data-value="all">الكل <span class="badge-count" id="accAllCount">0</span></button>
-                        <button class="filter-btn" data-filter="accommodation" data-value="yes">✅ نعم <span class="badge-count" id="accYesCount">0</span></button>
-                        <button class="filter-btn" data-filter="accommodation" data-value="no">❌ لا <span class="badge-count" id="accNoCount">0</span></button>
-                    </div>
-                </div>
-
-                <!-- Reset -->
-                <div class="filter-group-item" style="justify-content: flex-end; align-items: flex-end;">
-                    <button class="clear-filters-btn" onclick="clearAllFilters()"><i class="fa-solid fa-undo"></i> إعادة ضبط</button>
+            <!-- C-LVL -->
+            <div class="filter-group-item">
+                <span class="filter-label"><i class="fa-solid fa-layer-group"></i> C-LVL</span>
+                <div class="filter-options" id="clevelFilters">
+                    <button class="filter-btn active" data-filter="clevel" data-value="all">All <span class="badge-count" id="clAllCount">0</span></button>
                 </div>
             </div>
-        </div>
 
-        <!-- SELECTED PROGRAM INFO -->
-        <div class="selected-program-info" id="selectedProgramInfo">
-            <div class="prog-title" id="selectedProgTitle">📊 7 Sens Program</div>
-            <div class="prog-stats">
-                <span>👥 الإجمالي: <span class="num" id="selProgTotal">0</span></span>
-                <span>✅ حضور: <span class="num" id="selProgAttend">0</span></span>
-                <span>❌ غياب: <span class="num" id="selProgNotAttend">0</span></span>
-                <span>📍 مواقع: <span class="num" id="selProgLocations">0</span></span>
-                <span>📊 النسبة: <span class="num" id="selProgRate">0%</span></span>
-            </div>
-        </div>
-
-        <!-- KPI GRID -->
-        <div class="kpi-grid" id="kpiGrid">
-            <div class="kpi-card"><div class="kpi-info"><h4>إجمالي القوى</h4><div class="num" id="kpiTotal">...</div></div><i class="fa-solid fa-users"></i></div>
-            <div class="kpi-card"><div class="kpi-info"><h4>تقدم المشروع</h4><div class="num" id="kpiProgress">...</div></div><i class="fa-solid fa-chart-line"></i></div>
-            <div class="kpi-card"><div class="kpi-info"><h4>برامج مكتملة</h4><div class="num" id="kpiCompleted">...</div></div><i class="fa-solid fa-check-circle"></i></div>
-            <div class="kpi-card"><div class="kpi-info"><h4>مواقع التدريب</h4><div class="num" id="kpiLocations">...</div></div><i class="fa-solid fa-location-dot"></i></div>
-            <div class="kpi-card"><div class="kpi-info"><h4>إجمالي الحضور</h4><div class="num" id="kpiAttendees">...</div></div><i class="fa-solid fa-user-check"></i></div>
-            <div class="kpi-card"><div class="kpi-info"><h4>قطاعات نشطة</h4><div class="num" id="kpiSectors">...</div></div><i class="fa-solid fa-building"></i></div>
-            <div class="kpi-card"><div class="kpi-info"><h4>الأقسام</h4><div class="num" id="kpiDepartments">...</div></div><i class="fa-solid fa-sitemap"></i></div>
-            <div class="kpi-card"><div class="kpi-info"><h4>جودة البيانات</h4><div class="num" id="kpiQuality">...</div></div><i class="fa-solid fa-shield-halved"></i></div>
-        </div>
-
-        <!-- SEARCH + CHARTS -->
-        <div class="search-charts-grid">
-            <div class="search-wrapper">
-                <h3><i class="fa-solid fa-magnifying-glass"></i> البحث عن موظف</h3>
-                <p>أدخل كود الموظف</p>
-                <div class="search-box">
-                    <input type="text" id="empIdInput" placeholder="مثال: 5908">
-                    <button onclick="searchEmployee()"><i class="fa-solid fa-search"></i> بحث</button>
-                </div>
-                <div id="loadingMsg" class="loading-status"><i class="fa-solid fa-spinner fa-spin"></i> جاري التحميل...</div>
-                <div id="resultProfile" class="result-card">
-                    <div class="employee-profile">
-                        <div class="info-group"><h4>الاسم</h4><p id="resName">-</p></div>
-                        <div class="info-group"><h4>المسمى</h4><p id="resTitle">-</p></div>
-                        <div class="info-group"><h4>القطاع / القسم</h4><p id="resSector">-</p></div>
-                        <div class="info-group"><h4>C-LVL / المستوى</h4><p id="resLevel">-</p></div>
-                        <div class="info-group"><h4>الدرجة</h4><p id="resGrade">-</p></div>
-                        <div class="info-group"><h4>الموقع</h4><p id="resLocation">-</p></div>
-                        <div class="info-group"><h4>المجموعة / المرحلة</h4><p id="resGroupPhase">-</p></div>
-                        <div class="info-group"><h4>الحضور / الإقامة</h4><p id="resAttendAccom">-</p></div>
-                    </div>
-                    <div class="employee-stats">
-                        <span class="stat-badge attend" id="statAttended">✅ حضور: 0</span>
-                        <span class="stat-badge not-attend" id="statNotAttended">❌ غياب: 0</span>
-                        <span class="stat-badge group" id="statGroup">📋 المجموعة: -</span>
-                        <span class="stat-badge location" id="statLocation">📍 الموقع: -</span>
-                        <span class="stat-badge accommodation" id="statAccommodation">🏠 الإقامة: -</span>
-                    </div>
-                    <div class="perf-stats" id="perfStats">
-                        <div class="perf-stat">📊 الإجمالي: <span class="num" id="perfTotal">0</span></div>
-                        <div class="perf-stat">✅ مكتمل: <span class="num" id="perfCompleted">0</span></div>
-                        <div class="perf-stat">⏳ معلق: <span class="num" id="perfPending">0</span></div>
-                    </div>
-                    <div class="training-tags" id="resPrograms"></div>
-                    <button class="print-btn" id="printEmployeeBtn" onclick="printEmployeeProfile()" style="display:none;"><i class="fa-solid fa-print"></i> طباعة</button>
+            <!-- Level -->
+            <div class="filter-group-item">
+                <span class="filter-label"><i class="fa-solid fa-level-up"></i> Level</span>
+                <div class="filter-options" id="levelFilters">
+                    <button class="filter-btn active" data-filter="level" data-value="all">All <span class="badge-count" id="lvlAllCount">0</span></button>
                 </div>
             </div>
-            <div class="charts-grid">
-                <div class="chart-box" id="chartBoxSector"><h4><i class="fa-solid fa-chart-bar"></i> الموظفون حسب القطاع</h4><div class="chart-container"><canvas id="chartSector"></canvas></div></div>
-                <div class="chart-box" id="chartBoxLevel"><h4><i class="fa-solid fa-layer-group"></i> مستويات الكفاءة</h4><div class="chart-container"><canvas id="chartLevel"></canvas></div></div>
+
+            <!-- Grade -->
+            <div class="filter-group-item">
+                <span class="filter-label"><i class="fa-solid fa-graduation-cap"></i> Grade</span>
+                <div class="filter-options" id="gradeFilters">
+                    <button class="filter-btn active" data-filter="grade" data-value="all">All <span class="badge-count" id="gradeAllCount">0</span></button>
+                </div>
+            </div>
+
+            <!-- Activity -->
+            <div class="filter-group-item">
+                <span class="filter-label"><i class="fa-solid fa-bolt"></i> Activity</span>
+                <div class="filter-options">
+                    <select class="filter-select" id="activitySelect">
+                        <option value="all">All Activities</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Sector -->
+            <div class="filter-group-item">
+                <span class="filter-label"><i class="fa-solid fa-building"></i> Sector</span>
+                <div class="filter-options">
+                    <select class="filter-select" id="sectorSelect">
+                        <option value="all">All Sectors</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Area -->
+            <div class="filter-group-item">
+                <span class="filter-label"><i class="fa-solid fa-map-pin"></i> Area</span>
+                <div class="filter-options">
+                    <select class="filter-select" id="areaSelect">
+                        <option value="all">All Areas</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Group -->
+            <div class="filter-group-item">
+                <span class="filter-label"><i class="fa-solid fa-users"></i> Group</span>
+                <div class="filter-options">
+                    <select class="filter-select" id="groupSelect">
+                        <option value="all">All Groups</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Phase -->
+            <div class="filter-group-item">
+                <span class="filter-label"><i class="fa-solid fa-clock"></i> Phase</span>
+                <div class="filter-options">
+                    <select class="filter-select" id="phaseSelect">
+                        <option value="all">All Phases</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Location -->
+            <div class="filter-group-item">
+                <span class="filter-label"><i class="fa-solid fa-location-dot"></i> Location</span>
+                <div class="filter-options">
+                    <select class="filter-select" id="locationSelect">
+                        <option value="all">All Locations</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Attendance -->
+            <div class="filter-group-item">
+                <span class="filter-label"><i class="fa-solid fa-user-check"></i> Attendance</span>
+                <div class="filter-options" id="attendanceFilters">
+                    <button class="filter-btn active" data-filter="attendance" data-value="all">All <span class="badge-count" id="attAllCount">0</span></button>
+                    <button class="filter-btn" data-filter="attendance" data-value="attend">✅ Attended <span class="badge-count" id="attAttendCount">0</span></button>
+                    <button class="filter-btn" data-filter="attendance" data-value="not-attend">❌ Not Attended <span class="badge-count" id="attNotAttendCount">0</span></button>
+                </div>
+            </div>
+
+            <!-- Accommodation -->
+            <div class="filter-group-item">
+                <span class="filter-label"><i class="fa-solid fa-bed"></i> Accommodation</span>
+                <div class="filter-options" id="accommodationFilters">
+                    <button class="filter-btn active" data-filter="accommodation" data-value="all">All <span class="badge-count" id="accAllCount">0</span></button>
+                    <button class="filter-btn" data-filter="accommodation" data-value="yes">✅ Yes <span class="badge-count" id="accYesCount">0</span></button>
+                    <button class="filter-btn" data-filter="accommodation" data-value="no">❌ No <span class="badge-count" id="accNoCount">0</span></button>
+                </div>
+            </div>
+
+            <!-- Reset -->
+            <div class="filter-group-item" style="justify-content: flex-end; align-items: flex-end;">
+                <button class="clear-filters-btn" onclick="clearAllFilters()"><i class="fa-solid fa-undo"></i> Reset All</button>
             </div>
         </div>
+    </div>
 
-        <!-- CHARTS -->
-        <div class="charts-grid-2">
-            <div class="chart-box" id="chartBoxAttendance"><h4><i class="fa-solid fa-chart-line"></i> الحضور مقابل الإكمال</h4><div class="chart-container"><canvas id="chartAttendance"></canvas></div></div>
-            <div class="chart-box" id="chartBoxPhase"><h4><i class="fa-solid fa-clock"></i> توزيع مراحل التدريب</h4><div class="chart-container"><canvas id="chartPhase"></canvas></div></div>
-            <div class="chart-box" id="chartBoxLocation"><h4><i class="fa-solid fa-location-dot"></i> توزيع مواقع التدريب</h4><div class="chart-container"><canvas id="chartLocation"></canvas></div></div>
-            <div class="chart-box" id="chartBoxPrograms"><h4><i class="fa-solid fa-book-open"></i> التسجيل في البرامج</h4><div class="chart-container"><canvas id="chartPrograms"></canvas></div></div>
+    <!-- SELECTED PROGRAM INFO -->
+    <div class="selected-program-info" id="selectedProgramInfo">
+        <div class="prog-title" id="selectedProgTitle">📊 7 Sens Program</div>
+        <div class="prog-stats">
+            <span>👥 Total: <span class="num" id="selProgTotal">0</span></span>
+            <span>✅ Attended: <span class="num" id="selProgAttend">0</span></span>
+            <span>❌ Not Attended: <span class="num" id="selProgNotAttend">0</span></span>
+            <span>📍 Locations: <span class="num" id="selProgLocations">0</span></span>
+            <span>📊 Rate: <span class="num" id="selProgRate">0%</span></span>
         </div>
+    </div>
 
-        <div class="charts-grid-2" style="margin-top:8px;">
-            <div class="chart-box" id="chartBoxQuality"><h4><i class="fa-solid fa-gauge-high"></i> جودة البيانات</h4><div class="chart-container"><canvas id="chartQuality"></canvas></div></div>
-            <div class="chart-box" id="chartBoxDept"><h4><i class="fa-solid fa-users-between-lines"></i> حجم الأقسام</h4><div class="chart-container"><canvas id="chartDepartment"></canvas></div></div>
-        </div>
+    <!-- KPI GRID -->
+    <div class="kpi-grid" id="kpiGrid">
+        <div class="kpi-card"><div class="kpi-info"><h4>Total Workforce</h4><div class="num" id="kpiTotal">...</div></div><i class="fa-solid fa-users"></i></div>
+        <div class="kpi-card"><div class="kpi-info"><h4>Project Progress</h4><div class="num" id="kpiProgress">...</div></div><i class="fa-solid fa-chart-line"></i></div>
+        <div class="kpi-card"><div class="kpi-info"><h4>Completed Programs</h4><div class="num" id="kpiCompleted">...</div></div><i class="fa-solid fa-check-circle"></i></div>
+        <div class="kpi-card"><div class="kpi-info"><h4>Training Locations</h4><div class="num" id="kpiLocations">...</div></div><i class="fa-solid fa-location-dot"></i></div>
+        <div class="kpi-card"><div class="kpi-info"><h4>Total Attendees</h4><div class="num" id="kpiAttendees">...</div></div><i class="fa-solid fa-user-check"></i></div>
+        <div class="kpi-card"><div class="kpi-info"><h4>Active Sectors</h4><div class="num" id="kpiSectors">...</div></div><i class="fa-solid fa-building"></i></div>
+        <div class="kpi-card"><div class="kpi-info"><h4>Departments</h4><div class="num" id="kpiDepartments">...</div></div><i class="fa-solid fa-sitemap"></i></div>
+        <div class="kpi-card"><div class="kpi-info"><h4>Data Quality</h4><div class="num" id="kpiQuality">...</div></div><i class="fa-solid fa-shield-halved"></i></div>
+    </div>
 
-        <!-- EMPLOYEE DETAIL TABLE -->
-        <div class="employee-detail-table" id="employeeDetailTable">
-            <h4>
-                <i class="fa-solid fa-table"></i> بيانات الموظفين
-                <span class="count-badge" id="detailCount">(0 موظف)</span>
-                <span style="font-size:0.5rem;color:var(--text-muted);font-weight:400;margin-left:auto;">
-                    <i class="fa-solid fa-filter"></i> من <span id="totalRecords">0</span> إجمالي
-                </span>
-            </h4>
-            <div style="overflow-x:auto;">
-                <table id="employee-table">
-                    <thead>
-                        <tr>
-                            <th>الكود</th>
-                            <th>الاسم</th>
-                            <th>المسمى</th>
-                            <th>C-LVL</th>
-                            <th>المستوى</th>
-                            <th>الدرجة</th>
-                            <th>النشاط</th>
-                            <th>القطاع</th>
-                            <th>المنطقة</th>
-                            <th>المجموعة</th>
-                            <th>المرحلة</th>
-                            <th>الموقع</th>
-                            <th>الحضور</th>
-                            <th>الإقامة</th>
-                        </tr>
-                    </thead>
-                    <tbody id="detailTableBody">
-                        <tr><td colspan="14" style="text-align:center;padding:20px;color:var(--text-muted);"><i class="fa-solid fa-spinner fa-spin" style="display:block;margin-bottom:8px;"></i>جاري تحميل البيانات...</td></tr>
-                    </tbody>
-                </table>
+    <!-- SEARCH + CHARTS -->
+    <div class="search-charts-grid">
+        <div class="search-wrapper">
+            <h3><i class="fa-solid fa-magnifying-glass"></i> Employee Lookup</h3>
+            <p>Enter Employee ID</p>
+            <div class="search-box">
+                <input type="text" id="empIdInput" placeholder="e.g., 5908">
+                <button onclick="searchEmployee()"><i class="fa-solid fa-search"></i> Search</button>
+            </div>
+            <div id="loadingMsg" class="loading-status"><i class="fa-solid fa-spinner fa-spin"></i> Loading...</div>
+            <div id="resultProfile" class="result-card">
+                <div class="employee-profile">
+                    <div class="info-group"><h4>Name</h4><p id="resName">-</p></div>
+                    <div class="info-group"><h4>Title</h4><p id="resTitle">-</p></div>
+                    <div class="info-group"><h4>Sector / Dept</h4><p id="resSector">-</p></div>
+                    <div class="info-group"><h4>C-LVL / Level</h4><p id="resLevel">-</p></div>
+                    <div class="info-group"><h4>Grade</h4><p id="resGrade">-</p></div>
+                    <div class="info-group"><h4>Location</h4><p id="resLocation">-</p></div>
+                    <div class="info-group"><h4>Group / Phase</h4><p id="resGroupPhase">-</p></div>
+                    <div class="info-group"><h4>Attendance / Accom</h4><p id="resAttendAccom">-</p></div>
+                </div>
+                <div class="employee-stats">
+                    <span class="stat-badge attend" id="statAttended">✅ Attended: 0</span>
+                    <span class="stat-badge not-attend" id="statNotAttended">❌ Not Attended: 0</span>
+                    <span class="stat-badge group" id="statGroup">📋 Group: -</span>
+                    <span class="stat-badge location" id="statLocation">📍 Location: -</span>
+                    <span class="stat-badge accommodation" id="statAccommodation">🏠 Accommodation: -</span>
+                </div>
+                <div class="perf-stats" id="perfStats">
+                    <div class="perf-stat">📊 Total: <span class="num" id="perfTotal">0</span></div>
+                    <div class="perf-stat">✅ Completed: <span class="num" id="perfCompleted">0</span></div>
+                    <div class="perf-stat">⏳ Pending: <span class="num" id="perfPending">0</span></div>
+                </div>
+                <div class="training-tags" id="resPrograms"></div>
             </div>
         </div>
-
-        <!-- INSIGHTS -->
-        <div class="insights-section" id="insightsSection">
-            <div class="insight-card"><div class="insight-icon"><i class="fa-solid fa-layer-group"></i></div><h4>أكبر مستوى كفاءة</h4><div class="insight-value" id="insightTopLevel">-</div><div class="insight-desc" id="insightTopLevelDesc">موظف</div><span class="insight-tag info">📊 رئيسي</span></div>
-            <div class="insight-card"><div class="insight-icon"><i class="fa-solid fa-building"></i></div><h4>أكبر قطاع</h4><div class="insight-value" id="insightTopSector">-</div><div class="insight-desc" id="insightTopSectorDesc">موظف</div><span class="insight-tag info">🏢 الأكبر</span></div>
-            <div class="insight-card"><div class="insight-icon"><i class="fa-solid fa-clock"></i></div><h4>أكبر مرحلة</h4><div class="insight-value" id="insightTopPhase">-</div><div class="insight-desc" id="insightTopPhaseDesc">موظف</div><span class="insight-tag info">⏰ الأكبر</span></div>
-            <div class="insight-card"><div class="insight-icon"><i class="fa-solid fa-user-check"></i></div><h4>أعلى حضور</h4><div class="insight-value" id="insightTopAttendance">-</div><div class="insight-desc" id="insightTopAttendanceDesc">نسبة</div><span class="insight-tag good">✅ ممتاز</span></div>
-            <div class="insight-card"><div class="insight-icon"><i class="fa-solid fa-location-dot"></i></div><h4>الموقع الأكثر استخداماً</h4><div class="insight-value" id="insightTopLocation">-</div><div class="insight-desc" id="insightTopLocationDesc">موظف</div><span class="insight-tag info">📍 الأكثر</span></div>
-            <div class="insight-card"><div class="insight-icon"><i class="fa-solid fa-users"></i></div><h4>أكبر قسم</h4><div class="insight-value" id="insightLargestDept">-</div><div class="insight-desc" id="insightLargestDeptDesc">موظف</div><span class="insight-tag info">🏆 الأكبر</span></div>
+        <div class="charts-grid">
+            <div class="chart-box"><h4><i class="fa-solid fa-chart-bar"></i> Employees by Sector</h4><div class="chart-container"><canvas id="chartSector"></canvas></div></div>
+            <div class="chart-box"><h4><i class="fa-solid fa-layer-group"></i> C-LVL Distribution</h4><div class="chart-container"><canvas id="chartLevel"></canvas></div></div>
         </div>
+    </div>
 
-        <div class="print-footer" style="display:none;">CBT Intelligence Hub 2026 • جميع الحقوق محفوظة • تم الإنشاء: <span id="printDateFooter"></span></div>
+    <!-- CHARTS -->
+    <div class="charts-grid-2">
+        <div class="chart-box"><h4><i class="fa-solid fa-chart-line"></i> Attendance vs Completion</h4><div class="chart-container"><canvas id="chartAttendance"></canvas></div></div>
+        <div class="chart-box"><h4><i class="fa-solid fa-clock"></i> Training Phase Distribution</h4><div class="chart-container"><canvas id="chartPhase"></canvas></div></div>
+        <div class="chart-box"><h4><i class="fa-solid fa-location-dot"></i> Training Location Distribution</h4><div class="chart-container"><canvas id="chartLocation"></canvas></div></div>
+        <div class="chart-box"><h4><i class="fa-solid fa-book-open"></i> Program Enrollment</h4><div class="chart-container"><canvas id="chartPrograms"></canvas></div></div>
+    </div>
 
+    <div class="charts-grid-2" style="margin-top:0;">
+        <div class="chart-box"><h4><i class="fa-solid fa-gauge-high"></i> Data Quality</h4><div class="chart-container"><canvas id="chartQuality"></canvas></div></div>
+        <div class="chart-box"><h4><i class="fa-solid fa-users-between-lines"></i> Department Size</h4><div class="chart-container"><canvas id="chartDepartment"></canvas></div></div>
+    </div>
+
+    <!-- EMPLOYEE TABLE -->
+    <div class="employee-detail-table" id="employeeDetailTable">
+        <h4>
+            <i class="fa-solid fa-table"></i> Employee Data
+            <span class="count-badge" id="detailCount">(0 employees)</span>
+            <span style="font-size:0.5rem;color:var(--text-muted);font-weight:400;margin-left:auto;">
+                <i class="fa-solid fa-filter"></i> of <span id="totalRecords">0</span> total
+            </span>
+        </h4>
+        <div style="overflow-x:auto;">
+            <table id="employee-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Title</th>
+                        <th>C-LVL</th>
+                        <th>Level</th>
+                        <th>Grade</th>
+                        <th>Activity</th>
+                        <th>Sector</th>
+                        <th>Area</th>
+                        <th>Group</th>
+                        <th>Phase</th>
+                        <th>Location</th>
+                        <th>Attendance</th>
+                        <th>Accommodation</th>
+                    </tr>
+                </thead>
+                <tbody id="detailTableBody">
+                    <tr><td colspan="14" style="text-align:center;padding:20px;color:var(--text-muted);"><i class="fa-solid fa-spinner fa-spin" style="display:block;margin-bottom:8px;"></i>Loading employee data...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- INSIGHTS -->
+    <div class="insights-section" id="insightsSection">
+        <div class="insight-card"><div class="insight-icon"><i class="fa-solid fa-layer-group"></i></div><h4>Largest C-LVL</h4><div class="insight-value" id="insightTopLevel">-</div><div class="insight-desc" id="insightTopLevelDesc">employees</div><span class="insight-tag info">📊 Top</span></div>
+        <div class="insight-card"><div class="insight-icon"><i class="fa-solid fa-building"></i></div><h4>Largest Sector</h4><div class="insight-value" id="insightTopSector">-</div><div class="insight-desc" id="insightTopSectorDesc">employees</div><span class="insight-tag info">🏢 Top</span></div>
+        <div class="insight-card"><div class="insight-icon"><i class="fa-solid fa-clock"></i></div><h4>Largest Phase</h4><div class="insight-value" id="insightTopPhase">-</div><div class="insight-desc" id="insightTopPhaseDesc">employees</div><span class="insight-tag info">⏰ Top</span></div>
+        <div class="insight-card"><div class="insight-icon"><i class="fa-solid fa-user-check"></i></div><h4>Highest Attendance</h4><div class="insight-value" id="insightTopAttendance">-</div><div class="insight-desc" id="insightTopAttendanceDesc">rate</div><span class="insight-tag good">✅ Excellent</span></div>
+        <div class="insight-card"><div class="insight-icon"><i class="fa-solid fa-location-dot"></i></div><h4>Most Used Location</h4><div class="insight-value" id="insightTopLocation">-</div><div class="insight-desc" id="insightTopLocationDesc">employees</div><span class="insight-tag info">📍 Top</span></div>
+        <div class="insight-card"><div class="insight-icon"><i class="fa-solid fa-users"></i></div><h4>Largest Department</h4><div class="insight-value" id="insightLargestDept">-</div><div class="insight-desc" id="insightLargestDeptDesc">employees</div><span class="insight-tag info">🏆 Top</span></div>
+    </div>
+
+    <!-- FOOTER -->
+    <div style="text-align:center;font-size:0.5rem;color:var(--text-muted);padding:8px 0 16px 0;border-top:1px solid var(--border);">
+        CBT Intelligence Hub 2026 • All rights reserved • Data refreshed in real-time
     </div>
 
     <script>
         // ============================================================
-        // CONFIG - استخدام ملف CSV المرفق مباشرة
+        // CONFIGURATION
         // ============================================================
-        // البيانات مضمنة في ملف CSV، سنستخدمها مباشرة
-        // أسماء الأعمدة حسب الملف
         const COLUMNS = {
             ID: 'ID',
             Name: 'Name',
@@ -786,13 +955,16 @@
 
         const PROGRAM_SHORT = {
             '7 Sens Program': '7 Sens',
-            'Analytical Thinking Program': 'تحليلي',
-            'Mind field Program': 'مايند فيلد',
-            'Leader Ship Program': 'قيادة',
-            'Drive Performance Program': 'دفع الأداء',
-            'Kick Start Program': 'انطلاق'
+            'Analytical Thinking Program': 'Analytical',
+            'Mind field Program': 'Mind Field',
+            'Leader Ship Program': 'Leadership',
+            'Drive Performance Program': 'Drive Perf.',
+            'Kick Start Program': 'Kick Start'
         };
 
+        // ============================================================
+        // STATE
+        // ============================================================
         let allData = [];
         let filteredData = [];
         let chartInstances = {};
@@ -821,8 +993,6 @@
             if (lines.length < 2) return [];
             
             const headers = lines[0].split(",").map(h => h.trim().replace(/^"|"$/g, ''));
-            console.log('📋 Headers:', headers);
-            
             const result = [];
             const seenIds = new Set();
             
@@ -837,10 +1007,8 @@
                         seenIds.add(id);
                         result.push(obj);
                     }
-                } catch (e) { console.warn('⚠️ Error parsing row', i); }
+                } catch (e) { console.warn('Error parsing row', i); }
             }
-            
-            console.log('📊 Total records:', result.length);
             return result;
         }
 
@@ -898,16 +1066,16 @@
             }).length;
             const rate = total > 0 ? (attended / total) * 100 : 0;
             if (rate < 60) {
-                alerts.push({ type: 'danger', icon: 'fa-triangle-exclamation', msg: `⚠️ نسبة الحضور ${Math.round(rate)}% - أقل من 60%!` });
+                alerts.push({ type: 'danger', msg: `⚠️ Attendance rate is ${Math.round(rate)}% - below 60%!` });
             }
             const hasId = data.filter(r => r['ID'] && r['ID'].trim()).length;
             const hasName = data.filter(r => r['Name'] && r['Name'].trim()).length;
             const missing = total - Math.min(hasId, hasName);
             if (missing > total * 0.05) {
-                alerts.push({ type: 'warning', icon: 'fa-circle-exclamation', msg: `📊 ${missing} سجلات بها بيانات ناقصة.` });
+                alerts.push({ type: 'warning', msg: `📊 ${missing} records have missing data.` });
             }
             if (alerts.length === 0) {
-                alerts.push({ type: 'success', icon: 'fa-check-circle', msg: `✅ النظام سليم! ${total} موظف.` });
+                alerts.push({ type: 'success', msg: `✅ System healthy! ${total} employees loaded.` });
             }
             renderAlerts(alerts);
         }
@@ -918,14 +1086,8 @@
             if (!alerts || alerts.length === 0) { container.classList.remove('show'); return; }
             container.classList.add('show');
             list.innerHTML = alerts.map(a =>
-                `<div class="alert-item alert-${a.type}"><i class="fa-solid ${a.icon}"></i><span>${a.msg}</span></div>`
+                `<div class="alert-item alert-${a.type}"><i class="fa-solid ${a.type === 'success' ? 'fa-check-circle' : a.type === 'warning' ? 'fa-circle-exclamation' : 'fa-triangle-exclamation'}"></i><span>${a.msg}</span></div>`
             ).join('');
-        }
-
-        function showAlert(type, msg) {
-            const alerts = [{ type, icon: type === 'success' ? 'fa-check-circle' : type === 'warning' ? 'fa-circle-exclamation' : 'fa-triangle-exclamation', msg }];
-            renderAlerts(alerts);
-            setTimeout(() => document.getElementById('alertsContainer').classList.remove('show'), 5000);
         }
 
         // ============================================================
@@ -941,10 +1103,10 @@
         }
 
         function setupSlicerButtons() {
-            document.querySelectorAll('#sectorSlicerButtons .slicer-btn').forEach(btn => {
+            document.querySelectorAll('#activitySlicerButtons .slicer-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const activity = this.dataset.activity;
-                    document.querySelectorAll('#sectorSlicerButtons .slicer-btn').forEach(b => b.classList.remove('active'));
+                    document.querySelectorAll('#activitySlicerButtons .slicer-btn').forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
                     activeFilters.activitySlicer = activity;
                     applyFilters();
@@ -953,13 +1115,13 @@
         }
 
         // ============================================================
-        // UPDATE PROGRAM CARDS
+        // PROGRAM CARDS
         // ============================================================
         function updateProgramCards(data) {
             const container = document.getElementById('programFilters');
             const total = data.length;
             let html = `<div class="program-card active" data-program="all" data-value="all">
-                <span class="prog-icon">📋</span><span class="prog-name">الكل</span>
+                <span class="prog-icon">📋</span><span class="prog-name">All</span>
                 <span class="prog-count">${total}</span>
             </div>`;
             Object.keys(PROGRAM_FIELDS).forEach(progName => {
@@ -986,9 +1148,6 @@
             });
         }
 
-        // ============================================================
-        // UPDATE SELECTED PROGRAM INFO
-        // ============================================================
         function updateSelectedProgramInfo(data) {
             const container = document.getElementById('selectedProgramInfo');
             const progName = activeFilters.program;
@@ -1013,7 +1172,7 @@
         }
 
         // ============================================================
-        // POPULATE DROPDOWNS
+        // DROPDOWNS
         // ============================================================
         function populateDropdowns() {
             const dropdownMap = {
@@ -1032,15 +1191,15 @@
                 const values = getUniqueValues(allData, key);
                 const currentValue = select.value;
                 const labelMap = {
-                    'activitySelect': 'الأنشطة',
-                    'sectorSelect': 'القطاعات',
-                    'areaSelect': 'المناطق',
-                    'groupSelect': 'المجموعات',
-                    'phaseSelect': 'المراحل',
-                    'locationSelect': 'المواقع'
+                    'activitySelect': 'Activities',
+                    'sectorSelect': 'Sectors',
+                    'areaSelect': 'Areas',
+                    'groupSelect': 'Groups',
+                    'phaseSelect': 'Phases',
+                    'locationSelect': 'Locations'
                 };
-                const label = labelMap[selectId] || 'الكل';
-                select.innerHTML = `<option value="all">كل ${label}</option>`;
+                const label = labelMap[selectId] || 'All';
+                select.innerHTML = `<option value="all">All ${label}</option>`;
                 values.forEach(val => {
                     const opt = document.createElement('option');
                     opt.value = val;
@@ -1071,7 +1230,7 @@
         }
 
         // ============================================================
-        // POPULATE FILTER BUTTONS
+        // FILTER BUTTONS
         // ============================================================
         function populateFilterButtons() {
             const filterConfigs = [
@@ -1105,7 +1264,6 @@
         }
 
         function updateFilterCounts(data) {
-            // C-LVL
             document.getElementById('clAllCount').textContent = data.length;
             document.querySelectorAll('#clevelFilters .filter-btn:not([data-value="all"])').forEach(btn => {
                 const val = btn.dataset.value;
@@ -1113,7 +1271,6 @@
                 btn.querySelector('.badge-count').textContent = count;
             });
 
-            // Level
             document.getElementById('lvlAllCount').textContent = data.length;
             document.querySelectorAll('#levelFilters .filter-btn:not([data-value="all"])').forEach(btn => {
                 const val = btn.dataset.value;
@@ -1121,7 +1278,6 @@
                 btn.querySelector('.badge-count').textContent = count;
             });
 
-            // Grade
             document.getElementById('gradeAllCount').textContent = data.length;
             document.querySelectorAll('#gradeFilters .filter-btn:not([data-value="all"])').forEach(btn => {
                 const val = btn.dataset.value;
@@ -1129,13 +1285,11 @@
                 btn.querySelector('.badge-count').textContent = count;
             });
 
-            // Attendance
             const { attend, notAttend } = getProgramAttendance(data, COLUMNS.SevenSens);
             document.getElementById('attAllCount').textContent = data.length;
             document.getElementById('attAttendCount').textContent = attend;
             document.getElementById('attNotAttendCount').textContent = notAttend;
 
-            // Accommodation
             const accYes = data.filter(r => String(r[COLUMNS.Accommodation] || '').toLowerCase() === 'yes').length;
             const accNo = data.filter(r => String(r[COLUMNS.Accommodation] || '').toLowerCase() === 'no').length;
             document.getElementById('accAllCount').textContent = data.length;
@@ -1146,69 +1300,62 @@
         }
 
         // ============================================================
-        // UPDATE INSIGHTS
+        // INSIGHTS
         // ============================================================
         function updateInsights(data) {
             if (!data || data.length === 0) return;
 
-            // Largest C-LVL
             const levelCounts = {};
-            data.forEach(r => { const l = r[COLUMNS.CLevel] || 'غير معروف'; levelCounts[l] = (levelCounts[l] || 0) + 1; });
-            // إزالة "غير معروف"
-            if (levelCounts['غير معروف']) delete levelCounts['غير معروف'];
+            data.forEach(r => { const l = r[COLUMNS.CLevel] || 'Unknown'; levelCounts[l] = (levelCounts[l] || 0) + 1; });
+            if (levelCounts['Unknown']) delete levelCounts['Unknown'];
             const sortedLevels = Object.entries(levelCounts).sort((a, b) => b[1] - a[1]);
             if (sortedLevels.length > 0) {
                 document.getElementById('insightTopLevel').textContent = sortedLevels[0][0];
-                document.getElementById('insightTopLevelDesc').textContent = sortedLevels[0][1] + ' موظف';
+                document.getElementById('insightTopLevelDesc').textContent = sortedLevels[0][1] + ' employees';
             }
 
-            // Largest Sector
             const sectorCounts = {};
-            data.forEach(r => { const s = r[COLUMNS.Sector] || 'غير معروف'; sectorCounts[s] = (sectorCounts[s] || 0) + 1; });
-            if (sectorCounts['غير معروف']) delete sectorCounts['غير معروف'];
+            data.forEach(r => { const s = r[COLUMNS.Sector] || 'Unknown'; sectorCounts[s] = (sectorCounts[s] || 0) + 1; });
+            if (sectorCounts['Unknown']) delete sectorCounts['Unknown'];
             const sortedSectors = Object.entries(sectorCounts).sort((a, b) => b[1] - a[1]);
             if (sortedSectors.length > 0) {
                 document.getElementById('insightTopSector').textContent = sortedSectors[0][0];
-                document.getElementById('insightTopSectorDesc').textContent = sortedSectors[0][1] + ' موظف';
+                document.getElementById('insightTopSectorDesc').textContent = sortedSectors[0][1] + ' employees';
             }
 
-            // Largest Phase
             const phaseCounts = {};
-            data.forEach(r => { const p = r[COLUMNS.TrainingPhase] || 'غير معروف'; phaseCounts[p] = (phaseCounts[p] || 0) + 1; });
-            if (phaseCounts['غير معروف']) delete phaseCounts['غير معروف'];
+            data.forEach(r => { const p = r[COLUMNS.TrainingPhase] || 'Unknown'; phaseCounts[p] = (phaseCounts[p] || 0) + 1; });
+            if (phaseCounts['Unknown']) delete phaseCounts['Unknown'];
             const sortedPhases = Object.entries(phaseCounts).sort((a, b) => b[1] - a[1]);
             if (sortedPhases.length > 0) {
                 document.getElementById('insightTopPhase').textContent = sortedPhases[0][0];
-                document.getElementById('insightTopPhaseDesc').textContent = sortedPhases[0][1] + ' موظف';
+                document.getElementById('insightTopPhaseDesc').textContent = sortedPhases[0][1] + ' employees';
             }
 
-            // Highest Attendance
             const attended = data.filter(r => {
                 const val = String(r[COLUMNS.SevenSens] || '').toLowerCase();
                 return val === 'attend' || val === 'attended' || val.includes('attend');
             }).length;
             const rate = data.length > 0 ? Math.round((attended / data.length) * 100) : 0;
             document.getElementById('insightTopAttendance').textContent = rate + '%';
-            document.getElementById('insightTopAttendanceDesc').textContent = data.length + ' موظف';
+            document.getElementById('insightTopAttendanceDesc').textContent = data.length + ' employees';
 
-            // Most Popular Location
             const locCounts = {};
-            data.forEach(r => { const l = r[COLUMNS.Location] || 'غير معروف'; locCounts[l] = (locCounts[l] || 0) + 1; });
-            if (locCounts['غير معروف']) delete locCounts['غير معروف'];
+            data.forEach(r => { const l = r[COLUMNS.Location] || 'Unknown'; locCounts[l] = (locCounts[l] || 0) + 1; });
+            if (locCounts['Unknown']) delete locCounts['Unknown'];
             const sortedLocs = Object.entries(locCounts).sort((a, b) => b[1] - a[1]);
             if (sortedLocs.length > 0) {
                 document.getElementById('insightTopLocation').textContent = sortedLocs[0][0];
-                document.getElementById('insightTopLocationDesc').textContent = sortedLocs[0][1] + ' موظف';
+                document.getElementById('insightTopLocationDesc').textContent = sortedLocs[0][1] + ' employees';
             }
 
-            // Largest Department
             const deptCounts = {};
-            data.forEach(r => { const d = r[COLUMNS.Department] || 'غير معروف'; deptCounts[d] = (deptCounts[d] || 0) + 1; });
-            if (deptCounts['غير معروف']) delete deptCounts['غير معروف'];
+            data.forEach(r => { const d = r[COLUMNS.Department] || 'Unknown'; deptCounts[d] = (deptCounts[d] || 0) + 1; });
+            if (deptCounts['Unknown']) delete deptCounts['Unknown'];
             const sortedDepts = Object.entries(deptCounts).sort((a, b) => b[1] - a[1]);
             if (sortedDepts.length > 0) {
                 document.getElementById('insightLargestDept').textContent = sortedDepts[0][0];
-                document.getElementById('insightLargestDeptDesc').textContent = sortedDepts[0][1] + ' موظف';
+                document.getElementById('insightLargestDeptDesc').textContent = sortedDepts[0][1] + ' employees';
             }
         }
 
@@ -1261,22 +1408,19 @@
             // CHART DATA
             // ============================================================
             const sectorCounts = {};
-            data.forEach(r => { const s = r[COLUMNS.Sector] || 'غير معروف'; sectorCounts[s] = (sectorCounts[s] || 0) + 1; });
-            const sectorLabels = Object.keys(sectorCounts).filter(k => k !== 'غير معروف');
+            data.forEach(r => { const s = r[COLUMNS.Sector] || 'Unknown'; sectorCounts[s] = (sectorCounts[s] || 0) + 1; });
+            const sectorLabels = Object.keys(sectorCounts).filter(k => k !== 'Unknown');
             const sectorValues = sectorLabels.map(k => sectorCounts[k]);
-            if (sectorCounts['غير معروف']) {
-                sectorLabels.push('غير معروف');
-                sectorValues.push(sectorCounts['غير معروف']);
-            }
+            if (sectorCounts['Unknown']) { sectorLabels.push('Unknown'); sectorValues.push(sectorCounts['Unknown']); }
 
             const levelCounts = {};
-            data.forEach(r => { const l = r[COLUMNS.CLevel] || 'غير معروف'; levelCounts[l] = (levelCounts[l] || 0) + 1; });
+            data.forEach(r => { const l = r[COLUMNS.CLevel] || 'Unknown'; levelCounts[l] = (levelCounts[l] || 0) + 1; });
             const levelLabels = Object.keys(levelCounts);
             const levelValues = Object.values(levelCounts);
 
             const sectorAtt = {}, sectorComp = {};
             data.forEach(r => {
-                const s = r[COLUMNS.Sector] || 'غير معروف';
+                const s = r[COLUMNS.Sector] || 'Unknown';
                 if (!sectorAtt[s]) { sectorAtt[s] = 0; sectorComp[s] = 0; }
                 const v1 = String(r[COLUMNS.SevenSens] || '').toLowerCase();
                 const v2 = String(r[COLUMNS.Analytical] || '').toLowerCase();
@@ -1284,7 +1428,7 @@
                 if ((v1 === 'attend' || v1 === 'attended' || v1.includes('attend')) ||
                     (v2 === 'attend' || v2 === 'attended' || v2.includes('attend'))) sectorComp[s]++;
             });
-            const attSectors = Object.keys(sectorAtt).filter(k => k !== 'غير معروف');
+            const attSectors = Object.keys(sectorAtt).filter(k => k !== 'Unknown');
             const attValues = attSectors.map(s => {
                 const totalSector = data.filter(r => r[COLUMNS.Sector] === s).length;
                 return totalSector > 0 ? Math.round((sectorAtt[s] / totalSector) * 100) : 0;
@@ -1295,21 +1439,21 @@
             });
 
             const phaseCounts = {};
-            data.forEach(r => { const p = r[COLUMNS.TrainingPhase] || 'غير معروف'; phaseCounts[p] = (phaseCounts[p] || 0) + 1; });
+            data.forEach(r => { const p = r[COLUMNS.TrainingPhase] || 'Unknown'; phaseCounts[p] = (phaseCounts[p] || 0) + 1; });
             const phaseLabels = Object.keys(phaseCounts);
             const phaseValues = Object.values(phaseCounts);
 
             const locCounts = {};
-            data.forEach(r => { const l = r[COLUMNS.Location] || 'غير معروف'; locCounts[l] = (locCounts[l] || 0) + 1; });
+            data.forEach(r => { const l = r[COLUMNS.Location] || 'Unknown'; locCounts[l] = (locCounts[l] || 0) + 1; });
             const locLabels = Object.keys(locCounts);
             const locValues = Object.values(locCounts);
 
             const qualityData = {
-                'معرفات صالحة': hasId,
-                'أسماء صالحة': hasName,
-                'أقسام صالحة': hasDept,
-                'درجة موجودة': data.filter(r => r['Grade'] && r['Grade'].trim()).length,
-                'حالة موجودة': data.filter(r => r['Status'] && r['Status'].trim()).length
+                'Valid IDs': hasId,
+                'Valid Names': hasName,
+                'Valid Depts': hasDept,
+                'Grade Present': data.filter(r => r['Grade'] && r['Grade'].trim()).length,
+                'Status Present': data.filter(r => r['Status'] && r['Status'].trim()).length
             };
             const qualityLabels = Object.keys(qualityData);
             const qualityValues = Object.values(qualityData);
@@ -1325,17 +1469,16 @@
             const progEnrollLabels = Object.keys(progEnroll).map(n => PROGRAM_SHORT[n] || n.replace(' Program', '').substring(0, 10));
             const progEnrollValues = Object.values(progEnroll);
 
-            // Department Size
             const deptCounts = {};
-            data.forEach(r => { const d = r[COLUMNS.Department] || 'غير معروف'; deptCounts[d] = (deptCounts[d] || 0) + 1; });
-            if (deptCounts['غير معروف']) delete deptCounts['غير معروف'];
+            data.forEach(r => { const d = r[COLUMNS.Department] || 'Unknown'; deptCounts[d] = (deptCounts[d] || 0) + 1; });
+            if (deptCounts['Unknown']) delete deptCounts['Unknown'];
             const sortedDepts = Object.entries(deptCounts).sort((a, b) => b[1] - a[1]);
             const deptLabels = sortedDepts.map(d => d[0]);
             const deptValues = sortedDepts.map(d => d[1]);
 
             destroyCharts();
 
-            Chart.defaults.font.family = 'Cairo, sans-serif';
+            Chart.defaults.font.family = 'Inter, sans-serif';
             Chart.defaults.font.size = 9;
 
             const colors = ['#1e3d59', '#17b890', '#ff6e40', '#f6c23e', '#8b5cf6', '#e74a3b', '#3b82f6', '#10b981'];
@@ -1344,15 +1487,8 @@
             const ctx1 = document.getElementById('chartSector').getContext('2d');
             chartInstances.sector = new Chart(ctx1, {
                 type: 'bar',
-                data: { labels: sectorLabels, datasets: [{ label: 'الموظفين', data: sectorValues, backgroundColor: '#1e3d59',
-                        borderRadius: 6, barPercentage: 0.6 }] },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false }, datalabels: { color: '#1a2332', anchor: 'end', align: 'top',
-                            font: { weight: 'bold', size: 8 } } },
-                    scales: { y: { ticks: { font: { size: 7 } } }, x: { ticks: { font: { size: 7 } } } }
-                },
+                data: { labels: sectorLabels, datasets: [{ label: 'Employees', data: sectorValues, backgroundColor: '#1e3d59', borderRadius: 6, barPercentage: 0.6 }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 8 } } }, scales: { y: { ticks: { font: { size: 7 } } }, x: { ticks: { font: { size: 7 } } } } },
                 plugins: [ChartDataLabels]
             });
 
@@ -1361,16 +1497,7 @@
             chartInstances.level = new Chart(ctx2, {
                 type: 'doughnut',
                 data: { labels: levelLabels, datasets: [{ data: levelValues, backgroundColor: colors }] },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { position: 'bottom', labels: { boxWidth: 8, font: { size: 7 } } },
-                        datalabels: { color: '#1a2332', font: { weight: 'bold', size: 8 }, formatter: (v, ctx) => { const total =
-                                ctx.dataset.data.reduce((a, b) => a + b, 0); return total > 0 ? Math.round((v / total) *
-                                    100) + '%' : ''; } }
-                    }
-                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 8, font: { size: 7 } } }, datalabels: { color: '#1a2332', font: { weight: 'bold', size: 8 }, formatter: (v, ctx) => { const total = ctx.dataset.data.reduce((a, b) => a + b, 0); return total > 0 ? Math.round((v / total) * 100) + '%' : ''; } } } },
                 plugins: [ChartDataLabels]
             });
 
@@ -1378,26 +1505,8 @@
             const ctx3 = document.getElementById('chartAttendance').getContext('2d');
             chartInstances.attendance = new Chart(ctx3, {
                 type: 'bar',
-                data: {
-                    labels: attSectors,
-                    datasets: [
-                        { label: 'نسبة الحضور %', data: attValues, backgroundColor: '#3b82f6', borderRadius: 4,
-                            barPercentage: 0.4 },
-                        { label: 'نسبة الإكمال %', data: compValues, backgroundColor: '#10b981', borderRadius: 4,
-                            barPercentage: 0.4 }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { position: 'top', labels: { boxWidth: 8, font: { size: 7 } } },
-                        datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 7 },
-                            formatter: v => v + '%' }
-                    },
-                    scales: { y: { beginAtZero: true, max: 100, ticks: { callback: v => v + '%', font: { size: 7 } } },
-                        x: { ticks: { font: { size: 7 } } } }
-                },
+                data: { labels: attSectors, datasets: [{ label: 'Attendance %', data: attValues, backgroundColor: '#3b82f6', borderRadius: 4, barPercentage: 0.4 }, { label: 'Completion %', data: compValues, backgroundColor: '#10b981', borderRadius: 4, barPercentage: 0.4 }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'top', labels: { boxWidth: 8, font: { size: 7 } } }, datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 7 }, formatter: v => v + '%' } }, scales: { y: { beginAtZero: true, max: 100, ticks: { callback: v => v + '%', font: { size: 7 } } }, x: { ticks: { font: { size: 7 } } } } },
                 plugins: [ChartDataLabels]
             });
 
@@ -1405,18 +1514,8 @@
             const ctx4 = document.getElementById('chartPhase').getContext('2d');
             chartInstances.phase = new Chart(ctx4, {
                 type: 'pie',
-                data: { labels: phaseLabels, datasets: [{ data: phaseValues, backgroundColor: colors.slice(0, phaseLabels
-                            .length) }] },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { position: 'bottom', labels: { boxWidth: 8, font: { size: 7 } } },
-                        datalabels: { color: '#1a2332', font: { weight: 'bold', size: 8 }, formatter: (v, ctx) => { const total =
-                                ctx.dataset.data.reduce((a, b) => a + b, 0); return total > 0 ? Math.round((v / total) *
-                                    100) + '%' : ''; } }
-                    }
-                },
+                data: { labels: phaseLabels, datasets: [{ data: phaseValues, backgroundColor: colors.slice(0, phaseLabels.length) }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 8, font: { size: 7 } } }, datalabels: { color: '#1a2332', font: { weight: 'bold', size: 8 }, formatter: (v, ctx) => { const total = ctx.dataset.data.reduce((a, b) => a + b, 0); return total > 0 ? Math.round((v / total) * 100) + '%' : ''; } } } },
                 plugins: [ChartDataLabels]
             });
 
@@ -1424,15 +1523,8 @@
             const ctx5 = document.getElementById('chartLocation').getContext('2d');
             chartInstances.location = new Chart(ctx5, {
                 type: 'bar',
-                data: { labels: locLabels, datasets: [{ label: 'الموظفين', data: locValues, backgroundColor: '#ff6e40',
-                        borderRadius: 6, barPercentage: 0.6 }] },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false }, datalabels: { color: '#1a2332', anchor: 'end', align: 'top',
-                            font: { weight: 'bold', size: 7 } } },
-                    scales: { y: { ticks: { font: { size: 7 } } }, x: { ticks: { font: { size: 7 } } } }
-                },
+                data: { labels: locLabels, datasets: [{ label: 'Employees', data: locValues, backgroundColor: '#ff6e40', borderRadius: 6, barPercentage: 0.6 }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 7 } } }, scales: { y: { ticks: { font: { size: 7 } } }, x: { ticks: { font: { size: 7 } } } } },
                 plugins: [ChartDataLabels]
             });
 
@@ -1440,15 +1532,8 @@
             const ctx6 = document.getElementById('chartQuality').getContext('2d');
             chartInstances.quality = new Chart(ctx6, {
                 type: 'bar',
-                data: { labels: qualityLabels, datasets: [{ label: 'السجلات', data: qualityValues, backgroundColor: '#3b82f6',
-                        borderRadius: 6, barPercentage: 0.6 }] },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false }, datalabels: { color: '#1a2332', anchor: 'end', align: 'top',
-                            font: { weight: 'bold', size: 7 } } },
-                    scales: { y: { ticks: { font: { size: 7 } } }, x: { ticks: { font: { size: 6 } } } }
-                },
+                data: { labels: qualityLabels, datasets: [{ label: 'Records', data: qualityValues, backgroundColor: '#3b82f6', borderRadius: 6, barPercentage: 0.6 }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 7 } } }, scales: { y: { ticks: { font: { size: 7 } } }, x: { ticks: { font: { size: 6 } } } } },
                 plugins: [ChartDataLabels]
             });
 
@@ -1456,23 +1541,8 @@
             const ctx7 = document.getElementById('chartPrograms').getContext('2d');
             chartInstances.programs = new Chart(ctx7, {
                 type: 'bar',
-                data: {
-                    labels: progEnrollLabels,
-                    datasets: [{
-                        label: 'مسجلين',
-                        data: progEnrollValues,
-                        backgroundColor: colors.slice(0, progEnrollLabels.length),
-                        borderRadius: 6,
-                        barPercentage: 0.6
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false }, datalabels: { color: '#1a2332', anchor: 'end', align: 'top',
-                            font: { weight: 'bold', size: 7 } } },
-                    scales: { y: { ticks: { font: { size: 7 } } }, x: { ticks: { font: { size: 6 } } } }
-                },
+                data: { labels: progEnrollLabels, datasets: [{ label: 'Enrolled', data: progEnrollValues, backgroundColor: colors.slice(0, progEnrollLabels.length), borderRadius: 6, barPercentage: 0.6 }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 7 } } }, scales: { y: { ticks: { font: { size: 7 } } }, x: { ticks: { font: { size: 6 } } } } },
                 plugins: [ChartDataLabels]
             });
 
@@ -1480,26 +1550,17 @@
             const ctx8 = document.getElementById('chartDepartment').getContext('2d');
             chartInstances.department = new Chart(ctx8, {
                 type: 'bar',
-                data: { labels: deptLabels, datasets: [{ label: 'الموظفين', data: deptValues, backgroundColor: '#17b890',
-                        borderRadius: 6, barPercentage: 0.6 }] },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false }, datalabels: { color: '#1a2332', anchor: 'end', align: 'top',
-                            font: { weight: 'bold', size: 6 } } },
-                    indexAxis: 'y',
-                    scales: { y: { ticks: { font: { size: 6 } } }, x: { ticks: { font: { size: 6 } } } }
-                },
+                data: { labels: deptLabels, datasets: [{ label: 'Employees', data: deptValues, backgroundColor: '#17b890', borderRadius: 6, barPercentage: 0.6 }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { color: '#1a2332', anchor: 'end', align: 'top', font: { weight: 'bold', size: 6 } } }, indexAxis: 'y', scales: { y: { ticks: { font: { size: 6 } } }, x: { ticks: { font: { size: 6 } } } } },
                 plugins: [ChartDataLabels]
             });
 
             setupChartInteractivity();
 
-            document.getElementById('statusText').textContent = 'مباشر';
+            document.getElementById('statusText').textContent = 'Live';
             document.getElementById('statusIcon').className = 'fa-solid fa-cloud';
             document.getElementById('loadingMsg').className = 'loading-status success';
-            document.getElementById('loadingMsg').innerHTML = '<i class="fa-solid fa-check-circle"></i> تم تحميل ' + data.length +
-                ' سجل';
+            document.getElementById('loadingMsg').innerHTML = '<i class="fa-solid fa-check-circle"></i> Loaded ' + data.length + ' records';
             document.getElementById('loadingOverlay').classList.add('hidden');
         }
 
@@ -1527,16 +1588,14 @@
                         if (filterType === 'program') {
                             document.querySelectorAll('.program-card').forEach(c => c.classList.remove('active'));
                             if (activeFilters.program !== 'all') {
-                                document.querySelector(`.program-card[data-value="${filterValue}"]`)?.classList.add(
-                                'active');
+                                document.querySelector(`.program-card[data-value="${filterValue}"]`)?.classList.add('active');
                             } else {
                                 document.querySelector('.program-card[data-value="all"]')?.classList.add('active');
                             }
                         } else {
                             const select = document.getElementById(selectId);
                             if (select && select.tagName === 'SELECT') {
-                                if (activeFilters[filterType] !== 'all' && Array.from(select.options).some(o => o
-                                        .value === filterValue)) {
+                                if (activeFilters[filterType] !== 'all' && Array.from(select.options).some(o => o.value === filterValue)) {
                                     select.value = filterValue;
                                 } else {
                                     select.value = 'all';
@@ -1558,8 +1617,7 @@
                         applyFilters();
                     }
                 });
-                chart.on('mouseover', function(e) { if (e.dataIndex !== undefined) document.body.style.cursor =
-                    'pointer'; });
+                chart.on('mouseover', function(e) { if (e.dataIndex !== undefined) document.body.style.cursor = 'pointer'; });
                 chart.on('mouseout', function() { document.body.style.cursor = 'default'; });
             });
         }
@@ -1568,7 +1626,6 @@
         // APPLY FILTERS
         // ============================================================
         function applyFilters() {
-            console.log('🔄 تطبيق الفلاتر...');
             if (!allData || allData.length === 0) {
                 updateEmployeeDetailTable([]);
                 updateActivitySlicer([]);
@@ -1577,13 +1634,10 @@
 
             filteredData = [...allData];
 
-            // Activity slicer
             if (activeFilters.activitySlicer && activeFilters.activitySlicer !== 'all') {
-                filteredData = filteredData.filter(r => String(r[COLUMNS.Activity] || '').includes(activeFilters
-                .activitySlicer));
+                filteredData = filteredData.filter(r => String(r[COLUMNS.Activity] || '').includes(activeFilters.activitySlicer));
             }
 
-            // Program filter
             if (activeFilters.program !== 'all') {
                 const field = PROGRAM_FIELDS[activeFilters.program];
                 if (field) {
@@ -1594,25 +1648,15 @@
                 }
             }
 
-            // Other filters
-            if (activeFilters.clevel !== 'all') filteredData = filteredData.filter(r => String(r[COLUMNS.CLevel] || '')
-                .includes(activeFilters.clevel));
-            if (activeFilters.level !== 'all') filteredData = filteredData.filter(r => String(r[COLUMNS.Level] || '')
-                .includes(activeFilters.level));
-            if (activeFilters.grade !== 'all') filteredData = filteredData.filter(r => String(r[COLUMNS.Grade] || '')
-                .includes(activeFilters.grade));
-            if (activeFilters.activity !== 'all') filteredData = filteredData.filter(r => String(r[COLUMNS.Activity] || '')
-                .includes(activeFilters.activity));
-            if (activeFilters.sector !== 'all') filteredData = filteredData.filter(r => String(r[COLUMNS.Sector] || '')
-                .includes(activeFilters.sector));
-            if (activeFilters.area !== 'all') filteredData = filteredData.filter(r => String(r[COLUMNS.Area] || '')
-                .includes(activeFilters.area));
-            if (activeFilters.group !== 'all') filteredData = filteredData.filter(r => String(r[COLUMNS.TrainingGroup] ||
-                    '').includes(activeFilters.group));
-            if (activeFilters.phase !== 'all') filteredData = filteredData.filter(r => String(r[COLUMNS.TrainingPhase] ||
-                    '').includes(activeFilters.phase));
-            if (activeFilters.location !== 'all') filteredData = filteredData.filter(r => String(r[COLUMNS.Location] || '')
-                .includes(activeFilters.location));
+            if (activeFilters.clevel !== 'all') filteredData = filteredData.filter(r => String(r[COLUMNS.CLevel] || '').includes(activeFilters.clevel));
+            if (activeFilters.level !== 'all') filteredData = filteredData.filter(r => String(r[COLUMNS.Level] || '').includes(activeFilters.level));
+            if (activeFilters.grade !== 'all') filteredData = filteredData.filter(r => String(r[COLUMNS.Grade] || '').includes(activeFilters.grade));
+            if (activeFilters.activity !== 'all') filteredData = filteredData.filter(r => String(r[COLUMNS.Activity] || '').includes(activeFilters.activity));
+            if (activeFilters.sector !== 'all') filteredData = filteredData.filter(r => String(r[COLUMNS.Sector] || '').includes(activeFilters.sector));
+            if (activeFilters.area !== 'all') filteredData = filteredData.filter(r => String(r[COLUMNS.Area] || '').includes(activeFilters.area));
+            if (activeFilters.group !== 'all') filteredData = filteredData.filter(r => String(r[COLUMNS.TrainingGroup] || '').includes(activeFilters.group));
+            if (activeFilters.phase !== 'all') filteredData = filteredData.filter(r => String(r[COLUMNS.TrainingPhase] || '').includes(activeFilters.phase));
+            if (activeFilters.location !== 'all') filteredData = filteredData.filter(r => String(r[COLUMNS.Location] || '').includes(activeFilters.location));
 
             if (activeFilters.attendance === 'attend') {
                 filteredData = filteredData.filter(r => {
@@ -1632,7 +1676,6 @@
                 filteredData = filteredData.filter(r => String(r[COLUMNS.Accommodation] || '').toLowerCase() === 'no');
             }
 
-            console.log('📊 البيانات المفلترة:', filteredData.length);
             updateActivitySlicer(filteredData);
             renderDashboard(filteredData);
             updateEmployeeDetailTable(filteredData);
@@ -1688,7 +1731,7 @@
                 if (b.dataset.value === 'all') b.classList.add('active');
             });
 
-            document.querySelectorAll('#sectorSlicerButtons .slicer-btn').forEach(b => {
+            document.querySelectorAll('#activitySlicerButtons .slicer-btn').forEach(b => {
                 b.classList.remove('active');
                 if (b.dataset.activity === 'all') b.classList.add('active');
             });
@@ -1714,35 +1757,34 @@
             const countSpan = document.getElementById('detailCount');
 
             if (!data || data.length === 0) {
-                tbody.innerHTML =
-                    `<tr><td colspan="14" style="text-align:center;padding:15px;color:var(--text-muted);">⚠️ لا يوجد موظفين يطابقون الفلاتر.</td></tr>`;
-                countSpan.textContent = '(0 موظف)';
+                tbody.innerHTML = `<tr><td colspan="14" style="text-align:center;padding:15px;color:var(--text-muted);">⚠️ No employees match the current filters.</td></tr>`;
+                countSpan.textContent = '(0 employees)';
                 return;
             }
 
             const uniqueIds = new Set();
             data.forEach(emp => { const id = String(emp[COLUMNS.ID] || '').trim(); if (id) uniqueIds.add(id); });
-            countSpan.textContent = `(${uniqueIds.size} موظف فريد)`;
+            countSpan.textContent = `(${uniqueIds.size} unique employees)`;
 
             const displayData = data.slice(0, 150);
 
             tbody.innerHTML = displayData.map(emp => {
                 const sevenSens = String(emp[COLUMNS.SevenSens] || '').toLowerCase();
-                let attBadge = '<span class="badge-unknown">غير معروف</span>';
+                let attBadge = '<span class="badge-unknown">Unknown</span>';
                 if (sevenSens === 'attend' || sevenSens === 'attended' || sevenSens.includes('attend')) {
-                    attBadge = '<span class="badge-attend">✅ حاضر</span>';
+                    attBadge = '<span class="badge-attend">✅ Attended</span>';
                 } else if (sevenSens === 'not attend' || sevenSens.includes('not attend')) {
-                    attBadge = '<span class="badge-not-attend">❌ غائب</span>';
+                    attBadge = '<span class="badge-not-attend">❌ Not Attended</span>';
                 }
 
                 const accom = String(emp[COLUMNS.Accommodation] || '').toLowerCase();
-                let accBadge = '<span class="badge-unknown">غير محدد</span>';
-                if (accom === 'yes') accBadge = '<span class="badge-attend">✅ نعم</span>';
-                else if (accom === 'no') accBadge = '<span class="badge-not-attend">❌ لا</span>';
+                let accBadge = '<span class="badge-unknown">Unknown</span>';
+                if (accom === 'yes') accBadge = '<span class="badge-attend">✅ Yes</span>';
+                else if (accom === 'no') accBadge = '<span class="badge-not-attend">❌ No</span>';
 
                 return `<tr>
                     <td><strong>${emp[COLUMNS.ID] || 'N/A'}</strong></td>
-                    <td><strong>${emp[COLUMNS.Name] || 'غير معروف'}</strong></td>
+                    <td><strong>${emp[COLUMNS.Name] || 'Unknown'}</strong></td>
                     <td>${emp[COLUMNS.Title] || 'N/A'}</td>
                     <td>${emp[COLUMNS.CLevel] || 'N/A'}</td>
                     <td>${emp[COLUMNS.Level] || 'N/A'}</td>
@@ -1759,8 +1801,7 @@
             }).join('');
 
             if (data.length > 150) {
-                tbody.innerHTML +=
-                    `<tr><td colspan="14" style="text-align:center;color:var(--text-muted);font-style:italic;padding:4px;">... و ${data.length - 150} سجل آخر</td></tr>`;
+                tbody.innerHTML += `<tr><td colspan="14" style="text-align:center;color:var(--text-muted);font-style:italic;padding:4px;">... and ${data.length - 150} more records</td></tr>`;
             }
         }
 
@@ -1770,27 +1811,23 @@
         function searchEmployee() {
             const id = document.getElementById('empIdInput').value.trim();
             const card = document.getElementById('resultProfile');
-            const printBtn = document.getElementById('printEmployeeBtn');
-            if (!id) { alert('أدخل كود الموظف'); return; }
-            if (!allData || allData.length === 0) { alert('البيانات لم يتم تحميلها بعد.'); return; }
+            if (!id) { alert('Please enter an Employee ID'); return; }
+            if (!allData || allData.length === 0) { alert('Data not loaded yet.'); return; }
             const emp = allData.find(r => String(r['ID']).trim() === id);
-            if (!emp) { alert('الكود غير موجود'); card.style.display = 'none'; return; }
+            if (!emp) { alert('Employee ID not found'); card.style.display = 'none'; return; }
             lastSearchedEmployee = emp;
-            printBtn.style.display = 'inline-flex';
 
-            document.getElementById('resName').textContent = emp[COLUMNS.Name] || 'غير مسجل';
-            document.getElementById('resTitle').textContent = emp[COLUMNS.Title] || 'غير مسجل';
-            document.getElementById('resSector').textContent = (emp[COLUMNS.Sector] || '-') + ' / ' + (emp[COLUMNS.Department] ||
-                '-');
+            document.getElementById('resName').textContent = emp[COLUMNS.Name] || 'Not recorded';
+            document.getElementById('resTitle').textContent = emp[COLUMNS.Title] || 'Not recorded';
+            document.getElementById('resSector').textContent = (emp[COLUMNS.Sector] || '-') + ' / ' + (emp[COLUMNS.Department] || '-');
             document.getElementById('resLevel').textContent = (emp[COLUMNS.CLevel] || '-') + ' / ' + (emp[COLUMNS.Level] || '-');
             document.getElementById('resGrade').textContent = emp[COLUMNS.Grade] || 'N/A';
-            document.getElementById('resLocation').textContent = emp[COLUMNS.Location] || 'غير محدد';
-            document.getElementById('resGroupPhase').textContent = (emp[COLUMNS.TrainingGroup] || '-') + ' / ' + (emp[COLUMNS
-                .TrainingPhase] || '-');
+            document.getElementById('resLocation').textContent = emp[COLUMNS.Location] || 'Not specified';
+            document.getElementById('resGroupPhase').textContent = (emp[COLUMNS.TrainingGroup] || '-') + ' / ' + (emp[COLUMNS.TrainingPhase] || '-');
             const v = String(emp[COLUMNS.SevenSens] || '').toLowerCase();
-            const attText = (v === 'attend' || v === 'attended' || v.includes('attend')) ? '✅ حاضر' : '❌ غائب';
+            const attText = (v === 'attend' || v === 'attended' || v.includes('attend')) ? '✅ Attended' : '❌ Not Attended';
             const accom = String(emp[COLUMNS.Accommodation] || '').toLowerCase();
-            const accomText = accom === 'yes' ? '✅ نعم' : accom === 'no' ? '❌ لا' : 'غير محدد';
+            const accomText = accom === 'yes' ? '✅ Yes' : accom === 'no' ? '❌ No' : 'Unknown';
             document.getElementById('resAttendAccom').textContent = attText + ' / ' + accomText;
 
             const fields = Object.values(PROGRAM_FIELDS);
@@ -1800,12 +1837,11 @@
                 if (val === 'attend' || val === 'attended' || val.includes('attend')) attendedCount++;
                 else notAttendedCount++;
             });
-            document.getElementById('statAttended').textContent = '✅ حضور: ' + attendedCount;
-            document.getElementById('statNotAttended').textContent = '❌ غياب: ' + notAttendedCount;
-            document.getElementById('statGroup').textContent = '📋 المجموعة: ' + (emp[COLUMNS.TrainingGroup] || 'N/A');
-            document.getElementById('statLocation').textContent = '📍 الموقع: ' + (emp[COLUMNS.Location] || 'N/A');
-            document.getElementById('statAccommodation').textContent = '🏠 الإقامة: ' + (accom === 'yes' ? '✅ نعم' : accom ===
-                'no' ? '❌ لا' : 'غير محدد');
+            document.getElementById('statAttended').textContent = '✅ Attended: ' + attendedCount;
+            document.getElementById('statNotAttended').textContent = '❌ Not Attended: ' + notAttendedCount;
+            document.getElementById('statGroup').textContent = '📋 Group: ' + (emp[COLUMNS.TrainingGroup] || 'N/A');
+            document.getElementById('statLocation').textContent = '📍 Location: ' + (emp[COLUMNS.Location] || 'N/A');
+            document.getElementById('statAccommodation').textContent = '🏠 Accommodation: ' + (accom === 'yes' ? '✅ Yes' : accom === 'no' ? '❌ No' : 'Unknown');
             document.getElementById('perfTotal').textContent = fields.length;
             document.getElementById('perfCompleted').textContent = attendedCount;
             document.getElementById('perfPending').textContent = fields.length - attendedCount - notAttendedCount;
@@ -1813,14 +1849,14 @@
             const progContainer = document.getElementById('resPrograms');
             progContainer.innerHTML = '';
             const programs = [
-                emp[COLUMNS.TrainingGroup] ? 'المجموعة: ' + emp[COLUMNS.TrainingGroup] : '',
-                emp[COLUMNS.TrainingPhase] ? 'المرحلة: ' + emp[COLUMNS.TrainingPhase] : '',
+                emp[COLUMNS.TrainingGroup] ? 'Group: ' + emp[COLUMNS.TrainingGroup] : '',
+                emp[COLUMNS.TrainingPhase] ? 'Phase: ' + emp[COLUMNS.TrainingPhase] : '',
                 emp[COLUMNS.SevenSens] ? '7 Sens: ' + emp[COLUMNS.SevenSens] : '',
-                emp[COLUMNS.Analytical] ? 'تحليلي: ' + emp[COLUMNS.Analytical] : '',
-                emp[COLUMNS.MindField] ? 'مايند فيلد: ' + emp[COLUMNS.MindField] : '',
-                emp[COLUMNS.Leadership] ? 'قيادة: ' + emp[COLUMNS.Leadership] : '',
-                emp[COLUMNS.DrivePerformance] ? 'دفع الأداء: ' + emp[COLUMNS.DrivePerformance] : '',
-                emp[COLUMNS.KickStart] ? 'انطلاق: ' + emp[COLUMNS.KickStart] : ''
+                emp[COLUMNS.Analytical] ? 'Analytical: ' + emp[COLUMNS.Analytical] : '',
+                emp[COLUMNS.MindField] ? 'Mind Field: ' + emp[COLUMNS.MindField] : '',
+                emp[COLUMNS.Leadership] ? 'Leadership: ' + emp[COLUMNS.Leadership] : '',
+                emp[COLUMNS.DrivePerformance] ? 'Drive Perf: ' + emp[COLUMNS.DrivePerformance] : '',
+                emp[COLUMNS.KickStart] ? 'Kick Start: ' + emp[COLUMNS.KickStart] : ''
             ].filter(Boolean);
             if (programs.length > 0) {
                 programs.forEach(p => {
@@ -1830,88 +1866,11 @@
                     progContainer.appendChild(tag);
                 });
             } else {
-                progContainer.innerHTML = '<span style="color:#6b7a8f;font-style:italic;">لا توجد سجلات تدريب.</span>';
+                progContainer.innerHTML = '<span style="color:#6b7a8f;font-style:italic;">No training records.</span>';
             }
             card.style.display = 'block';
-        }
-
-        // ============================================================
-        // PRINT FUNCTIONS
-        // ============================================================
-        function printPage() {
-            const now = new Date().toLocaleString('ar-EG');
-            document.getElementById('printDateHeader').textContent = now;
-            document.getElementById('printDateFooter').textContent = now;
-            window.print();
-        }
-
-        function printEmployeeProfile() {
-            if (!lastSearchedEmployee) { alert('ابحث عن موظف أولاً'); return; }
-            const emp = lastSearchedEmployee;
-            const printWindow = window.open('', '_blank', 'width=800,height=600');
-            if (!printWindow) { alert('الرجاء السماح للنوافذ المنبثقة.'); return; }
-            const sevenSens = String(emp[COLUMNS.SevenSens] || '').toLowerCase();
-            const attendanceText = (sevenSens === 'attend' || sevenSens === 'attended' || sevenSens.includes('attend')) ?
-                '✅ حاضر' : '❌ غائب';
-            const accom = String(emp[COLUMNS.Accommodation] || '').toLowerCase();
-            const accomText = accom === 'yes' ? '✅ نعم' : accom === 'no' ? '❌ لا' : 'غير محدد';
-            const fields = Object.values(PROGRAM_FIELDS);
-            let attendedCount = 0, notAttendedCount = 0;
-            fields.forEach(f => {
-                const val = String(emp[f] || '').toLowerCase();
-                if (val === 'attend' || val === 'attended' || val.includes('attend')) attendedCount++;
-                else notAttendedCount++;
-            });
-            const programs = [
-                emp[COLUMNS.TrainingGroup] || 'N/A',
-                emp[COLUMNS.TrainingPhase] || 'N/A',
-                emp[COLUMNS.SevenSens] ? '7 Sens: ' + emp[COLUMNS.SevenSens] : '',
-                emp[COLUMNS.Analytical] ? 'تحليلي: ' + emp[COLUMNS.Analytical] : '',
-                emp[COLUMNS.MindField] ? 'مايند فيلد: ' + emp[COLUMNS.MindField] : '',
-                emp[COLUMNS.Leadership] ? 'قيادة: ' + emp[COLUMNS.Leadership] : '',
-                emp[COLUMNS.DrivePerformance] ? 'دفع الأداء: ' + emp[COLUMNS.DrivePerformance] : '',
-                emp[COLUMNS.KickStart] ? 'انطلاق: ' + emp[COLUMNS.KickStart] : ''
-            ].filter(Boolean);
-            const html = `<!DOCTYPE html><html><head><title>ملف الموظف - ${emp[COLUMNS.Name] || 'موظف'}</title>
-            <style>body{font-family:'Cairo',Arial,sans-serif;padding:30px;max-width:800px;margin:0 auto;color:#1a2332;direction:rtl;}
-            .header{border-bottom:3px solid #1e3d59;padding-bottom:10px;margin-bottom:15px;display:flex;align-items:center;gap:10px;}
-            .header h1{margin:0;font-size:20px;color:#1e3d59;}.header .sub{color:#6b7a8f;font-size:12px;}
-            .grid{display:grid;grid-template-columns:1fr 1fr;gap:5px 12px;margin:12px 0;}
-            .grid .label{font-weight:300;color:#6b7a8f;font-size:10px;text-transform:uppercase;}
-            .grid .value{font-weight:700;font-size:14px;}
-            .section-title{font-size:14px;font-weight:700;color:#1e3d59;margin-top:12px;margin-bottom:6px;border-bottom:2px solid #e8ecf0;padding-bottom:3px;}
-            .badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600;}
-            .badge-attend{background:rgba(16,185,129,0.15);color:#10b981;}
-            .badge-not-attend{background:rgba(239,68,68,0.15);color:#ef4444;}
-            .stats{display:flex;gap:12px;flex-wrap:wrap;background:#f8fafc;padding:8px 12px;border-radius:8px;margin:6px 0;}
-            .stats span{font-size:13px;}
-            .prog-list{list-style:none;padding:0;margin:6px 0;}
-            .prog-list li{padding:3px 0;border-bottom:1px solid #f0f0f0;font-size:13px;}
-            .footer{margin-top:20px;padding-top:10px;border-top:1px solid #e8ecf0;font-size:11px;color:#6b7a8f;text-align:center;}
-            </style></head><body>
-            <div class="header"><h1>👤 ملف الموظف</h1><span class="sub">CBT Intelligence Hub</span></div>
-            <div class="grid">
-                <div><div class="label">الكود</div><div class="value">${emp[COLUMNS.ID] || 'N/A'}</div></div>
-                <div><div class="label">الاسم</div><div class="value">${emp[COLUMNS.Name] || 'غير معروف'}</div></div>
-                <div><div class="label">المسمى</div><div class="value">${emp[COLUMNS.Title] || 'غير مسجل'}</div></div>
-                <div><div class="label">C-LVL / المستوى</div><div class="value">${(emp[COLUMNS.CLevel] || '-')} / ${(emp[COLUMNS.Level] || '-')}</div></div>
-                <div><div class="label">الدرجة</div><div class="value">${emp[COLUMNS.Grade] || 'N/A'}</div></div>
-                <div><div class="label">النشاط / القطاع</div><div class="value">${(emp[COLUMNS.Activity] || '-')} / ${(emp[COLUMNS.Sector] || '-')}</div></div>
-                <div><div class="label">المنطقة / القسم</div><div class="value">${(emp[COLUMNS.Area] || '-')} / ${(emp[COLUMNS.Department] || '-')}</div></div>
-                <div><div class="label">الموقع</div><div class="value">${emp[COLUMNS.Location] || 'غير محدد'}</div></div>
-                <div><div class="label">المجموعة / المرحلة</div><div class="value">${(emp[COLUMNS.TrainingGroup] || '-')} / ${(emp[COLUMNS.TrainingPhase] || '-')}</div></div>
-                <div><div class="label">الحضور / الإقامة</div><div class="value"><span class="badge ${sevenSens === 'attend' || sevenSens === 'attended' || sevenSens.includes('attend') ? 'badge-attend' : 'badge-not-attend'}">${attendanceText}</span> / ${accomText}</div></div>
-            </div>
-            <div class="section-title">📊 ملخص التدريب</div>
-            <div class="stats"><span>📚 الإجمالي: <strong>${fields.length}</strong></span><span>✅ مكتمل: <strong>${attendedCount}</strong></span><span>⏳ معلق: <strong>${fields.length - attendedCount - notAttendedCount}</strong></span><span>❌ غائب: <strong>${notAttendedCount}</strong></span></div>
-            <div class="section-title">📋 البرامج المسجل فيها</div>
-            <ul class="prog-list">${programs.map(p => `<li>${p}</li>`).join('')}</ul>
-            <div class="footer">تم الإنشاء من CBT Intelligence Hub • ${new Date().toLocaleString('ar-EG')}</div>
-            </body></html>`;
-            printWindow.document.write(html);
-            printWindow.document.close();
-            printWindow.focus();
-            setTimeout(() => printWindow.print(), 500);
+            document.getElementById('loadingMsg').className = 'loading-status success';
+            document.getElementById('loadingMsg').innerHTML = '<i class="fa-solid fa-check-circle"></i> Found employee: ' + emp[COLUMNS.Name];
         }
 
         // ============================================================
@@ -1919,58 +1878,45 @@
         // ============================================================
         async function loadData() {
             try {
-                // استخدام البيانات المضمنة في الملف
-                // في حالة التشغيل الفعلي، سنستخدم fetch لجلب البيانات
-                const response = await fetch('Competency Trainig Program Tracker Online.xlsx - Competency Trainig Program.csv');
-                if (!response.ok) {
-                    // إذا لم يتم العثور على الملف، نستخدم البيانات المضمنة
-                    console.warn('⚠️ ملف CSV غير موجود، جاري استخدام البيانات المضمنة...');
-                    // استخدام البيانات من الملف المرفق
-                    const csvData = document.querySelector('script[data-csv]')?.getAttribute('data-csv');
-                    if (csvData) {
-                        allData = parseCSV(csvData);
-                    } else {
-                        // محاولة جلب البيانات من الرابط
-                        const fallbackResponse = await fetch(
-                            'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6hwJjzyqBNQXDt774yBBqBnOiMW4AsLvdbJCFUl-v_SyFkgjsVSMM4bznY11o0g/pub?gid=901829913&single=true&output=csv'
-                            );
-                        if (fallbackResponse.ok) {
-                            const csv = await fallbackResponse.text();
-                            allData = parseCSV(csv);
-                        } else {
-                            throw new Error('فشل تحميل البيانات');
-                        }
-                    }
+                const csvData = document.querySelector('script[data-csv]')?.getAttribute('data-csv');
+                if (csvData) {
+                    allData = parseCSV(csvData);
                 } else {
+                    const response = await fetch('Competency Trainig Program Tracker Online.xlsx - Competency Trainig Program.csv');
+                    if (!response.ok) {
+                        throw new Error('CSV file not found. Please ensure it\'s in the same folder.');
+                    }
                     const csv = await response.text();
                     allData = parseCSV(csv);
                 }
 
                 if (!allData || allData.length === 0) {
-                    throw new Error('لا توجد بيانات');
+                    throw new Error('No data loaded');
                 }
 
-                console.log('✅ تم تحميل البيانات:', allData.length, 'سجل');
+                console.log('✅ Loaded', allData.length, 'records');
                 populateFilterButtons();
                 populateDropdowns();
                 setupFilterButtons();
                 applyFilters();
-                showAlert('success', `✅ تم تحميل ${allData.length} موظف!`);
+                document.getElementById('statusText').textContent = 'Live';
 
             } catch (err) {
-                console.error('❌ خطأ:', err);
+                console.error('❌ Error:', err);
                 document.getElementById('detailTableBody').innerHTML = `
                     <tr><td colspan="14" style="text-align:center;padding:30px;color:var(--danger);">
                         <i class="fa-solid fa-circle-exclamation" style="font-size:2rem;display:block;margin-bottom:10px;"></i>
-                        فشل تحميل البيانات.<br>
+                        Failed to load data.<br>
                         <span style="font-size:0.8rem;color:var(--text-muted);">${err.message}</span>
                         <br><br>
-                        <button onclick="loadData()" style="padding:6px 16px;background:var(--koki-orange);color:white;border:none;border-radius:6px;cursor:pointer;">
-                            <i class="fa-solid fa-rotate"></i> إعادة المحاولة
+                        <button onclick="loadData()" style="padding:6px 16px;background:var(--accent);color:white;border:none;border-radius:6px;cursor:pointer;">
+                            <i class="fa-solid fa-rotate"></i> Retry
                         </button>
                     </td></tr>
                 `;
                 document.getElementById('loadingOverlay').classList.add('hidden');
+                document.getElementById('statusText').textContent = 'Error';
+                document.getElementById('statusIcon').className = 'fa-solid fa-cloud';
             }
         }
 
@@ -1987,12 +1933,6 @@
 
             document.getElementById('empIdInput').addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') searchEmployee();
-            });
-
-            window.addEventListener('beforeprint', function() {
-                const now = new Date().toLocaleString('ar-EG');
-                document.getElementById('printDateHeader').textContent = now;
-                document.getElementById('printDateFooter').textContent = now;
             });
         });
     </script>
