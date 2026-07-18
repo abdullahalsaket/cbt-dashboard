@@ -329,7 +329,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255,255,255,0.85);
+            background: rgba(255,255,255,0.92);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -338,23 +338,34 @@
             font-family: 'Cairo', sans-serif;
             transition: opacity 0.5s ease;
         }
-        .loading-overlay.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
+        .loading-overlay.hidden { opacity: 0; pointer-events: none; }
         .loading-overlay .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid #e8ecf0;
+            width: 60px;
+            height: 60px;
+            border: 6px solid #e8ecf0;
             border-top-color: var(--koki-orange);
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
         }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loading-overlay .loading-text { margin-top: 20px; font-size: 1.1rem; color: var(--cpc-blue); font-weight: 700; }
+        .loading-overlay .loading-sub { font-size: 0.85rem; color: var(--text-muted); margin-top: 8px; }
+        .loading-overlay .loading-progress { margin-top: 15px; font-size: 0.8rem; color: var(--koki-orange); font-weight: 600; }
+        .loading-overlay .loading-error { margin-top: 15px; color: var(--danger); font-size: 0.85rem; text-align: center; max-width: 500px; padding: 0 20px; display: none; }
+        .loading-overlay .loading-error .retry-btn {
+            margin-top: 12px;
+            padding: 8px 24px;
+            background: var(--koki-orange);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            font-family: 'Cairo', sans-serif;
+            transition: all 0.2s;
         }
-        .loading-overlay .loading-text { margin-top: 15px; font-size: 0.9rem; color: var(--cpc-blue); font-weight: 600; }
-        .loading-overlay .loading-sub { font-size: 0.7rem; color: var(--text-muted); margin-top: 5px; }
+        .loading-overlay .loading-error .retry-btn:hover { background: var(--koki-orange-hover); transform: scale(1.02); }
 
         @media (max-width: 992px) {
             .filter-grid { grid-template-columns: repeat(3, 1fr); }
@@ -441,10 +452,16 @@
 </head>
 <body>
 
+    <!-- LOADING OVERLAY -->
     <div class="loading-overlay" id="loadingOverlay">
         <div class="spinner"></div>
-        <div class="loading-text">📊 Loading CBT Data...</div>
-        <div class="loading-sub">Fetching data from Google Sheets</div>
+        <div class="loading-text" id="loadingText">📊 Loading CBT Data...</div>
+        <div class="loading-sub" id="loadingSub">Fetching data from Google Sheets</div>
+        <div class="loading-progress" id="loadingProgress"></div>
+        <div class="loading-error" id="loadingError">
+            <div id="errorMessage">Failed to load data.</div>
+            <button class="retry-btn" onclick="loadData()"><i class="fa-solid fa-rotate"></i> Retry</button>
+        </div>
     </div>
 
     <div class="print-header" style="display:none;">
@@ -496,7 +513,7 @@
             <div id="alertsList"></div>
         </div>
 
-        <!-- FILTER BAR -->
+        <!-- FILTER BAR - بدون Department -->
         <div class="filter-bar no-print">
             <div class="filter-grid">
                 <!-- Programs -->
@@ -518,14 +535,6 @@
                     <span class="filter-label"><i class="fa-solid fa-graduation-cap"></i> Grade</span>
                     <div class="filter-options" id="gradeFilters">
                         <button class="filter-btn active" data-filter="grade" data-value="all">All <span class="badge-count" id="gradeAllCount">0</span></button>
-                    </div>
-                </div>
-
-                <!-- Department - إصلاح الفلتر -->
-                <div class="filter-group-item">
-                    <span class="filter-label"><i class="fa-solid fa-building"></i> Department</span>
-                    <div class="filter-options" id="departmentFilters">
-                        <button class="filter-btn active" data-filter="department" data-value="all">All <span class="badge-count" id="deptAllCount">0</span></button>
                     </div>
                 </div>
 
@@ -654,7 +663,7 @@
                     <div class="employee-profile">
                         <div class="info-group"><h4>Name</h4><p id="resName">-</p></div>
                         <div class="info-group"><h4>Title</h4><p id="resTitle">-</p></div>
-                        <div class="info-group"><h4>Sector / Dept</h4><p id="resSector">-</p></div>
+                        <div class="info-group"><h4>Sector</h4><p id="resSector">-</p></div>
                         <div class="info-group"><h4>C-LVL / Grade</h4><p id="resLevel">-</p></div>
                         <div class="info-group"><h4>Activity / Area</h4><p id="resActivityArea">-</p></div>
                         <div class="info-group"><h4>Location</h4><p id="resLocation">-</p></div>
@@ -683,20 +692,19 @@
             </div>
         </div>
 
-        <!-- CHARTS 2 -->
+        <!-- CHARTS -->
         <div class="charts-grid-2">
-            <div class="chart-box" id="chartBoxDept"><h4><i class="fa-solid fa-users-between-lines"></i> Department Size</h4><div class="chart-container"><canvas id="chartDepartment"></canvas></div></div>
             <div class="chart-box" id="chartBoxAttendance"><h4><i class="fa-solid fa-chart-line"></i> Attendance vs Completion</h4><div class="chart-container"><canvas id="chartAttendance"></canvas></div></div>
             <div class="chart-box" id="chartBoxPhase"><h4><i class="fa-solid fa-clock"></i> Training Phase Distribution</h4><div class="chart-container"><canvas id="chartPhase"></canvas></div></div>
             <div class="chart-box" id="chartBoxLocation"><h4><i class="fa-solid fa-location-dot"></i> Training Location Distribution</h4><div class="chart-container"><canvas id="chartLocation"></canvas></div></div>
+            <div class="chart-box" id="chartBoxPrograms"><h4><i class="fa-solid fa-book-open"></i> Program Enrollment</h4><div class="chart-container"><canvas id="chartPrograms"></canvas></div></div>
         </div>
 
         <div class="charts-grid-2" style="margin-top:10px;">
             <div class="chart-box" id="chartBoxQuality"><h4><i class="fa-solid fa-gauge-high"></i> Data Quality Overview</h4><div class="chart-container"><canvas id="chartQuality"></canvas></div></div>
-            <div class="chart-box" id="chartBoxPrograms"><h4><i class="fa-solid fa-book-open"></i> Program Enrollment</h4><div class="chart-container"><canvas id="chartPrograms"></canvas></div></div>
         </div>
 
-        <!-- EMPLOYEE DETAIL TABLE -->
+        <!-- EMPLOYEE DETAIL TABLE - بدون Department -->
         <div class="employee-detail-table" id="employeeDetailTable">
             <h4>
                 <i class="fa-solid fa-table"></i> Employees Data
@@ -714,7 +722,6 @@
                             <th>Title</th>
                             <th>C-LVL</th>
                             <th>Grade</th>
-                            <th>Department</th>
                             <th>Activity</th>
                             <th>Sector</th>
                             <th>Area</th>
@@ -727,7 +734,7 @@
                     </thead>
                     <tbody id="detailTableBody">
                         <tr>
-                            <td colspan="14" style="text-align:center;padding:30px;color:var(--text-muted);">
+                            <td colspan="13" style="text-align:center;padding:30px;color:var(--text-muted);">
                                 <i class="fa-solid fa-spinner fa-spin" style="font-size:1.5rem;display:block;margin-bottom:10px;"></i>
                                 Loading employees data...
                             </td>
@@ -739,7 +746,6 @@
 
         <!-- INSIGHTS -->
         <div class="insights-section" id="insightsSection">
-            <div class="insight-card"><div class="insight-icon"><i class="fa-solid fa-users"></i></div><h4>Largest Department</h4><div class="insight-value" id="insightLargestDept">-</div><div class="insight-desc" id="insightLargestDeptDesc">Employees</div><span class="insight-tag info">🏆 Top</span></div>
             <div class="insight-card"><div class="insight-icon"><i class="fa-solid fa-layer-group"></i></div><h4>Largest C-LVL</h4><div class="insight-value" id="insightTopLevel">-</div><div class="insight-desc" id="insightTopLevelDesc">Employees</div><span class="insight-tag info">📊 Key</span></div>
             <div class="insight-card"><div class="insight-icon"><i class="fa-solid fa-building"></i></div><h4>Largest Sector</h4><div class="insight-value" id="insightTopSector">-</div><div class="insight-desc" id="insightTopSectorDesc">Employees</div><span class="insight-tag info">🏢 Top</span></div>
             <div class="insight-card"><div class="insight-icon"><i class="fa-solid fa-clock"></i></div><h4>Largest Phase</h4><div class="insight-value" id="insightTopPhase">-</div><div class="insight-desc" id="insightTopPhaseDesc">Employees</div><span class="insight-tag info">⏰ Top</span></div>
@@ -753,18 +759,25 @@
 
     <script>
         // ============================================================
-        // CONFIG - الرابط الصحيح
+        // CONFIG - استخدام الروابط المتعددة للمحاولة
         // ============================================================
-        const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6hwJjzyqBNQXDt774yBBqBnOiMW4AsLvdbJCFUl-v_SyFkgjsVSMM4bznY11o0g/pub?gid=901829913&single=true&output=csv";
+        // قائمة الروابط للمحاولة (مع output=csv)
+        const SHEET_URLS = [
+            // الرابط الأول - نفس الرابط الذي أرسلته مع output=csv
+            "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6hwJjzyqBNQXDt774yBBqBnOiMW4AsLvdbJCFUl-v_SyFkgjsVSMM4bznY11o0g/pub?gid=901829913&single=true&output=csv",
+            // الرابط الثاني - محاولة بدون gid محدد
+            "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6hwJjzyqBNQXDt774yBBqBnOiMW4AsLvdbJCFUl-v_SyFkgjsVSMM4bznY11o0g/pub?output=csv",
+            // الرابط الثالث - من الشيت القديم (قد يكون له صلاحية)
+            "https://docs.google.com/spreadsheets/d/e/2PACX-1vRu0vhUS8c-hbFznxR_F9K9LNueNeabXiLwMjMzppgpIjJCSNCadsHDVVGxwiKYYHve9-Qtb37ALs8P/pub?gid=1032977671&single=true&output=csv"
+        ];
 
-        // أسماء الأعمدة - متطابقة مع الشيت
+        // أسماء الأعمدة - بدون Department
         const COLUMNS = {
             ID: 'ID',
             Name: 'Name',
             Title: 'Title',
             CLevel: 'C-LVL',
             Grade: 'Grade',
-            Department: 'Department',
             Activity: 'Activity',
             Sector: 'Sector',
             Area: 'Area',
@@ -814,7 +827,6 @@
             program: 'all',
             clevel: 'all',
             grade: 'all',
-            department: 'all',
             activity: 'all',
             sector: 'all',
             area: 'all',
@@ -829,7 +841,8 @@
             loadError = false,
             lastSearchedEmployee = null;
         let refreshInterval = null,
-            dataLoadAttempts = 0;
+            dataLoadAttempts = 0,
+            currentUrlIndex = 0;
         const MAX_ATTEMPTS = 5;
 
         function printPage() {
@@ -840,7 +853,7 @@
         }
 
         // ============================================================
-        // CSV TO JSON
+        // CSV TO JSON - محسّن
         // ============================================================
         function csvToJSON(csv) {
             if (!csv || csv.trim() === '') {
@@ -856,13 +869,6 @@
 
             const headers = lines[0].split(",").map(h => h.trim().replace(/^"|"$/g, ''));
             console.log('📋 Headers from sheet:', headers);
-
-            const requiredColumns = ['ID', 'Name'];
-            const missingColumns = requiredColumns.filter(col => !headers.includes(col));
-            if (missingColumns.length > 0) {
-                console.warn('⚠️ Missing columns:', missingColumns);
-                console.warn('⚠️ Available columns:', headers);
-            }
 
             const seenIds = new Set();
             const result = [];
@@ -891,7 +897,6 @@
             console.log('📊 Total unique records loaded:', result.length);
             if (result.length > 0) {
                 console.log('📝 Sample record:', result[0]);
-                console.log('📝 Available keys:', Object.keys(result[0]));
             }
             return result;
         }
@@ -1123,13 +1128,12 @@
         }
 
         // ============================================================
-        // POPULATE FILTER BUTTONS (C-LVL, Grade, Department)
+        // POPULATE FILTER BUTTONS (C-LVL, Grade)
         // ============================================================
         function populateFilterButtons() {
             const filterConfigs = [
                 { id: 'clevel', key: COLUMNS.CLevel, container: 'clevelFilters' },
-                { id: 'grade', key: COLUMNS.Grade, container: 'gradeFilters' },
-                { id: 'department', key: COLUMNS.Department, container: 'departmentFilters' }
+                { id: 'grade', key: COLUMNS.Grade, container: 'gradeFilters' }
             ];
 
             filterConfigs.forEach(({ id, key, container }) => {
@@ -1177,15 +1181,6 @@
                 if (badge) badge.textContent = count;
             });
 
-            // Department
-            document.getElementById('deptAllCount').textContent = data.length;
-            document.querySelectorAll('#departmentFilters .filter-btn:not([data-value="all"])').forEach(btn => {
-                const val = btn.dataset.value;
-                const count = data.filter(r => String(r[COLUMNS.Department] || '').includes(val)).length;
-                const badge = btn.querySelector('.badge-count');
-                if (badge) badge.textContent = count;
-            });
-
             // Attendance
             const { attend, notAttend } = getProgramAttendance(data, COLUMNS.SevenSens);
             document.getElementById('attAllCount').textContent = data.length;
@@ -1208,21 +1203,6 @@
         // ============================================================
         function updateInsights(data) {
             if (!data || data.length === 0) return;
-
-            const deptCounts = {};
-            data.forEach(r => {
-                const d = r[COLUMNS.Department] || 'Unknown';
-                if (d.trim()) deptCounts[d] = (deptCounts[d] || 0) + 1;
-            });
-            if (deptCounts['Unknown']) delete deptCounts['Unknown'];
-            const sortedDepts = Object.entries(deptCounts).sort((a, b) => b[1] - a[1]);
-            if (sortedDepts.length > 0) {
-                document.getElementById('insightLargestDept').textContent = sortedDepts[0][0] || 'N/A';
-                document.getElementById('insightLargestDeptDesc').textContent = (sortedDepts[0][1] || 0) + ' employees';
-            } else {
-                document.getElementById('insightLargestDept').textContent = 'N/A';
-                document.getElementById('insightLargestDeptDesc').textContent = 'No departments found';
-            }
 
             const levelCounts = {};
             data.forEach(r => {
@@ -1287,7 +1267,6 @@
             }
             const total = data.length;
             const sectors = new Set(data.map(r => r[COLUMNS.Sector]).filter(Boolean));
-            const departments = new Set(data.map(r => r[COLUMNS.Department]).filter(Boolean));
             const attended = data.filter(r => {
                 const val = String(r[COLUMNS.SevenSens] || '').toLowerCase();
                 return val === 'attend' || val === 'attended' || val.includes('attend');
@@ -1339,13 +1318,6 @@
             const levelLabels = Object.keys(levelCounts);
             const levelValues = Object.values(levelCounts);
 
-            const deptCounts = {};
-            data.forEach(r => { const d = r[COLUMNS.Department] || 'Unknown'; deptCounts[d] = (deptCounts[d] || 0) + 1; });
-            if (deptCounts['Unknown']) delete deptCounts['Unknown'];
-            const sortedDepts = Object.entries(deptCounts).sort((a, b) => b[1] - a[1]);
-            const deptLabels = sortedDepts.map(d => d[0]);
-            const deptValues = sortedDepts.map(d => d[1]);
-
             const sectorAtt = {},
                 sectorComp = {};
             data.forEach(r => {
@@ -1381,7 +1353,6 @@
             const qualityData = {
                 'Valid IDs': hasId,
                 'Valid Names': hasName,
-                'Valid Departments': hasDept,
                 'Has Grade': data.filter(r => r['Grade'] && r['Grade'].trim()).length,
                 'Has Status': data.filter(r => r['Status'] && r['Status'].trim()).length
             };
@@ -1441,26 +1412,9 @@
                 plugins: [ChartDataLabels]
             });
 
-            // 3. Department
-            const ctx3 = document.getElementById('chartDepartment').getContext('2d');
-            chartInstances.department = new Chart(ctx3, {
-                type: 'bar',
-                data: { labels: deptLabels, datasets: [{ label: 'Employees', data: deptValues, backgroundColor: '#17b890',
-                        borderRadius: 6, barPercentage: 0.6 }] },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false }, datalabels: { color: '#1a2332', anchor: 'end', align: 'top',
-                            font: { weight: 'bold', size: 8 } } },
-                    indexAxis: 'y',
-                    scales: { y: { ticks: { font: { size: 7 } } }, x: { ticks: { font: { size: 7 } } } }
-                },
-                plugins: [ChartDataLabels]
-            });
-
-            // 4. Attendance vs Completion
-            const ctx4 = document.getElementById('chartAttendance').getContext('2d');
-            chartInstances.attendance = new Chart(ctx4, {
+            // 3. Attendance vs Completion
+            const ctx3 = document.getElementById('chartAttendance').getContext('2d');
+            chartInstances.attendance = new Chart(ctx3, {
                 type: 'bar',
                 data: {
                     labels: attSectors,
@@ -1485,9 +1439,9 @@
                 plugins: [ChartDataLabels]
             });
 
-            // 5. Phase
-            const ctx5 = document.getElementById('chartPhase').getContext('2d');
-            chartInstances.phase = new Chart(ctx5, {
+            // 4. Phase
+            const ctx4 = document.getElementById('chartPhase').getContext('2d');
+            chartInstances.phase = new Chart(ctx4, {
                 type: 'pie',
                 data: { labels: phaseLabels, datasets: [{ data: phaseValues, backgroundColor: colors.slice(0, phaseLabels
                             .length) }] },
@@ -1504,9 +1458,9 @@
                 plugins: [ChartDataLabels]
             });
 
-            // 6. Location
-            const ctx6 = document.getElementById('chartLocation').getContext('2d');
-            chartInstances.location = new Chart(ctx6, {
+            // 5. Location
+            const ctx5 = document.getElementById('chartLocation').getContext('2d');
+            chartInstances.location = new Chart(ctx5, {
                 type: 'bar',
                 data: { labels: locLabels, datasets: [{ label: 'Employees', data: locValues, backgroundColor: '#ff6e40',
                         borderRadius: 6, barPercentage: 0.6 }] },
@@ -1520,9 +1474,9 @@
                 plugins: [ChartDataLabels]
             });
 
-            // 7. Quality
-            const ctx7 = document.getElementById('chartQuality').getContext('2d');
-            chartInstances.quality = new Chart(ctx7, {
+            // 6. Quality
+            const ctx6 = document.getElementById('chartQuality').getContext('2d');
+            chartInstances.quality = new Chart(ctx6, {
                 type: 'bar',
                 data: { labels: qualityLabels, datasets: [{ label: 'Records', data: qualityValues, backgroundColor: '#3b82f6',
                         borderRadius: 6, barPercentage: 0.6 }] },
@@ -1536,9 +1490,9 @@
                 plugins: [ChartDataLabels]
             });
 
-            // 8. Programs
-            const ctx8 = document.getElementById('chartPrograms').getContext('2d');
-            chartInstances.programs = new Chart(ctx8, {
+            // 7. Programs
+            const ctx7 = document.getElementById('chartPrograms').getContext('2d');
+            chartInstances.programs = new Chart(ctx7, {
                 type: 'bar',
                 data: {
                     labels: progEnrollLabels,
@@ -1579,7 +1533,6 @@
             const charts = [
                 { chart: chartInstances.sector, filterType: 'sector', selectId: 'sectorSelect' },
                 { chart: chartInstances.level, filterType: 'clevel', selectId: 'clevelFilters' },
-                { chart: chartInstances.department, filterType: 'department', selectId: 'departmentFilters' },
                 { chart: chartInstances.location, filterType: 'location', selectId: 'locationSelect' },
                 { chart: chartInstances.phase, filterType: 'phase', selectId: 'phaseSelect' },
                 { chart: chartInstances.programs, filterType: 'program', selectId: 'programFilters' }
@@ -1668,8 +1621,6 @@
                 .includes(activeFilters.clevel));
             if (activeFilters.grade !== 'all') filteredData = filteredData.filter(r => String(r[COLUMNS.Grade] || '')
                 .includes(activeFilters.grade));
-            if (activeFilters.department !== 'all') filteredData = filteredData.filter(r => String(r[COLUMNS.Department] ||
-                    '').includes(activeFilters.department));
             if (activeFilters.activity !== 'all') filteredData = filteredData.filter(r => String(r[COLUMNS.Activity] || '')
                 .includes(activeFilters.activity));
             if (activeFilters.sector !== 'all') filteredData = filteredData.filter(r => String(r[COLUMNS.Sector] || '')
@@ -1742,7 +1693,6 @@
                 program: 'all',
                 clevel: 'all',
                 grade: 'all',
-                department: 'all',
                 activity: 'all',
                 sector: 'all',
                 area: 'all',
@@ -1778,7 +1728,7 @@
         }
 
         // ============================================================
-        // EMPLOYEE DETAIL TABLE
+        // EMPLOYEE DETAIL TABLE - بدون Department
         // ============================================================
         function updateEmployeeDetailTable(data) {
             const tbody = document.getElementById('detailTableBody');
@@ -1786,7 +1736,7 @@
 
             if (!data || data.length === 0) {
                 tbody.innerHTML =
-                    `<tr><td colspan="14" style="text-align:center;padding:15px;color:var(--text-muted);">⚠️ No employees match the current filters.</td></tr>`;
+                    `<tr><td colspan="13" style="text-align:center;padding:15px;color:var(--text-muted);">⚠️ No employees match the current filters.</td></tr>`;
                 countSpan.textContent = '(0 employees)';
                 return;
             }
@@ -1820,7 +1770,6 @@
                     <td>${emp[COLUMNS.Title] || 'N/A'}</td>
                     <td>${emp[COLUMNS.CLevel] || 'N/A'}</td>
                     <td>${emp[COLUMNS.Grade] || 'N/A'}</td>
-                    <td>${emp[COLUMNS.Department] || 'N/A'}</td>
                     <td>${emp[COLUMNS.Activity] || 'N/A'}</td>
                     <td>${emp[COLUMNS.Sector] || 'N/A'}</td>
                     <td>${emp[COLUMNS.Area] || 'N/A'}</td>
@@ -1834,12 +1783,12 @@
 
             if (data.length > 200) {
                 tbody.innerHTML +=
-                    `<tr><td colspan="14" style="text-align:center;color:var(--text-muted);font-style:italic;padding:6px;">... and ${data.length - 200} more</td></tr>`;
+                    `<tr><td colspan="13" style="text-align:center;color:var(--text-muted);font-style:italic;padding:6px;">... and ${data.length - 200} more</td></tr>`;
             }
         }
 
         // ============================================================
-        // EMPLOYEE SEARCH
+        // EMPLOYEE SEARCH - بدون Department
         // ============================================================
         function searchEmployee() {
             const id = document.getElementById('empIdInput').value.trim();
@@ -1854,8 +1803,7 @@
 
             document.getElementById('resName').textContent = emp[COLUMNS.Name] || 'Not recorded';
             document.getElementById('resTitle').textContent = emp[COLUMNS.Title] || 'Not recorded';
-            document.getElementById('resSector').textContent = (emp[COLUMNS.Sector] || '-') + ' / ' + (emp[COLUMNS.Department] ||
-                '-');
+            document.getElementById('resSector').textContent = emp[COLUMNS.Sector] || '-';
             document.getElementById('resLevel').textContent = (emp[COLUMNS.CLevel] || '-') + ' / ' + (emp[COLUMNS.Grade] || '-');
             document.getElementById('resActivityArea').textContent = (emp[COLUMNS.Activity] || '-') + ' / ' + (emp[COLUMNS.Area] ||
                 '-');
@@ -1912,7 +1860,7 @@
         }
 
         // ============================================================
-        // PRINT EMPLOYEE PROFILE
+        // PRINT EMPLOYEE PROFILE - بدون Department
         // ============================================================
         function printEmployeeProfile() {
             if (!lastSearchedEmployee) { alert('Please search for an employee first.'); return; }
@@ -1967,7 +1915,7 @@
                 <div><div class="label">Title</div><div class="value">${emp[COLUMNS.Title] || 'Not recorded'}</div></div>
                 <div><div class="label">C-LVL / Grade</div><div class="value">${(emp[COLUMNS.CLevel] || '-')} / ${(emp[COLUMNS.Grade] || '-')}</div></div>
                 <div><div class="label">Activity / Area</div><div class="value">${(emp[COLUMNS.Activity] || '-')} / ${(emp[COLUMNS.Area] || '-')}</div></div>
-                <div><div class="label">Sector / Dept</div><div class="value">${(emp[COLUMNS.Sector] || '-')} / ${(emp[COLUMNS.Department] || '-')}</div></div>
+                <div><div class="label">Sector</div><div class="value">${(emp[COLUMNS.Sector] || '-')}</div></div>
                 <div><div class="label">Location</div><div class="value">${emp[COLUMNS.Location] || 'Not specified'}</div></div>
                 <div><div class="label">Group / Phase</div><div class="value">${(emp[COLUMNS.TrainingGroup] || '-')} / ${(emp[COLUMNS.TrainingPhase] || '-')}</div></div>
                 <div><div class="label">Attendance / Accommodation</div><div class="value"><span class="badge ${sevenSens === 'attend' || sevenSens === 'attended' || sevenSens.includes('attend') ? 'badge-attend' : 'badge-not-attend'}">${attendanceText}</span> / ${accomText}</div></div>
@@ -1985,7 +1933,7 @@
         }
 
         // ============================================================
-        // LOAD DATA
+        // LOAD DATA - مع محاولة جميع الروابط
         // ============================================================
         async function loadData() {
             if (isLoading) return;
@@ -1996,18 +1944,39 @@
             document.getElementById('refreshBtn').disabled = true;
 
             document.getElementById('loadingOverlay').classList.remove('hidden');
+            document.getElementById('loadingError').style.display = 'none';
 
             try {
-                console.log('🔄 Fetching data from:', SHEET_URL);
-                const response = await fetch(SHEET_URL);
-                if (!response.ok) throw new Error(`HTTP ${response.status} - ${response.statusText}`);
-                const csv = await response.text();
-                console.log('📄 CSV length:', csv.length, 'characters');
+                // محاولة كل الروابط
+                let csv = null;
+                let successUrl = null;
 
-                if (csv.length < 100) {
-                    throw new Error('CSV data is too short - possibly empty or wrong format');
+                for (let urlIndex = 0; urlIndex < SHEET_URLS.length; urlIndex++) {
+                    const url = SHEET_URLS[urlIndex];
+                    console.log(`🔄 Trying URL ${urlIndex + 1}/${SHEET_URLS.length}:`, url);
+                    document.getElementById('loadingText').textContent = `📊 Loading CBT Data... (${urlIndex + 1}/${SHEET_URLS.length})`;
+                    document.getElementById('loadingSub').textContent = `Fetching from Google Sheets...`;
+
+                    try {
+                        const response = await fetch(url);
+                        if (response.ok) {
+                            csv = await response.text();
+                            if (csv && csv.length > 100) {
+                                successUrl = url;
+                                console.log(`✅ Success with URL ${urlIndex + 1}`);
+                                break;
+                            }
+                        }
+                    } catch (e) {
+                        console.warn(`⚠️ URL ${urlIndex + 1} failed:`, e);
+                    }
                 }
 
+                if (!csv || csv.length < 100) {
+                    throw new Error('All URLs failed or returned empty data');
+                }
+
+                console.log('📄 CSV length:', csv.length, 'characters');
                 const jsonData = csvToJSON(csv);
                 if (jsonData.length === 0) {
                     throw new Error('No data found in sheet - check the sheet URL and permissions');
@@ -2037,8 +2006,9 @@
                 if (dataLoadAttempts < MAX_ATTEMPTS) {
                     msg.innerHTML =
                         `<i class="fa-solid fa-circle-exclamation"></i> Retrying... (${dataLoadAttempts}/${MAX_ATTEMPTS})`;
-                    document.getElementById('loadingOverlay').querySelector('.loading-text').textContent =
+                    document.getElementById('loadingText').textContent =
                         `🔄 Retrying... (${dataLoadAttempts}/${MAX_ATTEMPTS})`;
+                    document.getElementById('loadingSub').textContent = 'Waiting before next attempt...';
                     setTimeout(() => loadData(), 3000);
                 } else {
                     msg.className = 'loading-status error';
@@ -2046,13 +2016,15 @@
                     '<i class="fa-solid fa-circle-exclamation"></i> Could not load data. Please refresh the page.';
                     document.getElementById('statusText').textContent = 'Error';
                     document.getElementById('statusIcon').className = 'fa-solid fa-cloud-arrow-up';
-                    document.getElementById('loadingOverlay').querySelector('.loading-text').textContent =
-                        '❌ Failed to load data';
-                    document.getElementById('loadingOverlay').querySelector('.loading-sub').textContent =
-                        'Please refresh the page or check the data source';
+
+                    document.getElementById('loadingText').textContent = '❌ Failed to load data';
+                    document.getElementById('loadingSub').textContent = 'Please check the data source or try again later.';
+                    document.getElementById('loadingError').style.display = 'block';
+                    document.getElementById('errorMessage').innerHTML =
+                        `Error: ${err.message}<br><span style="font-size:0.8rem;color:var(--text-muted);">Attempted ${dataLoadAttempts} times</span>`;
 
                     document.getElementById('detailTableBody').innerHTML = `
-                        <tr><td colspan="14" style="text-align:center;padding:30px;color:var(--danger);">
+                        <tr><td colspan="13" style="text-align:center;padding:30px;color:var(--danger);">
                             <i class="fa-solid fa-circle-exclamation" style="font-size:2rem;display:block;margin-bottom:10px;"></i>
                             Failed to load data from Google Sheets.<br>
                             <span style="font-size:0.8rem;color:var(--text-muted);">Error: ${err.message}</span>
