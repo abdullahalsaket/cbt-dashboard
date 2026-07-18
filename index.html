@@ -12,7 +12,6 @@
         :root {
             --primary-dark: #0f2b40;
             --primary: #1e3d59;
-            --primary-light: #2d5a7a;
             --accent: #ff6e40;
             --accent-hover: #e05326;
             --white: #ffffff;
@@ -24,7 +23,6 @@
             --danger: #ef4444;
             --info: #3b82f6;
             --purple: #8b5cf6;
-            --teal: #14b8a6;
             --border: #e2e8f0;
             --shadow: 0 2px 12px rgba(0,0,0,0.06);
             --radius: 12px;
@@ -38,7 +36,6 @@
             padding: 0 16px;
         }
 
-        /* ========== NAVBAR ========== */
         .navbar {
             background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
             color: white;
@@ -100,9 +97,7 @@
             gap: 4px;
         }
         .refresh-btn:hover { background: rgba(255,255,255,0.2); }
-        .refresh-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-        /* ========== TOP BAR ========== */
         .top-bar {
             background: var(--white);
             border-radius: var(--radius);
@@ -159,7 +154,7 @@
             font-size: 0.45rem; 
             margin-left: 4px; 
         }
-        .top-bar .action-buttons { display: flex; gap: 4px; flex-shrink: 0; }
+        .top-bar .action-buttons { display: flex; gap: 4px; flex-shrink: 0; flex-wrap: wrap; }
         .top-bar .action-btn { 
             padding: 4px 14px; 
             border-radius: 30px; 
@@ -179,8 +174,9 @@
         .top-bar .action-btn:hover { background: var(--primary-dark); transform: translateY(-1px); }
         .top-bar .action-btn.pdf-btn { background: var(--danger); }
         .top-bar .action-btn.pdf-btn:hover { background: #dc2626; }
+        .top-bar .action-btn.excel-btn { background: #217346; }
+        .top-bar .action-btn.excel-btn:hover { background: #1a5a38; }
 
-        /* ========== OVERVIEW ========== */
         .overview-section {
             background: linear-gradient(135deg, var(--primary-dark) 0%, #1a5a4a 100%);
             color: white;
@@ -192,7 +188,6 @@
         .overview-section p { font-size: 0.7rem; opacity: 0.92; line-height: 1.5; }
         .overview-section .highlight { color: var(--accent); font-weight: 700; }
 
-        /* ========== ALERTS ========== */
         .alerts-container {
             background: var(--white);
             border-radius: var(--radius);
@@ -217,7 +212,6 @@
         .alert-warning { background: rgba(245,158,11,0.08); color: var(--warning); border-left: 3px solid var(--warning); }
         .alert-success { background: rgba(16,185,129,0.08); color: var(--success); border-left: 3px solid var(--success); }
 
-        /* ========== FILTER BAR ========== */
         .filter-bar {
             background: var(--white);
             border-radius: var(--radius);
@@ -305,7 +299,6 @@
         .filter-group-item .filter-select:focus { outline: none; border-color: var(--accent); }
         .filter-full-width { grid-column: 1 / -1; }
 
-        /* ========== PROGRAM CARDS ========== */
         .program-cards { display: flex; flex-wrap: wrap; gap: 4px 6px; padding: 2px 0; }
         .program-card {
             display: inline-flex;
@@ -340,7 +333,6 @@
         .program-card.active .prog-count .attend-count,
         .program-card.active .prog-count .not-attend-count { color: rgba(255,255,255,0.9); }
 
-        /* ========== SELECTED PROGRAM ========== */
         .selected-program-info {
             background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
             color: white;
@@ -354,7 +346,6 @@
         .selected-program-info .prog-stats { display: flex; flex-wrap: wrap; gap: 10px 20px; margin-top: 4px; font-size: 0.7rem; }
         .selected-program-info .prog-stats .num { font-weight: 700; font-size: 0.9rem; color: var(--accent); }
 
-        /* ========== KPI GRID ========== */
         .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 6px; margin-bottom: 12px; }
         .kpi-card {
             background: var(--white);
@@ -373,7 +364,6 @@
         .kpi-info h4 { font-size: 0.45rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 1px; }
         .kpi-info .num { font-size: 0.9rem; font-weight: 800; color: var(--primary); }
 
-        /* ========== SEARCH + CHARTS ========== */
         .search-charts-grid { display: grid; grid-template-columns: 260px 1fr; gap: 10px; margin-bottom: 12px; }
         .search-wrapper {
             background: var(--white);
@@ -435,7 +425,6 @@
         .training-tags { display: flex; flex-wrap: wrap; gap: 2px; margin-top: 3px; }
         .tag { background: var(--border); color: var(--primary); padding: 2px 6px; border-radius: 20px; font-size: 0.45rem; font-weight: 600; }
 
-        /* ========== CHARTS ========== */
         .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
         .charts-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
         .chart-box {
@@ -454,44 +443,46 @@
         .charts-grid-2 .chart-box .chart-container { height: 160px; }
         .charts-grid-2 .chart-box canvas { height: 160px !important; max-height: 160px; }
 
-        /* ========== EMPLOYEE TABLE ========== */
-        .employee-detail-table {
+        .export-section {
             background: var(--white);
             border-radius: var(--radius);
-            padding: 10px 12px;
-            margin-top: 12px;
+            padding: 12px 16px;
             margin-bottom: 12px;
             box-shadow: var(--shadow);
             border: 1px solid var(--border);
-            overflow-x: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
         }
-        .employee-detail-table h4 { 
+        .export-section h4 { 
             font-size: 0.75rem; 
             color: var(--primary); 
             font-weight: 700; 
-            margin-bottom: 4px; 
-            display: flex; 
-            align-items: center; 
-            gap: 6px; 
-            flex-wrap: wrap; 
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
-        .employee-detail-table h4 .count-badge { font-size: 0.6rem; color: var(--text-muted); font-weight: 400; }
-        .employee-detail-table table { width: 100%; border-collapse: collapse; font-size: 0.55rem; }
-        .employee-detail-table th { 
-            background: var(--primary); 
-            color: white; 
-            padding: 4px 6px; 
-            text-align: left; 
-            font-weight: 600; 
-            white-space: nowrap; 
+        .export-section .export-info { font-size: 0.55rem; color: var(--text-muted); }
+        .export-btn {
+            padding: 6px 20px;
+            border-radius: 30px;
+            border: none;
+            background: #217346;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
-        .employee-detail-table td { padding: 4px 6px; border-bottom: 1px solid var(--border); vertical-align: middle; }
-        .employee-detail-table tr:hover td { background: #f8fafc; }
-        .employee-detail-table .badge-attend { background: rgba(16,185,129,0.15); color: var(--success); padding: 1px 6px; border-radius: 20px; font-size: 0.45rem; font-weight: 600; }
-        .employee-detail-table .badge-not-attend { background: rgba(239,68,68,0.15); color: var(--danger); padding: 1px 6px; border-radius: 20px; font-size: 0.45rem; font-weight: 600; }
-        .employee-detail-table .badge-unknown { background: rgba(107,122,143,0.15); color: var(--text-muted); padding: 1px 6px; border-radius: 20px; font-size: 0.45rem; font-weight: 600; }
+        .export-btn:hover { background: #1a5a38; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(33,115,70,0.3); }
+        .export-btn i { font-size: 0.7rem; }
 
-        /* ========== INSIGHTS ========== */
         .insights-section {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -535,7 +526,6 @@
         }
         .clear-filters-btn:hover { border-color: var(--danger); color: var(--danger); background: rgba(239,68,68,0.04); }
 
-        /* ========== LOADING ========== */
         .loading-overlay {
             position: fixed;
             top: 0;
@@ -563,7 +553,6 @@
         .loading-overlay .loading-text { margin-top: 15px; font-size: 1rem; color: var(--primary); font-weight: 700; }
         .loading-overlay .loading-sub { font-size: 0.75rem; color: var(--text-muted); margin-top: 5px; }
 
-        /* ========== RESPONSIVE ========== */
         @media (max-width: 992px) {
             .filter-grid { grid-template-columns: repeat(3, 1fr); }
             .search-charts-grid { grid-template-columns: 1fr; }
@@ -580,6 +569,7 @@
             .employee-profile { grid-template-columns: 1fr; }
             .top-bar { flex-direction: column; align-items: stretch; }
             .top-bar .action-buttons { justify-content: flex-start; }
+            .export-section { flex-direction: column; align-items: stretch; text-align: center; }
         }
         @media (max-width: 480px) {
             .filter-grid { grid-template-columns: 1fr; }
@@ -591,19 +581,17 @@
 
         @media print {
             .no-print, .no-print * { display: none !important; }
-            .action-btn, .refresh-btn, .clear-filters-btn,
+            .action-btn, .refresh-btn, .clear-filters-btn, .export-btn,
             .search-box button, .filter-btn, .filter-select, .slicer-btn,
             .program-card, .loading-overlay { display: none !important; }
             body { background: white !important; padding: 10px !important; font-size: 9px !important; }
-            .kpi-card, .chart-box, .insight-card, .employee-detail-table,
-            .search-wrapper, .filter-bar, .overview-section, .alerts-container, .top-bar,
-            .selected-program-info { box-shadow: none !important; border: 1px solid #ddd !important; page-break-inside: avoid !important; margin: 4px 0 !important; padding: 6px 8px !important; background: white !important; }
+            .kpi-card, .chart-box, .insight-card, .search-wrapper, 
+            .filter-bar, .overview-section, .alerts-container, .top-bar,
+            .selected-program-info, .export-section { box-shadow: none !important; border: 1px solid #ddd !important; page-break-inside: avoid !important; margin: 4px 0 !important; padding: 6px 8px !important; background: white !important; }
             .kpi-grid { display: grid !important; grid-template-columns: repeat(4, 1fr) !important; gap: 4px !important; }
             .charts-grid, .charts-grid-2 { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 8px !important; }
             .chart-box .chart-container { height: 100px !important; }
             .chart-box canvas { height: 100px !important; max-height: 100px !important; }
-            .employee-detail-table table { font-size: 7px !important; }
-            .employee-detail-table th { background: #1e3d59 !important; color: white !important; }
         }
     </style>
 </head>
@@ -857,40 +845,18 @@
         <div class="chart-box"><h4><i class="fa-solid fa-users-between-lines"></i> Department Size</h4><div class="chart-container"><canvas id="chartDepartment"></canvas></div></div>
     </div>
 
-    <!-- EMPLOYEE TABLE -->
-    <div class="employee-detail-table" id="employeeDetailTable">
-        <h4>
-            <i class="fa-solid fa-table"></i> Employee Data
-            <span class="count-badge" id="detailCount">(0 employees)</span>
-            <span style="font-size:0.5rem;color:var(--text-muted);font-weight:400;margin-left:auto;">
-                <i class="fa-solid fa-filter"></i> of <span id="totalRecords">0</span> total
-            </span>
-        </h4>
-        <div style="overflow-x:auto;">
-            <table id="employee-table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Title</th>
-                        <th>C-LVL</th>
-                        <th>Level</th>
-                        <th>Grade</th>
-                        <th>Activity</th>
-                        <th>Sector</th>
-                        <th>Area</th>
-                        <th>Group</th>
-                        <th>Phase</th>
-                        <th>Location</th>
-                        <th>Attendance</th>
-                        <th>Accommodation</th>
-                    </tr>
-                </thead>
-                <tbody id="detailTableBody">
-                    <tr><td colspan="14" style="text-align:center;padding:20px;color:var(--text-muted);"><i class="fa-solid fa-spinner fa-spin" style="display:block;margin-bottom:8px;"></i>Loading employee data...</td></tr>
-                </tbody>
-            </table>
+    <!-- EXPORT SECTION - بديل جدول الموظفين -->
+    <div class="export-section no-print">
+        <div>
+            <h4><i class="fa-solid fa-file-export"></i> Export Employee Data</h4>
+            <div class="export-info">
+                <span id="exportCount">0</span> employees match current filters · 
+                <span id="exportTotalCount">0</span> total employees
+            </div>
         </div>
+        <button class="export-btn" onclick="exportToExcel()">
+            <i class="fa-solid fa-file-excel"></i> Export to Excel
+        </button>
     </div>
 
     <!-- INSIGHTS -->
@@ -1041,16 +1007,6 @@
                 if (v) vals.add(v);
             });
             return Array.from(vals).sort();
-        }
-
-        function getCounts(data, key, values) {
-            const counts = {};
-            values.forEach(v => { counts[v] = 0; });
-            data.forEach(r => {
-                const val = String(r[key] || '').trim();
-                if (counts.hasOwnProperty(val)) counts[val]++;
-            });
-            return counts;
         }
 
         // ============================================================
@@ -1296,7 +1252,8 @@
             document.getElementById('accYesCount').textContent = accYes;
             document.getElementById('accNoCount').textContent = accNo;
 
-            document.getElementById('totalRecords').textContent = allData.length;
+            document.getElementById('exportCount').textContent = data.length;
+            document.getElementById('exportTotalCount').textContent = allData.length;
         }
 
         // ============================================================
@@ -1627,7 +1584,6 @@
         // ============================================================
         function applyFilters() {
             if (!allData || allData.length === 0) {
-                updateEmployeeDetailTable([]);
                 updateActivitySlicer([]);
                 return;
             }
@@ -1678,7 +1634,6 @@
 
             updateActivitySlicer(filteredData);
             renderDashboard(filteredData);
-            updateEmployeeDetailTable(filteredData);
             checkSmartAlerts(filteredData);
         }
 
@@ -1750,62 +1705,6 @@
         }
 
         // ============================================================
-        // EMPLOYEE DETAIL TABLE
-        // ============================================================
-        function updateEmployeeDetailTable(data) {
-            const tbody = document.getElementById('detailTableBody');
-            const countSpan = document.getElementById('detailCount');
-
-            if (!data || data.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="14" style="text-align:center;padding:15px;color:var(--text-muted);">⚠️ No employees match the current filters.</td></tr>`;
-                countSpan.textContent = '(0 employees)';
-                return;
-            }
-
-            const uniqueIds = new Set();
-            data.forEach(emp => { const id = String(emp[COLUMNS.ID] || '').trim(); if (id) uniqueIds.add(id); });
-            countSpan.textContent = `(${uniqueIds.size} unique employees)`;
-
-            const displayData = data.slice(0, 150);
-
-            tbody.innerHTML = displayData.map(emp => {
-                const sevenSens = String(emp[COLUMNS.SevenSens] || '').toLowerCase();
-                let attBadge = '<span class="badge-unknown">Unknown</span>';
-                if (sevenSens === 'attend' || sevenSens === 'attended' || sevenSens.includes('attend')) {
-                    attBadge = '<span class="badge-attend">✅ Attended</span>';
-                } else if (sevenSens === 'not attend' || sevenSens.includes('not attend')) {
-                    attBadge = '<span class="badge-not-attend">❌ Not Attended</span>';
-                }
-
-                const accom = String(emp[COLUMNS.Accommodation] || '').toLowerCase();
-                let accBadge = '<span class="badge-unknown">Unknown</span>';
-                if (accom === 'yes') accBadge = '<span class="badge-attend">✅ Yes</span>';
-                else if (accom === 'no') accBadge = '<span class="badge-not-attend">❌ No</span>';
-
-                return `<tr>
-                    <td><strong>${emp[COLUMNS.ID] || 'N/A'}</strong></td>
-                    <td><strong>${emp[COLUMNS.Name] || 'Unknown'}</strong></td>
-                    <td>${emp[COLUMNS.Title] || 'N/A'}</td>
-                    <td>${emp[COLUMNS.CLevel] || 'N/A'}</td>
-                    <td>${emp[COLUMNS.Level] || 'N/A'}</td>
-                    <td>${emp[COLUMNS.Grade] || 'N/A'}</td>
-                    <td>${emp[COLUMNS.Activity] || 'N/A'}</td>
-                    <td>${emp[COLUMNS.Sector] || 'N/A'}</td>
-                    <td>${emp[COLUMNS.Area] || 'N/A'}</td>
-                    <td>${emp[COLUMNS.TrainingGroup] || 'N/A'}</td>
-                    <td>${emp[COLUMNS.TrainingPhase] || 'N/A'}</td>
-                    <td>${emp[COLUMNS.Location] || 'N/A'}</td>
-                    <td>${attBadge}</td>
-                    <td>${accBadge}</td>
-                </tr>`;
-            }).join('');
-
-            if (data.length > 150) {
-                tbody.innerHTML += `<tr><td colspan="14" style="text-align:center;color:var(--text-muted);font-style:italic;padding:4px;">... and ${data.length - 150} more records</td></tr>`;
-            }
-        }
-
-        // ============================================================
         // EMPLOYEE SEARCH
         // ============================================================
         function searchEmployee() {
@@ -1874,6 +1773,63 @@
         }
 
         // ============================================================
+        // EXPORT TO EXCEL
+        // ============================================================
+        function exportToExcel() {
+            if (!filteredData || filteredData.length === 0) {
+                alert('No data to export. Please check your filters.');
+                return;
+            }
+
+            // Build CSV header
+            const headers = [
+                'ID', 'Name', 'Title', 'C-LVL', 'Level', 'Grade', 
+                'Activity', 'Sector', 'Area', 'Department', 'Section',
+                'CPT Training Group', 'CPT Training Phase', 'Location',
+                '7 Sens Program', 'Analytical Thinking Program', 'Mind field Program',
+                'Leader Ship Program', 'Drive Performance Program', 'Kick Start Program',
+                'Accommodation'
+            ];
+
+            // Build CSV rows
+            const rows = filteredData.map(emp => {
+                return headers.map(h => {
+                    let val = emp[h] || '';
+                    // Escape commas and quotes for CSV
+                    if (typeof val === 'string' && (val.includes(',') || val.includes('"') || val.includes('\n'))) {
+                        val = '"' + val.replace(/"/g, '""') + '"';
+                    }
+                    return val;
+                }).join(',');
+            });
+
+            // Combine header and rows
+            const csvContent = [headers.join(','), ...rows].join('\n');
+
+            // Add BOM for UTF-8 (so Arabic displays correctly in Excel)
+            const blob = new Blob(['\uFEFF' + csvContent], { type: 'text/csv;charset=utf-8;' });
+
+            // Create download link
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', `CBT_Employees_${new Date().toISOString().split('T')[0]}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+
+            // Show success message
+            const msg = document.getElementById('loadingMsg');
+            msg.className = 'loading-status success';
+            msg.innerHTML = `<i class="fa-solid fa-check-circle"></i> Exported ${filteredData.length} employees to Excel!`;
+            setTimeout(() => {
+                msg.className = 'loading-status success';
+                msg.innerHTML = '<i class="fa-solid fa-check-circle"></i> Loaded ' + allData.length + ' records';
+            }, 3000);
+        }
+
+        // ============================================================
         // LOAD DATA
         // ============================================================
         async function loadData() {
@@ -1903,20 +1859,11 @@
 
             } catch (err) {
                 console.error('❌ Error:', err);
-                document.getElementById('detailTableBody').innerHTML = `
-                    <tr><td colspan="14" style="text-align:center;padding:30px;color:var(--danger);">
-                        <i class="fa-solid fa-circle-exclamation" style="font-size:2rem;display:block;margin-bottom:10px;"></i>
-                        Failed to load data.<br>
-                        <span style="font-size:0.8rem;color:var(--text-muted);">${err.message}</span>
-                        <br><br>
-                        <button onclick="loadData()" style="padding:6px 16px;background:var(--accent);color:white;border:none;border-radius:6px;cursor:pointer;">
-                            <i class="fa-solid fa-rotate"></i> Retry
-                        </button>
-                    </td></tr>
-                `;
                 document.getElementById('loadingOverlay').classList.add('hidden');
                 document.getElementById('statusText').textContent = 'Error';
                 document.getElementById('statusIcon').className = 'fa-solid fa-cloud';
+                document.getElementById('loadingMsg').className = 'loading-status error';
+                document.getElementById('loadingMsg').innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> ${err.message}`;
             }
         }
 
