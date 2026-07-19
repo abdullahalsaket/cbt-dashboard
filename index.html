@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -425,7 +425,6 @@
         .training-tags { display: flex; flex-wrap: wrap; gap: 2px; margin-top: 3px; }
         .tag { background: var(--border); color: var(--primary); padding: 2px 6px; border-radius: 20px; font-size: 0.45rem; font-weight: 600; }
 
-        /* زر طباعة الكارد */
         .print-card-btn {
             margin-top: 8px;
             padding: 4px 14px;
@@ -438,7 +437,7 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
-            display: inline-flex;
+            display: none;
             align-items: center;
             gap: 6px;
         }
@@ -572,53 +571,111 @@
         .loading-overlay .loading-text { margin-top: 15px; font-size: 1rem; color: var(--primary); font-weight: 700; }
         .loading-overlay .loading-sub { font-size: 0.75rem; color: var(--text-muted); margin-top: 5px; }
 
+        /* ===== PRINT HEADER & FOOTER ===== */
+        .print-header, .print-footer {
+            display: none;
+        }
+
         /* ============================================================
-           PRINT STYLES - لطباعة كارد الموظف
+           PRINT STYLES
            ============================================================ */
         @media print {
-            .no-print, .no-print * { display: none !important; }
-            .action-btn, .refresh-btn, .clear-filters-btn, .export-btn,
-            .search-box button, .filter-btn, .filter-select, .slicer-btn,
-            .program-card, .loading-overlay, .print-card-btn { display: none !important; }
-            
-            /* إخفاء كل حاجة إلا الكارد */
-            body { background: white !important; padding: 20px !important; }
-            .container { max-width: 100% !important; padding: 0 !important; }
-            
-            /* إظهار الكارد فقط */
-            .result-card { 
-                display: block !important; 
-                border: 1px solid #ddd !important;
-                box-shadow: none !important;
-                background: white !important;
-                padding: 20px !important;
-                margin: 0 !important;
-                border-radius: 0 !important;
+            /* إخفاء العناصر غير المطلوبة */
+            .no-print, .no-print *,
+            .action-btn, .refresh-btn, .clear-filters-btn,
+            .search-box button, .filter-btn, .filter-select,
+            .slicer-btn, .program-card, .export-btn,
+            .print-card-btn, .loading-overlay {
+                display: none !important;
             }
-            
-            /* إخفاء باقي العناصر */
-            .navbar, .top-bar, .overview-section, .alerts-container, 
-            .filter-bar, .kpi-grid, .search-charts-grid, .charts-grid,
-            .charts-grid-2, .export-section, .insights-section,
-            .selected-program-info, .search-wrapper .search-box,
-            .search-wrapper .loading-status, .search-wrapper h3,
-            .search-wrapper p, #loadingMsg { display: none !important; }
-            
-            /* تنسيق الكارد للطباعة */
-            .employee-profile { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 4px 12px !important; }
-            .info-group h4 { font-size: 8px !important; color: #6b7a8f !important; }
-            .info-group p { font-size: 11px !important; font-weight: 700 !important; }
-            .employee-stats { display: flex !important; flex-wrap: wrap !important; gap: 6px !important; margin-top: 8px !important; }
-            .stat-badge { font-size: 9px !important; padding: 2px 10px !important; }
-            .perf-stats { display: flex !important; gap: 8px !important; margin-top: 6px !important; }
-            .perf-stat { font-size: 10px !important; padding: 2px 10px !important; border: 1px solid #ddd !important; }
-            .perf-stat .num { font-size: 13px !important; }
-            .training-tags { display: flex !important; flex-wrap: wrap !important; gap: 4px !important; margin-top: 6px !important; }
-            .tag { font-size: 8px !important; padding: 2px 8px !important; background: #e2e8f0 !important; }
-            .result-card .print-header { display: block !important; text-align: center !important; border-bottom: 2px solid #1e3d59 !important; padding-bottom: 8px !important; margin-bottom: 12px !important; }
-            .result-card .print-header h2 { margin: 0 !important; color: #1e3d59 !important; font-size: 16px !important; }
-            .result-card .print-header .sub { color: #6b7a8f !important; font-size: 10px !important; }
-            .result-card .print-footer { margin-top: 12px !important; padding-top: 8px !important; border-top: 1px solid #ddd !important; text-align: center !important; font-size: 8px !important; color: #6b7a8f !important; }
+
+            /* إظهار كل المحتوى الآخر */
+            body * {
+                visibility: visible !important;
+            }
+            body {
+                background: white !important;
+                padding: 15px !important;
+                font-size: 10px !important;
+                color: #1a2332 !important;
+            }
+            .container {
+                max-width: 100% !important;
+                padding: 0 !important;
+            }
+
+            /* إظهار Header و Footer */
+            .print-header, .print-footer {
+                display: block !important;
+            }
+            .print-header {
+                text-align: center !important;
+                border-bottom: 2px solid #1e3d59 !important;
+                padding-bottom: 8px !important;
+                margin-bottom: 12px !important;
+            }
+            .print-header h1 {
+                color: #1e3d59 !important;
+                font-size: 16px !important;
+                margin: 0 !important;
+            }
+            .print-header .sub {
+                color: #6b7a8f !important;
+                font-size: 9px !important;
+            }
+            .print-footer {
+                margin-top: 12px !important;
+                padding-top: 8px !important;
+                border-top: 1px solid #ddd !important;
+                text-align: center !important;
+                font-size: 8px !important;
+                color: #6b7a8f !important;
+            }
+
+            /* تنسيق البطاقات */
+            .kpi-card, .chart-box, .insight-card,
+            .search-wrapper, .filter-bar, .overview-section,
+            .selected-program-info, .export-section,
+            .result-card, .employee-detail-table {
+                box-shadow: none !important;
+                border: 1px solid #ddd !important;
+                page-break-inside: avoid !important;
+                background: white !important;
+                padding: 6px 8px !important;
+                margin: 4px 0 !important;
+            }
+
+            /* تنسيق الرسوم البيانية */
+            .chart-box .chart-container {
+                height: 120px !important;
+            }
+            .chart-box canvas {
+                height: 120px !important;
+                max-height: 120px !important;
+            }
+
+            /* تنسيق الجدول */
+            .employee-detail-table table {
+                font-size: 8px !important;
+            }
+            .employee-detail-table th {
+                background: #1e3d59 !important;
+                color: white !important;
+            }
+
+            /* تنسيق الـ KPIs */
+            .kpi-grid {
+                display: grid !important;
+                grid-template-columns: repeat(4, 1fr) !important;
+                gap: 4px !important;
+            }
+
+            /* تنسيق بطاقة الموظف */
+            .result-card {
+                display: block !important;
+                border: 1px solid #ddd !important;
+                padding: 15px !important;
+            }
         }
 
         @media (max-width: 992px) {
@@ -656,7 +713,13 @@
         <div class="loading-sub">Fetching data from Google Sheets</div>
     </div>
 
-    <!-- NAVBAR -->
+    <!-- ===== PRINT HEADER ===== -->
+    <div class="print-header">
+        <h1>📊 CBT Intelligence Dashboard</h1>
+        <span class="sub">Generated: <span id="printDateHeader"></span></span>
+    </div>
+
+    <!-- ===== NAVBAR ===== -->
     <div class="navbar no-print">
         <div class="logo-left"><img src="CPC.png" alt="CPC Logo" onerror="this.style.display='none'"></div>
         <div class="title-center">
@@ -671,7 +734,7 @@
         </div>
     </div>
 
-    <!-- TOP BAR -->
+    <!-- ===== TOP BAR ===== -->
     <div class="top-bar no-print">
         <div class="slicer-section">
             <span class="slicer-label"><i class="fa-solid fa-industry"></i> Activity:</span>
@@ -682,24 +745,24 @@
             </div>
         </div>
         <div class="action-buttons">
-            <button class="action-btn" onclick="window.print()"><i class="fa-solid fa-print"></i> Print</button>
-            <button class="action-btn pdf-btn" onclick="window.print()"><i class="fa-solid fa-file-pdf"></i> Save PDF</button>
+            <button class="action-btn" onclick="printPage()"><i class="fa-solid fa-print"></i> Print</button>
+            <button class="action-btn pdf-btn" onclick="printPage()"><i class="fa-solid fa-file-pdf"></i> Save PDF</button>
         </div>
     </div>
 
-    <!-- OVERVIEW -->
+    <!-- ===== OVERVIEW ===== -->
     <div class="overview-section">
         <h2><i class="fa-solid fa-bullseye"></i> Overview</h2>
         <p>This dashboard provides <span class="highlight">real-time intelligence</span> for the <strong>Competency Based Training (CBT)</strong> initiative, powered directly by your HR data.</p>
     </div>
 
-    <!-- ALERTS -->
+    <!-- ===== ALERTS ===== -->
     <div class="alerts-container" id="alertsContainer">
         <h3><i class="fa-solid fa-bell"></i> Smart Alerts</h3>
         <div id="alertsList"></div>
     </div>
 
-    <!-- FILTER BAR -->
+    <!-- ===== FILTER BAR ===== -->
     <div class="filter-bar no-print">
         <div class="filter-grid">
             <!-- Programs -->
@@ -819,7 +882,7 @@
         </div>
     </div>
 
-    <!-- SELECTED PROGRAM INFO -->
+    <!-- ===== SELECTED PROGRAM INFO ===== -->
     <div class="selected-program-info" id="selectedProgramInfo">
         <div class="prog-title" id="selectedProgTitle">📊 7 Sens Program</div>
         <div class="prog-stats">
@@ -831,7 +894,7 @@
         </div>
     </div>
 
-    <!-- KPI GRID -->
+    <!-- ===== KPI GRID ===== -->
     <div class="kpi-grid" id="kpiGrid">
         <div class="kpi-card"><div class="kpi-info"><h4>Total Workforce</h4><div class="num" id="kpiTotal">...</div></div><i class="fa-solid fa-users"></i></div>
         <div class="kpi-card"><div class="kpi-info"><h4>Project Progress</h4><div class="num" id="kpiProgress">...</div></div><i class="fa-solid fa-chart-line"></i></div>
@@ -843,7 +906,7 @@
         <div class="kpi-card"><div class="kpi-info"><h4>Data Quality</h4><div class="num" id="kpiQuality">...</div></div><i class="fa-solid fa-shield-halved"></i></div>
     </div>
 
-    <!-- SEARCH + CHARTS -->
+    <!-- ===== SEARCH + CHARTS ===== -->
     <div class="search-charts-grid">
         <div class="search-wrapper">
             <h3><i class="fa-solid fa-magnifying-glass"></i> Employee Lookup</h3>
@@ -854,12 +917,6 @@
             </div>
             <div id="loadingMsg" class="loading-status"><i class="fa-solid fa-spinner fa-spin"></i> Loading...</div>
             <div id="resultProfile" class="result-card">
-                <!-- ===== HEADER للطباعة ===== -->
-                <div class="print-header" style="display:none;">
-                    <h2>👤 Employee Profile</h2>
-                    <span class="sub">CBT Intelligence Hub</span>
-                </div>
-
                 <div class="employee-profile">
                     <div class="info-group"><h4>Name</h4><p id="resName">-</p></div>
                     <div class="info-group"><h4>Title</h4><p id="resTitle">-</p></div>
@@ -883,16 +940,9 @@
                     <div class="perf-stat">⏳ Pending: <span class="num" id="perfPending">0</span></div>
                 </div>
                 <div class="training-tags" id="resPrograms"></div>
-
-                <!-- ===== زر طباعة الكارد ===== -->
                 <button class="print-card-btn" onclick="printEmployeeCard()">
                     <i class="fa-solid fa-print"></i> Print Employee Card
                 </button>
-
-                <!-- ===== FOOTER للطباعة ===== -->
-                <div class="print-footer" style="display:none;">
-                    Generated from CBT Intelligence Hub • <span id="printDate"></span>
-                </div>
             </div>
         </div>
         <div class="charts-grid">
@@ -901,7 +951,7 @@
         </div>
     </div>
 
-    <!-- CHARTS -->
+    <!-- ===== CHARTS ===== -->
     <div class="charts-grid-2">
         <div class="chart-box"><h4><i class="fa-solid fa-chart-line"></i> Attendance vs Completion</h4><div class="chart-container"><canvas id="chartAttendance"></canvas></div></div>
         <div class="chart-box"><h4><i class="fa-solid fa-clock"></i> Training Phase Distribution</h4><div class="chart-container"><canvas id="chartPhase"></canvas></div></div>
@@ -914,7 +964,7 @@
         <div class="chart-box"><h4><i class="fa-solid fa-users-between-lines"></i> Department Size</h4><div class="chart-container"><canvas id="chartDepartment"></canvas></div></div>
     </div>
 
-    <!-- EXPORT SECTION -->
+    <!-- ===== EXPORT SECTION ===== -->
     <div class="export-section no-print">
         <div>
             <h4><i class="fa-solid fa-file-export"></i> Export Employee Data</h4>
@@ -928,7 +978,7 @@
         </button>
     </div>
 
-    <!-- INSIGHTS -->
+    <!-- ===== INSIGHTS ===== -->
     <div class="insights-section" id="insightsSection">
         <div class="insight-card"><div class="insight-icon"><i class="fa-solid fa-layer-group"></i></div><h4>Largest C-LVL</h4><div class="insight-value" id="insightTopLevel">-</div><div class="insight-desc" id="insightTopLevelDesc">employees</div><span class="insight-tag info">📊 Top</span></div>
         <div class="insight-card"><div class="insight-icon"><i class="fa-solid fa-building"></i></div><h4>Largest Sector</h4><div class="insight-value" id="insightTopSector">-</div><div class="insight-desc" id="insightTopSectorDesc">employees</div><span class="insight-tag info">🏢 Top</span></div>
@@ -938,9 +988,14 @@
         <div class="insight-card"><div class="insight-icon"><i class="fa-solid fa-users"></i></div><h4>Largest Department</h4><div class="insight-value" id="insightLargestDept">-</div><div class="insight-desc" id="insightLargestDeptDesc">employees</div><span class="insight-tag info">🏆 Top</span></div>
     </div>
 
-    <!-- FOOTER -->
+    <!-- ===== FOOTER ===== -->
     <div style="text-align:center;font-size:0.5rem;color:var(--text-muted);padding:8px 0 16px 0;border-top:1px solid var(--border);">
         CBT Intelligence Hub 2026 • All rights reserved • Data refreshed in real-time
+    </div>
+
+    <!-- ===== PRINT FOOTER ===== -->
+    <div class="print-footer">
+        CBT Intelligence Hub 2026 • All rights reserved • <span id="printDateFooter"></span>
     </div>
 
     <script>
@@ -1838,26 +1893,29 @@
             }
             card.style.display = 'block';
 
-            // إظهار أزرار الطباعة في الكارد
+            // إظهار زر طباعة الكارد
             document.querySelector('.print-card-btn').style.display = 'inline-flex';
-            document.querySelector('.print-header').style.display = 'block';
-            document.querySelector('.print-footer').style.display = 'block';
-            document.getElementById('printDate').textContent = new Date().toLocaleString('en-US');
 
             document.getElementById('loadingMsg').className = 'loading-status success';
             document.getElementById('loadingMsg').innerHTML = '<i class="fa-solid fa-check-circle"></i> Found employee: ' + emp[COLUMNS.Name];
         }
 
         // ============================================================
-        // PRINT EMPLOYEE CARD - طباعة كارد الموظف فقط
+        // PRINT FUNCTIONS
         // ============================================================
+        function printPage() {
+            const now = new Date().toLocaleString('en-US');
+            document.getElementById('printDateHeader').textContent = now;
+            document.getElementById('printDateFooter').textContent = now;
+            window.print();
+        }
+
         function printEmployeeCard() {
             if (!lastSearchedEmployee) {
                 alert('Please search for an employee first.');
                 return;
             }
 
-            // نفتح نافذة طباعة جديدة
             const printWindow = window.open('', '_blank', 'width=800,height=600');
             if (!printWindow) {
                 alert('Please allow popups for this site.');
@@ -1907,7 +1965,6 @@
                     .badge { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
                     .badge-attend { background: rgba(16,185,129,0.15); color: #10b981; }
                     .badge-not-attend { background: rgba(239,68,68,0.15); color: #ef4444; }
-                    .badge-unknown { background: rgba(107,122,143,0.15); color: #6b7a8f; }
                     .stats { display: flex; gap: 14px; flex-wrap: wrap; background: #f8fafc; padding: 8px 14px; border-radius: 8px; margin: 6px 0; }
                     .stats span { font-size: 12px; }
                     .stats .num { font-weight: 800; font-size: 15px; color: #1e3d59; }
@@ -1916,7 +1973,6 @@
                     .prog-list li:last-child { border-bottom: none; }
                     .footer { margin-top: 16px; padding-top: 8px; border-top: 1px solid #e8ecf0; font-size: 10px; color: #6b7a8f; text-align: center; }
                     .print-date { font-size: 9px; color: #6b7a8f; margin-top: 4px; text-align: center; }
-                    @media print { body { padding: 20px; } }
                 </style>
             </head>
             <body>
