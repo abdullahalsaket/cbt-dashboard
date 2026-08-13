@@ -409,7 +409,11 @@
             display: none;
             border-right: 4px solid var(--success);
         }
-        .employee-profile { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 6px; }
+        .employee-profile {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px 12px;
+        }
         .info-group h4 { 
             font-size: 0.45rem; 
             color: var(--text-muted); 
@@ -419,7 +423,7 @@
         }
         .info-group p { 
             font-weight: 700; 
-            font-size: 0.7rem; 
+            font-size: 0.75rem; 
             color: var(--text-dark);
         }
         .employee-stats { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; padding: 3px 6px; background: rgba(30,61,89,0.04); border-radius: 6px; }
@@ -876,14 +880,15 @@
                     <div class="info-group"><h4>Grade</h4><p id="resGrade">-</p></div>
                     <div class="info-group"><h4>Location</h4><p id="resLocation">-</p></div>
                     <div class="info-group"><h4>Training Group / Phase</h4><p id="resGroupPhase">-</p></div>
-                    <div class="info-group"><h4>Attendance / Accommodation</h4><p id="resAttendAccom">-</p></div>
+                    <div class="info-group"><h4>Attendance</h4><p id="resAttendance">-</p></div>
+                    <div class="info-group"><h4>Accommodation</h4><p id="resAccommodation">-</p></div>
                 </div>
                 <div class="employee-stats">
                     <span class="stat-badge attend" id="statAttended">✅ Attended: 0</span>
                     <span class="stat-badge not-attend" id="statNotAttended">❌ Not Attended: 0</span>
                     <span class="stat-badge group" id="statGroup">📋 Training Group: -</span>
                     <span class="stat-badge location" id="statLocation">📍 Location: -</span>
-                    <span class="stat-badge accommodation" id="statAccommodation">🏠 Accommodation: -</span>
+                    <span class="stat-badge accommodation" id="statAccommodationBadge">🏠 Accommodation: -</span>
                 </div>
                 <div class="perf-stats" id="perfStats">
                     <div class="perf-stat">📊 Total Programs: <span class="num" id="perfTotal">0</span></div>
@@ -1804,12 +1809,16 @@
             document.getElementById('resGrade').textContent = emp[COLUMNS.Grade] || 'N/A';
             document.getElementById('resLocation').textContent = emp[COLUMNS.Location] || 'Not specified';
             document.getElementById('resGroupPhase').textContent = (emp[COLUMNS.TrainingGroup] || '-') + ' / ' + (emp[COLUMNS.TrainingPhase] || '-');
-            
+
+            // ===== Attendance =====
             const v = String(emp[COLUMNS.SevenSens] || '').toLowerCase();
             const attText = (v === 'attend' || v === 'attended' || v.includes('attend')) ? '✅ Attended' : '❌ Not Attended';
+            document.getElementById('resAttendance').textContent = attText;
+
+            // ===== Accommodation =====
             const accom = String(emp[COLUMNS.Accommodation] || '').toLowerCase();
-            const accomText = accom === 'yes' ? '✅ Yes' : accom === 'no' ? '❌ No' : 'Unknown';
-            document.getElementById('resAttendAccom').textContent = attText + ' / ' + accomText;
+            const accomText = accom === 'yes' ? '✅ Yes' : accom === 'no' ? '❌ No' : '❓ Unknown';
+            document.getElementById('resAccommodation').textContent = accomText;
 
             const fields = Object.values(PROGRAM_FIELDS);
             let attendedCount = 0, notAttendedCount = 0;
@@ -1822,7 +1831,7 @@
             document.getElementById('statNotAttended').textContent = '❌ Not Attended: ' + notAttendedCount;
             document.getElementById('statGroup').textContent = '📋 Training Group: ' + (emp[COLUMNS.TrainingGroup] || 'N/A');
             document.getElementById('statLocation').textContent = '📍 Location: ' + (emp[COLUMNS.Location] || 'N/A');
-            document.getElementById('statAccommodation').textContent = '🏠 Accommodation: ' + (accom === 'yes' ? '✅ Yes' : accom === 'no' ? '❌ No' : 'Unknown');
+            document.getElementById('statAccommodationBadge').textContent = '🏠 Accommodation: ' + (accom === 'yes' ? '✅ Yes' : accom === 'no' ? '❌ No' : '❓ Unknown');
             document.getElementById('perfTotal').textContent = fields.length;
             document.getElementById('perfCompleted').textContent = attendedCount;
             document.getElementById('perfPending').textContent = fields.length - attendedCount - notAttendedCount;
@@ -1881,7 +1890,7 @@
             const v = String(emp[COLUMNS.SevenSens] || '').toLowerCase();
             const attText = (v === 'attend' || v === 'attended' || v.includes('attend')) ? '✅ Attended' : '❌ Not Attended';
             const accom = String(emp[COLUMNS.Accommodation] || '').toLowerCase();
-            const accomText = accom === 'yes' ? '✅ Yes' : accom === 'no' ? '❌ No' : 'Unknown';
+            const accomText = accom === 'yes' ? '✅ Yes' : accom === 'no' ? '❌ No' : '❓ Unknown';
 
             const fields = Object.values(PROGRAM_FIELDS);
             let attendedCount = 0, notAttendedCount = 0;
@@ -1946,7 +1955,8 @@
                     <div><div class="label">Area / Department</div><div class="value">${(emp[COLUMNS.Area] || '-')} / ${(emp[COLUMNS.Department] || '-')}</div></div>
                     <div><div class="label">Location</div><div class="value">${emp[COLUMNS.Location] || 'Not specified'}</div></div>
                     <div><div class="label">Training Group / Phase</div><div class="value">${(emp[COLUMNS.TrainingGroup] || '-')} / ${(emp[COLUMNS.TrainingPhase] || '-')}</div></div>
-                    <div><div class="label">Attendance / Accommodation</div><div class="value"><span class="badge ${(v === 'attend' || v === 'attended' || v.includes('attend')) ? 'badge-attend' : 'badge-not-attend'}">${attText}</span> / ${accomText}</div></div>
+                    <div><div class="label">Attendance</div><div class="value"><span class="badge ${(v === 'attend' || v === 'attended' || v.includes('attend')) ? 'badge-attend' : 'badge-not-attend'}">${attText}</span></div></div>
+                    <div><div class="label">Accommodation</div><div class="value">${accomText}</div></div>
                 </div>
 
                 <div class="section-title">📊 Training Summary</div>
