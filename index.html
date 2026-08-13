@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>CBT | Competency Based Training Intelligence Hub 2026</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
     <style>
@@ -410,8 +410,18 @@
             border-right: 4px solid var(--success);
         }
         .employee-profile { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 6px; }
-        .info-group h4 { font-size: 0.4rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.3px; }
-        .info-group p { font-weight: 700; font-size: 0.65rem; }
+        .info-group h4 { 
+            font-size: 0.45rem; 
+            color: var(--text-muted); 
+            text-transform: uppercase; 
+            letter-spacing: 0.3px; 
+            font-weight: 700;
+        }
+        .info-group p { 
+            font-weight: 700; 
+            font-size: 0.7rem; 
+            color: var(--text-dark);
+        }
         .employee-stats { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; padding: 3px 6px; background: rgba(30,61,89,0.04); border-radius: 6px; }
         .stat-badge { font-size: 0.5rem; font-weight: 700; padding: 2px 8px; border-radius: 20px; }
         .stat-badge.attend { background: rgba(16,185,129,0.15); color: var(--success); }
@@ -571,16 +581,9 @@
         .loading-overlay .loading-text { margin-top: 15px; font-size: 1rem; color: var(--primary); font-weight: 700; }
         .loading-overlay .loading-sub { font-size: 0.75rem; color: var(--text-muted); margin-top: 5px; }
 
-        /* ===== PRINT HEADER & FOOTER ===== */
-        .print-header, .print-footer {
-            display: none;
-        }
+        .print-header, .print-footer { display: none; }
 
-        /* ============================================================
-           PRINT STYLES
-           ============================================================ */
         @media print {
-            /* إخفاء العناصر غير المطلوبة */
             .no-print, .no-print *,
             .action-btn, .refresh-btn, .clear-filters-btn,
             .search-box button, .filter-btn, .filter-select,
@@ -588,26 +591,15 @@
             .print-card-btn, .loading-overlay {
                 display: none !important;
             }
-
-            /* إظهار كل المحتوى الآخر */
-            body * {
-                visibility: visible !important;
-            }
+            body * { visibility: visible !important; }
             body {
                 background: white !important;
                 padding: 15px !important;
                 font-size: 10px !important;
                 color: #1a2332 !important;
             }
-            .container {
-                max-width: 100% !important;
-                padding: 0 !important;
-            }
-
-            /* إظهار Header و Footer */
-            .print-header, .print-footer {
-                display: block !important;
-            }
+            .container { max-width: 100% !important; padding: 0 !important; }
+            .print-header, .print-footer { display: block !important; }
             .print-header {
                 text-align: center !important;
                 border-bottom: 2px solid #1e3d59 !important;
@@ -631,8 +623,6 @@
                 font-size: 8px !important;
                 color: #6b7a8f !important;
             }
-
-            /* تنسيق البطاقات */
             .kpi-card, .chart-box, .insight-card,
             .search-wrapper, .filter-bar, .overview-section,
             .selected-program-info, .export-section,
@@ -644,33 +634,18 @@
                 padding: 6px 8px !important;
                 margin: 4px 0 !important;
             }
-
-            /* تنسيق الرسوم البيانية */
-            .chart-box .chart-container {
-                height: 120px !important;
-            }
-            .chart-box canvas {
-                height: 120px !important;
-                max-height: 120px !important;
-            }
-
-            /* تنسيق الجدول */
-            .employee-detail-table table {
-                font-size: 8px !important;
-            }
+            .chart-box .chart-container { height: 120px !important; }
+            .chart-box canvas { height: 120px !important; max-height: 120px !important; }
+            .employee-detail-table table { font-size: 8px !important; }
             .employee-detail-table th {
                 background: #1e3d59 !important;
                 color: white !important;
             }
-
-            /* تنسيق الـ KPIs */
             .kpi-grid {
                 display: grid !important;
                 grid-template-columns: repeat(4, 1fr) !important;
                 gap: 4px !important;
             }
-
-            /* تنسيق بطاقة الموظف */
             .result-card {
                 display: block !important;
                 border: 1px solid #ddd !important;
@@ -765,37 +740,28 @@
     <!-- ===== FILTER BAR ===== -->
     <div class="filter-bar no-print">
         <div class="filter-grid">
-            <!-- Programs -->
             <div class="filter-group-item filter-full-width">
                 <span class="filter-label"><i class="fa-solid fa-book"></i> Programs</span>
                 <div class="program-cards" id="programFilters"></div>
             </div>
-
-            <!-- C-LVL -->
             <div class="filter-group-item">
                 <span class="filter-label"><i class="fa-solid fa-layer-group"></i> C-LVL</span>
                 <div class="filter-options" id="clevelFilters">
                     <button class="filter-btn active" data-filter="clevel" data-value="all">All <span class="badge-count" id="clAllCount">0</span></button>
                 </div>
             </div>
-
-            <!-- Level -->
             <div class="filter-group-item">
-                <span class="filter-label"><i class="fa-solid fa-level-up"></i> Level</span>
+                <span class="filter-label"><i class="fa-solid fa-level-up"></i> Job Level</span>
                 <div class="filter-options" id="levelFilters">
                     <button class="filter-btn active" data-filter="level" data-value="all">All <span class="badge-count" id="lvlAllCount">0</span></button>
                 </div>
             </div>
-
-            <!-- Grade -->
             <div class="filter-group-item">
                 <span class="filter-label"><i class="fa-solid fa-graduation-cap"></i> Grade</span>
                 <div class="filter-options" id="gradeFilters">
                     <button class="filter-btn active" data-filter="grade" data-value="all">All <span class="badge-count" id="gradeAllCount">0</span></button>
                 </div>
             </div>
-
-            <!-- Activity -->
             <div class="filter-group-item">
                 <span class="filter-label"><i class="fa-solid fa-bolt"></i> Activity</span>
                 <div class="filter-options">
@@ -804,8 +770,6 @@
                     </select>
                 </div>
             </div>
-
-            <!-- Sector -->
             <div class="filter-group-item">
                 <span class="filter-label"><i class="fa-solid fa-building"></i> Sector</span>
                 <div class="filter-options">
@@ -814,8 +778,6 @@
                     </select>
                 </div>
             </div>
-
-            <!-- Area -->
             <div class="filter-group-item">
                 <span class="filter-label"><i class="fa-solid fa-map-pin"></i> Area</span>
                 <div class="filter-options">
@@ -824,8 +786,6 @@
                     </select>
                 </div>
             </div>
-
-            <!-- Group -->
             <div class="filter-group-item">
                 <span class="filter-label"><i class="fa-solid fa-users"></i> Group</span>
                 <div class="filter-options">
@@ -834,8 +794,6 @@
                     </select>
                 </div>
             </div>
-
-            <!-- Phase -->
             <div class="filter-group-item">
                 <span class="filter-label"><i class="fa-solid fa-clock"></i> Phase</span>
                 <div class="filter-options">
@@ -844,8 +802,6 @@
                     </select>
                 </div>
             </div>
-
-            <!-- Location -->
             <div class="filter-group-item">
                 <span class="filter-label"><i class="fa-solid fa-location-dot"></i> Location</span>
                 <div class="filter-options">
@@ -854,8 +810,6 @@
                     </select>
                 </div>
             </div>
-
-            <!-- Attendance -->
             <div class="filter-group-item">
                 <span class="filter-label"><i class="fa-solid fa-user-check"></i> Attendance</span>
                 <div class="filter-options" id="attendanceFilters">
@@ -864,8 +818,6 @@
                     <button class="filter-btn" data-filter="attendance" data-value="not-attend">❌ Not Attended <span class="badge-count" id="attNotAttendCount">0</span></button>
                 </div>
             </div>
-
-            <!-- Accommodation -->
             <div class="filter-group-item">
                 <span class="filter-label"><i class="fa-solid fa-bed"></i> Accommodation</span>
                 <div class="filter-options" id="accommodationFilters">
@@ -874,8 +826,6 @@
                     <button class="filter-btn" data-filter="accommodation" data-value="no">❌ No <span class="badge-count" id="accNoCount">0</span></button>
                 </div>
             </div>
-
-            <!-- Reset -->
             <div class="filter-group-item" style="justify-content: flex-end; align-items: flex-end;">
                 <button class="clear-filters-btn" onclick="clearAllFilters()"><i class="fa-solid fa-undo"></i> Reset All</button>
             </div>
@@ -919,23 +869,24 @@
             <div id="resultProfile" class="result-card">
                 <div class="employee-profile">
                     <div class="info-group"><h4>Name</h4><p id="resName">-</p></div>
-                    <div class="info-group"><h4>Title</h4><p id="resTitle">-</p></div>
-                    <div class="info-group"><h4>Sector / Dept</h4><p id="resSector">-</p></div>
-                    <div class="info-group"><h4>C-LVL / Level</h4><p id="resLevel">-</p></div>
+                    <div class="info-group"><h4>Job Title</h4><p id="resTitle">-</p></div>
+                    <div class="info-group"><h4>Sector / Department</h4><p id="resSector">-</p></div>
+                    <div class="info-group"><h4>C Level</h4><p id="resCLevel">-</p></div>
+                    <div class="info-group"><h4>Job Level</h4><p id="resJobLevel">-</p></div>
                     <div class="info-group"><h4>Grade</h4><p id="resGrade">-</p></div>
                     <div class="info-group"><h4>Location</h4><p id="resLocation">-</p></div>
-                    <div class="info-group"><h4>Group / Phase</h4><p id="resGroupPhase">-</p></div>
-                    <div class="info-group"><h4>Attendance / Accom</h4><p id="resAttendAccom">-</p></div>
+                    <div class="info-group"><h4>Training Group / Phase</h4><p id="resGroupPhase">-</p></div>
+                    <div class="info-group"><h4>Attendance / Accommodation</h4><p id="resAttendAccom">-</p></div>
                 </div>
                 <div class="employee-stats">
                     <span class="stat-badge attend" id="statAttended">✅ Attended: 0</span>
                     <span class="stat-badge not-attend" id="statNotAttended">❌ Not Attended: 0</span>
-                    <span class="stat-badge group" id="statGroup">📋 Group: -</span>
+                    <span class="stat-badge group" id="statGroup">📋 Training Group: -</span>
                     <span class="stat-badge location" id="statLocation">📍 Location: -</span>
                     <span class="stat-badge accommodation" id="statAccommodation">🏠 Accommodation: -</span>
                 </div>
                 <div class="perf-stats" id="perfStats">
-                    <div class="perf-stat">📊 Total: <span class="num" id="perfTotal">0</span></div>
+                    <div class="perf-stat">📊 Total Programs: <span class="num" id="perfTotal">0</span></div>
                     <div class="perf-stat">✅ Completed: <span class="num" id="perfCompleted">0</span></div>
                     <div class="perf-stat">⏳ Pending: <span class="num" id="perfPending">0</span></div>
                 </div>
@@ -947,7 +898,7 @@
         </div>
         <div class="charts-grid">
             <div class="chart-box"><h4><i class="fa-solid fa-chart-bar"></i> Employees by Sector</h4><div class="chart-container"><canvas id="chartSector"></canvas></div></div>
-            <div class="chart-box"><h4><i class="fa-solid fa-layer-group"></i> C-LVL Distribution</h4><div class="chart-container"><canvas id="chartLevel"></canvas></div></div>
+            <div class="chart-box"><h4><i class="fa-solid fa-layer-group"></i> C Level Distribution</h4><div class="chart-container"><canvas id="chartCLevel"></canvas></div></div>
         </div>
     </div>
 
@@ -1494,10 +1445,10 @@
             const sectorValues = sectorLabels.map(k => sectorCounts[k]);
             if (sectorCounts['Unknown']) { sectorLabels.push('Unknown'); sectorValues.push(sectorCounts['Unknown']); }
 
-            const levelCounts = {};
-            data.forEach(r => { const l = r[COLUMNS.CLevel] || 'Unknown'; levelCounts[l] = (levelCounts[l] || 0) + 1; });
-            const levelLabels = Object.keys(levelCounts);
-            const levelValues = Object.values(levelCounts);
+            const cLevelCounts = {};
+            data.forEach(r => { const l = r[COLUMNS.CLevel] || 'Unknown'; cLevelCounts[l] = (cLevelCounts[l] || 0) + 1; });
+            const cLevelLabels = Object.keys(cLevelCounts);
+            const cLevelValues = Object.values(cLevelCounts);
 
             const sectorAtt = {}, sectorComp = {};
             data.forEach(r => {
@@ -1573,11 +1524,11 @@
                 plugins: [ChartDataLabels]
             });
 
-            // 2. Level
-            const ctx2 = document.getElementById('chartLevel').getContext('2d');
-            chartInstances.level = new Chart(ctx2, {
+            // 2. C Level
+            const ctx2 = document.getElementById('chartCLevel').getContext('2d');
+            chartInstances.cLevel = new Chart(ctx2, {
                 type: 'doughnut',
-                data: { labels: levelLabels, datasets: [{ data: levelValues, backgroundColor: colors }] },
+                data: { labels: cLevelLabels, datasets: [{ data: cLevelValues, backgroundColor: colors }] },
                 options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 8, font: { size: 7 } } }, datalabels: { color: '#1a2332', font: { weight: 'bold', size: 8 }, formatter: (v, ctx) => { const total = ctx.dataset.data.reduce((a, b) => a + b, 0); return total > 0 ? Math.round((v / total) * 100) + '%' : ''; } } } },
                 plugins: [ChartDataLabels]
             });
@@ -1651,7 +1602,7 @@
         function setupChartInteractivity() {
             const charts = [
                 { chart: chartInstances.sector, filterType: 'sector', selectId: 'sectorSelect' },
-                { chart: chartInstances.level, filterType: 'clevel', selectId: 'clevelFilters' },
+                { chart: chartInstances.cLevel, filterType: 'clevel', selectId: 'clevelFilters' },
                 { chart: chartInstances.location, filterType: 'location', selectId: 'locationSelect' },
                 { chart: chartInstances.phase, filterType: 'phase', selectId: 'phaseSelect' },
                 { chart: chartInstances.programs, filterType: 'program', selectId: 'programFilters' },
@@ -1843,10 +1794,15 @@
             document.getElementById('resName').textContent = emp[COLUMNS.Name] || 'Not recorded';
             document.getElementById('resTitle').textContent = emp[COLUMNS.Title] || 'Not recorded';
             document.getElementById('resSector').textContent = (emp[COLUMNS.Sector] || '-') + ' / ' + (emp[COLUMNS.Department] || '-');
-            document.getElementById('resLevel').textContent = (emp[COLUMNS.CLevel] || '-') + ' / ' + (emp[COLUMNS.Level] || '-');
+            
+            // ===== C Level و Job Level منفصلين =====
+            document.getElementById('resCLevel').textContent = emp[COLUMNS.CLevel] || '-';
+            document.getElementById('resJobLevel').textContent = emp[COLUMNS.Level] || '-';
+            
             document.getElementById('resGrade').textContent = emp[COLUMNS.Grade] || 'N/A';
             document.getElementById('resLocation').textContent = emp[COLUMNS.Location] || 'Not specified';
             document.getElementById('resGroupPhase').textContent = (emp[COLUMNS.TrainingGroup] || '-') + ' / ' + (emp[COLUMNS.TrainingPhase] || '-');
+            
             const v = String(emp[COLUMNS.SevenSens] || '').toLowerCase();
             const attText = (v === 'attend' || v === 'attended' || v.includes('attend')) ? '✅ Attended' : '❌ Not Attended';
             const accom = String(emp[COLUMNS.Accommodation] || '').toLowerCase();
@@ -1862,7 +1818,7 @@
             });
             document.getElementById('statAttended').textContent = '✅ Attended: ' + attendedCount;
             document.getElementById('statNotAttended').textContent = '❌ Not Attended: ' + notAttendedCount;
-            document.getElementById('statGroup').textContent = '📋 Group: ' + (emp[COLUMNS.TrainingGroup] || 'N/A');
+            document.getElementById('statGroup').textContent = '📋 Training Group: ' + (emp[COLUMNS.TrainingGroup] || 'N/A');
             document.getElementById('statLocation').textContent = '📍 Location: ' + (emp[COLUMNS.Location] || 'N/A');
             document.getElementById('statAccommodation').textContent = '🏠 Accommodation: ' + (accom === 'yes' ? '✅ Yes' : accom === 'no' ? '❌ No' : 'Unknown');
             document.getElementById('perfTotal').textContent = fields.length;
@@ -1892,10 +1848,7 @@
                 progContainer.innerHTML = '<span style="color:#6b7a8f;font-style:italic;">No training records.</span>';
             }
             card.style.display = 'block';
-
-            // إظهار زر طباعة الكارد
             document.querySelector('.print-card-btn').style.display = 'inline-flex';
-
             document.getElementById('loadingMsg').className = 'loading-status success';
             document.getElementById('loadingMsg').innerHTML = '<i class="fa-solid fa-check-circle"></i> Found employee: ' + emp[COLUMNS.Name];
         }
@@ -1983,13 +1936,14 @@
                 <div class="grid">
                     <div><div class="label">ID</div><div class="value">${emp[COLUMNS.ID] || 'N/A'}</div></div>
                     <div><div class="label">Name</div><div class="value">${emp[COLUMNS.Name] || 'Unknown'}</div></div>
-                    <div><div class="label">Title</div><div class="value">${emp[COLUMNS.Title] || 'Not recorded'}</div></div>
-                    <div><div class="label">C-LVL / Level</div><div class="value">${(emp[COLUMNS.CLevel] || '-')} / ${(emp[COLUMNS.Level] || '-')}</div></div>
+                    <div><div class="label">Job Title</div><div class="value">${emp[COLUMNS.Title] || 'Not recorded'}</div></div>
+                    <div><div class="label">C Level</div><div class="value">${emp[COLUMNS.CLevel] || '-'}</div></div>
+                    <div><div class="label">Job Level</div><div class="value">${emp[COLUMNS.Level] || '-'}</div></div>
                     <div><div class="label">Grade</div><div class="value">${emp[COLUMNS.Grade] || 'N/A'}</div></div>
                     <div><div class="label">Activity / Sector</div><div class="value">${(emp[COLUMNS.Activity] || '-')} / ${(emp[COLUMNS.Sector] || '-')}</div></div>
                     <div><div class="label">Area / Department</div><div class="value">${(emp[COLUMNS.Area] || '-')} / ${(emp[COLUMNS.Department] || '-')}</div></div>
                     <div><div class="label">Location</div><div class="value">${emp[COLUMNS.Location] || 'Not specified'}</div></div>
-                    <div><div class="label">Group / Phase</div><div class="value">${(emp[COLUMNS.TrainingGroup] || '-')} / ${(emp[COLUMNS.TrainingPhase] || '-')}</div></div>
+                    <div><div class="label">Training Group / Phase</div><div class="value">${(emp[COLUMNS.TrainingGroup] || '-')} / ${(emp[COLUMNS.TrainingPhase] || '-')}</div></div>
                     <div><div class="label">Attendance / Accommodation</div><div class="value"><span class="badge ${(v === 'attend' || v === 'attended' || v.includes('attend')) ? 'badge-attend' : 'badge-not-attend'}">${attText}</span> / ${accomText}</div></div>
                 </div>
 
@@ -2120,5 +2074,6 @@
             });
         });
     </script>
+
 </body>
 </html>
