@@ -1795,9 +1795,11 @@
             document.getElementById('resTitle').textContent = emp[COLUMNS.Title] || 'Not recorded';
             document.getElementById('resSector').textContent = (emp[COLUMNS.Sector] || '-') + ' / ' + (emp[COLUMNS.Department] || '-');
             
-            // ===== C Level و Job Level منفصلين =====
+            // ===== C Level =====
             document.getElementById('resCLevel').textContent = emp[COLUMNS.CLevel] || '-';
-            document.getElementById('resJobLevel').textContent = emp[COLUMNS.Level] || '-';
+            
+            // ===== Job Level - يسحب من عمود "Job Level" في CSV =====
+            document.getElementById('resJobLevel').textContent = emp['Job Level'] || emp[COLUMNS.Level] || '-';
             
             document.getElementById('resGrade').textContent = emp[COLUMNS.Grade] || 'N/A';
             document.getElementById('resLocation').textContent = emp[COLUMNS.Location] || 'Not specified';
@@ -1938,7 +1940,7 @@
                     <div><div class="label">Name</div><div class="value">${emp[COLUMNS.Name] || 'Unknown'}</div></div>
                     <div><div class="label">Job Title</div><div class="value">${emp[COLUMNS.Title] || 'Not recorded'}</div></div>
                     <div><div class="label">C Level</div><div class="value">${emp[COLUMNS.CLevel] || '-'}</div></div>
-                    <div><div class="label">Job Level</div><div class="value">${emp[COLUMNS.Level] || '-'}</div></div>
+                    <div><div class="label">Job Level</div><div class="value">${emp['Job Level'] || emp[COLUMNS.Level] || '-'}</div></div>
                     <div><div class="label">Grade</div><div class="value">${emp[COLUMNS.Grade] || 'N/A'}</div></div>
                     <div><div class="label">Activity / Sector</div><div class="value">${(emp[COLUMNS.Activity] || '-')} / ${(emp[COLUMNS.Sector] || '-')}</div></div>
                     <div><div class="label">Area / Department</div><div class="value">${(emp[COLUMNS.Area] || '-')} / ${(emp[COLUMNS.Department] || '-')}</div></div>
